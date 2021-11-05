@@ -8,7 +8,7 @@ public class CareRecord {
 	private String writeDate;
 	private String title;
 	private String content;
-	private Reservation resInfo;
+	private Care careInfo;
 	
 	public String getId() {
 		return id;
@@ -40,10 +40,10 @@ public class CareRecord {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Reservation getResInfo() {
-		return resInfo;
+	public Care getCareInfo() {
+		return careInfo;
 	}
-	public void setResInfo(Reservation resInfo) {
-		this.resInfo = resInfo;
+	public void setCareInfo(Care careInfo) {
+		this.careInfo = careInfo;
 	}
 }

@@ -1,7 +1,12 @@
-package model;
+package model.service;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import model.dao.UserDAO;
+import model.dao.ReviewDAO;
+import model.Review;
+import model.Care;
 
 public class UserManager {
 	private static UserManager userMan = new UserManager();
@@ -25,7 +30,7 @@ public class UserManager {
 		return reviewDAO.findReviewList();
 	}
 	
-	public List<Care> caredateList() throws SQLException {
+	public List<Care> careDateList() throws SQLException {
 		return userDAO.careDateList();
 	}
 	

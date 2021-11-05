@@ -5,7 +5,7 @@ public class Review {
 	private String writeDate;
 	private String content;
 	private String rate;
-	private Reservation resInfo;
+	private Care careInfo;
 	
 	public String getId() {
 		return id;
@@ -31,10 +31,10 @@ public class Review {
 	public void setRate(String rate) {
 		this.rate = rate;
 	}
-	public Reservation getResInfo() {
-		return resInfo;
+	public Care getCareInfo() {
+		return careInfo;
 	}
-	public void setResInfo(Reservation resInfo) {
-		this.resInfo = resInfo;
+	public void setCareInfo(Care careInfo) {
+		this.careInfo = careInfo;
 	}
 }

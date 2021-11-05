@@ -1,9 +1,12 @@
-package model;
+package model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Review;
+import model.Care;
 
 public class ReviewDAO {
 

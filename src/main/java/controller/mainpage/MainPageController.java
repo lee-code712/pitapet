@@ -9,7 +9,8 @@ import javax.servlet.http.HttpSession;
 import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.Review;
-import model.UserManager;
+import model.Care;
+import model.service.UserManager;
 
 public class MainPageController implements Controller{
 
@@ -18,7 +19,7 @@ public class MainPageController implements Controller{
 		HttpSession session = request.getSession();
 		UserManager manager = UserManager.getInstance();
 		if(UserSessionUtils.hasLogined(session)) {
-			List<Care> careDateList = manager.caredateList(UserSessionUtils.getLoginUserId(session));
+			List<Care> careDateList = manager.careDateList(UserSessionUtils.getLoginUserId(session));
 			request.setAttribute("careDateList", careDateList);
 		} else {
 			request.setAttribute("NotLogin", true);

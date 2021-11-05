@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public class Reservation {
+public class Care {
 	private String id;
 	private String startDate;
 	private String endDate;

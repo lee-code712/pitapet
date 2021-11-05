@@ -1,0 +1,51 @@
+package model.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Care;
+import model.Member;
+import model.PetSitter;
+
+public class CareDAO {
+	private JDBCUtil jdbcUtil = null;
+	
+	public CareDAO() {			
+		jdbcUtil = new JDBCUtil();	// JDBCUtil 객체 생성
+	}
+	
+	//사용자의 돌봄 예약 내역 반환
+	public List<Care> getCareList(String memberId) throws SQLException {
+		String sql = "SELECT * FROM care c, member m";
+		sql	+= "WHERE c.sitter_id = m.member_id AND member_id = ?";     
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId});	
+						
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			
+			List<Care> careList = new ArrayList<Care>();	
+			while (rs.next()) {
+				Care care = new Care(			
+						rs.getInt("care_id"),
+						rs.getString("start_date"),
+						rs.getString("end_date"),
+						new PetSitter(
+								new Member(
+										rs.getString("sitter_id"),
+										rs.getString("name")
+								)
+						)
+				);
+				careList.add(care);				
+				}		
+				return careList;					
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			} finally {
+				jdbcUtil.close();
+			}
+		
+		return null;
+	}
+}

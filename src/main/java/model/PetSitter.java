@@ -3,7 +3,7 @@ package model;
 import java.util.List;
 
 public class PetSitter {
-	private String id;
+	private Member sitter;
 	private int publicStatus;
 	private List<Integer> availableDate;
 	private int calculatedPrice;
@@ -14,11 +14,15 @@ public class PetSitter {
 	private int view;
 	private PetSitterApplyInfo myApplyInfo;
 	
-	public String getId() {
-		return id;
+	public PetSitter(Member sitter) {
+		super();
+		this.sitter = sitter;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public Member getSitter() {
+		return sitter;
+	}
+	public void setSitter(Member sitter) {
+		this.sitter = sitter;
 	}
 	public int getPublicStatus() {
 		return publicStatus;

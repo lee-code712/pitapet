@@ -3,7 +3,7 @@ package model;
 import java.util.List;
 
 public class Care {
-	private String id;
+	private Integer id;
 	private String startDate;
 	private String endDate;
 	private int totalPrice;
@@ -13,10 +13,26 @@ public class Care {
 	private List<Pet> pets;
 	private Member companion;
 	private PetSitter sitter;
-	public String getId() {
+	
+	public Care(Integer id, String startDate, String endDate, PetSitter sitter) {
+		super();
+		this.id = id;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.sitter = sitter;
+	}
+	
+	public Care(Integer id) {
+		super();
+		this.id = id;
+	}
+
+
+
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getStartDate() {

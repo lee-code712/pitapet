@@ -17,25 +17,24 @@ private JDBCUtil jdbcUtil = null;
 	}
 		
 	//전체 리뷰 반환
-	public List<Review> findReviewList() throws SQLException {
-        String sql = "SELECT review_id, write_date, content, rate, member_id "
-        		   + "FROM review";       
+	public List<Review> getAllReviews() throws SQLException {
+        String sql = "SELECT * FROM review";       
 		jdbcUtil.setSqlAndParameters(sql, null);	
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();			
-			List<Review> reviewList = new ArrayList<Review>();	
+			List<Review> reviews = new ArrayList<Review>();	
 			while (rs.next()) {
 				Review review = new Review(			
 						rs.getString("review_id"),
 						rs.getString("write_date"),
 						rs.getString("content"),
-						rs.getString("rate"),
-						rs.getCare("member_id"));
-				
-				reviewList.add(review);				
+						rs.getFloat("rate"),
+						new Care(rs.getInt("care_id"))
+				);
+				reviews.add(review);				
 			}		
-			return reviewList;					
+			return reviews;					
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {

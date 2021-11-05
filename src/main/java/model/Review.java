@@ -4,9 +4,17 @@ public class Review {
 	private String id;
 	private String writeDate;
 	private String content;
-	private String rate;
+	private float rate;
 	private Care careInfo;
 	
+	public Review(String id, String writeDate, String content, float rate, Care careInfo) {
+		super();
+		this.id = id;
+		this.writeDate = writeDate;
+		this.content = content;
+		this.rate = rate;
+		this.careInfo = careInfo;
+	}
 	public String getId() {
 		return id;
 	}
@@ -25,10 +33,10 @@ public class Review {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getRate() {
+	public float getRate() {
 		return rate;
 	}
-	public void setRate(String rate) {
+	public void setRate(float rate) {
 		this.rate = rate;
 	}
 	public Care getCareInfo() {

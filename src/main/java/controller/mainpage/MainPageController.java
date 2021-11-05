@@ -10,24 +10,29 @@ import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.Review;
 import model.Care;
-import model.service.UserManager;
+import model.service.CareManager;
+import model.service.ReviewManager;
 
 public class MainPageController implements Controller{
 
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	
 		HttpSession session = request.getSession();
-		UserManager manager = UserManager.getInstance();
+		CareManager careMan = CareManager.getInstance();
+		ReviewManager reviewMan = ReviewManager.getInstance();
+		
 		if(UserSessionUtils.hasLogined(session)) {
-			List<Care> careDateList = manager.careDateList(UserSessionUtils.getLoginUserId(session));
-			request.setAttribute("careDateList", careDateList);
+			// List<Care> careSchedules = careMan.getCareList(UserSessionUtils.getLoginUserId(session));
+			// request.setAttribute("careSchedules", careSchedules);
 		} else {
-			request.setAttribute("NotLogin", true);
+			request.setAttribute("isLogined", false);
 		}
 		
-		List<Review> reviewList = manager.reviewList();
-		request.setAttribute("reviewList", reviewList);
+		List<Review> reviews = reviewMan.getAllReviews();
+		request.setAttribute("reviews", reviews);
 		
-        return "mainPage.jsp";
+		System.out.print(reviews);
+		
+        return "/mainPage.jsp";
     }
 }

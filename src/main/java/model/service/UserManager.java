@@ -25,16 +25,7 @@ public class UserManager {
 	public static UserManager getInstance() {
 		return userMan;
 	}
-	
-	public List<Review> reviewList() throws SQLException {
-		return reviewDAO.findReviewList();
-	}
-	
-	public List<Care> careDateList(String id) throws SQLException {
-		return userDAO.careDateList(id);
-	}
-	
-	
+		
 	public UserDAO getUserDAO() {
 		return this.userDAO;
 	}

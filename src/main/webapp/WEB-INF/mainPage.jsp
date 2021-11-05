@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,9 @@
                     <img src="./images/logo.svg" id="logoImg" />
                     <div id="logoTit">PIT A PET</div>
                 </div>
-                <img src="./images/rank.svg" id="rankImg" />
+                <c:if test="${isLogined}">
+					<img src="./images/rank.svg" id="rankImg" />
+                </c:if>
             </div>
             <div id="navInner">
                 <div id="navListOn">
@@ -51,7 +54,9 @@
                     <img src="./images/person.svg" id="personImg" />
                 </div>
                 <div id="logoutImgWrap">
-                    <img src="./images/logout.svg" id="logoutImg" />
+                	<c:if test="${isLogined}">
+                    	<img src="./images/logout.svg" id="logoutImg" />
+                    </c:if>
                 </div>
             </div>
             

@@ -30,8 +30,8 @@ public class UserManager {
 		return reviewDAO.findReviewList();
 	}
 	
-	public List<Care> careDateList() throws SQLException {
-		return userDAO.careDateList();
+	public List<Care> careDateList(String id) throws SQLException {
+		return userDAO.careDateList(id);
 	}
 	
 	

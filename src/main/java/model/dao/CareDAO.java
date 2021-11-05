@@ -32,8 +32,7 @@ public class CareDAO {
 						rs.getString("end_date"),
 						new PetSitter(
 								new Member(
-										rs.getString("sitter_id"),
-										rs.getString("name")
+										rs.getString("sitter_id")
 								)
 						)
 				);

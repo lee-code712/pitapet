@@ -4,6 +4,11 @@ public class LikeList {
 	private String memberId;
 	private PetSitter likeSitter;
 	
+	public LikeList(String memberId) {
+		super();
+		this.memberId = memberId;
+	}
+	
 	public String getMemberId() {
 		return memberId;
 	}

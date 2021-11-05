@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public class PetSitterApplyInfo {
+public class PetSitterApplyment {
 	private String id;
 	private String applyDate;
 	private String career;
@@ -12,6 +12,13 @@ public class PetSitterApplyInfo {
 	private List<PetKind> kinds;
 	private List<Service> services;
 	private Member applicant;
+	private List<String> images;
+	
+	public PetSitterApplyment(String id) {
+		super();
+		this.id = id;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -66,6 +73,12 @@ public class PetSitterApplyInfo {
 	public void setApplicant(Member applicant) {
 		this.applicant = applicant;
 	}
-	
-	
+
+	public List<String> getImages() {
+		return images;
+	}
+
+	public void setImages(List<String> images) {
+		this.images = images;
+	}
 }

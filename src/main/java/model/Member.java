@@ -11,14 +11,14 @@ public class Member {
 	private String phone;
 	private String address;
 	private String email;
-	private String grade;
+	private String identity;
 	private List<Pet> myPets;
 	
-	public Member(String id, String name) {
+	public Member(String id) {
 		super();
 		this.id = id;
-		this.name = name;
 	}
+	
 	public String getId() {
 		return id;
 	}
@@ -67,11 +67,11 @@ public class Member {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getGrade() {
-		return grade;
+	public String getIdentity() {
+		return identity;
 	}
-	public void setGrade(String grade) {
-		this.grade = grade;
+	public void setIdentity(String identity) {
+		this.identity = identity;
 	}
 	public List<Pet> getMyPets() {
 		return myPets;

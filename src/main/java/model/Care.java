@@ -3,16 +3,20 @@ package model;
 import java.util.List;
 
 public class Care {
-	private Integer id;
+	private int id;
 	private String startDate;
 	private String endDate;
 	private int totalPrice;
 	private String notes;
 	private int status;
-	private List<Service> services;
-	private List<Pet> pets;
+	private List<CareDetails> careList;
 	private Member companion;
 	private PetSitter sitter;
+	
+	public Care(Integer id) {
+		super();
+		this.id = id;
+	}
 	
 	public Care(Integer id, String startDate, String endDate, PetSitter sitter) {
 		super();
@@ -22,17 +26,10 @@ public class Care {
 		this.sitter = sitter;
 	}
 	
-	public Care(Integer id) {
-		super();
-		this.id = id;
-	}
-
-
-
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getStartDate() {
@@ -65,17 +62,11 @@ public class Care {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public List<Service> getServices() {
-		return services;
+	public List<CareDetails> getCareList() {
+		return careList;
 	}
-	public void setServices(List<Service> services) {
-		this.services = services;
-	}
-	public List<Pet> getPets() {
-		return pets;
-	}
-	public void setPets(List<Pet> pets) {
-		this.pets = pets;
+	public void setCareList(List<CareDetails> careList) {
+		this.careList = careList;
 	}
 	public Member getCompanion() {
 		return companion;

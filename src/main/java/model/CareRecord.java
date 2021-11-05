@@ -4,11 +4,17 @@ import java.util.List;
 
 public class CareRecord {
 	private String id;
-	private List<Service> services;
+	private List<CareDetails> checkList;
 	private String writeDate;
 	private String title;
 	private String content;
 	private Care careInfo;
+	private List<String> images;
+	
+	public CareRecord(String id) {
+		super();
+		this.id = id;
+	}
 	
 	public String getId() {
 		return id;
@@ -16,11 +22,11 @@ public class CareRecord {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public List<Service> getServices() {
-		return services;
+	public List<CareDetails> getCheckList() {
+		return checkList;
 	}
-	public void setServices(List<Service> services) {
-		this.services = services;
+	public void setCheckList(List<CareDetails> checkList) {
+		this.checkList = checkList;
 	}
 	public String getWriteDate() {
 		return writeDate;
@@ -45,5 +51,13 @@ public class CareRecord {
 	}
 	public void setCareInfo(Care careInfo) {
 		this.careInfo = careInfo;
+	}
+
+	public List<String> getImages() {
+		return images;
+	}
+
+	public void setImages(List<String> images) {
+		this.images = images;
 	}
 }

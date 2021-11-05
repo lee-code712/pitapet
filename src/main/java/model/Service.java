@@ -3,7 +3,12 @@ package model;
 public class Service {
 	private String id;
 	private String name;
-	private int check;
+	private String content;
+	
+	public Service(String id) {
+		super();
+		this.id = id;
+	}
 	
 	public String getId() {
 		return id;
@@ -17,10 +22,10 @@ public class Service {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getCheck() {
-		return check;
+	public String getContent() {
+		return content;
 	}
-	public void setCheck(int check) {
-		this.check = check;
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

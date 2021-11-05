@@ -1,13 +1,20 @@
 package model;
 
+import java.util.List;
+
 public class Pet {
 	private String id;
 	private String name;
 	private String birth;
 	private int gender;
-	private float weight;
 	private PetKind kind;
 	private Member myCompanion;
+	private List<String> images;
+	
+	public Pet(String id) {
+		super();
+		this.id = id;
+	}
 	
 	public String getId() {
 		return id;
@@ -33,12 +40,6 @@ public class Pet {
 	public void setGender(int gender) {
 		this.gender = gender;
 	}
-	public float getWeight() {
-		return weight;
-	}
-	public void setWeight(float weight) {
-		this.weight = weight;
-	}
 	public PetKind getKind() {
 		return kind;
 	}
@@ -50,5 +51,14 @@ public class Pet {
 	}
 	public void setMyCompanion(Member myCompanion) {
 		this.myCompanion = myCompanion;
+	}
+
+	public List<String> getImages() {
+		return images;
+	}
+
+	public void setImages(List<String> images) {
+		this.images = images;
 	}	
+	
 }

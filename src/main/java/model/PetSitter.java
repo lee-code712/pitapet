@@ -1,23 +1,22 @@
 package model;
 
-import java.util.List;
-
 public class PetSitter {
 	private Member sitter;
 	private int publicStatus;
-	private List<Integer> availableDate;
-	private int calculatedPrice;
-	private List<String> tag;
+	private String ableDate;
+	private String calculatedPrice;
+	private String tag;
 	private String notes;
 	private float avgRate;
 	private int like;
 	private int view;
-	private PetSitterApplyInfo myApplyInfo;
+	private PetSitterApplyment myApplyInfo;
 	
 	public PetSitter(Member sitter) {
 		super();
 		this.sitter = sitter;
 	}
+	
 	public Member getSitter() {
 		return sitter;
 	}
@@ -30,24 +29,31 @@ public class PetSitter {
 	public void setPublicStatus(int publicStatus) {
 		this.publicStatus = publicStatus;
 	}
-	public List<Integer> getAvailableDate() {
-		return availableDate;
+	
+	public String getAbleDate() {
+		return ableDate;
 	}
-	public void setAvailableDate(List<Integer> availableDate) {
-		this.availableDate = availableDate;
+
+	public void setAbleDate(String ableDate) {
+		this.ableDate = ableDate;
 	}
-	public int getCalculatedPrice() {
+
+	public String getCalculatedPrice() {
 		return calculatedPrice;
 	}
-	public void setCalculatedPrice(int calculatedPrice) {
+
+	public void setCalculatedPrice(String calculatedPrice) {
 		this.calculatedPrice = calculatedPrice;
 	}
-	public List<String> getTag() {
+
+	public String getTag() {
 		return tag;
 	}
-	public void setTag(List<String> tag) {
+
+	public void setTag(String tag) {
 		this.tag = tag;
 	}
+
 	public String getNotes() {
 		return notes;
 	}
@@ -72,10 +78,13 @@ public class PetSitter {
 	public void setView(int view) {
 		this.view = view;
 	}
-	public PetSitterApplyInfo getMyApplyInfo() {
+
+	public PetSitterApplyment getMyApplyInfo() {
 		return myApplyInfo;
 	}
-	public void setMyApplyInfo(PetSitterApplyInfo myApplyInfo) {
+
+	public void setMyApplyInfo(PetSitterApplyment myApplyInfo) {
 		this.myApplyInfo = myApplyInfo;
 	}
+	
 }

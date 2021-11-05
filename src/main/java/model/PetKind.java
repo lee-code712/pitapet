@@ -5,6 +5,11 @@ public class PetKind {
 	private String largeCategory;
 	private String smallCategory;
 	
+	public PetKind(String id) {
+		super();
+		this.id = id;
+	}
+	
 	public String getId() {
 		return id;
 	}

@@ -27,7 +27,7 @@ private JDBCUtil jdbcUtil = null;
 						rs.getInt("care_id"),
 						rs.getString("start_date"),
 						rs.getString("end_date"),
-						rs.getString("member_id"));)
+						rs.getString("member_id"));
 				careDateList.add(care);				
 			}		
 			return careDateList;					

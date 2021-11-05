@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import controller.user.*;
 import controller.comm.*;
+import controller.mainpage.*;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -41,6 +42,9 @@ public class RequestMapping {
         mappings.put("/community/create/form", new ForwardController("/community/creationForm.jsp"));
         mappings.put("/community/create", new CreateCommunityController());
         mappings.put("/community/update", new UpdateCommunityController());
+        
+        //pit a pet 
+        mappings.put("/mainpage/main", new MainPageController());
         
         logger.info("Initialized Request Mapping!");
     }

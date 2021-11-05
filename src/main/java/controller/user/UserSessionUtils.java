@@ -3,7 +3,7 @@ package controller.user;
 import javax.servlet.http.HttpSession;
 
 public class UserSessionUtils {
-    public static final String USER_SESSION_KEY = "userId";
+    public static final String USER_SESSION_KEY = "id";
 
     /* 현재 로그인한 사용자의 ID를 구함 */
     public static String getLoginUserId(HttpSession session) {

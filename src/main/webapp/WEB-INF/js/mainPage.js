@@ -20,7 +20,7 @@ $(document).ready(function() {
 function drawCalendar(){
     var setTableHTML = "";
     setTableHTML+='<table class="calendar">';
-    setTableHTML+='<tr><th id="calDayName" style="color: red;">일</th><th id="calDayName">월</th><th id="calDayName">화</th><th id="calDayName">수</th><th id="calDayName">목</th><th id="calDayName">금</th><th id="calDayName" style="color: blue;">토</th></tr>';
+    setTableHTML+='<tr><th id="calDayName" style="color: #FB7D71;">일</th><th id="calDayName">월</th><th id="calDayName">화</th><th id="calDayName">수</th><th id="calDayName">목</th><th id="calDayName">금</th><th id="calDayName" style="color: #89A0F2;">토</th></tr>';
     for(var i=0;i<6;i++){
         setTableHTML+='<tr height="90">';
         for(var j=0;j<7;j++){
@@ -61,10 +61,10 @@ function drawDays(){
         $tdDay.eq(i).text(++dayCount);
     }
     for(var i=0;i<42;i+=7){
-        $tdDay.eq(i).css("color","red");
+        $tdDay.eq(i).css("color","#FB7D71");
     }
     for(var i=6;i<42;i+=7){
-        $tdDay.eq(i).css("color","blue");
+        $tdDay.eq(i).css("color","#89A0F2");
     }
 }
 
@@ -146,3 +146,17 @@ function drawSche(){
         }
     }
 }
+
+$(function() { 
+    var lastScrollTop = 0, delta = 15; $(window).scroll(
+        function(event){
+            var st = $(this).scrollTop(); if(Math.abs(lastScrollTop - st) <= delta) return; 
+            if ((st > lastScrollTop) && (lastScrollTop>0)) { 
+                $("#headerWrap").css("border-bottom","1px solid rgba(150, 150, 150, 0.2)"); 
+            } else {
+                $("#headerWrap").css("border-bottom","1px solid white");
+            }
+            lastScrollTop = st; 
+        }
+    ); 
+});

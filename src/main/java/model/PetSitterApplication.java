@@ -2,7 +2,8 @@ package model;
 
 import java.util.List;
 
-public class PetSitterApplyment {
+public class PetSitterApplication {
+
 	private String id;
 	private String applyDate;
 	private String career;
@@ -14,7 +15,7 @@ public class PetSitterApplyment {
 	private Member applicant;
 	private List<String> images;
 	
-	public PetSitterApplyment(String id) {
+	public PetSitterApplication(String id) {
 		super();
 		this.id = id;
 	}

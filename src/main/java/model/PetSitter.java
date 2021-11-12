@@ -10,7 +10,7 @@ public class PetSitter {
 	private float avgRate;
 	private int like;
 	private int view;
-	private PetSitterApplyment myApplyInfo;
+	private PetSitterApplication myApplyInfo;
 	
 	public PetSitter(Member sitter) {
 		super();
@@ -79,11 +79,11 @@ public class PetSitter {
 		this.view = view;
 	}
 
-	public PetSitterApplyment getMyApplyInfo() {
+	public PetSitterApplication getMyApplyInfo() {
 		return myApplyInfo;
 	}
 
-	public void setMyApplyInfo(PetSitterApplyment myApplyInfo) {
+	public void setMyApplyInfo(PetSitterApplication myApplyInfo) {
 		this.myApplyInfo = myApplyInfo;
 	}
 	

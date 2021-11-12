@@ -22,7 +22,7 @@ public class ReviewManager {
 		return reviewMan;
 	}
 	
-	public List<Review> getAllReviews() throws SQLException {
-		return reviewDAO.getAllReviews();
+	public List<Review> findReviewList() throws SQLException {
+		return reviewDAO.findReviewList();
 	}
 }

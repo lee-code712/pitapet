@@ -22,13 +22,13 @@ public class MainPageController implements Controller{
 		ReviewManager reviewMan = ReviewManager.getInstance();
 		
 		if(UserSessionUtils.hasLogined(session)) {
-			// List<Care> careSchedules = careMan.getCareList(UserSessionUtils.getLoginUserId(session));
-			// request.setAttribute("careSchedules", careSchedules);
+			 List<Care> careSchedules = careMan.findCareSchedules(UserSessionUtils.getLoginUserId(session));
+			 request.setAttribute("careSchedules", careSchedules);
 		} else {
 			request.setAttribute("isLogined", false);
 		}
 		
-		List<Review> reviews = reviewMan.getAllReviews();
+		List<Review> reviews = reviewMan.findReviewList();
 		request.setAttribute("reviews", reviews);
 		
 		System.out.print(reviews);

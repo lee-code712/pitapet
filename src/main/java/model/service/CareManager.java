@@ -22,8 +22,8 @@ public class CareManager {
 		return careMan;
 	}
 	
-	public List<Care> getCareList(String memberId) throws SQLException {
-		return careDAO.getCareList(memberId);
+	public List<Care> findCareSchedules(String memberId) throws SQLException {
+		return careDAO.findCareSchedules(memberId);
 	}
 
 }

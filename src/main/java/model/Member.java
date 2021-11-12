@@ -19,6 +19,18 @@ public class Member {
 		this.id = id;
 	}
 	
+	public Member(String id, String password, String name, String birth, String gender, String phone, String address, String email, String identity) {
+		this.id = id;
+		this.password = password;
+		this.name = name;
+		this.birth = birth;
+		this.gender = gender;
+		this.phone = phone;
+		this.address = address;
+		this.email = email;
+		this.identity = identity;
+	}
+	
 	public String getId() {
 		return id;
 	}

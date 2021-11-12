@@ -6,7 +6,7 @@ public class Pet {
 	private String id;
 	private String name;
 	private String birth;
-	private int gender;
+	private char gender;
 	private PetKind kind;
 	private Member myCompanion;
 	private List<String> images;
@@ -34,10 +34,10 @@ public class Pet {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	public int getGender() {
+	public char getGender() {
 		return gender;
 	}
-	public void setGender(int gender) {
+	public void setGender(char gender) {
 		this.gender = gender;
 	}
 	public PetKind getKind() {

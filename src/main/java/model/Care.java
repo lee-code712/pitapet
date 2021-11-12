@@ -8,7 +8,7 @@ public class Care {
 	private String endDate;
 	private int totalPrice;
 	private String notes;
-	private int status;
+	private char status;
 	private List<CareDetails> careList;
 	private Member companion;
 	private PetSitter sitter;
@@ -56,10 +56,10 @@ public class Care {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	public int getStatus() {
+	public char getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(char status) {
 		this.status = status;
 	}
 	public List<CareDetails> getCareList() {

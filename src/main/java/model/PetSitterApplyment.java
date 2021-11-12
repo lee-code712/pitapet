@@ -8,7 +8,7 @@ public class PetSitterApplyment {
 	private String career;
 	private String certification;
 	private String introduction;
-	private int approvalStatus;
+	private char approvalStatus;
 	private List<PetKind> kinds;
 	private List<Service> services;
 	private Member applicant;
@@ -49,10 +49,10 @@ public class PetSitterApplyment {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
-	public int getApprovalStatus() {
+	public char getApprovalStatus() {
 		return approvalStatus;
 	}
-	public void setApprovalStatus(int approvalStatus) {
+	public void setApprovalStatus(char approvalStatus) {
 		this.approvalStatus = approvalStatus;
 	}
 	public List<PetKind> getKinds() {

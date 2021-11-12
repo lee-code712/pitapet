@@ -6,7 +6,7 @@ public class CareDetails {
 	private Care careInfo;
 	private Service serviceInfo;
 	private Pet carePet;
-	private char check;
+	private String check;
 	
 	public CareDetails(int id) {
 		super();
@@ -41,10 +41,10 @@ public class CareDetails {
 	public void setCarePet(Pet carePet) {
 		this.carePet = carePet;
 	}
-	public char getCheck() {
+	public String getCheck() {
 		return check;
 	}
-	public void setCheck(char check) {
+	public void setCheck(String check) {
 		this.check = check;
 	}
 }

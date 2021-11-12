@@ -7,7 +7,7 @@ public class Member {
 	private String password;
 	private String name;
 	private String birth;
-	private char gender;
+	private String gender;
 	private String phone;
 	private String address;
 	private String email;
@@ -43,10 +43,10 @@ public class Member {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	public char getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(char gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public String getPhone() {

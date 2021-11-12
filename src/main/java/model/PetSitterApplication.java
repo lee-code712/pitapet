@@ -9,7 +9,7 @@ public class PetSitterApplication {
 	private String career;
 	private String certification;
 	private String introduction;
-	private char approvalStatus;
+	private String approvalStatus;
 	private List<PetKind> kinds;
 	private List<Service> services;
 	private Member applicant;
@@ -50,10 +50,10 @@ public class PetSitterApplication {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
-	public char getApprovalStatus() {
+	public String getApprovalStatus() {
 		return approvalStatus;
 	}
-	public void setApprovalStatus(char approvalStatus) {
+	public void setApprovalStatus(String approvalStatus) {
 		this.approvalStatus = approvalStatus;
 	}
 	public List<PetKind> getKinds() {

@@ -33,6 +33,6 @@ public class MainPageController implements Controller{
 		
 		System.out.print(reviews);
 		
-        return "/mainPage.jsp";
+        return "/mainPage/mainPage.jsp";
     }
 }

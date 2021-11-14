@@ -131,7 +131,7 @@
         </table>
 
         <div id="btnWrap">
-            <button id="sitterRegisterBtn">저장</button>
+            <button id="reviseBtn">수정</button>
         </div>
     </div>
     

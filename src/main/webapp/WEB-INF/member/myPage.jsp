@@ -106,7 +106,6 @@
                         <div id="name">(이름)</div>
                         <div id="phone">(휴대폰 번호)</div>
                         <div id="myPageBtnWrap">
-                            <button id="certBtn">돌보미 인증</button>
                             <button id="registerInfoBtn">돌보미 정보 등록</button>
                         </div>
                     </div>

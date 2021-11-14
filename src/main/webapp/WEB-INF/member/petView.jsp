@@ -3,10 +3,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8"/>
+    <title>반려동물 정보</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/header.css"/>
+    <link rel="stylesheet" href="../css/footer.css"/>
+    <link rel="stylesheet" href="../css/petView.css"/>
 </head>
-<body>
 
+<body>
+	<div id="headerWrap">
+        <div id="headerInner">
+            <div id="logo">PIT A PET</div>
+            <div id="gnb">
+                <div id="sitterListLink">돌보미 조회</div>
+                <div id="reviewLink">이용 후기</div>
+                <div id="likeLink">좋아요</div>
+                <div id="myPageLink">마이페이지</div>
+                <button id="headerLoginBtn">로그인</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="pageWrap">
+        <div id="pageTit">반려동물 정보</div>
+        
+        <table>
+            <tr>
+                <td id="tableTit">반려동물 정보 추가하기</td>
+                <td id="petInfoAddBtnWrap"><button id="petInfoAddBtn">추가하기+</button></td>
+            </tr>
+
+            <tr id="petInfoBoxWrap">
+                <td id="petInfoBox">
+                    <img src="../images/petImg.svg"/>
+                    <div id="petInfoWrap">
+                        <div id="petName">이름</div>
+                        <div id="petBirth">생년월일</div>
+                        <div id="petKind">#종류</div>
+                    </div>
+                </td>
+                <td>
+                    <img src="../images/delete.svg" id="deleteImg" />
+                </td>
+            </tr>
+
+            <tr id="petInfoBoxWrap">
+                <td id="petInfoBox">
+                    <img src="../images/petImg.svg"/>
+                    <div id="petInfoWrap">
+                        <div id="petName">이름</div>
+                        <div id="petBirth">생년월일</div>
+                        <div id="petKind">#종류</div>
+                    </div>
+                </td>
+                <td>
+                    <img src="../images/delete.svg" id="deleteImg" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <div id="footerWrap">
+        <div id="footerText">Copyrights © 2021 by 윤김구이. All Rights Reserved.</div>
+    </div>
 </body>
 </html>

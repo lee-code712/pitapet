@@ -3,7 +3,7 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import model.Care;
+import model.dto.Care;
 import model.dao.CareDAO;
 
 public class CareManager {

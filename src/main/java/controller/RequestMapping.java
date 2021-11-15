@@ -16,17 +16,39 @@ public class RequestMapping {
 
     public void initMapping() {
     	// 각 uri에 대응되는 controller 객체를 생성 및 저장
+    	// main
         mappings.put("/", new ForwardController("index.jsp"));
         mappings.put("/mainpage", new MainPageController());
+        // member
         mappings.put("/member/login/form", new ForwardController("/member/loginForm.jsp"));
-//        mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
-//        mappings.put("/user/login", new LoginController());
-//        mappings.put("/user/logout", new LogoutController());
-//        
-//        // 회원 가입 폼 요청과 가입 요청 처리 병합 (폼에 커뮤니티 선택 메뉴 추가를 위함)
-////      mappings.put("/user/register/form", new ForwardController("/user/registerForm.jsp"));
-////      mappings.put("/user/register", new RegisterUserController());
-//        mappings.put("/user/register", new RegisterUserController());
+        mappings.put("/member/register/form", new ForwardController("/member/registerForm.jsp"));
+        mappings.put("/member/memberMyPage", new ForwardController("/member/memberMyPage.jsp"));
+        mappings.put("/member/updateMember", new ForwardController("/member/memberUpdateForm.jsp"));
+        mappings.put("/member/applySitter", new ForwardController("/member/sitterApplyForm.jsp"));
+        mappings.put("/member/updateSitterApply", new ForwardController("/member/sitterApplyUpdateForm.jsp"));
+        // pet
+        mappings.put("/pet/addPet", new ForwardController("/member/petAddForm.jsp"));
+        mappings.put("/pet/viewPet", new ForwardController("/member/petView.jsp"));
+        // sitter
+        mappings.put("/petSitter/sitterMyPage", new ForwardController("/sitter/sitterMyPage"));
+        mappings.put("/petSitter/registerSitter", new ForwardController("/sitter/sitterRegisterForm.jsp"));
+        mappings.put("/petSitter/updateSitter", new ForwardController("/sitter/sitterUpdateForm.jsp"));
+        mappings.put("/petSitter/viewSitter", new ForwardController("/sitter/sitterView.jsp"));
+        // reservation
+        mappings.put("/reservation/listSitter", new ForwardController("/reservation/sitterList.jsp"));
+        mappings.put("/reservation/viewSitterDetail", new ForwardController("/reservation/sitterDetailView.jsp"));
+        mappings.put("/reservation/Reserve", new ForwardController("/reservation/reservationForm.jsp"));
+        // care
+        mappings.put("/care/listCareDiary", new ForwardController("/care/careDiary.jsp"));
+        mappings.put("/care/recordCare", new ForwardController("/care/careRecordForm.jsp"));
+        mappings.put("/care/updateCareDiary", new ForwardController("/care/careDiaryUpdateForm.jsp"));
+        // review
+        mappings.put("/review/listReview", new ForwardController("/review/reviewList.jsp"));
+        // like
+        mappings.put("/like/listLike", new ForwardController("/like/likeList.jsp"));
+        // manager
+        mappings.put("/manager/listSitterApply", new ForwardController("/manager/sitterApplyList.jsp"));
+        mappings.put("/manager/viewApply", new ForwardController("/manager/applicationView.jsp"));
         
         logger.info("Initialized Request Mapping!");
     }

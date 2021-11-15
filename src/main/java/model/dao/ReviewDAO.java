@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Review;
-import model.Care;
+import model.dto.Review;
+import model.dto.Care;
 
 public class ReviewDAO {
 

@@ -3,7 +3,7 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import model.Review;
+import model.dto.Review;
 import model.dao.ReviewDAO;
 
 public class ReviewManager {

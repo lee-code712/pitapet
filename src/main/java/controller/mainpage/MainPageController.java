@@ -8,8 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import controller.user.UserSessionUtils;
-import model.Review;
-import model.Care;
+import model.dto.Review;
+import model.dto.Care;
 import model.service.CareManager;
 import model.service.ReviewManager;
 

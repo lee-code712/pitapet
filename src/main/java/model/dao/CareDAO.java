@@ -5,9 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Care;
-import model.Member;
-import model.PetSitter;
+import model.dto.Care;
+import model.dto.Member;
+import model.dto.PetSitter;
 
 public class CareDAO {
 	private JDBCUtil jdbcUtil = null;

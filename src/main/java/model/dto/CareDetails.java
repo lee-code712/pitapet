@@ -1,4 +1,4 @@
-package model;
+package model.dto;
 
 /* receive service랑 checklist 테이블이 합쳐진 것 */
 public class CareDetails {

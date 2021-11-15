@@ -20,7 +20,10 @@ public class RequestMapping {
         mappings.put("/", new ForwardController("index.jsp"));
         mappings.put("/mainpage", new MainPageController());
         // member
+        //로그인
         mappings.put("/member/login/form", new ForwardController("/member/loginForm.jsp"));
+        mappings.put("/member/login", new LoginController());
+        
         mappings.put("/member/register/form", new ForwardController("/member/registerForm.jsp"));
         mappings.put("/member/memberMyPage", new ForwardController("/member/memberMyPage.jsp"));
         mappings.put("/member/updateMember", new ForwardController("/member/memberUpdateForm.jsp"));

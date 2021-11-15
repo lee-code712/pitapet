@@ -6,31 +6,36 @@ import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import model.service.MemberManager;
+import model.service.exception.MemberNotFoundException;
+import model.service.exception.PasswordMismatchException;
 
 public class LoginController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	String userId = request.getParameter("userId");
-		String password = request.getParameter("password");
+    	String memberId = request.getParameter("loginId");
+		String password = request.getParameter("loginPwd");
 		
 		try {
 			// 모델에 로그인 처리를 위임
 			MemberManager manager = MemberManager.getInstance();
-			// manager.login(userId, password);
+			manager.login(memberId, password);
 	
 			// 세션에 사용자 이이디 저장
 			HttpSession session = request.getSession();
-            session.setAttribute(UserSessionUtils.USER_SESSION_KEY, userId);
+            session.setAttribute(UserSessionUtils.USER_SESSION_KEY, memberId);
             
-            return "redirect:/user/list";			
-		} catch (Exception e) {
-			/* UserNotFoundException이나 PasswordMismatchException 발생 시
-			 * 다시 login form을 사용자에게 전송하고 오류 메세지도 출력
-			 */
+            return "redirect:/mainpage";			
+		} catch (MemberNotFoundException e) {
             request.setAttribute("loginFailed", true);
 			request.setAttribute("exception", e);
-            return "/user/loginForm.jsp";			
-		}	
+            
+			return "/member/loginForm.jsp";			
+		} catch (PasswordMismatchException e) {
+            request.setAttribute("loginFailed", true);
+			request.setAttribute("exception", e);
+           
+			return "/member/loginForm.jsp";			
+		}		
     }
 }
 

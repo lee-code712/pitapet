@@ -18,6 +18,7 @@
 
 <body>
 	<%@include file="../components/header.jsp" %>
+	
     <div id="mainPageWrap">
         <div id="bannerWrap">
             <img src="../images/banner.svg" id="banner"/>

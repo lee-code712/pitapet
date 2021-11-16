@@ -24,7 +24,8 @@
                 <div id="reviewLink">이용 후기</div>
                 <div id="likeLink">좋아요</div>
                 <div id="myPageLink">마이페이지</div>
-                <button id="headerLoginBtn">로그인</button>
+                <c:url value='/member/login/form' var="url"/>
+                <button id="headerLoginBtn" onclick="location.href='${url}'">로그인</button>
             </div>
         </div>
     </div>

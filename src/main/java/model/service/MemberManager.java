@@ -39,4 +39,8 @@ public class MemberManager {
          }
          return true;
       }
+   
+   public Member findMember(String memberId) throws SQLException {
+	   return memberDAO.findMember(memberId);
+   }
 }

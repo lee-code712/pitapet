@@ -20,7 +20,7 @@ public class CareDAO {
 	public List<Care> findCareSchedules(String memberId) throws SQLException {
 		String sql = "SELECT care_id, start_date, end_date, sitter_id "
 				+ "FROM care c, member m "
-				+ "WHERE c.member_id = m.member_id AND member_id = ?";     
+				+ "WHERE c.member_id = m.member_id AND c.member_id = ?";     
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId});	
 						
 		try {

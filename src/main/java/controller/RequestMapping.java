@@ -5,7 +5,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import controller.user.*;
+import controller.member.*;
 import controller.mainpage.*;
 
 public class RequestMapping {

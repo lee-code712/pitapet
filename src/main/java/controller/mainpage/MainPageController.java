@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
-import controller.user.UserSessionUtils;
+import controller.member.UserSessionUtils;
 import model.dto.Review;
 import model.dto.Care;
 import model.service.CareManager;

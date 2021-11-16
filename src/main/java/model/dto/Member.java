@@ -20,6 +20,7 @@ public class Member {
 	}
 	
 	public Member(String id, String password, String name, String birth, String gender, String phone, String address, String email, String identity) {
+		super();
 		this.id = id;
 		this.password = password;
 		this.name = name;

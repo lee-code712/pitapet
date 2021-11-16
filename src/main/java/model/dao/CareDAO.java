@@ -18,8 +18,9 @@ public class CareDAO {
 	
 	//사용자의 돌봄 예약 내역 반환
 	public List<Care> findCareSchedules(String memberId) throws SQLException {
-		String sql = "SELECT * FROM care c, member m";
-		sql	+= "WHERE c.sitter_id = m.member_id AND member_id = ?";     
+		String sql = "SELECT care_id, start_date, end_date, sitter_id "
+				+ "FROM care c, member m "
+				+ "WHERE c.member_id = m.member_id AND member_id = ?";     
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId});	
 						
 		try {

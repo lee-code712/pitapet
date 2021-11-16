@@ -12,8 +12,8 @@ import model.service.exception.PasswordMismatchException;
 public class LoginController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	String memberId = request.getParameter("loginId");
-		String password = request.getParameter("loginPwd");
+    	String memberId = request.getParameter("memberId");
+		String password = request.getParameter("password");
 		
 		try {
 			// 모델에 로그인 처리를 위임

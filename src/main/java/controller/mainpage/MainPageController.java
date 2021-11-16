@@ -24,6 +24,7 @@ public class MainPageController implements Controller{
 		if(UserSessionUtils.hasLogined(session)) {
 			 List<Care> careSchedules = careMan.findCareSchedules(UserSessionUtils.getLoginUserId(session));
 			 request.setAttribute("careSchedules", careSchedules);
+			 request.setAttribute("isLogined", true);
 		} else {
 			request.setAttribute("isLogined", false);
 		}

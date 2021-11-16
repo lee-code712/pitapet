@@ -24,8 +24,14 @@
                 <div id="reviewLink">이용 후기</div>
                 <div id="likeLink">좋아요</div>
                 <div id="myPageLink">마이페이지</div>
-                <c:url value='/member/login/form' var="url"/>
-                <button id="headerLoginBtn" onclick="location.href='${url}'">로그인</button>
+                <c:if test="${isLogined}">
+                	<c:url value='/member/logout' var="url"/>
+                	<button id="headerLoginBtn" onclick="location.href='${url}'">로그아웃</button>
+                </c:if>
+                <c:if test="${!isLogined}">
+                    <c:url value='/member/login/form' var="url"/>
+                	<button id="headerLoginBtn" onclick="location.href='${url}'">로그인</button>
+                </c:if>
             </div>
         </div>
     </div>

@@ -12,10 +12,22 @@
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
     <link rel="stylesheet" href="/css/mainPage.css"/>
+    <link rel="stylesheet" href="/css/main.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="/js/mainPage.js"></script>
-    
-    <link href='/fullcalendar/main.css' rel='stylesheet' />
+    <!--  <script src="/js/mainPage.js"></script> -->
+    <script src="/js/main.js"></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+
+    </script>
+ 
     <style>
     	#reviewImg {
 			width: 364px;
@@ -40,7 +52,16 @@
 		    left:10%;
 		    transform: translate(-50%, -50%);
 		}
+		
+		#scheduleTit {
+			margin: 80px 0px;
+		}
+		
+		#scheduleWrap {
+			margin: 60px 0px;
+		}
     </style>
+    
 </head>
 
 <body>
@@ -56,28 +77,9 @@
             </div>
         </div>
         
-        <a href="cal.do?command=calendar">캘랜더 API 실습</a>
-        <%@include file="/calendar.html" %>
-        
         <div id="scheduleWrap">
             <div id="scheduleTit">일정 <span>schedule</span></div>
-            <div id="calendarWrap">
-                <div id="calendarDateWrap">
-                    <div class="cal_top">
-                        <a href="#" id="movePrevMonth"><span id="prevMonth" class="cal_tit"><img src="../images/prevImage.svg" /></span></a>
-                        <div>
-                            <span id="cal_top_year"></span>
-                            <span id="cal_top_month"></span>
-                        </div>
-                        <a href="#" id="moveNextMonth"><span id="nextMonth" class="cal_tit"><img src="../images/nextImage.svg" /></span></a>
-                    </div>
-                    <div id="cal_top_date"></div>
-                    <div id="calendarDay">
-                        (<span id="cal_top_dayName"></span>요일)
-                    </div>
-                </div>
-                <div id="cal_tab" class="cal"></div>
-            </div>
+        	<div id="calendar"></div>
         </div>
 
         <div id="reviewWrap">

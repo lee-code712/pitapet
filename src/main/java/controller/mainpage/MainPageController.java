@@ -1,8 +1,6 @@
 package controller.mainpage;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,23 +33,24 @@ public class MainPageController implements Controller{
 		}
 		
 		List<Review> reviews = reviewMan.findReviewList();
-		request.setAttribute("reviews", reviews);
+		Collections.shuffle(reviews);
 		
-		Random rd = new Random();
-		List<Review> randomReviews = new ArrayList<Review>();
-		for (int i = 0; i < 3; i++) {
-			int randomIndex = rd.nextInt(reviews.size());
-			Review review = reviews.get(randomIndex);
+		List<Review> randomReviews = reviews.subList(0, 3);
+		
+		for (Review review : randomReviews) {
 			Member sitterMemInfo = memMan.findMember(review.getCareInfo().getSitter().getSitter().getId());
 			String[] address = sitterMemInfo.getAddress().split(" ");
+			System.out.println(Arrays.toString(address));
 			String city = null;
 			for (int j = 0; j < address.length; j++) {
-				if (address[j].matches("(.*)로"))
-					city = address[j].substring(0, address[j].length() - 2);
+				if (address[j].matches("(.*)로")) {
+					city = address[j].substring(0, address[j].length() - 1);
+					System.out.println(city);
+				}
 			}
 			review.getCareInfo().getSitter().getSitter().setAddress(city);
-			randomReviews.add(reviews.get(randomIndex));
 		}
+		request.setAttribute("reviews", randomReviews);
 		
 		System.out.print(reviews);
 		

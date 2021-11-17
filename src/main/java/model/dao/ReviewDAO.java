@@ -20,8 +20,8 @@ private JDBCUtil jdbcUtil = null;
 		
 	//전체 리뷰 반환
 	public List<Review> findReviewList() throws SQLException {
-        String sql = "SELECT review_id, write_date, content, rate, r.care_id, c.member_id, c.sitter_id "
-        		+ "FROM review r JOIN care c USING (care_id)";
+        String sql = "SELECT review_id, write_date, content, rate, care_id, member_id, sitter_id "
+        		+ "FROM review JOIN care USING (care_id)";
 		jdbcUtil.setSqlAndParameters(sql, null);	
 					
 		try {

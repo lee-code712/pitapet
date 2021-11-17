@@ -9,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/header.css"/>
-    <link rel="stylesheet" href="../css/footer.css"/>
-    <link rel="stylesheet" href="../css/careRecordForm.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/careRecordForm.css"/>
 </head>
 
 <body>
@@ -70,7 +70,7 @@
 
         <div id="fileReviewBtnWrap">
             <div id="fileWrap">
-                <img src="../images/fileImg.svg" id="fileImg"/>
+                <img src="/images/fileImg.svg" id="fileImg"/>
                 <input type="file" id="fileBtn"/>
             </div>
             <button id="detailReviewBtn">리뷰 등록</button>

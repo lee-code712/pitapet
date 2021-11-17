@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/header.css"/>
-    <link rel="stylesheet" href="../css/footer.css"/>
-    <link rel="stylesheet" href="../css/myPage.css"/>
-    <link rel="stylesheet" href="../css/memberMyPage.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/myPage.css"/>
+    <link rel="stylesheet" href="/css/memberMyPage.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 
@@ -31,9 +31,9 @@
             <div id="myInfoWrap">
                 <div id="myInfoTitWrap">
                     <div id="myInfoTit">내 정보</div>
-                    <img src="../images/infoEdit.svg" id="editBtn" />
+                    <img src="/images/infoEdit.svg" id="editBtn" />
                 </div>
-                <img src="../images/myPageNullImg.svg" />
+                <img src="/images/myPageNullImg.svg" />
                 <div id="myInfo">
                     <div id="name">(이름)</div>
                     <div id="phone">(휴대폰 번호)</div>

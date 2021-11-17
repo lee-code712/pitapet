@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/header.css"/>
-    <link rel="stylesheet" href="../css/footer.css"/>
-    <link rel="stylesheet" href="../css/sitterDetailView.css"/>
-    <script src="../js/sitterDetailView.js"></script>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/sitterDetailView.css"/>
+    <script src="/js/sitterDetailView.js"></script>
 </head>
 
 <body>
@@ -23,10 +23,10 @@
         <div id="detailWrap">
             <div id="detailBox">
                 <div id="detailPetSitterName">### 반려동물 돌보미</div>
-                <img src="../images/detailNulImg.svg" />
+                <img src="/images/detailNulImg.svg" />
                 <div id="targetLocation">상월곡</div>
                 <div id="likeCountWrap">
-                    <img src="../images/smallHeart.svg" id="smallHeart" />
+                    <img src="/images/smallHeart.svg" id="smallHeart" />
                     <div id="likeCount">12</div>
                 </div>
                 <div id="detailInner">
@@ -80,7 +80,7 @@
             <textarea placeholder="리뷰를 작성해주세요." id="reviewText"></textarea>
             <div id="fileReviewBtnWrap">
                 <div id="fileWrap">
-                    <img src="../images/fileImg.svg" id="fileImg"/>
+                    <img src="/images/fileImg.svg" id="fileImg"/>
                     <input type="file" id="fileBtn"/>
                 </div>
                 <button id="detailReviewBtn">리뷰 등록</button>
@@ -90,13 +90,13 @@
         <div id="reviewTitWrap">
             <div id="reviewTit">이용 후기</div>
             <div id="scopeWrap">
-                <img src="../images/star.svg"/>
+                <img src="/images/star.svg"/>
                 <div id="scope">5.0</div>
             </div>
         </div>
 
         <div id="petSitterInfoBox">
-            <img src="../images/petSitterNullImg.svg" id="petSitterImg" />
+            <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
             <div id="petSitterLocation">상월곡</div>
             <div id="petSitterInfoInner">
                 <div id="petSitterNameLikeWrap">
@@ -110,7 +110,7 @@
                             <div id="caringTit">about ### 반려동물 돌보미</div>
                         </div>
                         <div id="scopeWrap">
-                            <img src="../images/star.svg"/>
+                            <img src="/images/star.svg"/>
                             <div id="scope">5.0</div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
         </div>
 
         <div id="petSitterInfoBox">
-            <img src="../images/petSitterNullImg.svg" id="petSitterImg" />
+            <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
             <div id="petSitterLocation">상월곡</div>
             <div id="petSitterInfoInner">
                 <div id="petSitterNameLikeWrap">
@@ -133,7 +133,7 @@
                             <div id="caringTit">about ### 반려동물 돌보미</div>
                         </div>
                         <div id="scopeWrap">
-                            <img src="../images/star.svg"/>
+                            <img src="/images/star.svg"/>
                             <div id="scope">5.0</div>
                         </div>
                     </div>

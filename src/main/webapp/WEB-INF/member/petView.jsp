@@ -9,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/header.css"/>
-    <link rel="stylesheet" href="../css/footer.css"/>
-    <link rel="stylesheet" href="../css/petView.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/petView.css"/>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
 
             <tr id="petInfoBoxWrap">
                 <td id="petInfoBox">
-                    <img src="../images/petImg.svg"/>
+                    <img src="/images/petImg.svg"/>
                     <div id="petInfoWrap">
                         <div id="petName">이름</div>
                         <div id="petBirth">생년월일</div>
@@ -36,13 +36,13 @@
                     </div>
                 </td>
                 <td>
-                    <img src="../images/delete.svg" id="deleteImg" />
+                    <img src="/images/delete.svg" id="deleteImg" />
                 </td>
             </tr>
 
             <tr id="petInfoBoxWrap">
                 <td id="petInfoBox">
-                    <img src="../images/petImg.svg"/>
+                    <img src="/images/petImg.svg"/>
                     <div id="petInfoWrap">
                         <div id="petName">이름</div>
                         <div id="petBirth">생년월일</div>
@@ -50,7 +50,7 @@
                     </div>
                 </td>
                 <td>
-                    <img src="../images/delete.svg" id="deleteImg" />
+                    <img src="/images/delete.svg" id="deleteImg" />
                 </td>
             </tr>
         </table>

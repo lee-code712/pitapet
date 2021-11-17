@@ -9,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/header.css"/>
-    <link rel="stylesheet" href="../css/footer.css"/>
-    <link rel="stylesheet" href="../css/careDiary.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/careDiary.css"/>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
                         <div id="careDiaryPetSitterName">
                             ###반려동물 돌보미
                         </div>
-                        <img src="../images/diaryImg.svg" id="diaryImg" />
+                        <img src="/images/diaryImg.svg" id="diaryImg" />
                         <div id="diaryContentWrap">
                             <div id="diaryTit">(제목)</div>
                             <div id="diaryContent">(내용)</div>
@@ -47,7 +47,7 @@
                         <div id="careDiaryPetSitterName">
                             ###반려동물 돌보미
                         </div>
-                        <img src="../images/diaryImg.svg" id="diaryImg" />
+                        <img src="/images/diaryImg.svg" id="diaryImg" />
                         <div id="diaryContentWrap">
                             <div id="diaryTit">(제목)</div>
                             <div id="diaryContent">(내용)</div>

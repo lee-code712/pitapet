@@ -20,6 +20,11 @@
     color: #89A0F2;
 }
 
+#loginInner {
+	display: flex;
+	flex-direction: column;
+}
+
 #loginId {
     margin-bottom: 10px;
     padding-left: 20px;

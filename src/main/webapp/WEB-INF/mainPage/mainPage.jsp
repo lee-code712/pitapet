@@ -9,11 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/header.css"/>
-    <link rel="stylesheet" href="../css/footer.css"/>
-    <link rel="stylesheet" href="../css/mainPage.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/mainPage.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="../js/mainPage.js"></script>
+    <script src="/js/mainPage.js"></script>
 </head>
 
 <body>
@@ -58,7 +58,7 @@
 
             <div id="reviewBoxWrap">
                 <div id="reviewBox">
-                    <img src="../images/reviewNullImg.svg" id="reviewImg"/>
+                    <img src="/images/reviewNullImg.svg" id="reviewImg"/>
                     <div id="reviewBoxInner">
                         <div id="reviewerDateWrap">
                             <div id="reviewerTargetWrap">
@@ -71,7 +71,7 @@
                         <div id="targetScopeWrap">
                             <div id="reviewTarget">about ###반려동물 돌보미</div>
                             <div id="scopeWrap">
-                                <img src="../images/star.svg"/>
+                                <img src="/images/star.svg"/>
                                 <div id="scope">5.0</div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                 </div>
 
                 <div id="reviewBox">
-                    <img src="../images/reviewNullImg.svg" id="reviewImg"/>
+                    <img src="/images/reviewNullImg.svg" id="reviewImg"/>
                     <div id="reviewBoxInner">
                         <div id="reviewerDateWrap">
                             <div id="reviewerTargetWrap">
@@ -92,7 +92,7 @@
                         <div id="targetScopeWrap">
                             <div id="reviewTarget">about ###반려동물 돌보미</div>
                             <div id="scopeWrap">
-                                <img src="../images/star.svg"/>
+                                <img src="/images/star.svg"/>
                                 <div id="scope">5.0</div>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                 </div>
 
                 <div id="reviewBox">
-                    <img src="../images/reviewNullImg.svg" id="reviewImg"/>
+                    <img src="/images/reviewNullImg.svg" id="reviewImg"/>
                     <div id="reviewBoxInner">
                         <div id="reviewerDateWrap">
                             <div id="reviewerTargetWrap">
@@ -113,7 +113,7 @@
                         <div id="targetScopeWrap">
                             <div id="reviewTarget">about ###반려동물 돌보미</div>
                             <div id="scopeWrap">
-                                <img src="../images/star.svg"/>
+                                <img src="/images/star.svg"/>
                                 <div id="scope">5.0</div>
                             </div>
                         </div>

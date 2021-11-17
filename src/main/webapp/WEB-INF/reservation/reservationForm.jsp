@@ -10,10 +10,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/header.css"/>
-    <link rel="stylesheet" href="../css/footer.css"/>
-    <link rel="stylesheet" href="../css/reservationForm.css"/>
-    <script src="../js/reservationForm.js"></script>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/reservationForm.css"/>
+    <script src="/js/reservationForm.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 </head>
@@ -49,10 +49,10 @@
                     <div id="periodInner">
                         <div id="askPeriodTit">언제 맡기시나요?</div>
                         <div id="pickPeriodWrap">
-                            <img src="../images/calendar.svg" id="calendarImg" />
+                            <img src="/images/calendar.svg" id="calendarImg" />
                             <div id="pickPeriodInner">
                                 <input type="text" name="fromDate" id="fromDate" placeholder="체크인 날짜" onfocus="this.blur()" />
-                                <img src="../images/arrow.svg"/>
+                                <img src="/images/arrow.svg"/>
                                 <input type="text" name="toDate" id="toDate" placeholder="체크아웃 날짜" onfocus="this.blur()" />
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                         <div id="selectPetTit">반려동물 선택하기</div>
                         <div id="petInfoBox">
                             <div id="petInfoBoxInner">
-                                <img src="../images/petImg.svg" id="petImg" />
+                                <img src="/images/petImg.svg" id="petImg" />
                                 <div id="petInfo">
                                     <div id="petNBWrap">
                                         <div id="petName">이름</div>
@@ -70,12 +70,12 @@
                                     <div id="petKind"># 대형견</div>
                                 </div>
                             </div>
-                            <img src="../images/checkBoxOn.svg" id="checkBoxImg" />
+                            <img src="/images/checkBoxOn.svg" id="checkBoxImg" />
                         </div>
 
                         <div id="petInfoBox">
                             <div id="petInfoBoxInner">
-                                <img src="../images/petImg.svg" id="petImg" />
+                                <img src="/images/petImg.svg" id="petImg" />
                                 <div id="petInfo">
                                     <div id="petNBWrap">
                                         <div id="petName">이름</div>
@@ -84,7 +84,7 @@
                                     <div id="petKind"># 대형견</div>
                                 </div>
                             </div>
-                            <img src="../images/checkBox.svg" id="checkBoxImg" />
+                            <img src="/images/checkBox.svg" id="checkBoxImg" />
                         </div>
                     </div>
                 </div>

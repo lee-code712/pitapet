@@ -9,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/header.css"/>
-    <link rel="stylesheet" href="../css/footer.css"/>
-    <link rel="stylesheet" href="../css/sitterList.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <link rel="stylesheet" href="/css/footer.css"/>
+    <link rel="stylesheet" href="/css/sitterList.css"/>
 </head>
 
 <body>
@@ -28,10 +28,10 @@
                 </select>
                 <div id="searchWrap">
                     <input type="text" placeholder="검색어를 입력하세요." id="searchText"/>
-                    <img src="../images/search.svg" id="searchImg"/>
+                    <img src="/images/search.svg" id="searchImg"/>
                 </div>
                 <div class="dropdown">
-                    <img src="../images/hamburgerBar.svg" id="hamburgerBarImg" class="dropbtn"/>
+                    <img src="/images/hamburgerBar.svg" id="hamburgerBarImg" class="dropbtn"/>
                     <div class="dropdown-content">
                       <a href="#">인기순</a>
                       <a href="#">조회순</a>
@@ -40,16 +40,16 @@
             </div>
         </div>
         <div id="petSitterInfoBox">
-            <img src="../images/petSitterNullImg.svg" id="petSitterImg" />
+            <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
             <div id="petSitterLocation">상월곡</div>
             <div id="likeCountWrap">
-                <img src="../images/smallHeart.svg" is="likeCountImg" />
+                <img src="/images/smallHeart.svg" is="likeCountImg" />
                 <div id="likeCount">12</div>
             </div>
             <div id="petSitterInfoInner">
                 <div id="petSitterNameLikeWrap">
                     <div id="petSitterName">### 반려동물 돌보미</div>
-                    <img src="../images/likeOn.svg" is="likeOnImg" />
+                    <img src="/images/likeOn.svg" is="likeOnImg" />
                 </div>
                 <div id="petSitterIntro">(소개)</div>
                 <div id="serviceCaringWrap">
@@ -71,16 +71,16 @@
         </div>
 
         <div id="petSitterInfoBox">
-            <img src="../images/petSitterNullImg.svg" id="petSitterImg" />
+            <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
             <div id="petSitterLocation">상월곡</div>
             <div id="likeCountWrap">
-                <img src="../images/smallHeart.svg" is="likeCountImg" />
+                <img src="/images/smallHeart.svg" is="likeCountImg" />
                 <div id="likeCount">12</div>
             </div>
             <div id="petSitterInfoInner">
                 <div id="petSitterNameLikeWrap">
                     <div id="petSitterName">### 반려동물 돌보미</div>
-                    <img src="../images/like.svg" id="likeOnImg" />
+                    <img src="/images/like.svg" id="likeOnImg" />
                 </div>
                 <div id="petSitterIntro">(소개)</div>
                 <div id="serviceCaringWrap">
@@ -105,7 +105,7 @@
         
         <div id="reviewBoxWrap">
             <div id="reviewBox">
-                <img src="../images/reviewNullImg.svg" id="reviewImg"/>
+                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
                 <div id="reviewBoxInner">
                     <div id="reviewerDateWrap">
                         <div id="reviewerTargetWrap">
@@ -118,7 +118,7 @@
                     <div id="targetScopeWrap">
                         <div id="reviewTarget">about ###반려동물 돌보미</div>
                         <div id="scopeWrap">
-                            <img src="../images/star.svg"/>
+                            <img src="/images/star.svg"/>
                             <div id="scope">5.0</div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
             </div>
 
             <div id="reviewBox">
-                <img src="../images/reviewNullImg.svg" id="reviewImg"/>
+                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
                 <div id="reviewBoxInner">
                     <div id="reviewerDateWrap">
                         <div id="reviewerTargetWrap">
@@ -139,7 +139,7 @@
                     <div id="targetScopeWrap">
                         <div id="reviewTarget">about ###반려동물 돌보미</div>
                         <div id="scopeWrap">
-                            <img src="../images/star.svg"/>
+                            <img src="/images/star.svg"/>
                             <div id="scope">5.0</div>
                         </div>
                     </div>
@@ -147,7 +147,7 @@
             </div>
 
             <div id="reviewBox">
-                <img src="../images/reviewNullImg.svg" id="reviewImg"/>
+                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
                 <div id="reviewBoxInner">
                     <div id="reviewerDateWrap">
                         <div id="reviewerTargetWrap">
@@ -160,7 +160,7 @@
                     <div id="targetScopeWrap">
                         <div id="reviewTarget">about ###반려동물 돌보미</div>
                         <div id="scopeWrap">
-                            <img src="../images/star.svg"/>
+                            <img src="/images/star.svg"/>
                             <div id="scope">5.0</div>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
     <nav class="menu-box-1">
         <div class="button">
             <div id="btn">
-                <img src="../images/leftSlide.svg" />
+                <img src="/images/leftSlide.svg" />
             </div>
         </div>
         <div id="category">

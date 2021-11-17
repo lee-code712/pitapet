@@ -23,6 +23,7 @@ public class RequestMapping {
         //로그인
         mappings.put("/member/login/form", new ForwardController("/member/loginForm.jsp"));
         mappings.put("/member/login", new LoginController());
+        mappings.put("/member/logout", new LogoutController());
         
         mappings.put("/member/register/form", new ForwardController("/member/registerForm.jsp"));
         mappings.put("/member/memberMyPage", new MemberMyPageController());

@@ -16,6 +16,31 @@
     <script src="/js/mainPage.js"></script>
     
     <link href='/fullcalendar/main.css' rel='stylesheet' />
+    <style>
+    	#reviewImg {
+			width: 364px;
+			height: 190px;
+			object-fit: cover;
+			border-radius: 10px 10px 0px 0px;
+		}
+		
+		#targetLocation {
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    margin-right: 10px;
+		    width: 70px;
+		    height: 24px;
+		    background-color: #757575;
+		    color: white;
+		    border-radius: 10px 0px 10px 0px;
+		    font-size: 12px;
+		    position: absolute;
+		    top:2.8%;
+		    left:10%;
+		    transform: translate(-50%, -50%);
+		}
+    </style>
 </head>
 
 <body>

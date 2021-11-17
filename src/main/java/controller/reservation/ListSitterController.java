@@ -1,6 +1,8 @@
 package controller.reservation;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +13,9 @@ import controller.member.UserSessionUtils;
 import model.service.LikeListManager;
 import model.service.PetSitterManager;
 import model.dto.PetSitter;
+import model.dto.Review;
 import model.dto.LikeList;
+import model.dto.Member;
 
 public class ListSitterController implements Controller {
 
@@ -38,7 +42,9 @@ public class ListSitterController implements Controller {
 			totalPage = totalSitter / rpp;
 		else
 			totalPage = totalSitter / rpp + 1;
-		int startIndex = currentPage * rpp - 1;
+		int startIndex = 0;
+		for (int i = 1; i < currentPage; i++)
+			startIndex += rpp;
 		int endIndex;
 		if (totalSitter - startIndex == 0)
 			endIndex = startIndex;
@@ -50,7 +56,19 @@ public class ListSitterController implements Controller {
 		pageInfo.add(totalPage);
 		pageInfo.add(currentPage);
 		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("petSitterList", sitterList.subList(startIndex, endIndex));
+		
+		System.out.println(startIndex + " " + endIndex);
+		List<PetSitter> pagingSitters = sitterList.subList(startIndex, endIndex);
+		for (PetSitter sitter : pagingSitters) {
+			String[] address = sitter.getSitter().getAddress().split(" ");
+			String city = null;
+			for (int j = 0; j < address.length; j++) {
+				if (address[j].matches("(.*)로"))
+					city = address[j].substring(0, address[j].length() - 1);
+			}
+			sitter.getSitter().setAddress(city);
+		}
+		request.setAttribute("petSitterList", pagingSitters);
 
 		// 지역별 추천 돌보미 리스트(3개) 전달
 		

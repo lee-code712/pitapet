@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,68 +40,35 @@
                 </div>
             </div>
         </div>
-        <div id="petSitterInfoBox">
-            <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
-            <div id="petSitterLocation">상월곡</div>
-            <div id="likeCountWrap">
-                <img src="/images/smallHeart.svg" is="likeCountImg" />
-                <div id="likeCount">12</div>
-            </div>
-            <div id="petSitterInfoInner">
-                <div id="petSitterNameLikeWrap">
-                    <div id="petSitterName">### 반려동물 돌보미</div>
-                    <img src="/images/likeOn.svg" is="likeOnImg" />
-                </div>
-                <div id="petSitterIntro">(소개)</div>
-                <div id="serviceCaringWrap">
-                    <div id="petSitterServiceWrap">
-                        <div id="serviceTit">제공 서비스</div> 
-                        <div id="petSitterService">(제공서비스)</div>
-                    </div>
-                    <div id="caringDateWrap">
-                        <div id="caringPetsWrap">
-                            <div id="caringTit">돌봄 가능 반려동물</div>
-                            <div id="caringPet">대형견</div>
-                            <div id="caringPet">소형견</div>
-                            <div id="caringPet">고양이</div>
-                        </div>
-                        <div id="lookUpDate">2021-11-01</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="petSitterInfoBox">
-            <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
-            <div id="petSitterLocation">상월곡</div>
-            <div id="likeCountWrap">
-                <img src="/images/smallHeart.svg" is="likeCountImg" />
-                <div id="likeCount">12</div>
-            </div>
-            <div id="petSitterInfoInner">
-                <div id="petSitterNameLikeWrap">
-                    <div id="petSitterName">### 반려동물 돌보미</div>
-                    <img src="/images/like.svg" id="likeOnImg" />
-                </div>
-                <div id="petSitterIntro">(소개)</div>
-                <div id="serviceCaringWrap">
-                    <div id="petSitterServiceWrap">
-                        <div id="serviceTit">제공 서비스</div> 
-                        <div id="petSitterService">(제공서비스)</div>
-                    </div>
-                    <div id="caringDateWrap">
-                        <div id="caringPetsWrap">
-                            <div id="caringTit">돌봄 가능 반려동물</div>
-                            <div id="caringPet">대형견</div>
-                            <div id="caringPet">소형견</div>
-                            <div id="caringPet">고양이</div>
-                        </div>
-                        <div id="lookUpDate">2021-11-01</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+        <c:forEach var="petsitter" items="${petSitterList}">
+			<div id="petSitterInfoBox">
+	            <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
+	            <div id="petSitterLocation">${petsitter.sitter.address}</div>
+	            <div id="likeCountWrap">
+	                <img src="/images/smallHeart.svg" is="likeCountImg" />
+	                <div id="likeCount">${petsitter.like}</div>
+	            </div>
+	            <div id="petSitterInfoInner">
+	                <div id="petSitterNameLikeWrap">
+	                    <div id="petSitterName">${petsitter.sitter.id}</div>
+	                    <img src="/images/likeOn.svg" is="likeOnImg" />
+	                </div>
+	                <div id="petSitterIntro">${petsitter.notes}</div>
+	                <div id="serviceCaringWrap">
+	                    <div id="caringDateWrap">
+	                        <div id="caringPetsWrap">
+	                            <div id="caringTit">태그</div>
+	                            <c:set var="tags" value="${fn:split(petsitter.tag,',')}" />
+	                            <c:forEach var="tag" items="${tags}">
+	                            	<div id="caringPet">#${tag}</div>
+	                            </c:forEach>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>        
+        </c:forEach>
+                
         <div id="paging">
         	<div id="pagingInner">
         		<c:set var="currentPage" value="${pageInfo.get(1)}"/>

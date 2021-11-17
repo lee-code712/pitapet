@@ -9,6 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/header.css"/>
+    
+    <script>
+    	// alert('로그인이 필요합니다.\n');
+    </script>
 </head>
 
 <body>
@@ -19,16 +23,26 @@
                 <img src="../images/proRank.svg" />
             </div>
             
-            <div id="gnb">
-                <div id="sitterListLink">돌보미 조회</div>
-                <div id="reviewLink">이용 후기</div>
-                <div id="likeLink">좋아요</div>
-                <div id="myPageLink">마이페이지</div>
+            <div id="gnb">    
+            	<div id="reviewLink">이용 후기</div>
                 <c:if test="${isLogined}">
+                	<c:url value='/reservation/sitterList' var="sitterListUrl"/>
+                	<div id="sitterListLink" onclick="location.href='${sitterListUrl}'">돌보미 조회</div>
+                	
+                	<c:url value='/like/likeList' var="likeListUrl"/>
+                	<div id="likeLink" onclick="location.href='${likeListUrl}'">좋아요</div>
+                	
+                	<c:url value='/member/memberMyPage' var="memberMyPageUrl"/>
+                	<div id="myPageLink" onclick="location.href='${memberMyPageUrl}'">마이페이지</div>
+                	
                 	<c:url value='/member/logout' var="url"/>
                 	<button id="headerLoginBtn" onclick="location.href='${url}'">로그아웃</button>
                 </c:if>
                 <c:if test="${!isLogined}">
+                	<div id="sitterListLink">돌보미 조회</div>
+                	<div id="likeLink">좋아요</div>
+                	<div id="myPageLink">마이페이지</div>
+                	
                     <c:url value='/member/login/form' var="url"/>
                 	<button id="headerLoginBtn" onclick="location.href='${url}'">로그인</button>
                 </c:if>

@@ -39,6 +39,13 @@ public class MemberMyPageController implements Controller{
 		
 		List<Care> careList = careMan.findCareSchedules(userId);
 		request.setAttribute("careList", careList);
+		// System.out.println(careList);
+		
+		// Sitter에 member 정보 매핑
+		for (Care care:careList) {
+			String sitterId = care.getSitter().getSitter().getId();
+			care.getSitter().setSitter(memberMan.findMember(sitterId));
+		}
 		
         return "/member/memberMyPage.jsp";
     }

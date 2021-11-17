@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/header.css"/>
-    <link rel="stylesheet" href="/css/footer.css"/>
-    <link rel="stylesheet" href="/css/myPage.css"/>
-    <link rel="stylesheet" href="/css/memberMyPage.css"/>
+    <link rel="stylesheet" href="../css/header.css"/>
+    <link rel="stylesheet" href="../css/footer.css"/>
+    <link rel="stylesheet" href="../css/myPage.css"/>
+    <link rel="stylesheet" href="../css/memberMyPage.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 
@@ -31,15 +32,29 @@
             <div id="myInfoWrap">
                 <div id="myInfoTitWrap">
                     <div id="myInfoTit">내 정보</div>
-                    <img src="/images/infoEdit.svg" id="editBtn" />
+                    <img src="../images/infoEdit.svg" id="editBtn" />
                 </div>
-                <img src="/images/myPageNullImg.svg" />
+                <img src="../images/myPageNullImg.svg" />
                 <div id="myInfo">
-                    <div id="name">(이름)</div>
-                    <div id="phone">(휴대폰 번호)</div>
+                    <div id="name">${memberInfo.name}</div>
+                    <div id="phone">${memberInfo.phone}</div>
                     <div id="myPageBtnWrap">
                         <button id="petInfoBtn">반려동물 정보</button>
-                        <button id="applySitterBtn">돌보미 지원</button>
+                        <c:if test="${applicationStatus eq null}">
+                        	<c:url value='/member/applySitter' var="applySitterUrl"/>
+                        	<button id="applySitterBtn" onclick="location.href='${applySitterUrl}'">돌보미 지원</button>
+                        </c:if>
+                        <c:if test="${applicationStatus eq 'X'}">
+                        	<c:url value='/member/updateSitterApply' var="updateSitterApplyUrl"/>
+                        	<button id="applySitterBtn" onclick="location.href='${updateSitterApplyUrl}'">돌보미 지원 정보 조회/수정</button>
+                        </c:if>
+                        <c:if test="${applicationStatus eq 'Y'}">
+                        	<c:url value='/petSitter/sitterMyPage' var="sitterMyPageUrl"/>
+                        	<button id="applySitterBtn" onclick="location.href='${sitterMyPageUrl}'">돌보미 마이페이지</button>
+                        </c:if>
+                        <c:if test="${applicationStatus eq 'Z'}">
+                        	<button id="applySitterBtn">돌보미 지원 정보 조회</button>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -52,31 +67,44 @@
                         <th>완료상태</th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <td>###반려동물 돌보미</td>
-                        <td>2021-09-19 ~ 2021-09-20</td>
-                        <td>돌봄완료</td>
-                        <td>
-                            <button id="careBtn">돌봄일지</button>
-                            <button id="reviewBtn">리뷰작성</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>###반려동물 돌보미</td>
-                        <td>2021-09-19 ~ 2021-09-20</td>
-                        <td>진행중</td>
-                        <td>
-                            <button id="careBtn">돌봄일지</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>###반려동물 돌보미</td>
-                        <td>2021-09-19 ~ 2021-09-20</td>
-                        <td>예약완료</td>
-                        <td>
-                            <button id="cancelBtn">취소하기</button>
-                        </td>
-                    </tr>
+           
+                    <c:forEach var="care" items="${careList}">            	
+                   		<c:if test="${care.status eq 'X'}">
+                   			<tr>
+	                    		<td>${care.sitter.sitter.name}</td>
+	                    		<td>${care.startDate} ~ ${care.endDate}</td>
+	                   			<td>예약완료</td>
+	                   			<td>
+		                            <button id="cancelBtn">취소하기</button>
+		                        </td>
+	                        </tr>
+                   		</c:if>
+                   		
+                   		<c:if test="${care.status eq 'Y'}">
+                   			<tr>
+	                    		<td>${care.sitter.sitter.name}</td>
+	                    		<td>${care.startDate} ~ ${care.endDate}</td>
+	                   			<td>진행중</td>
+	                   			<td>
+		                            <button id="careBtn">돌봄일지</button>
+		                        </td>
+	                        </tr>
+                   		</c:if>
+                   		
+                   		<c:if test="${care.status eq 'Z'}">
+            
+                   			<tr>
+	                    		<td>${care.sitter.sitter.name}</td>
+	                    		<td>${care.startDate} ~ ${care.endDate}</td>
+	                   			<td>돌봄완료</td>
+	                   			<td>
+		                            <button id="careBtn">돌봄일지</button>
+		                            <button id="reviewBtn">리뷰작성</button>
+		                        </td>
+	                        </tr>
+                   		</c:if>
+                    </c:forEach>
+
                 </table>
             </div>
         </div>

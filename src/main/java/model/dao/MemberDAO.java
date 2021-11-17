@@ -26,10 +26,10 @@ private JDBCUtil jdbcUtil = null;
                rs.getString("password"),
                rs.getString("name"),
                rs.getString("birth"),
-               rs.getString("gender"),               
+               rs.getString("gender"),
+               rs.getString("email"),               
                rs.getString("phone"),
                rs.getString("address"),
-               rs.getString("email"),
                rs.getString("identity")
             );
             return member;

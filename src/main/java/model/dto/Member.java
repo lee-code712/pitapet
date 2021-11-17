@@ -25,7 +25,7 @@ public class Member {
 		this.address = address;
 	}
 	
-	public Member(String id, String password, String name, String birth, String gender, String phone, String address, String email, String identity) {
+	public Member(String id, String password, String name, String birth, String gender, String email, String phone, String address, String identity) {
 		super();
 		this.id = id;
 		this.password = password;

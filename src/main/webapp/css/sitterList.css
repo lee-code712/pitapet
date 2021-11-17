@@ -427,3 +427,47 @@ a {
     height: 50px;
     font-size: 18px;
 }
+
+#paging {
+	display: flex;
+	justify-content: center;
+	margin-top: 40px;
+}
+
+#pagingInner {
+	display: flex;
+	align-items: center;
+
+}
+
+#pre {
+	margin-right: 60px;
+}
+
+#numOn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 40px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50px;
+	color: #89A0F2;
+	border: 1px solid #89A0F2;
+}
+
+#num {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 40px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50px;
+	color: #C4C4C4;
+	border: 1px solid #C4C4C4;
+}
+
+#next {
+	margin-left: 20px;
+}

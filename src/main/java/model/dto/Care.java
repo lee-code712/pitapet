@@ -13,12 +13,19 @@ public class Care {
 	private Member companion;
 	private PetSitter sitter;
 	
-	public Care(Integer id) {
+	public Care(int id) {
 		super();
 		this.id = id;
 	}
 	
-	public Care(Integer id, String startDate, String endDate, PetSitter sitter) {
+	public Care(int id, Member companion, PetSitter sitter) {
+		super();
+		this.id = id;
+		this.companion = companion;
+		this.sitter = sitter;
+	}
+
+	public Care(int id, String startDate, String endDate, PetSitter sitter) {
 		super();
 		this.id = id;
 		this.startDate = startDate;

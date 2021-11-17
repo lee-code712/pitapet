@@ -31,6 +31,7 @@
             </div>
             <input type="text" placeholder="생년월일" id="joinBirth" name="birth" />
             <input type="text" placeholder="전화번호 (숫자만 입력)" id="joinPhoneNumber" name="phone" />
+            <input type="text" placeholder="이메일" id="joinEmail" name="email" />
             <input type="text" placeholder="주소" id="joinAddress" name="address" />
         </div>
 

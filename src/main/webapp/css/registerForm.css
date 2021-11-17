@@ -38,7 +38,8 @@
 #joinName,
 #joinBirth,
 #joinAddress,
-#joinPhoneNumber {
+#joinPhoneNumber,
+#joinEmail {
     padding-left: 20px;
     width: 420px;
     height: 50px;
@@ -52,7 +53,8 @@
 #joinName:focus,
 #joinBirth:focus,
 #joinAddress:focus,
-#joinPhoneNumber:focus {
+#joinPhoneNumber:focus,
+#joinEmail:focus {
     outline-color: #89A0F2;
 }
 

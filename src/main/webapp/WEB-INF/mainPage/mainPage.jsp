@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="/css/mainPage.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="/js/mainPage.js"></script>
+    
+    <link href='/fullcalendar/main.css' rel='stylesheet' />
 </head>
 
 <body>
@@ -28,7 +30,10 @@
                 <div id="bannerInfo">반려동물 돌보미 매칭 서비스</div>
             </div>
         </div>
-
+        
+        <a href="cal.do?command=calendar">캘랜더 API 실습</a>
+        <%@include file="/calendar.html" %>
+        
         <div id="scheduleWrap">
             <div id="scheduleTit">일정 <span>schedule</span></div>
             <div id="calendarWrap">

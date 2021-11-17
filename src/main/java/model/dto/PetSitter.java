@@ -17,6 +17,16 @@ public class PetSitter {
 		this.sitter = sitter;
 	}
 	
+	public PetSitter(Member sitter, String tag, String notes, float avgRate, int like, int view) {
+		super();
+		this.sitter = sitter;
+		this.tag = tag;
+		this.notes = notes;
+		this.avgRate = avgRate;
+		this.like = like;
+		this.view = view;
+	}
+	
 	public Member getSitter() {
 		return sitter;
 	}

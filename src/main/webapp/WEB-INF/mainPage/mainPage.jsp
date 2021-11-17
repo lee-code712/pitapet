@@ -64,7 +64,12 @@
             <div id="reviewBoxWrap">
             	<c:forEach var="review" items="${reviews}">
             		<div id="reviewBox">
-                    	<img src="../images/reviewNullImg.svg" id="reviewImg"/>
+                    	<c:if test="${review.images eq null}">
+                    		<img src="../images/reviewNullImg.svg" id="reviewImg"/>
+                    	</c:if>
+                    	<c:if test="${review.images ne null}">
+                    		<img src="${review.images[0]}" id="reviewImg"/>
+                    	</c:if>
                     	<div id="reviewBoxInner">
                         	<div id="reviewerDateWrap">
                             	<div id="reviewerTargetWrap">

@@ -1,6 +1,7 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import model.dao.MemberDAO;
 //import model.dao.ReviewDAO;
@@ -42,5 +43,9 @@ public class MemberManager {
    
    public Member findMember(String memberId) throws SQLException {
 	   return memberDAO.findMember(memberId);
+   }
+   
+   public List<String> findReviewAttachments(String memberId, int careId) throws SQLException {
+	   return memberDAO.findReviewAttachments(memberId, careId);
    }
 }

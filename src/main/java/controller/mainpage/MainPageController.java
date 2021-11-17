@@ -49,6 +49,11 @@ public class MainPageController implements Controller{
 				}
 			}
 			review.getCareInfo().getSitter().getSitter().setAddress(city);
+			
+			// 파일 이미지 경로 set
+			List<String> imgList = memMan.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
+			review.setImages(imgList);
+			System.out.println(imgList.get(0));
 		}
 		request.setAttribute("reviews", randomReviews);
 		

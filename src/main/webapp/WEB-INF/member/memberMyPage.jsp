@@ -32,9 +32,9 @@
             <div id="myInfoWrap">
                 <div id="myInfoTitWrap">
                     <div id="myInfoTit">내 정보</div>
-                    <img src="../images/infoEdit.svg" id="editBtn" />
+                    <img src="/images/infoEdit.svg" id="editBtn" />
                 </div>
-                <img src="../images/myPageNullImg.svg" />
+                <img src="/images/myPageNullImg.svg" />
                 <div id="myInfo">
                     <div id="name">${memberInfo.name}</div>
                     <div id="phone">${memberInfo.phone}</div>

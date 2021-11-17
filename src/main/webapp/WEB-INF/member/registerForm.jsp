@@ -22,16 +22,16 @@
         </div>
 
         <div id="privacyWrap">
-            <input type="text" placeholder="이름" id="joinName" />
+            <input type="text" placeholder="이름" id="joinName" name="name" />
             <div id="genderWrap">
                 <div id="genderInner">
-                    <button id="joinMan" class="gender">남성</button>
-                    <button id="joinWoman" class="gender">여성</button>
+                    <button id="joinMan" class="gender" name="male">남성</button>
+                    <button id="joinWoman" class="gender" name="female">여성</button>
                 </div>
             </div>
-            <input type="text" placeholder="생년월일" id="joinBirth" />
-            <input type="text" placeholder="전화번호 (숫자만 입력)" id="joinPhoneNumber" />
-            <input type="text" placeholder="주소" id="joinAddress" />
+            <input type="text" placeholder="생년월일" id="joinBirth" name="birth" />
+            <input type="text" placeholder="전화번호 (숫자만 입력)" id="joinPhoneNumber" name="phone" />
+            <input type="text" placeholder="주소" id="joinAddress" name="address" />
         </div>
 
         <button id="joinBtn">가입하기</button>

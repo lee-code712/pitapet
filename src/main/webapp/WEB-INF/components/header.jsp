@@ -26,7 +26,9 @@
             <div id="gnb">    
             	<div id="reviewLink">이용 후기</div>
                 <c:if test="${isLogined}">
-                	<c:url value='/reservation/sitterList' var="sitterListUrl"/>
+                	<c:url value='/reservation/listSitter' var="sitterListUrl">
+                		<c:param name="currentPage" value="1"/>
+                	</c:url>
                 	<div id="sitterListLink" onclick="location.href='${sitterListUrl}'">돌보미 조회</div>
                 	
                 	<c:url value='/like/likeList' var="likeListUrl"/>

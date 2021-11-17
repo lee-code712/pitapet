@@ -5,8 +5,19 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import controller.member.*;
+import controller.*;
+import controller.care.*;
+import controller.like.*;
 import controller.mainpage.*;
+import controller.manager.*;
+import controller.member.*;
+import controller.pet.*;
+import controller.reservation.*;
+import controller.review.*;
+import controller.sitter.*;
+
+
+
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -39,7 +50,7 @@ public class RequestMapping {
         mappings.put("/petSitter/updateSitter", new ForwardController("/sitter/sitterUpdateForm.jsp"));
         mappings.put("/petSitter/viewSitter", new ForwardController("/sitter/sitterView.jsp"));
         // reservation
-        mappings.put("/reservation/listSitter", new ForwardController("/reservation/sitterList.jsp"));
+        mappings.put("/reservation/listSitter", new ListSitterController());
         mappings.put("/reservation/viewSitterDetail", new ForwardController("/reservation/sitterDetailView.jsp"));
         mappings.put("/reservation/Reserve", new ForwardController("/reservation/reservationForm.jsp"));
         // care

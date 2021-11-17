@@ -20,7 +20,7 @@ public class ListSitterController implements Controller {
 		HttpSession session = request.getSession();
 		PetSitterManager sitterMan = PetSitterManager.getInstance();
 		LikeListManager likelistMan = LikeListManager.getInstance();
-		int currentPage = Integer.parseInt(request.getParameter("currntPage"));
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		int rpp = 2;
 		
 		// session에 id정보가 없으면 mainpage 호출 리다이렉션
@@ -47,7 +47,8 @@ public class ListSitterController implements Controller {
 		else
 			endIndex = startIndex + rpp;
 		ArrayList<Integer> pageInfo = new ArrayList<Integer>();
-		pageInfo.add(totalPage, currentPage);
+		pageInfo.add(totalPage);
+		pageInfo.add(currentPage);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("petSitterList", sitterList.subList(startIndex, endIndex));
 

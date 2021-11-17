@@ -14,19 +14,19 @@ public class LikeListDAO {
 	}
 	
 	public ArrayList<LikeList> findLikeListOfMember(String memberId) throws SQLException {
-		String sql = "SELECT sitterId "
+		String sql = "SELECT sitter_id "
                  + "FROM likelist "        
-				 + "WHERE memberId = ?";
+				 + "WHERE member_id = ?";
 		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId});
 	      try {
 	         ResultSet rs = jdbcUtil.executeQuery();
 	         if (rs.next()) {                  
 	        	 ArrayList<LikeList> likeList = new ArrayList<>();
-	        	 LikeList like = new LikeList(rs.getString("sitterId"));
+	        	 LikeList like = new LikeList(rs.getString("sitter_id"));
 	        	 likeList.add(like);
 	        	 while (rs.next()) {
-	        		 like = new LikeList(rs.getString("sitterId"));
+	        		 like = new LikeList(rs.getString("sitter_id"));
 		        	 likeList.add(like);
 	        	 }
 	            return likeList;

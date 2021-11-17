@@ -15,8 +15,8 @@ public class PetSitterDAO {
 	}
 	
 	public ArrayList<PetSitter> findPetSitterList() throws SQLException {
-		String sql = "SELECT ps.sitterId, ps.tag, ps.notes, ps.avgRate, ps.like, ps.view, m.address "
-                 + "FROM member m JOIN petsitter ps ON (m.memberId = ps.sitterId) JOIN petsitter_application psa ON (ps.applyId = psa.applyId) "        
+		String sql = "SELECT ps.sitter_id, ps.tag, ps.notes, ps.avg_rate, ps.sitter_like, ps.sitter_view, m.address "
+                 + "FROM member m JOIN petsitter ps ON (m.member_id = ps.sitter_id) "        
 				 + "WHERE ps.public_status = 'Y'";
 		jdbcUtil.setSqlAndParameters(sql, null);
 	      try {
@@ -25,24 +25,24 @@ public class PetSitterDAO {
 	        	 ArrayList<PetSitter> sitterList = new ArrayList<>();
 	        	 PetSitter sitter = new PetSitter (
 	        			 new Member (
-	        					 rs.getString("sitterId"), 
+	        					 rs.getString("sitter_id"), 
 	        					 rs.getString("address")),
 	        			 rs.getString("tag"),
 	        			 rs.getString("notes"),
-	        			 rs.getFloat("avgRate"),
-	        			 rs.getInt("like"),
-	        			 rs.getInt("view"));
+	        			 rs.getFloat("avg_rate"),
+	        			 rs.getInt("sitter_like"),
+	        			 rs.getInt("sitter_view"));
 	        	 sitterList.add(sitter);
 	        	 while (rs.next()) {
 	        		 sitter = new PetSitter (
 	        			 new Member (
-	        					 rs.getString("sitterId"), 
+	        					 rs.getString("sitter_id"), 
 	        					 rs.getString("address")),
 	        			 rs.getString("tag"),
 	        			 rs.getString("notes"),
-	        			 rs.getFloat("avgRate"),
-	        			 rs.getInt("like"),
-	        			 rs.getInt("view"));
+	        			 rs.getFloat("avg_rate"),
+	        			 rs.getInt("sitter_like"),
+	        			 rs.getInt("sitter_view"));
 	        		 sitterList.add(sitter);
 	        	 }
 	            return sitterList;

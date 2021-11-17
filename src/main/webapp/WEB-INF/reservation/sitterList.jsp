@@ -103,29 +103,32 @@
         
         <div id="paging">
         	<div id="pagingInner">
+        		<c:set var="currentPage" value="${pageInfo.get(1)}"/>
+        		<c:set var="totalPage" value="${pageInfo.get(0)}"/>
         		<c:if test="${currentPage > 1}">
-        			<c:url value='/reservation/listSitter' var="url">
+        			<c:url value='/reservation/listSitter' var="preUrl">
         				<c:param name="currentPage" value="${currentPage - 1}"/>
         			</c:url>
-	        		<a href="${url}" id="pre">이전</a>
+	        		<a href="${preUrl}" id="pre">이전</a>
         		</c:if>
-	        	<c:forEach var="i" begin="1" end="${pageInfo.totalPage}">
+	        	<c:forEach var="i" begin="1" end="${totalPage}">
 	        		<c:choose>
-	        			<c:when test="${i == pageInfo.currentPage}">
-	        				<div id="numOn">i</div>
+	        			<c:when test="${i == currentPage}">
+	        				<div id="numOn">${i}</div>
 	        			</c:when>
 	        			<c:otherwise>
-	        				<div id="num">i</div>
+	        				<c:url value='/reservation/listSitter' var="url">
+        						<c:param name="currentPage" value="${i}"/>
+        					</c:url>
+	        				<div id="num" onClick="location.href='${url}'">${i}</div>
 	        			</c:otherwise>
 	        		</c:choose>
 	        	</c:forEach>
-	        	<!--<div id="numOn">1</div>
-	        	<div id="num">2</div>  -->
 	        	<c:if test="${currentPage < totalPage}">
-        			<c:url value='/reservation/listSitter' var="url">
+        			<c:url value='/reservation/listSitter' var="postUrl">
         				<c:param name="currentPage" value="${currentPage + 1}"/>
         			</c:url>
-	        		<a href="${url}" id="next">다음</a>
+	        		<a href="${postUrl}" id="next">다음</a>
         		</c:if>
         	</div>
         </div>

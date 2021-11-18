@@ -24,7 +24,9 @@
             </div>
             
             <div id="gnb">    
-            	<div id="reviewLink">이용 후기</div>
+                <c:url value='/review/listReview' var = "reviewListUrl"/>
+            	<div id="reviewLink" onclick="location.href='${reviewListUrl}'">이용 후기</div>
+                
                 <c:if test="${isLogined}">
                 	<c:url value='/reservation/listSitter' var="sitterListUrl">
                 		<c:param name="currentPage" value="1"/>

@@ -20,194 +20,33 @@
     <div id="reviewPageWrap">
         <div id="pageTit">이용 후기</div>
         <div id="reviewBoxWrap">
+           <c:forEach var="review" items="${reviews}"> 
             <div id="reviewBox">
-                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
+                <c:if test="${review.images eq null}">
+                    	<img src="../images/reviewNullImg.svg" id="reviewImg"/>
+                </c:if>
+                 <c:if test="${review.images ne null}">
+                    	<img src="${review.images[0]}" id="reviewImg"/>
+                </c:if>
                 <div id="reviewBoxInner">
                     <div id="reviewerDateWrap">
                         <div id="reviewerTargetWrap">
-                            <div id="targetLocation">상월곡</div>
-                            <div id="reviewer">###보호자님</div>
+                            <div id="targetLocation">${review.careInfo.sitter.sitter.address}</div>
+                            <div id="reviewer">${review.careInfo.companion.id} 님</div>
                         </div>
-                        <div id="reviewDate">2021-11-01</div>
+                        <div id="reviewDate">${review.writeDate}</div>
                     </div>
-                    <div id="review">(리뷰 작성)</div>
+                    <div id="review">${review.content}</div>
                     <div id="targetScopeWrap">
-                        <div id="reviewTarget">about ###반려동물 돌보미</div>
+                        <div id="reviewTarget">by ${review.careInfo.sitter.sitter.id}</div>
                         <div id="scopeWrap">
                             <img src="/images/star.svg"/>
-                            <div id="scope">5.0</div>
+                            <div id="scope">${review.rate}</div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div id="reviewBox">
-                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
-                <div id="reviewBoxInner">
-                    <div id="reviewerDateWrap">
-                        <div id="reviewerTargetWrap">
-                            <div id="targetLocation">상월곡</div>
-                            <div id="reviewer">###보호자님</div>
-                        </div>
-                        <div id="reviewDate">2021-11-01</div>
-                    </div>
-                    <div id="review">(리뷰 작성)</div>
-                    <div id="targetScopeWrap">
-                        <div id="reviewTarget">about ###반려동물 돌보미</div>
-                        <div id="scopeWrap">
-                            <img src="/images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="reviewBox">
-                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
-                <div id="reviewBoxInner">
-                    <div id="reviewerDateWrap">
-                        <div id="reviewerTargetWrap">
-                            <div id="targetLocation">상월곡</div>
-                            <div id="reviewer">###보호자님</div>
-                        </div>
-                        <div id="reviewDate">2021-11-01</div>
-                    </div>
-                    <div id="review">(리뷰 작성)</div>
-                    <div id="targetScopeWrap">
-                        <div id="reviewTarget">about ###반려동물 돌보미</div>
-                        <div id="scopeWrap">
-                            <img src="/images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="reviewBox">
-                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
-                <div id="reviewBoxInner">
-                    <div id="reviewerDateWrap">
-                        <div id="reviewerTargetWrap">
-                            <div id="targetLocation">상월곡</div>
-                            <div id="reviewer">###보호자님</div>
-                        </div>
-                        <div id="reviewDate">2021-11-01</div>
-                    </div>
-                    <div id="review">(리뷰 작성)</div>
-                    <div id="targetScopeWrap">
-                        <div id="reviewTarget">about ###반려동물 돌보미</div>
-                        <div id="scopeWrap">
-                            <img src="/images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="reviewBox">
-                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
-                <div id="reviewBoxInner">
-                    <div id="reviewerDateWrap">
-                        <div id="reviewerTargetWrap">
-                            <div id="targetLocation">상월곡</div>
-                            <div id="reviewer">###보호자님</div>
-                        </div>
-                        <div id="reviewDate">2021-11-01</div>
-                    </div>
-                    <div id="review">(리뷰 작성)</div>
-                    <div id="targetScopeWrap">
-                        <div id="reviewTarget">about ###반려동물 돌보미</div>
-                        <div id="scopeWrap">
-                            <img src="/images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="reviewBox">
-                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
-                <div id="reviewBoxInner">
-                    <div id="reviewerDateWrap">
-                        <div id="reviewerTargetWrap">
-                            <div id="targetLocation">상월곡</div>
-                            <div id="reviewer">###보호자님</div>
-                        </div>
-                        <div id="reviewDate">2021-11-01</div>
-                    </div>
-                    <div id="review">(리뷰 작성)</div>
-                    <div id="targetScopeWrap">
-                        <div id="reviewTarget">about ###반려동물 돌보미</div>
-                        <div id="scopeWrap">
-                            <img src="/images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="reviewBox">
-                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
-                <div id="reviewBoxInner">
-                    <div id="reviewerDateWrap">
-                        <div id="reviewerTargetWrap">
-                            <div id="targetLocation">상월곡</div>
-                            <div id="reviewer">###보호자님</div>
-                        </div>
-                        <div id="reviewDate">2021-11-01</div>
-                    </div>
-                    <div id="review">(리뷰 작성)</div>
-                    <div id="targetScopeWrap">
-                        <div id="reviewTarget">about ###반려동물 돌보미</div>
-                        <div id="scopeWrap">
-                            <img src="/images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="reviewBox">
-                <img src="../images/reviewNullImg.svg" id="reviewImg"/>
-                <div id="reviewBoxInner">
-                    <div id="reviewerDateWrap">
-                        <div id="reviewerTargetWrap">
-                            <div id="targetLocation">상월곡</div>
-                            <div id="reviewer">###보호자님</div>
-                        </div>
-                        <div id="reviewDate">2021-11-01</div>
-                    </div>
-                    <div id="review">(리뷰 작성)</div>
-                    <div id="targetScopeWrap">
-                        <div id="reviewTarget">about ###반려동물 돌보미</div>
-                        <div id="scopeWrap">
-                            <img src="../images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="reviewBox">
-                <img src="../images/reviewNullImg.svg" id="reviewImg"/>
-                <div id="reviewBoxInner">
-                    <div id="reviewerDateWrap">
-                        <div id="reviewerTargetWrap">
-                            <div id="targetLocation">상월곡</div>
-                            <div id="reviewer">###보호자님</div>
-                        </div>
-                        <div id="reviewDate">2021-11-01</div>
-                    </div>
-                    <div id="review">(리뷰 작성)</div>
-                    <div id="targetScopeWrap">
-                        <div id="reviewTarget">about ###반려동물 돌보미</div>
-                        <div id="scopeWrap">
-                            <img src="../images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+		  </c:forEach>	
         </div>
     </div>
 </body>

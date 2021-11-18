@@ -12,6 +12,32 @@
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
     <link rel="stylesheet" href="/css/review.css"/>
+    
+    <style>
+	    #reviewImg {
+			width: 364px;
+			height: 190px;
+			object-fit: cover;
+			border-radius: 10px 10px 0px 0px;
+		}
+		
+		#targetLocation {
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    margin-right: 10px;
+		    width: 70px;
+		    height: 24px;
+		    background-color: #757575;
+		    color: white;
+		    border-radius: 10px 0px 10px 0px;
+		    font-size: 12px;
+		    position: absolute;
+		    top:2.8%;
+		    left:10%;
+		    transform: translate(-50%, -50%);
+		}
+	</style>
 </head>
 
 <body>
@@ -23,7 +49,7 @@
            <c:forEach var="review" items="${reviews}"> 
             <div id="reviewBox">
                 <c:if test="${review.images eq null}">
-                    	<img src="../images/reviewNullImg.svg" id="reviewImg"/>
+                    	<img src="/images/reviewNullImg.svg" id="reviewImg"/>
                 </c:if>
                  <c:if test="${review.images ne null}">
                     	<img src="${review.images[0]}" id="reviewImg"/>

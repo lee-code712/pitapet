@@ -9,6 +9,12 @@ public class LikeList {
 		this.memberId = memberId;
 	}
 	
+	public LikeList(String memberId, PetSitter likeSitter) {
+		super();
+		this.memberId = memberId;
+		this.likeSitter = likeSitter;
+	}
+	
 	public String getMemberId() {
 		return memberId;
 	}

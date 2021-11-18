@@ -3,8 +3,11 @@ package model.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.dto.LikeList;
+import model.dto.Member;
+import model.dto.PetSitter;
 
 public class LikeListDAO {
 	private JDBCUtil jdbcUtil = null;
@@ -13,24 +16,23 @@ public class LikeListDAO {
 		jdbcUtil = new JDBCUtil();   // JDBCUtil 객체 생성
 	}
 	
-	public ArrayList<LikeList> findLikeListOfMember(String memberId) throws SQLException {
+	public List<LikeList> findLikeListOfMember(String memberId) throws SQLException {
 		String sql = "SELECT sitter_id "
                  + "FROM likelist "        
 				 + "WHERE member_id = ?";
 		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId});
 	      try {
-	         ResultSet rs = jdbcUtil.executeQuery();
-	         if (rs.next()) {                  
-	        	 ArrayList<LikeList> likeList = new ArrayList<>();
-	        	 LikeList like = new LikeList(rs.getString("sitter_id"));
-	        	 likeList.add(like);
+	         ResultSet rs = jdbcUtil.executeQuery();            
+	        	 List<LikeList> likeList = new ArrayList<>();
 	        	 while (rs.next()) {
-	        		 like = new LikeList(rs.getString("sitter_id"));
+	        		 LikeList like = new LikeList(
+	        				 memberId, 
+	        				 new PetSitter(
+	        						 new Member(rs.getString("sitter_id"))));
 		        	 likeList.add(like);
 	        	 }
 	            return likeList;
-	         }
 	      } catch (Exception ex) {
 	         ex.printStackTrace();
 	      } finally {

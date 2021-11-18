@@ -60,7 +60,7 @@ public class RequestMapping {
         // review
         mappings.put("/review/listReview", new ListReviewController());
         // like
-        mappings.put("/like/listLike", new ForwardController("/like/likeList.jsp"));
+        mappings.put("/like/listLike", new ListLikeController());
         // manager
         mappings.put("/manager/listSitterApply", new ForwardController("/manager/sitterApplyList.jsp"));
         mappings.put("/manager/viewApply", new ForwardController("/manager/applicationView.jsp"));

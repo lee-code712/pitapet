@@ -73,7 +73,7 @@ public class ListSitterController implements Controller {
 		// 지역별 추천 돌보미 리스트(3개) 전달
 		
 		// 좋아요 누른 돌보미 id list 전달
-		ArrayList<LikeList> likeSitters = likelistMan.findLikeListOfMember(UserSessionUtils.getLoginUserId(session));
+		List<LikeList> likeSitters = likelistMan.findLikeListOfMember(UserSessionUtils.getLoginUserId(session));
 		request.setAttribute("likeSitters", likeSitters);
 		
         return "/reservation/sitterList.jsp";

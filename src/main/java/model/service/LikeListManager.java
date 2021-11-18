@@ -2,6 +2,7 @@ package model.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.dao.LikeListDAO;
 import model.dto.LikeList;
@@ -22,7 +23,7 @@ public class LikeListManager {
 		      return likelistMan;
 	   }
 	   
-	   public ArrayList<LikeList> findLikeListOfMember(String memberId) throws SQLException {
+	   public List<LikeList> findLikeListOfMember(String memberId) throws SQLException {
 		   return likeListDAO.findLikeListOfMember(memberId);
 	   }
 }

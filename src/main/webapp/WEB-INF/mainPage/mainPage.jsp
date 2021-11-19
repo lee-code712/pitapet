@@ -25,13 +25,14 @@
 			});
         	calendar.render();
         	
-        	var schedules = ${careSchedules};
+        	var schedules = JSON.parse('${careSchedules}');
+        	console.log(schedules);
         	for (key in schedules) {
-        		calendar.addEvent({
-        			title: schedules[key].sitter.sitter.id,
-        			start: schedules[key].startDate,
-        			end: schedules[key].endDate
-        		})
+            	calendar.addEvent({
+            		title: schedules[key].sitter.sitter.id,
+            		start: schedules[key].startDate,
+            		end: schedules[key].endDate
+            	})
         	}
 		});
     </script>

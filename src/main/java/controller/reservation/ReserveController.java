@@ -28,42 +28,58 @@ public class ReserveController {
 		String userId = UserSessionUtils.getLoginUserId(session);
 
 		if (request.getMethod().equals("GET")) {
-			// 화면 뿌려주고
-			/*
-			 * 돌보미 이름 - member 테이블 보호자 반려동물 리스트 - pet 테이블 돌보미 제공 가능 서비스 리스트 -
-			 * provide_service 테이블 돌보미 돌봄 가능 반려동물 리스트 - available_pet_kind 테이블
-			 */
-
-			String sitterId = (String) request.getAttribute("sitterId");
+			String sitterId = (String) request.getParameter("sitterId");
 
 			PetSitterManager sitterMan = PetSitterManager.getInstance();
 			PetManager petMan = PetManager.getInstance();
 			CareManager careMan = CareManager.getInstance();
 			ServiceManager srvcMan = ServiceManager.getInstance();
 
+			// 펫시터 정보
 			PetSitter petSitterInfo = sitterMan.findPetSitter(sitterId);
 			request.setAttribute("petSitterInfo", petSitterInfo);
+			
+			// 가능 일자 (01000000 형식의 int)
+			String unparsedAbleDay = petSitterInfo.getAbleDate();
+			String parsedAbleDay = Integer.toBinaryString(unparsedAbleDay.charAt(0));
+			int ableDay = Integer.parseInt(parsedAbleDay);
+			request.setAttribute("ableDay", ableDay);
 
+			// 돌봄 가능 동물종 리스트
 			List<PetKind> ablePetKinds = petMan.findAblePetKindLsit(sitterId);
 			request.setAttribute("ablePetKinds", ablePetKinds);
 
-			List<Care> UnparsedAbleDay = careMan.findCareSchedules(sitterId);
-			List<Integer> ableDay = null;
-			request.setAttribute("ableDay", ableDay);
-
+			// 로그인한 유저의 반려동물 리스트
 			List<Pet> userPets = petMan.findPetListOfMember(userId);
 			request.setAttribute("userPets", userPets);
 
+			// 로그인한 유저의 반려동물 별 사진 리스트
 			for (Pet pet : userPets) {
 				List<String> imgList = petMan.findPetAttachments(userId);
 				pet.setImages(imgList);
 			}
-
 			List<Service> ableService = srvcMan.findProvideServiceList(sitterId);
 			request.setAttribute("ableService", ableService);
 
-			// 가격 조회 추가
+			// 가격 계산
+			String[] fromDate = request.getParameter("startDate").split("-");
+			String[] toDate = request.getParameter("endDate").split("-");
 
+			String fDate = (fromDate[0] + fromDate[1] + fromDate[2]);
+			String tDate = (toDate[0] + toDate[1] + toDate[2]);
+			int dateLength = Integer.parseInt(tDate) - Integer.parseInt(fDate);
+			
+			int totalPrice = 0;
+			String[] price = petSitterInfo.getCalculatedPrice().split(",");
+			int nightPrice = Integer.parseInt(price[0]);
+			int dayPrice = Integer.parseInt(price[1]);
+			if (dateLength == 0)
+				totalPrice = dayPrice;
+			else
+				totalPrice = dateLength * nightPrice;
+			
+			request.setAttribute("totalPrice", totalPrice);
+			
 			return "/reservation/reservationForm.jsp";
 		}
 

@@ -23,7 +23,17 @@
             <div id="logoWrap">
             	<c:url value="/mainpage" var="mainUrl"/>
                 <div id="logo" onClick="location.href='${mainUrl}'">PIT A PET</div>
-                <img src="../images/proRank.svg" />
+                <c:choose>
+                	<c:when test="${sessionScope.identity == 'C'}">
+                		보호자 등급
+                	</c:when>
+                	<c:when test="${sessionScope.identity == 'S'}">
+                		<img src="../images/proRank.svg" />
+                	</c:when>
+                	<c:when test="${sessionScope.identity == 'M'}">
+                		관리자 등급
+                	</c:when>
+                </c:choose>  
             </div>
             
             <div id="gnb">    

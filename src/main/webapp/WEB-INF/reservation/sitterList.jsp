@@ -54,13 +54,27 @@
 	            <div id="petSitterInfoInner">
 	                <div id="petSitterNameLikeWrap">
 	                    <div id="petSitterName">${petsitter.sitter.id}</div>
-	                    <img src="/images/likeOn.svg" is="likeOnImg" />
+	                    <c:set var="findCk" value="false"/>
+	                    <c:forEach var="likesitter" items ="${likeSitters}" varStatus="status">
+	                    	<c:if test="${findCk == false}">
+	                    		<c:choose>
+	                    			<c:when test="${likesitter.likeSitter.sitter.id == petsitter.sitter.id}">
+	                    				<img src="/images/likeOn.svg" is="likeOnImg" />
+		                    			<c:set var="findCk" value="true"/>
+	                    			</c:when>
+	                    			<c:otherwise>
+	                    				<c:if test="${status.last}">
+	                    					<img src="/images/like.svg" is="likeImg" />
+	                    				</c:if>
+	                    			</c:otherwise>
+		                    	</c:choose>
+	                    	</c:if>
+	                    </c:forEach>
 	                </div>
 	                <div id="petSitterIntro">${petsitter.notes}</div>
 	                <div id="serviceCaringWrap">
 	                    <div id="caringDateWrap">
 	                        <div id="caringPetsWrap">
-	                            <div id="caringTit">태그</div>
 	                            <c:set var="tags" value="${fn:split(petsitter.tag,',')}" />
 	                            <c:forEach var="tag" items="${tags}">
 	                            	<div id="caringPet">#${tag}</div>

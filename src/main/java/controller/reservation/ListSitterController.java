@@ -2,7 +2,6 @@ package controller.reservation;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,9 +12,7 @@ import controller.member.UserSessionUtils;
 import model.service.LikeListManager;
 import model.service.PetSitterManager;
 import model.dto.PetSitter;
-import model.dto.Review;
 import model.dto.LikeList;
-import model.dto.Member;
 
 public class ListSitterController implements Controller {
 
@@ -57,7 +54,6 @@ public class ListSitterController implements Controller {
 		pageInfo.add(currentPage);
 		request.setAttribute("pageInfo", pageInfo);
 		
-		System.out.println(startIndex + " " + endIndex);
 		List<PetSitter> pagingSitters = sitterList.subList(startIndex, endIndex);
 		for (PetSitter sitter : pagingSitters) {
 			String[] address = sitter.getSitter().getAddress().split(" ");
@@ -75,6 +71,7 @@ public class ListSitterController implements Controller {
 		// 좋아요 누른 돌보미 id list 전달
 		List<LikeList> likeSitters = likelistMan.findLikeListOfMember(UserSessionUtils.getLoginUserId(session));
 		request.setAttribute("likeSitters", likeSitters);
+		System.out.println(likeSitters);
 		
         return "/reservation/sitterList.jsp";
     }

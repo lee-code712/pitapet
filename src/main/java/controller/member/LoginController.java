@@ -20,9 +20,12 @@ public class LoginController implements Controller {
 			MemberManager manager = MemberManager.getInstance();
 			manager.login(memberId, password);
 	
-			// 세션에 사용자 이이디 저장
+			// 세션에 사용자 아이디, 등급 저장
 			HttpSession session = request.getSession();
             session.setAttribute(UserSessionUtils.USER_SESSION_KEY, memberId);
+            
+            String memberIdentity = manager.findMember(memberId).getIdentity();
+            session.setAttribute("identity", memberIdentity);
             
             return "redirect:/mainpage";			
 		} catch (MemberNotFoundException e) {

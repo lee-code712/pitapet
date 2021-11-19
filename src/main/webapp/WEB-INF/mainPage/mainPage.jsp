@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +24,15 @@
 				initialView: 'dayGridMonth'
 			});
         	calendar.render();
+        	
+        	var schedules = ${careSchedules};
+        	for (key in schedules) {
+        		calendar.addEvent({
+        			title: schedules[key].sitter.sitter.id,
+        			start: schedules[key].startDate,
+        			end: schedules[key].endDate
+        		})
+        	}
 		});
     </script>
  

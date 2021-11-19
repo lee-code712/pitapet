@@ -1,6 +1,7 @@
 package controller.mainpage;
 
 import java.util.*;
+import com.fasterxml.jackson.databind.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,9 +25,21 @@ public class MainPageController implements Controller{
 		ReviewManager reviewMan = ReviewManager.getInstance();
 		MemberManager memMan = MemberManager.getInstance();
 		
+		// login 상태 확인
 		if(UserSessionUtils.hasLogined(session)) {
 			 List<Care> careSchedules = careMan.findCareSchedules(UserSessionUtils.getLoginUserId(session));
-			 request.setAttribute("careSchedules", careSchedules);
+			 if(careSchedules != null) {
+					Iterator<Care> iterator = careSchedules.iterator();
+					Map<Integer, Care> scheduleMap = new HashMap<Integer, Care>();
+					while(iterator.hasNext()) {
+						Care care = iterator.next();
+						scheduleMap.put(care.getId(), care);
+					}
+					ObjectMapper mapper = new ObjectMapper();   
+					String schedules = mapper.writeValueAsString(scheduleMap);
+					
+					request.setAttribute("careSchedules", schedules);
+			 }
 		} else {
 			request.setAttribute("isNotLogined", true);
 		}

@@ -41,7 +41,10 @@
             </div>
         </div>
         <c:forEach var="petsitter" items="${petSitterList}">
-			<div id="petSitterInfoBox">
+        	<c:url value="/reservation/viewSitterDetail" var="viewUrl">
+        		<c:param name="sitterId" value="${petsitter.sitter.id}"/>
+        	</c:url>
+			<div id="petSitterInfoBox" onClick="location.href='${viewUrl}'">
 	            <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
 	            <div id="petSitterLocation">${petsitter.sitter.address}</div>
 	            <div id="likeCountWrap">

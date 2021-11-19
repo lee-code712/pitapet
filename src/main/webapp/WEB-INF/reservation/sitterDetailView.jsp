@@ -71,7 +71,10 @@
                         <tbody></tbody>
                     </table>
                 </div>
-                <button id="reservationBtn">예약하기</button>
+                <c:url value="/reservation/reserve" var="reserveUrl">
+                	<c:param name="sitterId" value="${param.sitterId}"/>
+                </c:url>
+                <button id="reservationBtn" onClick="location.href='${reserveUrl}'">예약하기</button>
             </div>
         </div>
 

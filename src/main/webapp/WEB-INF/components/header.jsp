@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="../css/header.css"/>
     
     <script>
-    	// alert('로그인이 필요합니다.\n');
+		function accessAlert() {
+			alert('로그인 후 이용가능합니다.');    		
+		}
     </script>
 </head>
 
@@ -27,7 +29,7 @@
                 <c:url value='/review/listReview' var = "reviewListUrl"/>
             	<div id="reviewLink" onclick="location.href='${reviewListUrl}'">이용 후기</div>
                 
-                <c:if test="${isLogined}">
+                <c:if test="${!isNotLogined}">
                 	<c:url value='/reservation/listSitter' var="sitterListUrl">
                 		<c:param name="currentPage" value="1"/>
                 	</c:url>
@@ -42,10 +44,10 @@
                 	<c:url value='/member/logout' var="url"/>
                 	<button id="headerLoginBtn" onclick="location.href='${url}'">로그아웃</button>
                 </c:if>
-                <c:if test="${!isLogined}">
-                	<div id="sitterListLink">돌보미 조회</div>
-                	<div id="likeLink">좋아요</div>
-                	<div id="myPageLink">마이페이지</div>
+                <c:if test="${isNotLogined}">
+                	<div id="sitterListLink" onClick="accessAlert();">돌보미 조회</div>
+                	<div id="likeLink" onClick="accessAlert();">좋아요</div>
+                	<div id="myPageLink" onClick="accessAlert();">마이페이지</div>
                 	
                     <c:url value='/member/login/form' var="url"/>
                 	<button id="headerLoginBtn" onclick="location.href='${url}'">로그인</button>

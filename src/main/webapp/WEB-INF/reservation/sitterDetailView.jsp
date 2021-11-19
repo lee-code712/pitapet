@@ -20,6 +20,31 @@
     <script src="/js/main.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+       <style>
+    	   	#reviewImg {
+			width: 364px;
+			height: 242px;
+			object-fit: cover;
+			border-radius: 10px;
+		}
+		
+		#targetLocation {
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    margin-right: 10px;
+		    width: 70px;
+		    height: 24px;
+		    background-color: #757575;
+		    color: white;
+		    border-radius: 10px 0px 10px 0px;
+		    font-size: 12px;
+		    position: absolute;
+		    top:2.8%;
+		    left:10%;
+		    transform: translate(-50%, -50%);
+		}
+    </style>
     <script src="/js/reservationForm.js"></script>
         <script>
 		document.addEventListener('DOMContentLoaded', function() {

@@ -56,7 +56,13 @@
                     </div>
                 </div>
                 <div id="subPageTit">원하는 서비스</div>
-                <textarea placeholder="원하는 서비스를 작성하세요." id="reviewText"></textarea>
+                <input type="checkbox" id="service1" checked> 밥주기
+                <input type="checkbox" id="service2"> 물주기
+                <input type="checkbox" id="service3"> 목욕하기
+                <input type="checkbox" id="service4"> 산책하기
+                <input type="checkbox" id="service5"> 실내놀이
+                <input type="checkbox" id="service6"> 미용
+
 
                 <div id="subPageTit">주의사항</div>
                 <textarea placeholder="주의사항을 입력하세요." id="reviewText"></textarea>

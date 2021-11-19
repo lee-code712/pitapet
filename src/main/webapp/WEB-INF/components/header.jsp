@@ -21,7 +21,8 @@
 	<div id="headerWrap">
         <div id="headerInner">
             <div id="logoWrap">
-                <div id="logo">PIT A PET</div>
+            	<c:url value="/mainpage" var="mainUrl"/>
+                <div id="logo" onClick="location.href='${mainUrl}'">PIT A PET</div>
                 <img src="../images/proRank.svg" />
             </div>
             

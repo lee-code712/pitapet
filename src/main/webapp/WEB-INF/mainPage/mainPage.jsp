@@ -94,7 +94,8 @@
         <div id="reviewWrap">
             <div id="reviewTit">이용 후기 <span>review</span></div>
             <div id="reviewMoreBtnWrap">
-                <div id="reviewMoreBtn"><a href="<c:url value='/review/listReview'/>">더 보기+</a></div>
+            	<c:url value="/review/listReview" var="reviewUrl"/>
+                <div id="reviewMoreBtn" onClick="location.href='${reviewUrl}'">더 보기+</div>
             </div>
 
             <div id="reviewBoxWrap">

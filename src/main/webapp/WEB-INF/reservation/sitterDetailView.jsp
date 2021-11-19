@@ -45,7 +45,7 @@
 <body>
 	<%@include file="../components/header.jsp" %>
 
-    <div id="detailViewWrap">
+     <div id="detailViewWrap">
         <div id="pageTit">돌보미 상세정보</div>
         <div id="detailWrap">
             <div id="detailBox">
@@ -126,55 +126,39 @@
             <div id="reviewTit">이용 후기</div>
             <div id="scopeWrap">
                 <img src="/images/star.svg"/>
-                <div id="scope">5.0</div>
+                <div id="scope">${sitterInfo.avgRate}</div>
             </div>
         </div>
 
-        <div id="petSitterInfoBox">
-            <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
-            <div id="petSitterLocation">상월곡</div>
-            <div id="petSitterInfoInner">
-                <div id="petSitterNameLikeWrap">
-                    <div id="petSitterName">### 반려동물 보호자님</div>
-                    <div id="lookUpDate">2021-11-01</div>
-                </div>
-                <div id="petSitterIntro">(후기)</div>
-                <div id="serviceCaringWrap">
-                    <div id="caringDateWrap">
-                        <div id="caringPetsWrap">
-                            <div id="caringTit">about ### 반려동물 돌보미</div>
-                        </div>
-                        <div id="scopeWrap">
-                            <img src="/images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="petSitterInfoBox">
-            <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
-            <div id="petSitterLocation">상월곡</div>
-            <div id="petSitterInfoInner">
-                <div id="petSitterNameLikeWrap">
-                    <div id="petSitterName">### 반려동물 보호자님</div>
-                    <div id="lookUpDate">2021-11-01</div>
-                </div>
-                <div id="petSitterIntro">(후기)</div>
-                <div id="serviceCaringWrap">
-                    <div id="caringDateWrap">
-                        <div id="caringPetsWrap">
-                            <div id="caringTit">about ### 반려동물 돌보미</div>
-                        </div>
-                        <div id="scopeWrap">
-                            <img src="/images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<c:forEach var="review" items="${reviews}">
+            <div id="petSitterInfoBox">
+            	<c:if test="${review.images eq null}">
+                	<img src="../images/reviewNullImg.svg" id="reviewImg"/>
+                </c:if>
+                <c:if test="${review.images ne null}">
+                    <img src="${review.images[0]}" id="reviewImg"/>
+                </c:if>
+		        <div id="petSitterLocation">${sitterInfo.sitter.address}</div>
+		        <div id="petSitterInfoInner">
+		        	<div id="petSitterNameLikeWrap">
+		            	<div id="petSitterName">${review.careInfo.companion.id}</div>
+		                <div id="lookUpDate">${review.writeDate}</div>
+		            </div>
+		            <div id="petSitterIntro">${review.content}</div>
+		            <div id="serviceCaringWrap">
+		                <div id="caringDateWrap">
+		                    <div id="caringPetsWrap">
+		                        <div id="caringTit">by ${sitterInfo.sitter.id}</div>
+		                    </div>
+		                    <div id="scopeWrap">
+		                        <img src="/images/star.svg"/>
+		                        <div id="scope">${review.rate}</div>
+		                    </div>
+		                </div>
+		            </div>
+		            </div>
+	            </div>
+		</c:forEach>
     </div>
     <div id="footerWrap">
         <div id="footerText">Copyrights © 2021 by 윤김구이. All Rights Reserved.</div>

@@ -25,4 +25,8 @@ public class ReviewManager {
 	public List<Review> findReviewList() throws SQLException {
 		return reviewDAO.findReviewList();
 	}
+	
+	public List<Review> findReviewListOfSitter(String sitterId) throws SQLException {
+		return reviewDAO.findReviewListOfSitter(sitterId);
+	}
 }

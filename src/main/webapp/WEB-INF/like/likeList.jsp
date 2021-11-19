@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8"/>
+   <meta charset="UTF-8"/>
     <title>좋아요</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,44 +15,44 @@
 </head>
 
 <body>
-	<%@include file="../components/header.jsp" %>
+   <%@include file="../components/header.jsp" %>
 
     <div id="likeListWrap">
         <div id="pageTit">좋아요 목록</div>
         
         <c:forEach var="likelist" items="${likeLists}"> 
-	        <div id="petSitterInfoBox">
-	            <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
-	            <div id="petSitterLocation">상월곡</div>
-	            <div id="likeCountWrap">
-	                <img src="/images/smallHeart.svg" is="likeCountImg" />
-	                <div id="likeCount">${likelist.likeSitter.like}</div>
-	            </div>
-	            <div id="petSitterInfoInner">
-	                <div id="petSitterNameLikeWrap">
-	                    <div id="petSitterName">### 반려동물 돌보미</div>
-	                    <img src="/images/likeOn.svg" is="likeOnImg" />
-	                </div>
-	                <div id="petSitterIntro">(소개)</div>
-	                <div id="serviceCaringWrap">
-	                    <div id="petSitterServiceWrap">
-	                        <div id="serviceTit">제공 서비스</div> 
-	                        <div id="petSitterService">(제공서비스)</div>
-	                    </div>
-	                    <div id="caringDateWrap">
-	                        <div id="caringPetsWrap">
-	                            <div id="caringTit">돌봄 가능 반려동물</div>
-	                            <div id="caringPet">대형견</div>
-	                            <div id="caringPet">소형견</div>
-	                            <div id="caringPet">고양이</div>
-	                        </div>
-	                        <div id="lookUpDate">2021-11-01</div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </c:forEach>
-	    
+           <div id="petSitterInfoBox">
+               <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
+               <div id="petSitterLocation">상월곡</div>
+               <div id="likeCountWrap">
+                   <img src="/images/smallHeart.svg" is="likeCountImg" />
+                   <div id="likeCount">${likelist.likeSitter.like}</div>
+               </div>
+               <div id="petSitterInfoInner">
+                   <div id="petSitterNameLikeWrap">
+                       <div id="petSitterName">${likelist.likeSitter.sitter.id}</div>
+                       <img src="/images/likeOn.svg" is="likeOnImg" />
+                   </div>
+                   <div id="petSitterIntro">${likelist.likeSitter.myApplyInfo.introduction}</div>
+                   <div id="serviceCaringWrap">
+                       <div id="petSitterServiceWrap">
+                           <div id="serviceTit">제공 서비스</div> 
+                           <div id="petSitterService">(제공서비스)</div>
+                       </div>
+                       <div id="caringDateWrap">
+                           <div id="caringPetsWrap">
+                               <div id="caringTit">돌봄 가능 반려동물</div>
+                               <div id="caringPet">대형견</div>
+                               <div id="caringPet">소형견</div>
+                               <div id="caringPet">고양이</div>
+                           </div>
+                           <div id="lookUpDate">2021-11-01</div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </c:forEach>
+       
     </div>
 </body>
 </html>

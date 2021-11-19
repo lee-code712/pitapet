@@ -3,6 +3,7 @@ package model.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.dto.Pet;
 import model.dto.PetKind;
@@ -22,12 +23,23 @@ private JDBCUtil jdbcUtil = null;
 	         ResultSet rs = jdbcUtil.executeQuery();
 	         if (rs.next()) {                  
 	        	 ArrayList<Pet> petList = new ArrayList<>();
-	        	 Pet pet = new Pet();
+	        	 
+	        	 Pet pet = new Pet(rs.getString("pet_id"));
+	        	 pet.setName(sql);
+	        	 pet.setBirth(sql);
+	        	 pet.setGender(sql);
+	        	 pet.setKind(new PetKind(rs.getString("kind_id")));
 	        	 petList.add(pet);
+	        	 
 	        	 while (rs.next()) {
-	        		 Pet pet = new Pet();
+	        		 pet = new Pet(rs.getString("pet_id"));
+		        	 pet.setName(sql);
+		        	 pet.setBirth(sql);
+		        	 pet.setGender(sql);
+		        	 pet.setKind(new PetKind(rs.getString("kind_id")));
 		        	 petList.add(pet);
 	        	 }
+	        	 
 	            return petList;
 	         }
 	      } catch (Exception ex) {
@@ -70,4 +82,27 @@ private JDBCUtil jdbcUtil = null;
 	      }
 	      return null;
 	}
+	
+	public List<String> findPetAttachments(String memberId) throws SQLException {   
+	       String sql = "SELECT img_src "
+	                + "FROM attachment "
+	                + "WHERE member_id=? AND category_id=?"; 
+	       
+	     jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, "AtchId01"});   // JDBCUtil에 query문과 매개 변수 설정
+
+	     try {
+	        ResultSet rs = jdbcUtil.executeQuery();  
+	        List<String> imgList = new ArrayList<String>();
+	        while (rs.next()) {                  
+	           String img_src = rs.getString("img_src");
+	           imgList.add(img_src);
+	        }
+	        return imgList;
+	     } catch (Exception ex) {
+	        ex.printStackTrace();
+	     } finally {
+	        jdbcUtil.close();      
+	     }
+	     return null;
+	  }
 }

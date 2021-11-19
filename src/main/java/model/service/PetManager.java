@@ -24,10 +24,14 @@ public class PetManager {
 	}
 
 	public ArrayList<Pet> findPetListOfMember(String memberId) throws SQLException {
-		return petDAO.findPetList(memberId);
+		return petDAO.findPetListOfMember(memberId);
 	}
 	
 	public ArrayList<PetKind> findAblePetKindLsit(String sitterId) throws SQLException {
 		return petDAO.findAblePetKindList(sitterId);
+	}
+	
+	public ArrayList<String> findPetAttachments(String memberId) throws SQLException {
+		return (ArrayList<String>) petDAO.findPetAttachments(memberId);
 	}
 }

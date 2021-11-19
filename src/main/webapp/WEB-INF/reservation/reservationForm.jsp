@@ -65,7 +65,7 @@
 
 
                 <div id="subPageTit">주의사항</div>
-                <textarea placeholder="주의사항을 입력하세요." id="reviewText"></textarea>
+                <textarea placeholder="주의사항을 입력하세요." id="reviewText" name="cautionText"></textarea>
                 <button id="reservationBtn">예약하기</button>
             </div>
     

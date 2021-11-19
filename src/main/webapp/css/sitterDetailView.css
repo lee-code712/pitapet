@@ -335,13 +335,6 @@
     color: #535353;
 }
 
-#ableTimeWrap {
-    padding: 20px 0px;
-    width: 480px;
-    border: 1px solid #EAEAEA;
-    border-radius: 5px;
-}
-
 #reservationBtn {
     margin-top: 60px;
     width: 480px;
@@ -518,4 +511,85 @@ font-size: 24px;
 
 #fileImg {
     margin-right: 10px;
+}
+
+#ableTimeTit {
+ 	margin-bottom: 20px;
+}
+  	
+#ableTimeWrap {
+    padding: 20px 0px;
+    width: 480px;
+    border: 1px solid #EAEAEA;
+    border-radius: 5px;
+}
+
+#askPeriodTit {
+    margin: 40px 0px 20px 0px;
+    font-size: 14px;
+}
+
+/*datepicker에서 사용한 이미지 버튼 style적용*/
+img.ui-datepicker-trigger {
+    margin-left:5px; vertical-align:middle; cursor:pointer;
+}
+
+#fromDate,
+#toDate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100px;
+    height: 40px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+}
+
+input::-webkit-input-placeholder {
+    color: black;
+    font-size: 14px;
+}
+
+input:-ms-input-placeholder {
+    color: black;
+    font-size: 14px;
+}
+
+#pickPeriodWrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 480px;
+    height: 70px;
+    border-radius: 10px;
+    border: 1px solid #C4C4C4;
+}
+
+#calendarImg {
+    position: absolute;
+    top: 34%;
+    left: 8%;
+    transform: (50%, 50%);
+}
+
+#pickPeriodInner {
+    display: flex;
+    justify-content: space-between;
+    width: 320px;
+}
+
+#carePriceKind {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #7AAFFF;
+}
+
+#carePrice {
+    float: right;
+    margin-top: 20px;
+    font-size: 18px;
+    color: red;
 }

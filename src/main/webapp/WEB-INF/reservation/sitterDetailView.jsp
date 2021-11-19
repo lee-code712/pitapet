@@ -14,6 +14,32 @@
     <link rel="stylesheet" href="/css/footer.css"/>
     <link rel="stylesheet" href="/css/sitterDetailView.css"/>
     <script src="/js/sitterDetailView.js"></script>
+    <link rel="stylesheet" href="/css/main.css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!--  <script src="/js/mainPage.js"></script> -->
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="/js/reservationForm.js"></script>
+        <script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var calendarEl = document.getElementById('calendar');
+        	var calendar = new FullCalendar.Calendar(calendarEl, {
+				initialView: 'dayGridMonth'
+			});
+        	calendar.render();
+        	
+        	var schedules = JSON.parse('${careSchedules}');
+        	console.log(schedules);
+        	for (key in schedules) {
+            	calendar.addEvent({
+            		title: schedules[key].sitter.sitter.id,
+            		start: schedules[key].startDate,
+            		end: schedules[key].endDate
+            	})
+        	}
+		});
+    </script>
 </head>
 
 <body>
@@ -61,26 +87,22 @@
             </div>
             <div>
                 <div id="ableTimeWrap">
-                    <table class="scriptCalendar">
-                        <thead>
-                            <tr>
-                                <div id="ableTimeTit">예약 가능일</div>
-                            </tr>
-                            <tr>
-                                <td onClick="prevCalendar();" style="cursor:pointer;"><img src="../images/calLeft.svg" /></td>
-                                <td colspan="5" id="calYearMonth">
-                                    <span id="calYear">YYYY</span>년
-                                    <span id="calMonth">MM</span>월
-                                </td>
-                                <td onClick="nextCalendar();" style="cursor:pointer;"><img src="../images/calRight.svg" /></td>
-                            </tr>
-                            <tr>
-                                <td>일</td><td>월</td><td>화</td><td>수</td><td>목</td><td>금</td><td>토</td>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                  <div id="ableTimeTit">예약 가능일</div>
+                  <div id="calendar"></div>
                 </div>
+                
+                <div id="askPeriodTit">언제 맡기시나요?</div>
+                <div id="pickPeriodWrap">
+                    <img src="/images/calendar.svg" id="calendarImg" />
+                    <div id="pickPeriodInner">
+                        <input type="text" name="fromDate" id="fromDate" placeholder="체크인 날짜" onfocus="this.blur()" />
+                        <img src="/images/arrow.svg"/>
+                        <input type="text" name="toDate" id="toDate" placeholder="체크아웃 날짜" onfocus="this.blur()" />
+                    </div>
+                </div>
+                <div id="carePriceKind">*1박케어: 32,000원 / 데이케어: 22,000원</div>
+                <div id="carePrice">1박 32,000원</div>
+                        
                 <c:url value="/reservation/reserve" var="reserveUrl">
                 	<c:param name="sitterId" value="${param.sitterId}"/>
                 </c:url>

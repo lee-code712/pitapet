@@ -15,6 +15,11 @@ public class LikeList {
 		this.likeSitter = likeSitter;
 	}
 	
+	public LikeList(PetSitter likeSitter) {
+		super();
+		this.likeSitter = likeSitter;
+	}
+	
 	public String getMemberId() {
 		return memberId;
 	}

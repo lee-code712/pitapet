@@ -42,6 +42,18 @@ public class Care {
 		this.status = status;
 	}
 	
+	public Care(String startDate, String endDate, int totalPrice, String notes, String status, List<CareDetails> careList, Member companion, PetSitter sitter) {
+		super();
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.totalPrice = totalPrice;
+		this.notes = notes;
+		this.status = status;
+		this.careList = careList;
+		this.companion = companion;
+		this.sitter = sitter;
+	}
+	
 	public int getId() {
 		return id;
 	}

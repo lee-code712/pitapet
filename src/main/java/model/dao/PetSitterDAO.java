@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import model.dto.Member;
 import model.dto.PetSitter;
+import model.dto.PetSitterApplication;
 
 public class PetSitterDAO {
 	private JDBCUtil jdbcUtil = null;
@@ -15,7 +16,7 @@ public class PetSitterDAO {
 	}
 	
 	public ArrayList<PetSitter> findPetSitterList() throws SQLException {
-		String sql = "SELECT ps.sitter_id, ps.tag, ps.notes, ps.avg_rate, ps.sitter_like, ps.sitter_view, m.address "
+		String sql = "SELECT ps.sitter_id, ps.tag, ps.notes, ps.sitter_like, ps.sitter_view, m.address "
                  + "FROM member m JOIN petsitter ps ON (m.member_id = ps.sitter_id) "        
 				 + "WHERE ps.public_status = 'Y'";
 		jdbcUtil.setSqlAndParameters(sql, null);
@@ -29,7 +30,6 @@ public class PetSitterDAO {
 	        					 rs.getString("address")),
 	        			 rs.getString("tag"),
 	        			 rs.getString("notes"),
-	        			 rs.getFloat("avg_rate"),
 	        			 rs.getInt("sitter_like"),
 	        			 rs.getInt("sitter_view"));
 	        	 sitterList.add(sitter);
@@ -40,7 +40,6 @@ public class PetSitterDAO {
 	        					 rs.getString("address")),
 	        			 rs.getString("tag"),
 	        			 rs.getString("notes"),
-	        			 rs.getFloat("avg_rate"),
 	        			 rs.getInt("sitter_like"),
 	        			 rs.getInt("sitter_view"));
 	        		 sitterList.add(sitter);
@@ -64,8 +63,9 @@ public class PetSitterDAO {
 		 */
 		
 		// sql 쿼리문 미완성
-		String sql = "SELECT ps.sitter_id, ps.able_date, ps.calculated_price, srvc.service_id "
-                 + "FROM provide_service srvc JOIN petsitter pstr ON (srvc.sitter_id = pstr.sitter_id) "        
+		String sql = "SELECT ps.sitter_id, ps.public_status, ps.able_date, ps.caculated_price, "
+				+ "ps.tag, ps.notes, ps.avg_rate, ps.sitter_like, ps.sitter_view, ps.apply_id, m.address "
+                + "FROM member m JOIN petsitter ps ON (m.member_id = ps.sitter_id) "        
 				 + "WHERE ps.sitter_id = ?";
 		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {sitterId});
@@ -77,11 +77,15 @@ public class PetSitterDAO {
 	        			 new Member (
 	        					 rs.getString("sitter_id"), 
 	        					 rs.getString("address")),
+	        			 rs.getString("public_status"),
+	        			 rs.getString("able_date"),
+	        			 rs.getString("caculated_price"),
 	        			 rs.getString("tag"),
 	        			 rs.getString("notes"),
 	        			 rs.getFloat("avg_rate"),
 	        			 rs.getInt("sitter_like"),
-	        			 rs.getInt("sitter_view"));
+	        			 rs.getInt("sitter_view"),
+	        			 new PetSitterApplication(rs.getString("apply_id")));
 	        	 
 	            return sitter;
 	         }

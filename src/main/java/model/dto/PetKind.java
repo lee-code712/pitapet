@@ -10,6 +10,13 @@ public class PetKind {
 		this.id = id;
 	}
 	
+	public PetKind(String id, String largeCategory, String smallCategory) {
+		super();
+		this.id = id;
+		this.largeCategory = largeCategory;
+		this.smallCategory = smallCategory;
+	}
+
 	public String getId() {
 		return id;
 	}

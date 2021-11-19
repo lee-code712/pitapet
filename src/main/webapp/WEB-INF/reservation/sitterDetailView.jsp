@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,30 +23,39 @@
         <div id="pageTit">돌보미 상세정보</div>
         <div id="detailWrap">
             <div id="detailBox">
-                <div id="detailPetSitterName">### 반려동물 돌보미</div>
+                <div id="detailPetSitterName">${sitterInfo.sitter.id}</div>
                 <img src="/images/detailNulImg.svg" />
-                <div id="targetLocation">상월곡</div>
+                <div id="targetLocation">${sitterInfo.sitter.address}</div>
                 <div id="likeCountWrap">
                     <img src="/images/smallHeart.svg" id="smallHeart" />
                     <div id="likeCount">12</div>
                 </div>
                 <div id="detailInner">
-                    <div id="detailTit">(제목)</div>
-                    <div id="detailIntro">(소개)</div>
+                	<c:set var="tags" value="${fn:split(sitterInfo.tag,',')}" />
+                    <div id="detailTit">
+	                	<c:forEach var="tag" items="${tags}">
+	                		#${tag} 
+	                    </c:forEach>
+	                </div>
+                    <div id="detailIntro">${sitterInfo.notes}</div>
                     <div id="serviceCaringWrap">
                         <div id="petSitterServiceWrap">
                             <div id="serviceTit">제공 서비스</div> 
-                            <div id="petSitterService">(제공서비스)</div>
+                            <div id="petSitterService">
+                            	<c:forEach var="service" items="${sitterInfo.myApplyInfo.services}" varStatus="status">
+                            		${service.title}
+                            		<c:if test="${!status.last}">, </c:if>
+                            	</c:forEach>
+                            </div>
                         </div>
                         <div id="caringDateWrap">
                             <div id="caringPetsWrap">
                                 <div id="caringTit">돌봄 가능 반려동물</div>
-                                <div id="caringPet">대형견</div>
-                                <div id="caringPet">소형견</div>
-                                <div id="caringPet">고양이</div>
+                                <c:forEach var="kind" items="${sitterInfo.myApplyInfo.kinds}">
+                            		<div id="caringPet">${kind.smallCategory}</div>
+                            	</c:forEach>
                             </div>
                         </div>
-                        <div id="lookUpDate">2021-11-01</div>
                     </div>
                 </div>
             </div>

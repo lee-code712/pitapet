@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import model.dao.PetDAO;
 import model.dto.Pet;
+import model.dto.PetKind;
 
 public class PetManager {
 	private static PetManager petMan = new PetManager();
@@ -24,5 +25,9 @@ public class PetManager {
 
 	public ArrayList<Pet> findPetListOfMember(String memberId) throws SQLException {
 		return petDAO.findPetList(memberId);
+	}
+	
+	public ArrayList<PetKind> findAblePetKindLsit(String sitterId) throws SQLException {
+		return petDAO.findAblePetKindList(sitterId);
 	}
 }

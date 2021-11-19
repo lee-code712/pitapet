@@ -2,7 +2,7 @@ package model.dto;
 
 public class Service {
 	private String id;
-	private String name;
+	private String title;
 	private String content;
 	
 	public Service(String id) {
@@ -10,18 +10,28 @@ public class Service {
 		this.id = id;
 	}
 	
+	public Service(String id, String title, String content) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+	}
+
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	
+	public String getTitle() {
+		return title;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
+
 	public String getContent() {
 		return content;
 	}

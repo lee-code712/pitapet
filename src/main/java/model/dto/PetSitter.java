@@ -2,7 +2,7 @@ package model.dto;
 
 public class PetSitter {
 	private Member sitter;
-	private int publicStatus;
+	private String publicStatus;
 	private String ableDate;
 	private String calculatedPrice;
 	private String tag;
@@ -17,26 +17,40 @@ public class PetSitter {
 		this.sitter = sitter;
 	}
 	
-	public PetSitter(Member sitter, String tag, String notes, float avgRate, int like, int view) {
+	public PetSitter(Member sitter, String tag, String notes, int like, int view) {
 		super();
 		this.sitter = sitter;
+		this.tag = tag;
+		this.notes = notes;
+		this.like = like;
+		this.view = view;
+	}
+	
+	public PetSitter(Member sitter, String publicStatus, String ableDate, String calculatedPrice, String tag, String notes,
+			float avgRate, int like, int view, PetSitterApplication myApplyInfo) {
+		super();
+		this.sitter = sitter;
+		this.publicStatus = publicStatus;
+		this.ableDate = ableDate;
+		this.calculatedPrice = calculatedPrice;
 		this.tag = tag;
 		this.notes = notes;
 		this.avgRate = avgRate;
 		this.like = like;
 		this.view = view;
+		this.myApplyInfo = myApplyInfo;
 	}
-	
+
 	public Member getSitter() {
 		return sitter;
 	}
 	public void setSitter(Member sitter) {
 		this.sitter = sitter;
 	}
-	public int getPublicStatus() {
+	public String getPublicStatus() {
 		return publicStatus;
 	}
-	public void setPublicStatus(int publicStatus) {
+	public void setPublicStatus(String publicStatus) {
 		this.publicStatus = publicStatus;
 	}
 	

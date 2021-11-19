@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.dao.ServiceDAO;
+import model.dto.Care;
 import model.dto.Service;
 
 public class ServiceManager {
@@ -25,5 +26,8 @@ public class ServiceManager {
 	public ArrayList<Service> findProvideServiceList(String sitterId) throws SQLException {
 		return serviceDAO.findProvideServiceList(sitterId);
 	}
-
+	
+	public int createRecvService(Care care) throws SQLException {
+		   return serviceDAO.createRecvService(care);
+	}
 }

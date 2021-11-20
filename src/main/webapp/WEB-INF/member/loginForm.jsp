@@ -37,7 +37,7 @@
 		        <input type="button" id="loginBtn" value="로그인" onClick="login()">
 	        </div>
         </form>
-        <div id="joinLinkWrap">아직 회원이 아니신가요? <a href="#" id="joinLink">회원가입</a></div>
+        <div id="joinLinkWrap">아직 회원이 아니신가요? <a href="<c:url value='/member/register/form'/>" id="joinLink">회원가입</a></div>
     </div>
 </body>
 </html>

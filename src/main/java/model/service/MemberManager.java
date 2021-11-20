@@ -6,7 +6,9 @@ import java.util.List;
 import model.dao.MemberDAO;
 //import model.dao.ReviewDAO;
 import model.dto.Member;
+import model.service.exception.ExistingIdException;
 import model.service.exception.MemberNotFoundException;
+import model.service.exception.PasswordCkMismatchException;
 import model.service.exception.PasswordMismatchException;
 
 public class MemberManager {
@@ -48,4 +50,12 @@ public class MemberManager {
    public List<String> findReviewAttachments(String memberId, int careId) throws SQLException {
 	   return memberDAO.findReviewAttachments(memberId, careId);
    }
+   
+   public int createMember(Member newMember) throws SQLException, ExistingIdException {
+		if (memberDAO.findMember(newMember.getId()) != null) {
+			throw new ExistingIdException(newMember.getId() + "는 존재하는 아이디입니다.");
+		}
+		
+		return memberDAO.createMember(newMember);
+	}
 }

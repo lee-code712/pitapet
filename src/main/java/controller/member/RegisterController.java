@@ -1,5 +1,8 @@
 package controller.member;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,28 +17,23 @@ import model.service.exception.PasswordMismatchException;
 
 public class RegisterController implements Controller{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		try {
+		try {
 			MemberManager memMan = MemberManager.getInstance();
-			System.out.println(request.getParameter("male"));
-//			if (memMan.findMember(request.getParameter("id")) != null)
-//					
-//			if(request.getParameter("password") != request.getParameter("checkPassword"))
-				
-//			Member member = new Member(request.getParameter("id"), request.getParameter("password"), 
-//					request.getParameter("name"), request.getParameter("birth"), //젠더 들어갈 자리,
-//					request.getParameter("email"), request.getParameter("phone"), request.getParameter("address"), null);
-			return "/member/loginForm.jsp";
-//		} catch (ExistingIdException e) {
-//            request.setAttribute("registerFailed", true);
-//			request.setAttribute("exception", e);
-//            
-//			return "/member/registerForm.jsp";			
-//		} catch (PasswordCkMismatchException e) {
-//            request.setAttribute("registerFailed", true);
-//			request.setAttribute("exception", e);
-//           
-//			return "/member/registerForm.jsp";			
-		}		
-	}
+			Member member = null;
 
+			member = new Member(request.getParameter("id"), request.getParameter("password"),
+					request.getParameter("name"), request.getParameter("birth"), request.getParameter("gender"),
+					request.getParameter("email"), request.getParameter("phone"), request.getParameter("address"));
+			
+			memMan.createMember(member);	
+			return "/member/loginForm.jsp";
+		} catch (ExistingIdException e) {
+            request.setAttribute("registerFailed", true);
+			request.setAttribute("exception", e);
+            
+			return "/member/registerForm.jsp";			
+		}
+	}
 }
+
+

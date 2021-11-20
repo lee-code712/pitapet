@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 </head>
 
 <body id="joinBg">
-	<form name="form" method="POST" action="<c:url value='/member/authRegister'/>">
+	<form name="form" method="POST" action="<c:url value='/member/register'/>">
 	<div id="joinWrap">
         <div id="joinTit">PIT A PET</div>
         <div id="idPwdWrap">
@@ -25,8 +26,10 @@
             <input type="text" placeholder="이름" id="joinName" name="name" />
             <div id="genderWrap">
                 <div id="genderInner">
-                    <button id="joinMan" class="gender" name="male">남성</button>
-                    <button id="joinWoman" class="gender" name="female">여성</button>
+                	<select name = "gender">
+                		<option id="joinMan" class="gender" value="M">남성</option>
+                   		<option id="joinWoman" class="gender" value="F">여성</option>
+                	</select>
                 </div>
             </div>
             <input type="text" placeholder="생년월일" id="joinBirth" name="birth" />
@@ -35,7 +38,7 @@
             <input type="text" placeholder="주소" id="joinAddress" name="address" />
         </div>
 
-        <button type="submit" id="joinBtn">가입하기</button>
+        <button type="submit" id="joinBtn" onClick="userCreate()">가입하기</button>
      </div>
    </form> 
 </body>
@@ -64,7 +67,16 @@
             gender[i].addEventListener("click", handleClick);
         }window.CP.exitedLoop(1);
     }
-
+    
+    function userCreate() {
+		if (form.password.value != form.checkPassword.value) {
+			alert("비밀번호가 일치하지 않습니다.");
+			form.name.focus();
+			return false;
+		}
+		form.submit();
+    }
+    
     init();
 </script>
 </html>

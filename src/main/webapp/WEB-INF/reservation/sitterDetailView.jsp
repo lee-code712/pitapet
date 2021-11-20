@@ -382,6 +382,7 @@
     <script>
 	    document.addEventListener('DOMContentLoaded', function() {
 	        var calendarEl = document.getElementById('calendar');
+	        var sitterCareSchedules = JSON.parse('${sitterCareSchedules}');
 	        var calendar = new FullCalendar.Calendar(calendarEl, {
 	            initialView: 'dayGridMonth'
 	        });
@@ -396,6 +397,17 @@
 	                end: schedules[key].endDate
 	            })
 	        }
+	        
+	        var sitterCareSchedules = JSON.parse('${sitterCareSchedules}');
+	        console.log(sitterCareSchedules);
+	        for (key in sitterCareSchedules) {
+	            var temp = calendar.addEvent({
+	            	start: sitterCareSchedules[key].startDate,
+	                end: sitterCareSchedules[key].endDate
+	            })
+	            console.log(temp);
+	        }
+	        calendar.render();
 	    });
 	</script>
 </head>

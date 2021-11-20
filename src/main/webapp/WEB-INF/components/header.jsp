@@ -26,13 +26,13 @@
                 <div id="logo" onClick="location.href='${mainUrl}'">PIT A PET</div>
                 <c:choose>
                 	<c:when test="${sessionScope.identity == 'C'}">
-                		보호자 등급
+                		<img src="/images/memberRank.svg" />
                 	</c:when>
                 	<c:when test="${sessionScope.identity == 'S'}">
-                		<img src="../images/proRank.svg" />
+                		<img src="/images/sitterRank.svg" />
                 	</c:when>
                 	<c:when test="${sessionScope.identity == 'M'}">
-                		관리자 등급
+                		<img src="/images/adminRank.svg" />
                 	</c:when>
                 </c:choose>  
             </div>

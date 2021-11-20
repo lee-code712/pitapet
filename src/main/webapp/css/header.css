@@ -3,6 +3,10 @@
     padding: 0px;
 }
 
+#logo {
+   	margin-right: 10px;
+ }
+
 #headerWrap {
     display: flex;
     justify-content: center;

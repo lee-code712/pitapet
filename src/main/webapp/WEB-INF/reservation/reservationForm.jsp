@@ -65,6 +65,17 @@
 	font-size: 12px;
 	color: #E3C1A2;
 }
+
+#petCheckImg {
+	width: 200px;
+	height: 150px;
+	object-fit: cover;
+}
+
+#logo {
+    z-index: 1;
+   	margin-left: 14px;
+}
 </style>
 
 <script>

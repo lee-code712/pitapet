@@ -154,7 +154,8 @@ $(function() {
             if ((st > lastScrollTop) && (lastScrollTop>0)) { 
                 $("#headerWrap").css("border-bottom","1px solid rgba(150, 150, 150, 0.2)"); 
             } else {
-                $("#headerWrap").css("border-bottom","1px solid white");
+                $("#headerWrap").css("border-bottom","none");
+				$("#headerWrap").css("background-color","none");
             }
             lastScrollTop = st; 
         }

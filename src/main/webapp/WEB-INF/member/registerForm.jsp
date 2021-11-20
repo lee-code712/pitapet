@@ -10,6 +10,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/registerForm.css"/>
+    
+    <style>
+	    #logo {
+		    z-index: 1;
+		   	margin-left: 14px;
+		}
+	</style>
 </head>
 
 <body id="joinBg">

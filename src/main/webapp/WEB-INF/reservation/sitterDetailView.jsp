@@ -22,9 +22,10 @@
     <script src="/js/reservationForm.js"></script>
     
     <style>
-    #calendar {
-    	contentHeight: 40px;
-    }
+	    #calendar {
+	    	contentHeight: 40px;
+	    }
+	    
         #pageWrap {
             margin: 0 auto;
             width: 1194px;
@@ -100,25 +101,14 @@
         #reviewWriteWrap {
             margin-top: 80px;
         }
-
-        #serviceInner,
         #ablePetInner {
             display: flex;
         }
 
-        #service,
         #ablePet {
             margin-right: 40px;
             font-size: 14px;
         }
-
-        #service {
-            padding: 4px 8px;
-            border: 1px solid #89A0F2;
-            color: #89A0F2;
-            font-size: 14px;
-        }
-
         #reviewText {
             padding-top: 20px;
             width: 100%;
@@ -222,20 +212,20 @@
             color: #535353;
         }
        
-           #reviewTitWrap {
-               margin-bottom: 40px;
-               display: flex;
-               align-items: center;
-           }
+        #reviewTitWrap {
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+        }
 
-           #reviewScopeWrap {
-               display: flex;
-               align-items: center;
-               justify-content: flex-end;
-               margin-top: 130px;
-           }
+        #reviewScopeWrap {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 130px;
+        }
 
-           #scopeWrap {
+       	#scopeWrap {
             display: flex;
             margin-top: 6px;
             color: #C4C4C4;
@@ -246,41 +236,41 @@
             font-size: 12px;
         }
        
-           #periodWrap {
-               width: 444px;
-           }  
-           
-           #periodInner {
-           padding: 20px;
-           	border: 1px solid #EAEAEA;
-           	border-radius: 5px;
-           }
+        #periodWrap {
+            width: 444px;
+        }  
+        
+        #periodInner {
+        padding: 20px;
+        	border: 1px solid #EAEAEA;
+        	border-radius: 5px;
+        }
 
-           #ableCalWrap {       
-               width: 404px;
-           }
+        #ableCalWrap {       
+            width: 404px;
+        }
 
-           #ableCalTit {
-               margin-bottom: 20px;
-               width: 100%;
-               text-align: center;
-           }
+        #ableCalTit {
+            margin-bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
 
-           #reservationBtn {
-               margin-top: 40px;
-               width: 404px;
-               height: 40px;
-               color: white;
-               background-color: #89A0F2;
-               border: none;
-               border-radius: 5px;
-               cursor: pointer;
-           }
+        #reservationBtn {
+            margin-top: 40px;
+            width: 404px;
+            height: 40px;
+            color: white;
+            background-color: #89A0F2;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-           #askPeriodTit {
-			    margin: 40px 0px 20px 0px;
-			    font-size: 14px;
-			}
+        #askPeriodTit {
+		    margin: 40px 0px 20px 0px;
+		    font-size: 14px;
+		}
 			
 		/*datepicker에서 사용한 이미지 버튼 style적용*/
 		img.ui-datepicker-trigger {
@@ -377,12 +367,58 @@
 		#reviewerName {
 			margin-top: -10px;
 		}
+
+       	#service {
+	        display: flex;
+	        width: 206px;
+	        border-radius: 5px;
+    	}
+
+        #serviceTitContentWrap {
+	        display: flex;
+	        justify-content: flex-start;
+	        flex-direction: column;
+    	}
+
+        #serviceTit {
+            font-size: 14px;
+        }
+
+        #serviceContent {
+	        font-size: 12px;
+	        color: #C4C4C4;
+	    }
+
+         #serviceImg {
+	        margin-right: 20px;
+	        width: 34px;
+	        height: 34px;
+	    }
+
+         #serviceInner {
+			display: inline-flex;
+	        flex-wrap: wrap;
+	        width: 684px;
+	        border-radius: 5px;
+	        gap: 30px;
+	    }
+    
+        #ablePet {
+        	margin-right: 20px;
+        	padding: 4px 8px;
+        	border: 1px solid #89A0F2;
+        	color: #89A0F2;
+        	border-radius :50px;
+        }
+        
+        .fc-scroller {
+		   overflow-y: hidden !important;
+		}
     </style>
     
     <script>
 	    document.addEventListener('DOMContentLoaded', function() {
 	        var calendarEl = document.getElementById('calendar');
-	        var sitterCareSchedules = JSON.parse('${sitterCareSchedules}');
 	        var calendar = new FullCalendar.Calendar(calendarEl, {
 	            initialView: 'dayGridMonth'
 	        });
@@ -397,19 +433,15 @@
 	                end: schedules[key].endDate
 	            })
 	        }
-	        
-	        var sitterCareSchedules = JSON.parse('${sitterCareSchedules}');
-	        console.log(sitterCareSchedules);
-	        for (key in sitterCareSchedules) {
-	            var temp = calendar.addEvent({
-	            	start: sitterCareSchedules[key].startDate,
-	                end: sitterCareSchedules[key].endDate
-	            })
-	            console.log(temp);
-	        }
-	        calendar.render();
 	    });
 	</script>
+	
+	<style>
+	    #logo {
+		    z-index: 1;
+		   	margin-left: 14px;
+		}
+	</style>
 </head>
 
 <body>
@@ -449,9 +481,22 @@
 
             <div id="serviceWrap">
                 <div id="subPageTit">이용 서비스</div>
-                <div id="serviceInner">
+                <div id="serviceInner">   
                     <c:forEach var="service" items="${sitterInfo.myApplyInfo.services}" varStatus="status">
-                        <div id="service">${service.title}</div>
+	                    <div id="service"> 
+	               			<c:choose>
+	               				<c:when test="${service.title eq '산책하기'}"><img src="/images/wark.png" id="serviceImg" /></c:when>
+	               				<c:when test="${service.title eq '목욕하기'}"><img src="/images/bath.png" id="serviceImg" /></c:when>
+	               				<c:when test="${service.title eq '배식하기'}"><img src="/images/feed.png" id="serviceImg" /></c:when>
+	               				<c:when test="${service.title eq '픽업가능'}"><img src="/images/pickup.png" id="serviceImg" /></c:when>
+	               				<c:when test="${service.title eq '실내놀이'}"><img src="/images/play.png" id="serviceImg" /></c:when>
+	               				<c:when test="${service.title eq '미용관리'}"><img src="/images/beauty.png" id="serviceImg" /></c:when>
+	               			</c:choose>
+	               				<div id="serviceTitContentWrap">
+			                    	<div id="serviceTit">${service.title}</div>
+			                    	<div id="serviceContent">${service.content}</div>
+			                    </div>
+			            </div>
                     </c:forEach>
                 </div>
             </div>

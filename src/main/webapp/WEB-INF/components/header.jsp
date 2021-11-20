@@ -23,7 +23,6 @@
         <div id="headerInner">
             <div id="logoWrap">
             	<c:url value="/mainpage" var="mainUrl"/>
-                <div id="logo" onClick="location.href='${mainUrl}'">PIT A PET</div>
                 <c:choose>
                 	<c:when test="${sessionScope.identity == 'C'}">
                 		<img src="/images/memberRank.svg" />
@@ -35,6 +34,7 @@
                 		<img src="/images/adminRank.svg" />
                 	</c:when>
                 </c:choose>  
+                <div id="logo" onClick="location.href='${mainUrl}'">PIT A PET</div>
             </div>
             
             <div id="gnb">    
@@ -47,7 +47,7 @@
                 	</c:url>
                 	<div id="sitterListLink" onclick="location.href='${sitterListUrl}'">돌보미 조회</div>
                 	
-                	<c:url value='/like/listLike' var="likeListUrl"/>
+                	<c:url value='/like/likeList' var="likeListUrl"/>
                 	<div id="likeLink" onclick="location.href='${likeListUrl}'">좋아요</div>
                 	
                 	<c:url value='/member/memberMyPage' var="memberMyPageUrl"/>

@@ -37,6 +37,11 @@
 		    left:10%;
 		    transform: translate(-50%, -50%);
 		}
+
+	    #logo {
+		    z-index: 1;
+		   	margin-left: 14px;
+		}
 	</style>
 </head>
 

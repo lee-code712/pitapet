@@ -48,7 +48,7 @@ public class ServiceDAO {
 	   }
 	
 // 아직 완료x	
-	 public int createRecvService(Care care) throws SQLException {
+	 public int createReceiveService(Care care) throws SQLException {
 		  String sql = "INSERT INTO RECEIVE_SERVICE VALUES (?, ?, ?, ?)";
          Object[] param = new Object[] {};   
          jdbcUtil.setSqlAndParameters(sql, param);

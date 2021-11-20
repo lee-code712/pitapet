@@ -47,11 +47,7 @@ public class MemberManager {
    public Member findMember(String memberId) throws SQLException {
 	   return memberDAO.findMember(memberId);
    }
-   
-   public List<String> findReviewAttachments(String memberId, int careId) throws SQLException {
-	   return memberDAO.findReviewAttachments(memberId, careId);
-   }
-   
+      
    public String findProfileAttachment(String memberId) throws SQLException {
 		return (String) memberDAO.findProfileAttachment(memberId);
 	}

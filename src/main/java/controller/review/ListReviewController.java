@@ -33,7 +33,7 @@ public class ListReviewController implements Controller{
 			}
 			review.getCareInfo().getSitter().getSitter().setAddress(city);
 			
-			List<String> imgList = memMan.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
+			List<String> imgList = reviewMan.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
 			review.setImages(imgList);
 		}
 		request.setAttribute("reviews", reviews);

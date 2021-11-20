@@ -46,32 +46,7 @@ private JDBCUtil jdbcUtil = null;
       }
       return null;
    }
-   
-   public List<String> findReviewAttachments(String memberId, int careId) throws SQLException {   
-       String sql = "SELECT img_src "
-                + "FROM attachment "
-                + "WHERE member_id=? AND category_id=? AND img_src LIKE ?"; 
-       
-       String like = "%care-" + Integer.toString(careId) + "-%";
-       
-     jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, "AtchId03", like});   // JDBCUtil에 query문과 매개 변수 설정
-
-     try {
-        ResultSet rs = jdbcUtil.executeQuery();  
-        List<String> imgList = new ArrayList<String>();
-        while (rs.next()) {                  
-           String img_src = rs.getString("img_src");
-           imgList.add(img_src);
-        }
-        return imgList;
-     } catch (Exception ex) {
-        ex.printStackTrace();
-     } finally {
-        jdbcUtil.close();      
-     }
-     return null;
-  }
-   
+     
    public String findProfileAttachment(String memberId) throws SQLException {   
 	     String sql = "SELECT img_src "
 	                + "FROM attachment "

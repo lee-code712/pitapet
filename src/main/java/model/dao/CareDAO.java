@@ -16,11 +16,11 @@ public class CareDAO {
 		jdbcUtil = new JDBCUtil();	// JDBCUtil 객체 생성
 	}
 	
-	//사용자의 돌봄 예약 내역 반환
+	//보호자의 돌봄 예약 내역 반환
 	public List<Care> findCareSchedules(String memberId) throws SQLException {
 		String sql = "SELECT care_id, start_date, end_date, sitter_id, care_status "
-				+ "FROM care c, member m "
-				+ "WHERE c.member_id = m.member_id AND c.member_id = ?";     
+				+ "FROM care "
+				+ "WHERE member_id = ?";     
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId});	
 						
 		try {
@@ -31,10 +31,44 @@ public class CareDAO {
 						rs.getInt("care_id"),
 						rs.getString("start_date"),
 						rs.getString("end_date"),
+						new Member(memberId),
 						new PetSitter(
 								new Member(
 										rs.getString("sitter_id")
 								)
+						),
+						rs.getString("care_status")
+				);
+				careList.add(care);				
+				}		
+				return careList;					
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			} finally {
+				jdbcUtil.close();
+			}
+		
+		return null;
+	}
+	
+	//돌보미의 돌봄 예약 내역 반환
+	public List<Care> findCareSchedulesOfSitter(String sitterId) throws SQLException {
+		String sql = "SELECT care_id, start_date, end_date, member_id, care_status "
+				+ "FROM care "
+				+ "WHERE sitter_id = ?";     
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {sitterId});	
+						
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			
+			List<Care> careList = new ArrayList<Care>();	
+			while (rs.next()) {
+				Care care = new Care(			
+						rs.getInt("care_id"),
+						rs.getString("start_date"),
+						rs.getString("end_date"),
+						new Member(rs.getString("member_id")),
+						new PetSitter(
+								new Member(sitterId)
 						),
 						rs.getString("care_status")
 				);

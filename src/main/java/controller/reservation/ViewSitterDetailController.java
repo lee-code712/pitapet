@@ -6,8 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import controller.Controller;
 import controller.member.UserSessionUtils;
+import model.dto.Care;
 import model.dto.PetKind;
 import model.dto.PetSitter;
 import model.dto.Review;
@@ -21,7 +24,7 @@ import model.service.ServiceManager;
 
 public class ViewSitterDetailController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	
+
 		HttpSession session = request.getSession();
 		MemberManager memMan = MemberManager.getInstance();
 		PetSitterManager sitterMan = PetSitterManager.getInstance();
@@ -30,12 +33,12 @@ public class ViewSitterDetailController implements Controller {
 		CareManager careMan = CareManager.getInstance();
 		ReviewManager reviewMan = ReviewManager.getInstance();
 		String sitterId = (String) request.getParameter("sitterId");
-		
+
 		// session에 id정보가 없으면 mainpage 호출 리다이렉션
-		if(!UserSessionUtils.hasLogined(session)) {
-			 return "redirect:/mainpage";
+		if (!UserSessionUtils.hasLogined(session)) {
+			return "redirect:/mainpage";
 		}
-		
+
 		// 돌보미 상세 정보 전달
 		PetSitter sitter = sitterMan.findPetSitter(sitterId);
 		List<Service> prvdServiceList = serviceMan.findProvideServiceList(sitterId);
@@ -49,19 +52,47 @@ public class ViewSitterDetailController implements Controller {
 				city = address[j].substring(0, address[j].length() - 1);
 		}
 		sitter.getSitter().setAddress(city);
-		
+
 		request.setAttribute("sitterInfo", sitter);
+
+		// 돌보미 돌봄 가능시간대
+		String unparsedAbleDay = sitter.getAbleDate();
+		String parsedAbleDay = Integer.toBinaryString(unparsedAbleDay.charAt(0));
+		String[] dateArr = parsedAbleDay.split("");
+
+		List<Care> careSchedules = careMan.findCareSchedules(UserSessionUtils.getLoginUserId(session));
+		if (careSchedules != null) {
+			Iterator<Care> iterator = careSchedules.iterator();
+			Map<Integer, Care> scheduleMap = new HashMap<Integer, Care>();
+			while (iterator.hasNext()) {
+				Care care = iterator.next();
+				scheduleMap.put(care.getId(), care);
+			}
+			ObjectMapper mapper = new ObjectMapper();
+			String schedules = mapper.writeValueAsString(scheduleMap);
+
+			request.setAttribute("careSchedules", schedules);
+		}
+
+		List<Care> sitterCareSchedules = careMan.findCareSchedulesOfSitter(sitterId);
 		
-		// 돌보미 돌봄 스케줄 전달
-		
+		Calendar cal = Calendar.getInstance();
+		Date time = new Date();
+		cal.setTime(new Date());
+		cal.add(Calendar.MONTH, 1);
+		System.out.println(time + " " + cal.getTime());
+		// request.setAttribute("ableDay", ableDay);
+		// System.out.println(ableDay);
+
 		// 돌보미 후기 전달
 		List<Review> reviews = reviewMan.findReviewListOfSitter(sitterId);
 		for (Review review : reviews) {
-			List<String> imgList = memMan.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
+			List<String> imgList = memMan.findReviewAttachments(review.getCareInfo().getCompanion().getId(),
+					review.getCareInfo().getId());
 			review.setImages(imgList);
 		}
 		request.setAttribute("reviews", reviews);
-		
+
 		return "/reservation/sitterDetailView.jsp";
 	}
 }

@@ -35,7 +35,7 @@
             <input type="text" placeholder="주소" id="joinAddress" name="address" />
         </div>
 
-        <button id="joinBtn">가입하기</button>
+        <button type="submit" id="joinBtn">가입하기</button>
      </div>
    </form> 
 </body>

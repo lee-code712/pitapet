@@ -3,9 +3,11 @@ package model.service;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.dao.MemberDAO;
 import model.dao.PetSitterDAO;
+import model.dto.LikeList;
 import model.dto.PetSitter;
 
 public class PetSitterManager {
@@ -31,4 +33,5 @@ public class PetSitterManager {
 	public PetSitter findPetSitter(String sitter_id) throws SQLException {
 		return sitterDAO.findPetSitter(sitter_id);
 	}
+
 }

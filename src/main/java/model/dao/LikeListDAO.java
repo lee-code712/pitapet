@@ -27,6 +27,7 @@ public class LikeListDAO {
                List<LikeList> likeList = new ArrayList<>();
                while (rs.next()) {
                   LikeList like = new LikeList(
+                		  memberId, 
                         new PetSitter(
                               new Member(rs.getString("sitter_id"))));
                   likeList.add(like);

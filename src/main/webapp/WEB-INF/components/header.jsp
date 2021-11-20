@@ -47,7 +47,7 @@
                 	</c:url>
                 	<div id="sitterListLink" onclick="location.href='${sitterListUrl}'">돌보미 조회</div>
                 	
-                	<c:url value='/like/likeList' var="likeListUrl"/>
+                	<c:url value='/like/listLike' var="likeListUrl"/>
                 	<div id="likeLink" onclick="location.href='${likeListUrl}'">좋아요</div>
                 	
                 	<c:url value='/member/memberMyPage' var="memberMyPageUrl"/>

@@ -12,13 +12,13 @@
 </head>
 
 <body id="joinBg">
+	<form name="form" method="POST" action="<c:url value='/member/authRegister'/>">
 	<div id="joinWrap">
         <div id="joinTit">PIT A PET</div>
-
         <div id="idPwdWrap">
-            <input type="text" placeholder="아이디" id="joinId" />
-            <input type="text" placeholder="비밀번호" id="joinPwd" />
-            <input type="text" placeholder="비밀번호 재확인" id="joinCheckPwd" />
+            <input type="text" placeholder="아이디" id="joinId" name="id" />
+            <input type="text" placeholder="비밀번호" id="joinPwd" name ="password"/>
+            <input type="text" placeholder="비밀번호 재확인" id="joinCheckPwd" name="checkPassword" />
         </div>
 
         <div id="privacyWrap">
@@ -36,7 +36,8 @@
         </div>
 
         <button id="joinBtn">가입하기</button>
-    </div>
+     </div>
+   </form> 
 </body>
 <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
 

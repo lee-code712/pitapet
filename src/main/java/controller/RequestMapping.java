@@ -53,7 +53,7 @@ public class RequestMapping {
         // reservation
         mappings.put("/reservation/listSitter", new ListSitterController());
         mappings.put("/reservation/viewSitterDetail", new ViewSitterDetailController());
-        mappings.put("/reservation/reserve", new ForwardController("/reservation/reservationForm.jsp"));
+        mappings.put("/reservation/reserve", new ReserveController());
         // care
         mappings.put("/care/listCareDiary", new ForwardController("/care/careDiary.jsp"));
         mappings.put("/care/recordCare", new ForwardController("/care/careRecordForm.jsp"));

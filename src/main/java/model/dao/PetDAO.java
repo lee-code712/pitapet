@@ -16,8 +16,10 @@ private JDBCUtil jdbcUtil = null;
 	}
 	
 	public ArrayList<Pet> findPetListOfMember(String memberId) throws SQLException {
-		String sql = "";
-		jdbcUtil.setSqlAndParameters(sql, null);
+		String sql = "SELECT pet_id, name, birth, gender, kind_id, large_category, small_category "
+                + "FROM pet JOIN pet_kind USING (kind_id) "        
+				 + "WHERE member_id = ?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId });
 		
 	      try {
 	         ResultSet rs = jdbcUtil.executeQuery();
@@ -25,18 +27,18 @@ private JDBCUtil jdbcUtil = null;
 	        	 ArrayList<Pet> petList = new ArrayList<>();
 	        	 
 	        	 Pet pet = new Pet(rs.getString("pet_id"));
-	        	 pet.setName(sql);
-	        	 pet.setBirth(sql);
-	        	 pet.setGender(sql);
-	        	 pet.setKind(new PetKind(rs.getString("kind_id")));
+	        	 pet.setName(rs.getString("name"));
+	        	 pet.setBirth(rs.getString("birth"));
+	        	 pet.setGender(rs.getString("gender"));
+	        	 pet.setKind(new PetKind(rs.getString("kind_id"), rs.getString("large_category"), rs.getString("small_category")));
 	        	 petList.add(pet);
 	        	 
 	        	 while (rs.next()) {
 	        		 pet = new Pet(rs.getString("pet_id"));
-		        	 pet.setName(sql);
-		        	 pet.setBirth(sql);
-		        	 pet.setGender(sql);
-		        	 pet.setKind(new PetKind(rs.getString("kind_id")));
+	        		 pet.setName(rs.getString("name"));
+		        	 pet.setBirth(rs.getString("birth"));
+		        	 pet.setGender(rs.getString("gender"));
+		        	 pet.setKind(new PetKind(rs.getString("kind_id"), rs.getString("large_category"), rs.getString("small_category")));
 		        	 petList.add(pet);
 	        	 }
 	        	 

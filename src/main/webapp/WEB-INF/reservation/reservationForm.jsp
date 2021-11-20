@@ -17,6 +17,7 @@
     <script src="/js/reservationForm.js"></script>
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    
     <style>
     
     	#petCheckBoxWrap {
@@ -62,44 +63,35 @@
     		color: #E3C1A2;
     	}
     </style>
+    
+    <script>
+		var ableService = JSON.parse('${ableService}');
+	</script>
 </head>
 
 <body>
 	<%@include file="../components/header.jsp" %>
 
     <div id="reservationFormWrap">
-                <div id="targetName">### 반려동물 돌보미</div>
+                <div id="targetName">${petsitterInfo.sitter.id} 반려동물 돌보미</div>
                 <div id="subPageTit">반려동물 선택하기</div>
                 <div id="petPickWrap">
-                    <div id="petCheckBoxWrap">
-                    	<img src="/images/petCheckImg.svg" id="petCheckImg" />
-                        <div id="petInfoName">이름</div>
-                       	<div id="petInfoBirth">생년월일</div>
-
-                       	<div id="tagCheckWrap">
-                        <div id="petInfoKind"># 대형견</div>
-                        <input type="checkbox" id="checkbox"/>
-                        </div>
-                    </div>
-                    
-                    <div id="petCheckBoxWrap">
-                    	<img src="/images/petCheckImg.svg" id="petCheckImg" />
-                        <div id="petInfoName">이름</div>
-                       	<div id="petInfoBirth">생년월일</div>
-
-                       	<div id="tagCheckWrap">
-                        <div id="petInfoKind"># 대형견</div>
-                        <input type="checkbox" id="checkbox"/>
-                        </div>
-                    </div>
+	                <c:forEach var="pet" items="${userPets}">
+	                    <div id="petCheckBoxWrap">
+	                    	<img src="/images/petCheckImg.svg" id="petCheckImg" />
+	                        <div id="petInfoName">${pet.name}</div>
+	                       	<div id="petInfoBirth">${pet.birth}</div>
+	                       	<div id="tagCheckWrap">
+		                        <div id="petInfoKind">#${pet.kind.smallCategory}</div>
+		                        <input type="checkbox" class="checkbox"/>
+	                        </div>
+	                    </div>
+	                </c:forEach>
                 </div>
                 <div id="subPageTit">원하는 서비스</div>
                 <div id="petSitterService">
-                	<c:forEach var="service" items="${petSitterInfo.myApplyInfo.services}" varStatus="status">
-                		<input type="checkbox" id="service1"> ${service.title}
-                	</c:forEach>
+                	
                 </div>
-
                 <div id="subPageTit">주의사항</div>
                 <textarea placeholder="주의사항을 입력하세요." id="reviewText"></textarea>
                 <button id="reservationBtn">예약하기</button>

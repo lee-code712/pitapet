@@ -38,12 +38,6 @@ public class ReserveController {
 			// 펫시터 정보
 			PetSitter petSitterInfo = sitterMan.findPetSitter(sitterId);
 			request.setAttribute("petSitterInfo", petSitterInfo);
-			
-			// 가능 일자 (01000000 형식의 int)
-			String unparsedAbleDay = petSitterInfo.getAbleDate();
-			String parsedAbleDay = Integer.toBinaryString(unparsedAbleDay.charAt(0));
-			int ableDay = Integer.parseInt(parsedAbleDay);
-			request.setAttribute("ableDay", ableDay);
 
 			// 돌봄 가능 동물종 리스트
 			List<PetKind> ablePetKinds = petMan.findAblePetKindLsit(sitterId);
@@ -58,6 +52,8 @@ public class ReserveController {
 				List<String> imgList = petMan.findPetAttachments(userId);
 				pet.setImages(imgList);
 			}
+			
+			// 가능 서비스
 			List<Service> ableService = srvcMan.findProvideServiceList(sitterId);
 			request.setAttribute("ableService", ableService);
 

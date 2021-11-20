@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import controller.Controller;
 import controller.member.UserSessionUtils;
 import model.service.LikeListManager;
+import model.service.MemberManager;
 import model.service.PetSitterManager;
 import model.dto.PetSitter;
 import model.dto.LikeList;
@@ -19,6 +20,7 @@ public class ListSitterController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	
 		HttpSession session = request.getSession();
+		MemberManager memberMan = MemberManager.getInstance();
 		PetSitterManager sitterMan = PetSitterManager.getInstance();
 		LikeListManager likelistMan = LikeListManager.getInstance();
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -63,6 +65,9 @@ public class ListSitterController implements Controller {
 					city = address[j].substring(0, address[j].length() - 1);
 			}
 			sitter.getSitter().setAddress(city);
+			
+			String profileImg = memberMan.findProfileAttachment(sitter.getSitter().getId());
+			sitter.getSitter().setProfileImage(profileImg);
 		}
 		request.setAttribute("petSitterList", pagingSitters);
 

@@ -45,7 +45,12 @@
         		<c:param name="sitterId" value="${petsitter.sitter.id}"/>
         	</c:url>
 			<div id="petSitterInfoBox" onClick="location.href='${viewUrl}'">
-	            <img src="/images/petSitterNullImg.svg" id="petSitterImg" />
+	            <c:if test="${petsitter.sitter.profileImage eq null}">
+					<img src="/images/petSitterNullImg.svg" id="petSitterImg" />
+				</c:if>
+				<c:if test="${petsitter.sitter.profileImage ne null}">
+					<img src="${petsitter.sitter.profileImage}" id="petSitterImg" />
+				</c:if>
 	            <div id="petSitterLocation">${petsitter.sitter.address}</div>
 	            <div id="likeCountWrap">
 	                <img src="/images/smallHeart.svg" is="likeCountImg" />

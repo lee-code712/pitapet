@@ -34,7 +34,13 @@
                     <div id="myInfoTit">내 정보</div>
                     <img src="/images/infoEdit.svg" id="editBtn" />
                 </div>
-                <img src="/images/myPageNullImg.svg" />
+                
+                <c:if test="${memberInfo.profileImage eq null}">
+					<img src="/images/myPageNullImg.svg" id="profileImg" />
+				</c:if>
+				<c:if test="${memberInfo.profileImage ne null}">
+					<img src="${memberInfo.profileImage}" id="profileImg" />
+				</c:if>
                 <div id="myInfo">
                     <div id="name">${memberInfo.name}</div>
                     <div id="phone">${memberInfo.phone}</div>

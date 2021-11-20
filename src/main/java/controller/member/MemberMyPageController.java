@@ -31,11 +31,12 @@ public class MemberMyPageController implements Controller{
 		
 		Member memberInfo = memberMan.findMember(userId);
 		request.setAttribute("memberInfo", memberInfo);
-		System.out.println(memberInfo);
+		
+		String profileImg = memberMan.findProfileAttachment(userId);
+		memberInfo.setProfileImage(profileImg);
 		
 		String applicationStatus = applicationMan.getApprovalStatus(userId);
 		request.setAttribute("applicationStatus", applicationStatus);
-		System.out.println(applicationStatus);
 		
 		List<Care> careList = careMan.findCareSchedules(userId);
 		request.setAttribute("careList", careList);

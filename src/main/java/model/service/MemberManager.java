@@ -1,6 +1,7 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.dao.MemberDAO;
@@ -50,6 +51,10 @@ public class MemberManager {
    public List<String> findReviewAttachments(String memberId, int careId) throws SQLException {
 	   return memberDAO.findReviewAttachments(memberId, careId);
    }
+   
+   public String findProfileAttachment(String memberId) throws SQLException {
+		return (String) memberDAO.findProfileAttachment(memberId);
+	}
    
    public int createMember(Member newMember) throws SQLException, ExistingIdException {
 		if (memberDAO.findMember(newMember.getId()) != null) {

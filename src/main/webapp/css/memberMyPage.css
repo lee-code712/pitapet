@@ -21,3 +21,8 @@
     border-radius: 0px 50px 50px 0px;
     cursor: pointer;
 }
+
+#profileImg {
+	width: 316px;
+	height: 200px;
+}

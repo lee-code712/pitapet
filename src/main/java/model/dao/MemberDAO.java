@@ -72,6 +72,30 @@ private JDBCUtil jdbcUtil = null;
      return null;
   }
    
+   public String findProfileAttachment(String memberId) throws SQLException {   
+	     String sql = "SELECT img_src "
+	                + "FROM attachment "
+	                + "WHERE member_id=? AND img_src LIKE ?"; 
+	    	       
+	     String like = "%profile-" + memberId + "-%";
+	     like = like.replaceAll(" ", "");
+	       
+	     jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, like});   // JDBCUtil에 query문과 매개 변수 설정
+
+	     try {
+	        ResultSet rs = jdbcUtil.executeQuery();  
+	        if (rs.next()) {                  
+	           String img_src = rs.getString("img_src");
+	           return img_src;
+	        }
+	     } catch (Exception ex) {
+	        ex.printStackTrace();
+	     } finally {
+	        jdbcUtil.close();      
+	     }
+	     return null;
+	  }
+   
    public int createMember(Member newMember) throws SQLException {
 		  String sql = "INSERT INTO MEMBER VALUES (?, ?, ?, TO_DATE(?, 'YYYYMMDD'), ?, ?, ?, ?, ?)";
 //		  Date birth = null;

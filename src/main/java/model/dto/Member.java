@@ -13,6 +13,7 @@ public class Member {
 	private String email;
 	private String identity;
 	private List<Pet> myPets;
+	private String profileImage;
 	
 	public Member(String id) {
 		super();
@@ -109,6 +110,13 @@ public class Member {
 	}
 	public void setMyPets(List<Pet> myPets) {
 		this.myPets = myPets;
+	}
+	
+	public String getProfileImage() {
+		return profileImage;
+	}
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
 	}
 	
 	public boolean matchPassword(String password) {

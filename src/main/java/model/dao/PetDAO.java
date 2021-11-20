@@ -85,18 +85,22 @@ private JDBCUtil jdbcUtil = null;
 	      return null;
 	}
 	
-	public List<String> findPetAttachments(String memberId) throws SQLException {   
-	       String sql = "SELECT img_src "
+	public List<String> findPetAttachments(String memberId, String petId) throws SQLException {   
+	     String sql = "SELECT img_src "
 	                + "FROM attachment "
-	                + "WHERE member_id=? AND category_id=?"; 
+	                + "WHERE member_id=? AND img_src LIKE ?"; 
+	    	       
+	     String like = "%pet-" + petId + "-%";
+	     like = like.replaceAll(" ", "");
 	       
-	     jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, "AtchId01"});   // JDBCUtil에 query문과 매개 변수 설정
+	     jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, like});   // JDBCUtil에 query문과 매개 변수 설정
 
 	     try {
 	        ResultSet rs = jdbcUtil.executeQuery();  
 	        List<String> imgList = new ArrayList<String>();
 	        while (rs.next()) {                  
 	           String img_src = rs.getString("img_src");
+	           System.out.println(img_src);
 	           imgList.add(img_src);
 	        }
 	        return imgList;

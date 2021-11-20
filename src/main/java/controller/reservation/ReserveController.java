@@ -55,7 +55,7 @@ public class ReserveController implements Controller {
 
 			// 로그인한 유저의 반려동물 별 사진 리스트
 			for (Pet pet : userPets) {
-				List<String> imgList = petMan.findPetAttachments(userId);
+				List<String> imgList = petMan.findPetAttachments(userId, pet.getId());
 				pet.setImages(imgList);
 			}
 
@@ -74,25 +74,6 @@ public class ReserveController implements Controller {
 
 				request.setAttribute("ableService", services);
 			}
-
-			// 가격 계산
-			/*String[] fromDate = request.getParameter("fromDate").split("-");
-			String[] toDate = request.getParameter("toDate").split("-");
-
-			String fDate = (fromDate[0] + fromDate[1] + fromDate[2]);
-			String tDate = (toDate[0] + toDate[1] + toDate[2]);
-			int dateLength = Integer.parseInt(tDate) - Integer.parseInt(fDate);
-
-			int totalPrice = 0;
-			String[] price = petsitterInfo.getCalculatedPrice().split(",");
-			int nightPrice = Integer.parseInt(price[0]);
-			int dayPrice = Integer.parseInt(price[1]);
-			if (dateLength == 0)
-				totalPrice = dayPrice;
-			else
-				totalPrice = dateLength * nightPrice;
-
-			request.setAttribute("totalPrice", totalPrice);*/
 
 			return "/reservation/reservationForm.jsp";
 		}

@@ -31,7 +31,7 @@ public class PetManager {
 		return petDAO.findAblePetKindList(sitterId);
 	}
 	
-	public ArrayList<String> findPetAttachments(String memberId) throws SQLException {
-		return (ArrayList<String>) petDAO.findPetAttachments(memberId);
+	public ArrayList<String> findPetAttachments(String memberId, String petId) throws SQLException {
+		return (ArrayList<String>) petDAO.findPetAttachments(memberId, petId);
 	}
 }

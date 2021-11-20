@@ -413,7 +413,7 @@
                     <div id="sitterNameLikeWrap">
                         <div id="sitterName">${sitterInfo.sitter.id} 반려동물 돌보미</div>
                         <div id="likeCount">
-                            <img src="/images/likeOn.svg" id="likeImg" />12
+                            <img src="/images/likeOn.svg" id="likeImg" />${sitterInfo.like}
                         </div>
                     </div>
                     <div id="locationWrap">

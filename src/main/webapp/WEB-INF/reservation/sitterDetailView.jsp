@@ -413,45 +413,14 @@
         	border-radius :50px;
         }
     </style>
-    
-    <script>
-    	var date = "${ableDate}".split("");
-    	var today = new Date();
-    	var startDay = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-    	var endDay = today.getFullYear() + "-" + (today.getMonth() + 2) + "-" + today.getDate(); 
-
-	    document.addEventListener('DOMContentLoaded', function() {
-	        var calendarEl = document.getElementById('calendar');
-	        var calendar = new FullCalendar.Calendar(calendarEl, {
-	            initialView: 'dayGridMonth'
-	            , events: [
-	            	{
-	            		start: startDay,
-	            		end: endDay,
-	            		display: 'background'
-	            	}
-	            ]
-	        });
-	        calendar.render();
-	        
-	        
-	        var schedules = JSON.parse('${schedules}');
-	        for (key in schedules) {
-	            calendar.addEvent({
-	            	title: "불가",
-	                start: key,
-	                end: schedules[key],
-	                textColor: "#000000",
-	                allDay: true
-	            })
-	        }
-	    });
-	</script>
 	
 	<script>
+		var today = new Date();
+		var year = today.getFullYear();
 	    $(function() {
 	        $("#fromDate,#toDate").datepicker({
 	                dateFormat: 'yy-mm-dd' //달력 날짜 형태
+	                ,yearRange: year + ":" + (year + 1)
 	                ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
 	                ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
 	                ,changeYear: true //option값 년 선택 가능
@@ -461,13 +430,46 @@
 	                ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
 	                ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
 	                ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
-	                ,minDate: "-5Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-	                ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)  
+	                ,minDate: "+1D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+	                ,maxDate: "+30D" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+	        		,beforeShowDay: disableAllTheseDays
 	            });                    
 	            
 	            //초기값을 오늘 날짜로 설정해줘야 합니다.
 	            $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
 	        });
+	    
+	 	// 불가능한 날짜들 배열
+	 	var schedules = JSON.parse('${schedules}');
+	 	console.log(schedules);
+	    var disabledDays = [];
+	    for (key in schedules) {
+	    	disabledDays.push(key.split(' ')[0]);
+	    	disabledDays.push(schedules[key].split(' ')[0]);
+	    }
+	    console.log(disabledDays);
+
+	    // 특정일 선택막기
+	    function disableAllTheseDays(date) {
+	        var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+	        for (var i = 0; i < disabledDays.length; i++) {
+	            if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+	                return [false];
+	            }
+	        }
+	        var dateArr = '${dateArr}'.split('');
+	        var s = '';
+	        for (var i = 0; i < 7; i++) {
+	        	if(dateArr[i] == '0') {
+	        		if (i == 6)
+	        			s += 'date.getDay() != 0';
+	        		else
+	        			s+= 'date.getDay() != ' + (i + 1) + ' && ';
+	        		return [(s)];
+	        	}
+	        }
+	        return [true];
+	    }
      </script>
 	
 	<style>
@@ -609,22 +611,19 @@
             </div>
 
             <div id="askPeriodTit">언제 맡기시나요?</div>
-            <div id="pickPeriodWrap">
-                <img src="/images/calendar.svg" id="calendarImg" />
-                <div id="pickPeriodInner">
-                    <input type="text" name="fromDate" id="fromDate" placeholder="체크인 날짜" onfocus="this.blur()" />
-                    <img src="/images/arrow.svg"/>
-                    <input type="text" name="toDate" id="toDate" placeholder="체크아웃 날짜" onfocus="this.blur()" />
-                </div>
-            </div>
-            <div id="carePriceKind">*1박케어: 32,000원 / 데이케어: 22,000원</div>
-            <div id="carePrice">1박 32,000원</div>
-                    
-            <c:url value="/reservation/reserve" var="reserveUrl">
-                <c:param name="sitterId" value="${param.sitterId}"/>
-            </c:url>
-            <button id="reservationBtn" onClick="location.href='${reserveUrl}'">예약하기</button>
-        </div>
+            <form method="GET" action="<c:url value='/reservation/reserve'><c:param name="sitterId" value="${param.sitterId}"/></c:url>">
+	            <div id="pickPeriodWrap">
+	                <img src="/images/calendar.svg" id="calendarImg" />
+	                <div id="pickPeriodInner">
+	                    <input type="text" name="fromDate" id="fromDate" placeholder="체크인 날짜" onfocus="this.blur()" />
+	                    <img src="/images/arrow.svg"/>
+	                    <input type="text" name="toDate" id="toDate" placeholder="체크아웃 날짜" onfocus="this.blur()" />
+	                </div>
+	            </div>
+	            <div id="carePriceKind">*1박케어: 32,000원 / 데이케어: 22,000원</div>
+	            <div id="carePrice">1박 32,000원</div>
+	            <button id="reservationBtn">예약하기</button>
+        	</form>
         </div>
     </div>
     </div>

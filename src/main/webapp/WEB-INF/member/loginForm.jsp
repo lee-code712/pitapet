@@ -33,7 +33,7 @@
         <form name="form" method="POST" action="<c:url value='/member/login'/>">
         	<div id="loginInner">
 		        <input type="text" placeholder="아이디" id="loginId" name="memberId" />
-		        <input type="text" placeholder="비밀번호" id="loginPwd" name="password" />
+		        <input type="password" placeholder="비밀번호" id="loginPwd" name="password" />
 		        <input type="button" id="loginBtn" value="로그인" onClick="login()">
 	        </div>
         </form>

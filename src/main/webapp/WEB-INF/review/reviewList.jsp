@@ -30,7 +30,6 @@
 }
 
 #reviewBox {
-    margin-right: 50px;
     width: 364px;
 	    height: 424px;
 	    border-radius: 5px;
@@ -129,6 +128,14 @@
     
     #reviewBg {
     	background: #F8F9FA;
+    }
+    
+    #reviewBoxWrap {
+    	display: inline-flex;
+	        flex-wrap: wrap;
+	        width: 100%;
+	        border-radius: 5px;
+	        gap: 50px;
     }
 	</style>
 </head>

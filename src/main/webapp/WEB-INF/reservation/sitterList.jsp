@@ -548,6 +548,13 @@ select {
 	background: white;
 	background: url(../) no-repeat 80% 50%;
 }
+
+#petSitterImg {
+	width: 354px;
+	height: 242px;
+	object-fit: cover;
+	border-radius: 10px;
+}
 </style>
 </head>
 

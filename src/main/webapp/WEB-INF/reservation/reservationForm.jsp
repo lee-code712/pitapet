@@ -95,7 +95,7 @@
 		<input type="hidden" name="sitterId" value="${petsitterInfo.sitter.id}" />
 		
 		<div id="targetName">${petsitterInfo.sitter.id} 반려동물 돌보미</div>
-		<div id="carePrice">총 이용 요금 ${param.totalPrice}원</div>
+		<div id="carePrice">이용 요금 ${param.totalPrice}원</div>
 		<div id="subPageTit">반려동물 선택하기</div>
 		<div id="petPickWrap">
 			<c:forEach var="pet" items="${userPets}">
@@ -107,7 +107,7 @@
 						<img src="${pet.images[0]}" id="petCheckImg" />
 					</c:if>
 					<div id="petInfoName">${pet.name}</div>
-					<div id="petInfoBirth">${pet.birth}</div>
+					<div id="petInfoBirth">${pet.birth}살</div>
 					<div id="tagCheckWrap">
 						<div id="petInfoKind">#${pet.kind.smallCategory}</div>
 						<input type="checkbox" class="checkbox" name="pet" value="${pet.id}" />
@@ -115,7 +115,7 @@
 				</div>
 			</c:forEach>
 		</div>
-		<div id="subPageTit">원하는 서비스</div>
+		<div id="subPageTit">제공받을 서비스</div>
 		<div id="petSitterService"></div>
 		<div id="subPageTit">요구사항</div>
 		<textarea placeholder="추가적인 요구사항을 입력하세요." id="reviewText" name="cautionText"></textarea>

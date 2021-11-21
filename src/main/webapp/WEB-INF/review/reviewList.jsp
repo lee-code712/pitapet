@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -158,7 +159,7 @@
                		<div id="reviewBoxContent">
                     	<div id="reviewerDateWrap">
                            	<div id="reviewer">${review.careInfo.companion.id} 님</div>
-                        	<div id="reviewDate">${review.writeDate}</div>
+                        	<div id="reviewDate">${fn:split(review.writeDate, ' ')[0]}</div>
                     	</div>
                     	<div id="locationWrap">
                     		<img src="/images/location.svg" id="locationImg"/>

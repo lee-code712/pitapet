@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,10 +30,12 @@
     <div id="pageWrap">
         <div id="pageTitWrap">
             <div id="pageTit">마이페이지</div>
-            <div id="changeBtnWrap">
-                <button id="memberBtn">보호자</button>
-                <button id="sitterBtn">돌보미</button>
-            </div>
+            <c:if test="${sessionScope.identity == 'S'}">
+            	<div id="changeBtnWrap">
+	                <button id="memberBtn">보호자</button>
+	                <button id="sitterBtn">돌보미</button>
+            	</div>
+            </c:if>
         </div>
 
         <div id="container">
@@ -84,7 +87,7 @@
                    		<c:if test="${care.status eq 'X'}">
                    			<tr>
 	                    		<td>${care.sitter.sitter.name}</td>
-	                    		<td>${care.startDate} ~ ${care.endDate}</td>
+	                    		<td>${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}</td>
 	                   			<td>예약완료</td>
 	                   			<td>
 		                            <button id="cancelBtn">취소하기</button>
@@ -95,7 +98,7 @@
                    		<c:if test="${care.status eq 'Y'}">
                    			<tr>
 	                    		<td>${care.sitter.sitter.name}</td>
-	                    		<td>${care.startDate} ~ ${care.endDate}</td>
+	                    		<td>${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}</td>
 	                   			<td>진행중</td>
 	                   			<td>
 		                            <button id="careBtn">돌봄일지</button>
@@ -107,7 +110,7 @@
             
                    			<tr>
 	                    		<td>${care.sitter.sitter.name}</td>
-	                    		<td>${care.startDate} ~ ${care.endDate}</td>
+	                    		<td>${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}</td>
 	                   			<td>돌봄완료</td>
 	                   			<td>
 		                            <button id="careBtn">돌봄일지</button>

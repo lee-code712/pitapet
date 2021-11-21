@@ -428,7 +428,7 @@
                     		<div id="reviewBoxContent">
 	                        	<div id="reviewerDateWrap">
 	                               	<div id="reviewer">${review.careInfo.companion.id} 님</div>
-	                            	<div id="reviewDate">${review.writeDate}</div>
+	                            	<div id="reviewDate">${fn:split(review.writeDate, ' ')[0]}</div>
 	                        	</div>
 	                        	<div id="locationWrap">
 	                        		<img src="/images/location.svg" id="locationImg"/>

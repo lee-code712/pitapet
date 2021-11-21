@@ -70,6 +70,12 @@ public class ReserveController implements Controller {
 				Map<String, Pet> petMap = new HashMap<String, Pet>();
 				while (iterator.hasNext()) {
 					Pet pet = iterator.next();
+					SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
+					String[] today = sdf.format(new Date()).split("-");
+					String[] birth = pet.getBirth().split(" ")[0].split("-");
+					int year = Integer.valueOf(today[0]) - Integer.valueOf(birth[0]) + 1;
+					pet.setBirth(String.valueOf(year));
+					
 					petMap.put(pet.getId(), pet);
 				}
 				ObjectMapper mapper = new ObjectMapper();

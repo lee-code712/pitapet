@@ -415,20 +415,34 @@
     </style>
     
     <script>
+    	var date = "${ableDate}".split("");
+    	var today = new Date();
+    	var startDay = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+    	var endDay = today.getFullYear() + "-" + (today.getMonth() + 2) + "-" + today.getDate(); 
+
 	    document.addEventListener('DOMContentLoaded', function() {
 	        var calendarEl = document.getElementById('calendar');
 	        var calendar = new FullCalendar.Calendar(calendarEl, {
 	            initialView: 'dayGridMonth'
+	            , events: [
+	            	{
+	            		start: startDay,
+	            		end: endDay,
+	            		display: 'background'
+	            	}
+	            ]
 	        });
 	        calendar.render();
 	        
-	        var schedules = JSON.parse('${careSchedules}');
-	        console.log(schedules);
+	        
+	        var schedules = JSON.parse('${schedules}');
 	        for (key in schedules) {
 	            calendar.addEvent({
-	                title: schedules[key].sitter.sitter.id,
-	                start: schedules[key].startDate,
-	                end: schedules[key].endDate
+	            	title: "불가",
+	                start: key,
+	                end: schedules[key],
+	                textColor: "#000000",
+	                allDay: true
 	            })
 	        }
 	    });
@@ -531,15 +545,17 @@
             </div>
 
             <div id="reviewWriteWrap">
-                <div id="subPageTit">리뷰 작성</div>
-                <textarea placeholder="(내용)" id="reviewContent"></textarea>
-                <div id="reviewBtnWrap">
-                    <div>
-                        <img src="/images/fileImg.svg" />
-                        <input type="file" />
-                    </div>
-                    <button id="reviewBtn">등록</button>
-                </div>
+            	<c:if test="${not empty careListOfReview}">
+	                <div id="subPageTit">리뷰 작성</div>
+	                <textarea placeholder="(내용)" id="reviewContent"></textarea>
+	                <div id="reviewBtnWrap">
+	                    <div>
+	                        <img src="/images/fileImg.svg" />
+	                        <input type="file" />
+	                    </div>
+	                    <button id="reviewBtn">등록</button>
+	                </div>
+                </c:if>
             </div>
 
             <div id="reviewWriteWrap">

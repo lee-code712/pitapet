@@ -26,7 +26,6 @@ public class ViewSitterDetailController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		HttpSession session = request.getSession();
-		MemberManager memMan = MemberManager.getInstance();
 		PetSitterManager sitterMan = PetSitterManager.getInstance();
 		ServiceManager serviceMan = ServiceManager.getInstance();
 		PetManager petMan = PetManager.getInstance();
@@ -60,36 +59,24 @@ public class ViewSitterDetailController implements Controller {
 		// 돌보미 돌봄 가능시간대 전달
 		String unparsedAbleDay = sitter.getAbleDate();
 		String parsedAbleDay = Integer.toBinaryString(unparsedAbleDay.charAt(0));
-		String[] dateArr = parsedAbleDay.split("");
-		request.setAttribute("dateArr", dateArr);
+		request.setAttribute("ableDate", parsedAbleDay);
 
-		// 로그인한 유저의 예약 스케줄 전달
+		// 돌봄 불가능 일자 전달
 		List<Care> careSchedules = careMan.findCareSchedules(memberId);
+		careSchedules.addAll(careMan.findCareSchedulesOfSitter(sitterId));
+		
 		if (careSchedules != null) {
 			Iterator<Care> iterator = careSchedules.iterator();
-			Map<Integer, Care> scheduleMap = new HashMap<Integer, Care>();
+			Map<String, String> scheduleMap = new HashMap<>();
 			while (iterator.hasNext()) {
 				Care care = iterator.next();
-				scheduleMap.put(care.getId(), care);
+				scheduleMap.put(care.getStartDate(), care.getEndDate());
 			}
 			ObjectMapper mapper = new ObjectMapper();
 			String schedules = mapper.writeValueAsString(scheduleMap);
-			request.setAttribute("careSchedules", schedules);
-		}
 
-		// 해당 돌보미의 예약 스케줄 전달
-		List<Care> sitterCareSchedules = careMan.findCareSchedulesOfSitter(sitterId);
-		if (careSchedules != null) {
-			Iterator<Care> iterator = sitterCareSchedules.iterator();
-			Map<Integer, Care> sitterScheduleMap = new HashMap<Integer, Care>();
-			while (iterator.hasNext()) {
-				Care care = iterator.next();
-				sitterScheduleMap.put(care.getId(), care);
-			}
-			ObjectMapper mapper = new ObjectMapper();
-			String sitterSchedules = mapper.writeValueAsString(sitterScheduleMap);
-			request.setAttribute("sitterCareSchedules", sitterSchedules);
-		}
+			request.setAttribute("schedules", schedules);
+		}	
 
 		// 돌보미 후기 전달
 		List<Review> reviews = reviewMan.findReviewListOfSitter(sitterId);
@@ -102,8 +89,8 @@ public class ViewSitterDetailController implements Controller {
 		
 		// 돌보미와의 돌봄완료 내역 중 리뷰 작성을 안한 내역 전달
 		List<Care> careList = careMan.findCareOfDoNotReview(memberId, sitterId);
-		request.setAttribute("careList", careList);
-		
+		request.setAttribute("careListOfReview", careList);
+		System.out.println(careList);
 
 		return "/reservation/sitterDetailView.jsp";
 	}

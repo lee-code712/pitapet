@@ -74,6 +74,7 @@ public class ReviewDAO {
 		return null;
 	}
 
+	// 리뷰 첨부파일 반환
 	public List<String> findReviewAttachments(String memberId, int careId) throws SQLException {
 		String sql = "SELECT img_src " + "FROM attachment " + "WHERE member_id=? AND category_id=? AND img_src LIKE ?";
 
@@ -96,4 +97,24 @@ public class ReviewDAO {
 		}
 		return null;
 	}
+	
+	// 선택한 sitter의 리뷰 반환
+	public boolean isExistReview(Integer careId) throws SQLException {
+		String sql = "SELECT review_id "
+				+ "FROM review JOIN care USING (care_id) " 
+				+ "WHERE care_id = ?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { careId });
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next())
+				return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return false;
+	}
+	
 }

@@ -32,6 +32,8 @@ public class ViewSitterDetailController implements Controller {
 		PetManager petMan = PetManager.getInstance();
 		CareManager careMan = CareManager.getInstance();
 		ReviewManager reviewMan = ReviewManager.getInstance();
+		
+		String memberId = UserSessionUtils.getLoginUserId(session);
 		String sitterId = (String) request.getParameter("sitterId");
 
 		// session에 id정보가 없으면 mainpage 호출 리다이렉션
@@ -55,14 +57,14 @@ public class ViewSitterDetailController implements Controller {
 
 		request.setAttribute("sitterInfo", sitter);
 
-		// 돌보미 돌봄 가능시간대
+		// 돌보미 돌봄 가능시간대 전달
 		String unparsedAbleDay = sitter.getAbleDate();
 		String parsedAbleDay = Integer.toBinaryString(unparsedAbleDay.charAt(0));
 		String[] dateArr = parsedAbleDay.split("");
 		request.setAttribute("dateArr", dateArr);
 
-		// 로그인한 유저의 예약 스케줄
-		List<Care> careSchedules = careMan.findCareSchedules(UserSessionUtils.getLoginUserId(session));
+		// 로그인한 유저의 예약 스케줄 전달
+		List<Care> careSchedules = careMan.findCareSchedules(memberId);
 		if (careSchedules != null) {
 			Iterator<Care> iterator = careSchedules.iterator();
 			Map<Integer, Care> scheduleMap = new HashMap<Integer, Care>();
@@ -72,11 +74,10 @@ public class ViewSitterDetailController implements Controller {
 			}
 			ObjectMapper mapper = new ObjectMapper();
 			String schedules = mapper.writeValueAsString(scheduleMap);
-
 			request.setAttribute("careSchedules", schedules);
 		}
 
-		// 해당 돌보미의 예약 스케줄
+		// 해당 돌보미의 예약 스케줄 전달
 		List<Care> sitterCareSchedules = careMan.findCareSchedulesOfSitter(sitterId);
 		if (careSchedules != null) {
 			Iterator<Care> iterator = sitterCareSchedules.iterator();
@@ -87,18 +88,8 @@ public class ViewSitterDetailController implements Controller {
 			}
 			ObjectMapper mapper = new ObjectMapper();
 			String sitterSchedules = mapper.writeValueAsString(sitterScheduleMap);
-
 			request.setAttribute("sitterCareSchedules", sitterSchedules);
 		}
-		
-		Calendar cal_start = Calendar.getInstance(); // 예약 가능일 시작
-		Date time_now = new Date();
-		cal_start.setTime(time_now);
-		Calendar cal_end = Calendar.getInstance();
-		cal_end.add(Calendar.MONTH, 1); // 예약 가능일 끝
-		
-		// System.out.println(time + " " + cal.getTime());
-		// System.out.println(ableDay);
 
 		// 돌보미 후기 전달
 		List<Review> reviews = reviewMan.findReviewListOfSitter(sitterId);
@@ -108,6 +99,11 @@ public class ViewSitterDetailController implements Controller {
 			review.setImages(imgList);
 		}
 		request.setAttribute("reviews", reviews);
+		
+		// 돌보미와의 돌봄완료 내역 중 리뷰 작성을 안한 내역 전달
+		List<Care> careList = careMan.findCareOfDoNotReview(memberId, sitterId);
+		request.setAttribute("careList", careList);
+		
 
 		return "/reservation/sitterDetailView.jsp";
 	}

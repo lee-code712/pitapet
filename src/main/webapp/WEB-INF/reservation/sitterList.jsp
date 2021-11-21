@@ -48,8 +48,9 @@
 		    width: 130px;
 		    height: 40px;
 		    border-radius: 50px;
-		    border: 1px solid #EAEAEA;
+		    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 		    cursor: pointer;
+		    background: white;
 		}
 		
 		#choiceBox:focus {
@@ -63,8 +64,9 @@
 		    width: 300px;
 		    height: 40px;
 		    border-radius: 50px;
-		    border: 1px solid #EAEAEA;
+		    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 		    background-color: white;
+		    border: none;
 		}
 		
 		#searchText {
@@ -115,28 +117,34 @@
 		
 		.dropdown:hover .dropdown-content {display: block;}
 		
-		#reviewBox {
-		    margin-top: 100px;
+		
+			#reviewBox {
 		    margin-right: 50px;
 		    width: 364px;
-		    border: 1px solid #EAEAEA;
-		    border-radius: 10px;
+		    height: 424px;
+		    border-radius: 5px;
 		    position: relative;
+		    background: white;
+		    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 		}
 		
 		#reviewBoxInner {
 		    display: flex;
 		    flex-direction: column;
-		    width: 324px;
+		    width: 364px;
 		    height: 200px;
-		    padding: 20px;
 		    border-radius: 10px;
+		}
+		
+		* {
+			padding: 0px;
+			margin: 0px;
 		}
 		
 		#reviewerDateWrap {
 		    display: flex;
 		    justify-content: space-between;
-		    margin-bottom: 16px;
+		    align-items: center;
 		}
 		
 		#reviewer {
@@ -153,61 +161,68 @@
 		    color: #757575;
 		}
 		
-		#targetScopeWrap {
-		    display: flex;
-		    justify-content: space-between;
-		    margin-top: auto;
-		}
-		
-		#scopeWrap {
-		    display: flex;
-		}
-		
-		#reviewTarget {
-		    font-size: 12px;
-		    color: #C4C4C4;
-		}
-		
-		#scope {
-		    margin-left: 6px;
-		    font-size: 12px;
-		}
-		
-		#targetLocation {
-		    display: flex;
-		    justify-content: center;
-		    align-items: center;
-		    margin-right: 10px;
-		    width: 70px;
-		    height: 24px;
-		    background-color: #757575;
-		    color: white;
-		    border-radius: 10px 0px 10px 0px;
-		    font-size: 12px;
-		    position: absolute;
-		    top:2.8%;
-		    left:9%;
-		    transform: translate(-50%, -50%);
-		}
-		
 		#reviewerTargetWrap {
 		    display: flex;
 		}
 		
 		#reviewBoxWrap {
 		    display: flex;
-		    width: 1460px;
-		    flex-wrap: wrap;
+		    width: 1194px;
 		}
 		
 		#reviewMoreBtn {
 		    margin: 60px 0px;
 		    display: flex;
 		    justify-content: flex-end;
-		    margin-right: 200px;
 		    color:#7AAFFF;
 		    cursor: pointer;
 		}
+		    	
+        #logo {
+		    z-index: 1;
+		   	margin-left: 14px;
+		}
+		
+    	#reviewImg {
+			width: 364px;
+			height: 190px;
+			object-fit: cover;
+			border-radius: 5px 5px 0px 0px;
+		}
+		
+		#targetScopeWrap {
+       		display: flex;
+       		justify-content: space-between;
+       		align-items: center;
+       		padding: 8px 20px;
+       		width: 324px;
+       		border-top: 1px solid #EAEAEA;
+       	}
+       	
+       	#scopeWrap {
+       		display: flex;
+       		margin-top: auto;
+       	}
+       	
+       	#scope {
+       		margin-left: 4px;
+       	}
+       	
+       	#reviewBoxContent {
+       		padding: 20px;
+       	}
+       	
+   
+       	
+       	#review {
+       		height: 96px;
+       	}
+       	
+       	#reviewTarget {
+       		color: #C4C4C4;
+       		font-size: 12px;
+       	}
+		
 		
 		#recommendTit {
 		    margin: 160px 0px -20px 0px;
@@ -220,9 +235,10 @@
 		    margin-bottom: 60px;
 		    padding: 20px;
 		    width: 1154px;
-		    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-		    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+		    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+		    background: white;
 		    border-radius: 10px;
+		    cursor: pointer;
 		}
 		
 		#petSitterLocation {
@@ -269,7 +285,7 @@
 		#petSitterNameLikeWrap {
 		    display: flex;
 		    justify-content: space-between;
-		    margin-bottom: 20px;
+		    margin-bottom: 4px;
 		    width: 780px;
 		    height: 20px;
 		}
@@ -486,30 +502,45 @@
 			margin-left: 20px;
 		}
 		
+	    #logo {
+		    z-index: 1;
+		   	margin-left: 14px;
+		}
 		
-		#locationImg {
-			margin-right: 8px;
-			width: 16px;
-			height: 16px;
+		#pageBg {
+			background: #F8F9FA;
+		}
+		
+		#reviewTit {
+			margin: 100px 0px 100px 0px;
+			font-size: 24px;
 		}
 		
 		#locationWrap {
 			display: flex;
 			align-items: center;
-			margin-top: -10px;
-			margin-bottom: 20px;
+			margin: 4px 0px 10px 0px;
 			color: #C4C4C4;
-			font-size: 14px;
+			font-size: 12px;
 		}
 		
-	    #logo {
-		    z-index: 1;
-		   	margin-left: 14px;
+		#sitterLocationWrap {
+			display: flex;
+			align-items: center;
+			margin: 4px 0px 20px 0px;
+			color: #C4C4C4;
+			font-size: 12px;
+		}
+		
+		select {
+			border: none;
+			background: white;
+			background: url(../) no-repeat 80% 50%;
 		}
     </style>
 </head>
 
-<body>
+<body id="pageBg">
 	<%@include file="../components/header.jsp" %>
 	
     <div id="sitterListWrap">
@@ -565,7 +596,7 @@
 	                    	</c:if>
 	                    </c:forEach>
 	                </div>
-	                <div id="locationWrap">
+	                <div id="sitterLocationWrap">
 	                	<img src="/images/location.svg" id="locationImg" />${petsitter.sitter.address}
 	                </div>
 	                <div id="petSitterIntro">${petsitter.notes}</div>
@@ -615,70 +646,82 @@
         	</div>
         </div>
         
-        <div id="recommendTit">추천</div>
-        
-        <div id="reviewBoxWrap">
-            <div id="reviewBox">
-                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
-                <div id="reviewBoxInner">
-                    <div id="reviewerDateWrap">
-                        <div id="reviewerTargetWrap">
-                            <div id="targetLocation">상월곡</div>
-                            <div id="reviewer">###보호자님</div>
-                        </div>
-                        <div id="reviewDate">2021-11-01</div>
-                    </div>
-                    <div id="review">(리뷰 작성)</div>
-                    <div id="targetScopeWrap">
-                        <div id="reviewTarget">about ###반려동물 돌보미</div>
-                        <div id="scopeWrap">
-                            <img src="/images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="reviewWrap">
+            <div id="reviewTit">추천</div>
+       
+            <div id="reviewBoxWrap">
 
-            <div id="reviewBox">
-                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
-                <div id="reviewBoxInner">
-                    <div id="reviewerDateWrap">
-                        <div id="reviewerTargetWrap">
-                            <div id="targetLocation">상월곡</div>
-                            <div id="reviewer">###보호자님</div>
-                        </div>
-                        <div id="reviewDate">2021-11-01</div>
-                    </div>
-                    <div id="review">(리뷰 작성)</div>
-                    <div id="targetScopeWrap">
-                        <div id="reviewTarget">about ###반려동물 돌보미</div>
-                        <div id="scopeWrap">
-                            <img src="/images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="reviewBox">
-                <img src="/images/reviewNullImg.svg" id="reviewImg"/>
-                <div id="reviewBoxInner">
-                    <div id="reviewerDateWrap">
-                        <div id="reviewerTargetWrap">
-                            <div id="targetLocation">상월곡</div>
-                            <div id="reviewer">###보호자님</div>
-                        </div>
-                        <div id="reviewDate">2021-11-01</div>
-                    </div>
-                    <div id="review">(리뷰 작성)</div>
-                    <div id="targetScopeWrap">
-                        <div id="reviewTarget">about ###반려동물 돌보미</div>
-                        <div id="scopeWrap">
-                            <img src="/images/star.svg"/>
-                            <div id="scope">5.0</div>
-                        </div>
-                    </div>
-                </div>
+            		<div id="reviewBox">
+                    	<img src="/images/recommendNullImg.svg" id="reviewImg"/>
+                    	<div id="reviewBoxInner">
+                    		<div id="reviewBoxContent">
+	                        	<div id="reviewerDateWrap">
+	                               	<div id="reviewer">###보호자님</div>
+	                            	<div id="reviewDate">2021-11-01</div>
+	                        	</div>
+	                        	<div id="locationWrap">
+	                        		<img src="/images/location.svg" id="locationImg"/>
+	                        		상월곡
+	                        	</div>
+	                        	<div id="review">(리뷰 작성)</div>
+                        	</div>
+                        	<div id="targetScopeWrap">
+                            	<div id="reviewTarget">about ###반려동물 돌보미</div>
+                            	<div id="scopeWrap">
+                                	<img src="../images/star.svg"/>
+                                	<div id="scope">5.0</div>
+                            	</div>
+                        	</div>
+                    	</div>
+                	</div>
+                	
+                	<div id="reviewBox">
+                    	<img src="/images/recommendNullImg.svg" id="reviewImg"/>
+                    	<div id="reviewBoxInner">
+                    		<div id="reviewBoxContent">
+	                        	<div id="reviewerDateWrap">
+	                               	<div id="reviewer">###보호자님</div>
+	                            	<div id="reviewDate">2021-11-01</div>
+	                        	</div>
+	                        	<div id="locationWrap">
+	                        		<img src="/images/location.svg" id="locationImg"/>
+	                        		상월곡
+	                        	</div>
+	                        	<div id="review">(리뷰 작성)</div>
+                        	</div>
+                        	<div id="targetScopeWrap">
+                            	<div id="reviewTarget">about ###반려동물 돌보미</div>
+                            	<div id="scopeWrap">
+                                	<img src="../images/star.svg"/>
+                                	<div id="scope">5.0</div>
+                            	</div>
+                        	</div>
+                    	</div>
+                	</div>
+                	
+                	<div id="reviewBox">
+                    	<img src="/images/recommendNullImg.svg" id="reviewImg"/>
+                    	<div id="reviewBoxInner">
+                    		<div id="reviewBoxContent">
+	                        	<div id="reviewerDateWrap">
+	                               	<div id="reviewer">###보호자님</div>
+	                            	<div id="reviewDate">2021-11-01</div>
+	                        	</div>
+	                        	<div id="locationWrap">
+	                        		<img src="/images/location.svg" id="locationImg"/>
+	                        		상월곡
+	                        	</div>
+	                        	<div id="review">(리뷰 작성)</div>
+                        	</div>
+                        	<div id="targetScopeWrap">
+                            	<div id="reviewTarget">about ###반려동물 돌보미</div>
+                            	<div id="scopeWrap">
+                                	<img src="../images/star.svg"/>
+                                	<div id="scope">5.0</div>
+                            	</div>
+                        	</div>
+                    	</div>
+                	</div>
             </div>
         </div>
     </div>

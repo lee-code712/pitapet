@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8"/>
     <title>세부사항</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/header.css"/>
@@ -242,7 +242,8 @@
         
         #periodInner {
         padding: 20px;
-        	border: 1px solid #EAEAEA;
+        	box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+        	background: #F8F9FA;
         	border-radius: 5px;
         }
 
@@ -308,7 +309,8 @@
 		    width: 404px;
 		    height: 70px;
 		    border-radius: 5px;
-		    border: 1px solid #EAEAEA;
+		    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+        	background: white;
 		}
 		
 		#calendarImg {
@@ -441,10 +443,12 @@
 		    z-index: 1;
 		   	margin-left: 14px;
 		}
+		
+		
 	</style>
 </head>
 
-<body>
+<body id="pageBg">
 	<%@include file="../components/header.jsp" %>
 
     <div id="pageWrap">

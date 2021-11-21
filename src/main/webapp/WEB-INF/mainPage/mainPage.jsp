@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
-    <link rel="stylesheet" href="/css/mainPage.css"/>
     <link rel="stylesheet" href="/css/main.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
    	<meta http-equiv="X-UA-Compatible" content="ie=edge"> 
@@ -42,6 +41,179 @@
     </script>
  
     <style> 
+    	@charset "UTF-8";
+
+		#headerWrap {
+		    z-index: 10; 
+		    top: 0px; 
+		    position: fixed; 
+		    box-sizing: border-box; 
+		    transition: All 0.2s ease; 
+		    -webkit-transition: All 0.2s ease; 
+		    -moz-transition: All 0.2s ease; 
+		    -o-transition: All 0.2s ease;
+		}
+		
+		#mainPageWrap {
+		    margin: 0 auto;
+		    width: 1194px;
+		}
+		
+		#bannerWrap {
+		    position: relative;
+		}
+		
+		#banner {
+		    display: flex;
+		    justify-content: center;
+		}
+		
+		#bannerText {
+		    position: absolute;
+		    top: 500px;
+		    left: 42%;
+		    transform: (-50%, 0%);
+		}
+		
+		#bannerTit {
+		    font-family: 'Righteous', cursive;
+		    font-size: 48px;
+		}
+		
+		#bannerSubTit {
+		    padding-left: 68px;
+		    color: #FB7D71;
+		    font-size: 24px;
+		}
+		
+		#bannerInfo {
+		    margin: 10px 0px 0px 4px;
+		}
+		
+		#scheduleTit,
+		#reviewTit {
+		    font-size: 24px;
+		}
+		
+		#scheduleWrap,
+		#reviewWrap {
+		    margin-top: 80px;
+		}
+		
+		#scheduleTit span,
+		#reviewTit span {
+		    margin-left: 6px;
+		    font-size: 18px;
+		    color: #89A0F2;
+		}
+		
+		table {
+		    border-collapse: collapse;
+		}
+		
+		.cal_top{
+		    display: flex;
+		    justify-content: space-between;
+		    margin-bottom: 60px;
+		    font-size: 30px;
+		}
+		
+		table.calendar{
+		    display: inline-table;
+		    text-align: left;
+		}
+		
+		table.calendar td{
+		    vertical-align: top;
+		    border: 1px solid #EAEAEA;
+		    width: 116px;
+		}
+		
+		#cal_top_date {
+		    font-size: 36px;
+		}
+		
+		#calendarDay {
+		    margin-top: 8px;
+		    font-size: 18px;
+		    color: #535353;
+		}
+		
+		#calendarWrap {
+		    display: flex;
+		    margin-top: 100px;
+		}
+		
+		#calendarDateWrap {
+		    margin-right: 54px;
+		    width: 320px;
+		    text-align: center;
+		}
+		
+		#calDayName {
+		    padding-bottom: 20px;
+		}
+		
+		#reviewBox {
+		    margin-right: 50px;
+		    width: 364px;
+		    height: 424px;
+		    border-radius: 5px;
+		    position: relative;
+		    background: white;
+		    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+		}
+		
+		#reviewBoxInner {
+		    display: flex;
+		    flex-direction: column;
+		    width: 364px;
+		    height: 200px;
+		    border-radius: 10px;
+		}
+		
+		* {
+			padding: 0px;
+			margin: 0px;
+		}
+		
+		#reviewerDateWrap {
+		    display: flex;
+		    justify-content: space-between;
+		    align-items: center;
+		}
+		
+		#reviewer {
+		    font-size: 18px;
+		}
+		
+		#reviewDate {
+		    font-size: 12px;
+		    color: #c4c4c4;
+		}
+		
+		#review {
+		    font-size: 14px;
+		    color: #757575;
+		}
+		
+		#reviewerTargetWrap {
+		    display: flex;
+		}
+		
+		#reviewBoxWrap {
+		    display: flex;
+		    width: 1194px;
+		}
+		
+		#reviewMoreBtn {
+		    margin: 60px 0px;
+		    display: flex;
+		    justify-content: flex-end;
+		    color:#7AAFFF;
+		    cursor: pointer;
+		}
+		    	
         #logo {
 		    z-index: 1;
 		   	margin-left: 14px;
@@ -51,7 +223,7 @@
 			width: 364px;
 			height: 190px;
 			object-fit: cover;
-			border-radius: 10px 10px 0px 0px;
+			border-radius: 5px 5px 0px 0px;
 		}
 		
 		#targetLocation {
@@ -111,6 +283,50 @@
 		    margin: 10px 0px 0px 4px;
 		    color: #535353;
 		}
+		
+		#targetScopeWrap {
+       		display: flex;
+       		justify-content: space-between;
+       		align-items: center;
+       		padding: 8px 20px;
+       		width: 100%;
+       		border-top: 1px solid #EAEAEA;
+       	}
+       	
+       	#scopeWrap {
+       		display: flex;
+       		margin-top: auto;
+       	}
+       	
+       	#scope {
+       		margin-left: 4px;
+       	}
+       	
+       	#reviewBoxContent {
+       		padding: 20px;
+       	}
+       	
+       	#locationWrap {
+       		display: flex;
+       		align-items: center;
+       		margin-bottom: 10px;
+       		color: #C4C4C4;
+       		font-size: 12px;
+       	}
+       	
+       	#locationImg {
+       		margin-right: 4px;
+       	}
+       	
+       	#review {
+       		height: 96px;
+       	}
+       	
+       	#reviewTarget {
+       		color: #C4C4C4;
+       		font-size: 12px;
+       	}
+		
 	</style> 
 </head>
 
@@ -139,11 +355,11 @@
 	            </div> 
 	            
 	            <div class="carousel-item"> 
-	           		<img class="d-block w-100" src="/images/bannerImg2.svg" alt="Second slide"> 
+	           		<img class="d-block w-100" src="/images/bannerNew2.svg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Second slide"> 
 	           	</div>
 	                          
 	            <div class="carousel-item"> 
-	            	<img class="d-block w-100" src="https://images.pexels.com/photos/2544554/pexels-photo-2544554.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Third slide"> 
+	            	<img class="d-block w-100" src="/images/bannerNew3.svg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Third slide"> 
 	            </div> <!-- / 슬라이드 쇼 끝 --> <!-- 왼쪽 오른쪽 화살표 버튼 --> 
 	            
 	            <a class="carousel-control-prev" href="#demo" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> 
@@ -173,6 +389,7 @@
             	<c:url value="/review/listReview" var="reviewUrl"/>
                 <div id="reviewMoreBtn" onClick="location.href='${reviewUrl}'">더 보기+</div>
             </div>
+       
 
             <div id="reviewBoxWrap">
             	<c:forEach var="review" items="${reviews}">
@@ -184,16 +401,19 @@
                     		<img src="${review.images[0]}" id="reviewImg"/>
                     	</c:if>
                     	<div id="reviewBoxInner">
-                        	<div id="reviewerDateWrap">
-                            	<div id="reviewerTargetWrap">
-                                	<div id="targetLocation">${review.careInfo.sitter.sitter.address}</div>
-                               	 	<div id="reviewer">${review.careInfo.companion.id} 님</div>
-                            	</div>
-                            	<div id="reviewDate">${review.writeDate}</div>
+                    		<div id="reviewBoxContent">
+	                        	<div id="reviewerDateWrap">
+	                               	<div id="reviewer">${review.careInfo.companion.id} 님</div>
+	                            	<div id="reviewDate">${review.writeDate}</div>
+	                        	</div>
+	                        	<div id="locationWrap">
+	                        		<img src="/images/location.svg" id="locationImg"/>
+	                        		${review.careInfo.sitter.sitter.address}
+	                        	</div>
+	                        	<div id="review">${review.content}</div>
                         	</div>
-                        	<div id="review">${review.content}</div>
                         	<div id="targetScopeWrap">
-                            	<div id="reviewTarget">by ${review.careInfo.sitter.sitter.id}</div>
+                            	<div id="reviewTarget">about ${review.careInfo.sitter.sitter.id}</div>
                             	<div id="scopeWrap">
                                 	<img src="../images/star.svg"/>
                                 	<div id="scope">${review.rate}</div>

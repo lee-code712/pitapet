@@ -25,8 +25,9 @@ public class MainPageController implements Controller{
 		ReviewManager reviewMan = ReviewManager.getInstance();
 		MemberManager memMan = MemberManager.getInstance();
 		
-		// login 상태 확인
+		// session에 id정보가 없는지 확인
 		if(UserSessionUtils.hasLogined(session)) {
+			// 로그인 상태면 돌봄 스케줄 정보 검색해 전달
 			 List<Care> careSchedules = careMan.findCareSchedules(UserSessionUtils.getLoginUserId(session));
 			 if(careSchedules != null) {
 					Iterator<Care> iterator = careSchedules.iterator();
@@ -41,9 +42,11 @@ public class MainPageController implements Controller{
 					request.setAttribute("careSchedules", schedules);
 			 }
 		} else {
+			// 로그인 상태가 아니면 방문자인 상태를 전달
 			request.setAttribute("isNotLogined", true);
 		}
 		
+		// 메인페이지에 띄울 3개의 랜덤 리뷰 전달
 		List<Review> reviews = reviewMan.findReviewList();
 		Collections.shuffle(reviews);
 		
@@ -52,12 +55,10 @@ public class MainPageController implements Controller{
 		for (Review review : randomReviews) {
 			Member sitterMemInfo = memMan.findMember(review.getCareInfo().getSitter().getSitter().getId());
 			String[] address = sitterMemInfo.getAddress().split(" ");
-			System.out.println(Arrays.toString(address));
 			String city = null;
 			for (int j = 0; j < address.length; j++) {
 				if (address[j].matches("(.*)로")) {
 					city = address[j].substring(0, address[j].length() - 1);
-					System.out.println(city);
 				}
 			}
 			review.getCareInfo().getSitter().getSitter().setAddress(city);
@@ -68,8 +69,6 @@ public class MainPageController implements Controller{
 			System.out.println(imgList.get(0));
 		}
 		request.setAttribute("reviews", randomReviews);
-		
-		System.out.print(reviews);
 		
         return "/mainPage/mainPage.jsp";
     }

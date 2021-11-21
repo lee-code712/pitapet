@@ -71,7 +71,7 @@ public class ListSitterController implements Controller {
 		}
 		request.setAttribute("petSitterList", pagingSitters);
 
-		// 지역별 추천 돌보미 리스트(3개) 전달
+		// 지역 및 동물 맞춤 추천 돌보미 전달
 		
 		// 좋아요 누른 돌보미 id list 전달
 		List<LikeList> likeSitters = likelistMan.findLikeListOfMember(UserSessionUtils.getLoginUserId(session));

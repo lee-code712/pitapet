@@ -23,12 +23,15 @@ public class ListLikeController implements Controller{
 		LikeListManager likeman = LikeListManager.getInstance();
 		PetSitterManager sitterman = PetSitterManager.getInstance();
 		
+		// session에 id정보가 없으면 mainpage 호출 리다이렉션
 		if(!UserSessionUtils.hasLogined(session)) {
 			 return "redirect:/mainpage";
 		}
 		
+		// 사용자의 좋아요 목록을 검색해 전달
 		List<LikeList> likeLists = likeman.findLikeListOfMember(UserSessionUtils.getLoginUserId(session));
 		List<PetSitter> likeSitterLists = new ArrayList<PetSitter>();
+		
 		for (LikeList likeList : likeLists) {
 			PetSitter likeSitter = sitterman.findPetSitter(likeList.getLikeSitter().getSitter().getId());
 			String[] address = likeSitter.getSitter().getAddress().split(" ");

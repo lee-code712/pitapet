@@ -33,10 +33,11 @@ import model.service.exception.UnavailableReservationTimeException;
 public class ReserveController implements Controller {
 
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		HttpSession session = request.getSession();
-
 		String userId = UserSessionUtils.getLoginUserId(session);
 
+		// 예약 form 이동
 		if (request.getMethod().equals("GET")) {
 			String sitterId = (String) request.getParameter("sitterId");
 
@@ -103,7 +104,6 @@ public class ReserveController implements Controller {
 		}
 
 		// 예약 처리
-		// PetSitterManager petsitterMan = PetSitterManager.getInstance();
 		CareManager careMan = CareManager.getInstance();
 		ReservationManager reservationMan = ReservationManager.getInstance();
 		ServiceManager serviceMan = ServiceManager.getInstance();
@@ -154,11 +154,11 @@ public class ReserveController implements Controller {
 					}
 				}
 			}
-
 			care.setCareList(careDetails);
 			
 			request.setAttribute("reservationFailed", false);
 			request.setAttribute("care", care);
+			
 			return "redirect:/member/memberMyPage";
 		}
 	}

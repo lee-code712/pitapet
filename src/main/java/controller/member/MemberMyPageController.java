@@ -23,17 +23,18 @@ public class MemberMyPageController implements Controller{
 		PetSitterApplicationManager applicationMan = PetSitterApplicationManager.getInstance();
 		CareManager careMan = CareManager.getInstance();
 		
+		// session에 id정보가 없으면 mainpage 호출 리다이렉션
 		if(!UserSessionUtils.hasLogined(session)) {
 			 return "redirect:/mainpage";
 		}
 		
+		// 마이페이지에 보일 정보 전달
 		String userId = UserSessionUtils.getLoginUserId(session);
 		
 		Member memberInfo = memberMan.findMember(userId);
-		request.setAttribute("memberInfo", memberInfo);
-		
 		String profileImg = memberMan.findProfileAttachment(userId);
 		memberInfo.setProfileImage(profileImg);
+		request.setAttribute("memberInfo", memberInfo);
 		
 		String applicationStatus = applicationMan.getApprovalStatus(userId);
 		request.setAttribute("applicationStatus", applicationStatus);

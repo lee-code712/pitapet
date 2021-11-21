@@ -108,20 +108,7 @@ public class ReserveController implements Controller {
 		ReservationManager reservationMan = ReservationManager.getInstance();
 		ServiceManager serviceMan = ServiceManager.getInstance();
 
-        // int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
-
-		// 가격 계산
-		/*
-		 * String[] fromdate = request.getParameter("fromDate").split("-"); String[]
-		 * todate = request.getParameter("toDate").split("-"); String fDate =
-		 * (fromdate[0] + fromdate[1] + fromdate[2]); String tDate = (todate[0] +
-		 * todate[1] + todate[2]); int dateLength = Integer.parseInt(tDate) -
-		 * Integer.parseInt(fDate); int money = 0; String[] payMoney =
-		 * petsitter.getCalculatedPrice().split(","); int nightMoney =
-		 * Integer.parseInt(payMoney[0]); int dayMoney = Integer.parseInt(payMoney[1]);
-		 * if (dateLength == 0) money = dayMoney; else money = dateLength * nightMoney;
-		 */
-		
+		int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
 		String toDate = request.getParameter("toDate") + " 00:00:01";
 		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -130,7 +117,7 @@ public class ReserveController implements Controller {
 		// Date타입의 변수를 새롭게 지정한 포맷으로 변환
 		toDate = newDtFormat.format(formatDate);
 		
-		Care care = new Care(request.getParameter("fromDate"), toDate, 30000,
+		Care care = new Care(request.getParameter("fromDate"), toDate, totalPrice,
 				request.getParameter("cautionText"), "X", null, new Member(userId),
 				new PetSitter(new Member(request.getParameter("sitterId"))));
 		

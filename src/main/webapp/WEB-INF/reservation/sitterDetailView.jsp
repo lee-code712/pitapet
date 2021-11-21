@@ -471,14 +471,23 @@
 	    	var end = new Date($("#toDate").val());
 	    	var dateDiff = Math.ceil((end.getTime() - start.getTime()) / (1000 * 3600 * 24));
 	    	console.log(dateDiff);
-	    	if (dateDiff == 0)
+	    	var price = 0;
+	    	if (dateDiff == 0) {
+	    		price = '${fn:split(sitterInfo.calculatedPrice,',')[1]}';
 	    		$('#carePrice').text('데이케어 ${fn:split(sitterInfo.calculatedPrice,',')[1]}원');
+	    	}
 	    	else {
-	    		var price = '${fn:split(sitterInfo.calculatedPrice,',')[0]}';
+	    		price = '${fn:split(sitterInfo.calculatedPrice,',')[0]}';
 	    		price = price * dateDiff
 	    		$('#carePrice').text(dateDiff + '박케어 ' + price +'원');
 	    		console.log(price);
 	    	}
+	    	
+	    	var newInputElement = document.createElement("input");
+			$(newInputElement).attr("type", "hidden");
+			$(newInputElement).attr("name", "totalPrice");
+			$(newInputElement).attr("value", price);
+			$("#carePrice").append(newInputElement);
 	    }
      </script>
 	

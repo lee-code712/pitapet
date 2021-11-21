@@ -91,12 +91,11 @@
 	<div id="reservationFormWrap">
 		<input type="hidden" name="fromDate" value="${fromDate}" />
 		<input type="hidden" name="toDate" value="${toDate}" />
-		
-		<%-- <input type="hidden" name="fromDate" value="2021-11-22" />
-		<input type="hidden" name="toDate" value="2021-11-23" /> --%>
+		<input type="hidden" name="totalPrice" value="${param.totalPrice}" />
 		<input type="hidden" name="sitterId" value="${petsitterInfo.sitter.id}" />
 		
 		<div id="targetName">${petsitterInfo.sitter.id}반려동물 돌보미</div>
+		<div id="carePrice">이용 요금 ${param.totalPrice}원</div>
 		<div id="subPageTit">반려동물 선택하기</div>
 		<div id="petPickWrap">
 			<c:forEach var="pet" items="${userPets}">

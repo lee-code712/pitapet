@@ -566,9 +566,8 @@ select {
 			<div id="pageTit">돌보미 정보 조회</div>
 			<div id="searchTools">
 				<select id="choiceBox">
-					<option value="bigDog">대형견</option>
-					<option value="smallDog">소형견</option>
-					<option value="cat">고양이</option>
+					<option value="city">지역</option>
+					<option value="tag">태그</option>
 				</select>
 				<div id="searchWrap">
 					<input type="text" placeholder="검색어를 입력하세요." id="searchText" /> <img
@@ -600,7 +599,7 @@ select {
 				</div>
 				<div id="petSitterInfoInner">
 					<div id="petSitterNameLikeWrap">
-						<div id="petSitterName">${petsitter.sitter.id}반려동물 돌보미</div>
+						<div id="petSitterName">${petsitter.sitter.id} 반려동물 돌보미</div>
 
 						<c:set var="findCk" value="false" />
 						<c:forEach var="likesitter" items="${likeSitters}"

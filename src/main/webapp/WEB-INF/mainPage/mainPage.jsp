@@ -31,7 +31,6 @@
         	var schedules = JSON.parse('${careSchedules}');
         	console.log(schedules);
         	for (key in schedules) {
-        		var color = '';
         		var petNames = '';
         		console.log(schedules[key].careList.length);
         		for (var i = 0; i < schedules[key].careList.length; i++) {
@@ -40,15 +39,22 @@
         				break;
         			petNames += ", ";
         		}
-        			
-        		if (schedules[key].status == 'X')
+        		var color = '';
+        		var status = '';
+        		if (schedules[key].status == 'X') {
+        			color = '#FF4500';
+        			status = ' 돌봄 예약';
+        		}
+        		else if (schedules[key].status == 'Y') {
+        			color ='#FF6347';
+        			status = ' 돌봄 진행';
+        		}
+        		else {
         			color = '#FFA07A';
-        		else if (schedules[key].status == 'Y')
-        			color ='#FFDAB9';
-        		else
-        			color = '#FF7F50';
+        			status = ' 돌봄 완료';
+        		}
             	calendar.addEvent({
-            		title: petNames + " 돌봄 예약",
+            		title: petNames + status,
             		start: schedules[key].startDate,
             		end: schedules[key].endDate,
             		allDay: true,

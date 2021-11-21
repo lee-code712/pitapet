@@ -94,8 +94,8 @@
 		<input type="hidden" name="totalPrice" value="${param.totalPrice}" />
 		<input type="hidden" name="sitterId" value="${petsitterInfo.sitter.id}" />
 		
-		<div id="targetName">${petsitterInfo.sitter.id}반려동물 돌보미</div>
-		<div id="carePrice">이용 요금 ${param.totalPrice}원</div>
+		<div id="targetName">${petsitterInfo.sitter.id} 반려동물 돌보미</div>
+		<div id="carePrice">총 이용 요금 ${param.totalPrice}원</div>
 		<div id="subPageTit">반려동물 선택하기</div>
 		<div id="petPickWrap">
 			<c:forEach var="pet" items="${userPets}">
@@ -117,8 +117,8 @@
 		</div>
 		<div id="subPageTit">원하는 서비스</div>
 		<div id="petSitterService"></div>
-		<div id="subPageTit">주의사항</div>
-		<textarea placeholder="주의사항을 입력하세요." id="reviewText" name="cautionText"></textarea>
+		<div id="subPageTit">요구사항</div>
+		<textarea placeholder="추가적인 요구사항을 입력하세요." id="reviewText" name="cautionText"></textarea>
 		<button id="reservationBtn">예약하기</button>
 	</div>
 	</form>

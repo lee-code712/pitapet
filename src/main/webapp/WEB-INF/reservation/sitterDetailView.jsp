@@ -489,6 +489,20 @@
 			$(newInputElement).attr("value", price);
 			$("#carePrice").append(newInputElement);
 	    }
+	    
+	    function reserve() {
+	    	if (form.fromDate.value == "") {
+	    		alert("체크인 날짜를 선택하세요.");
+	    		form.fromDate.focus();
+	    		return false;
+	    	}
+	    	if (form.toDate.value == "") {
+	    		alert("체크아웃 날짜를 선택하세요.");
+	    		form.toDate.focus();
+	    		return false;
+	    	}
+	    	form.submit();
+	    }
      </script>
 	
 	<style>
@@ -530,7 +544,7 @@
             </div>
             
             <div id="sitterIntroTextWrap">
-                <div id="subPageTit">${sitterInfo.sitter.id} 반려동물 돌보미 소개</div>
+                <div id="subPageTit">돌보미 소개</div>
                 <div id="sitterIntroText">${sitterInfo.notes}</div>
             </div>
 
@@ -625,7 +639,7 @@
         <div id="periodWrap">
         	<div id="periodInner">
             <div id="askPeriodTit">언제 맡기시나요?</div>
-            <form method="GET" action="<c:url value='/reservation/reserve'/>">
+            <form name="form" method="GET" action="<c:url value='/reservation/reserve'/>">
 	            <input type="hidden" name="sitterId" value="${sitterInfo.sitter.id}" />
 	            <div id="pickPeriodWrap">
 	                <img src="/images/calendar.svg" id="calendarImg" />
@@ -635,15 +649,16 @@
 	                    <input type="text" name="toDate" id="toDate" placeholder="체크아웃 날짜" onfocus="this.blur()" onChange="getPrice()"/>
 	                </div>
 	            </div>
-	            <div id="carePriceKind">*1박케어: ${fn:split(sitterInfo.calculatedPrice,',')[0]}원 / 데이케어: ${fn:split(sitterInfo.calculatedPrice,',')[1]}원</div>
+	            <div id="carePriceKind">*데이케어: ${fn:split(sitterInfo.calculatedPrice,',')[1]}원 / 1박케어: ${fn:split(sitterInfo.calculatedPrice,',')[0]}원 </div>
 	            <div id="carePrice"></div>
-	            <button id="reservationBtn">예약하기</button>
+	            <input type="button" value="예약하기" id="reservationBtn" onClick="reserve()"/>
         	</form>
         </div>
     </div>
     </div>
     <div id="footerWrap">
         <div id="footerText">Copyrights © 2021 by 윤김구이. All Rights Reserved.</div>
+    </div>
     </div>
 </body>
 </html>

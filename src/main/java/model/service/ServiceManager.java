@@ -27,7 +27,7 @@ public class ServiceManager {
 		return serviceDAO.findProvideServiceList(sitterId);
 	}
 	
-	public int createReceiveService(Care care) throws SQLException {
-		   return serviceDAO.createReceiveService(care);
+	public String createReceiveService(int careId, String petId, String serviceId) throws SQLException {
+		   return serviceDAO.createReceiveService(careId, petId, serviceId);
 	}
 }

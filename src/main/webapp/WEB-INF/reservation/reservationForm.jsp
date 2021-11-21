@@ -80,13 +80,22 @@
 
 <script>
 	var ableService = JSON.parse('${ableService}');
+	var userPetsJson = JSON.parse('${userPetsJson}');
 </script>
 </head>
 
 <body>
 	<%@include file="../components/header.jsp"%>
 
+	<form name="form" method="POST" action="<c:url value='/reservation/reserve'/>" onsubmit="return reservation()">
 	<div id="reservationFormWrap">
+		<%-- <input type="hidden" name="fromDate" value="${fromDate}" />
+		<input type="hidden" name="toDate" value="${toDate}" /> --%>
+		
+		<input type="hidden" name="fromDate" value="2021-11-22" />
+		<input type="hidden" name="toDate" value="2021-11-23" />
+		<input type="hidden" name="sitterId" value="${petsitterInfo.sitter.id}" />
+		
 		<div id="targetName">${petsitterInfo.sitter.id}반려동물 돌보미</div>
 		<div id="subPageTit">반려동물 선택하기</div>
 		<div id="petPickWrap">
@@ -102,7 +111,7 @@
 					<div id="petInfoBirth">${pet.birth}</div>
 					<div id="tagCheckWrap">
 						<div id="petInfoKind">#${pet.kind.smallCategory}</div>
-						<input type="checkbox" class="checkbox" />
+						<input type="checkbox" class="checkbox" name="pet" value="${pet.id}" />
 					</div>
 				</div>
 			</c:forEach>
@@ -110,9 +119,10 @@
 		<div id="subPageTit">원하는 서비스</div>
 		<div id="petSitterService"></div>
 		<div id="subPageTit">주의사항</div>
-		<textarea placeholder="주의사항을 입력하세요." id="reviewText"></textarea>
+		<textarea placeholder="주의사항을 입력하세요." id="reviewText" name="cautionText"></textarea>
 		<button id="reservationBtn">예약하기</button>
 	</div>
+	</form>
 
 	<div id="footerWrap">
 		<div id="footerText">Copyrights © 2021 by 윤김구이. All Rights

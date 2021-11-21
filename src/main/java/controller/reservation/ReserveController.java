@@ -1,5 +1,6 @@
 package controller.reservation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import controller.Controller;
 import controller.member.UserSessionUtils;
 import model.dto.Care;
+import model.dto.CareDetails;
 import model.dto.Member;
 import model.dto.Pet;
 import model.dto.PetKind;
@@ -44,6 +46,12 @@ public class ReserveController implements Controller {
 			// 펫시터 정보
 			PetSitter petsitterInfo = sitterMan.findPetSitter(sitterId);
 			request.setAttribute("petsitterInfo", petsitterInfo);
+			
+			// 돌봄 시작일, 종료일 정보
+			String fromDate = request.getParameter("fromDate");
+			request.setAttribute("fromDate", fromDate);
+			String toDate = request.getParameter("toDate");
+			request.setAttribute("toDate", toDate);
 
 			// 돌봄 가능 동물종 리스트
 			List<PetKind> ablePetKinds = petMan.findAblePetKindLsit(sitterId);
@@ -52,6 +60,20 @@ public class ReserveController implements Controller {
 			// 로그인한 유저의 반려동물 리스트
 			List<Pet> userPets = petMan.findPetListOfMember(userId);
 			request.setAttribute("userPets", userPets);
+			
+			// 로그인한 유저의 반려동물 리스트 js에서 사용하기 위해 JSON 객체로 저장
+			if (userPets != null) {
+				Iterator<Pet> iterator = userPets.iterator();
+				Map<String, Pet> petMap = new HashMap<String, Pet>();
+				while (iterator.hasNext()) {
+					Pet pet = iterator.next();
+					petMap.put(pet.getId(), pet);
+				}
+				ObjectMapper mapper = new ObjectMapper();
+				String pets = mapper.writeValueAsString(petMap);
+	
+				request.setAttribute("userPetsJson", pets);
+			}
 
 			// 로그인한 유저의 반려동물 별 사진 리스트
 			for (Pet pet : userPets) {
@@ -79,30 +101,74 @@ public class ReserveController implements Controller {
 		}
 
 		// 예약 처리
-		PetSitterManager petsitterMan = PetSitterManager.getInstance();
+		// PetSitterManager petsitterMan = PetSitterManager.getInstance();
 		ReservationManager reservationMan = ReservationManager.getInstance();
 		ServiceManager serviceMan = ServiceManager.getInstance();
 
-		PetSitter petsitter = (PetSitter) request.getAttribute("petSitterInfo");
-//         String sitterId = petsitter.getSitter().getId();
+        // int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
 
-		String[] fromdate = request.getParameter("fromDate").split("-");
-		String[] todate = request.getParameter("toDate").split("-");
-		String fDate = (fromdate[0] + fromdate[1] + fromdate[2]);
-		String tDate = (todate[0] + todate[1] + todate[2]);
-		int dateLength = Integer.parseInt(tDate) - Integer.parseInt(fDate);
-		int money = 0;
-		String[] payMoney = petsitter.getCalculatedPrice().split(",");
-		int nightMoney = Integer.parseInt(payMoney[0]);
-		int dayMoney = Integer.parseInt(payMoney[1]);
-		if (dateLength == 0)
-			money = dayMoney;
-		else
-			money = dateLength * nightMoney;
+		// 가격 계산
+		/*
+		 * String[] fromdate = request.getParameter("fromDate").split("-"); String[]
+		 * todate = request.getParameter("toDate").split("-"); String fDate =
+		 * (fromdate[0] + fromdate[1] + fromdate[2]); String tDate = (todate[0] +
+		 * todate[1] + todate[2]); int dateLength = Integer.parseInt(tDate) -
+		 * Integer.parseInt(fDate); int money = 0; String[] payMoney =
+		 * petsitter.getCalculatedPrice().split(","); int nightMoney =
+		 * Integer.parseInt(payMoney[0]); int dayMoney = Integer.parseInt(payMoney[1]);
+		 * if (dateLength == 0) money = dayMoney; else money = dateLength * nightMoney;
+		 */
+		
+		Care care = new Care(request.getParameter("fromDate"), request.getParameter("toDate"), 30000,
+				request.getParameter("cautionText"), "X", null, new Member(userId),
+				new PetSitter(new Member(request.getParameter("sitterId"))));
+		
+		int careId = reservationMan.createCare(care);
+		
+		if (careId == 0) { // care 레코드 생성 실패
+			request.setAttribute("reservationFailed", true);
+			request.setAttribute("care", care);
+			return "redirect:/reservation/reserve";
+		}
+		else {
+			String[] pets = request.getParameterValues("pet"); // 돌봄 받을 펫들의 id
+			List<CareDetails> careDetails = new ArrayList<CareDetails>();
+			
+			for (String pet:pets) {
+				String[] services = request.getParameterValues(pet); // 돌봄 받을 펫의 요청 서비스들
+				
+				for (String service:services) {
+					String receiveServiceId = serviceMan.createReceiveService(careId, pet, service);
+					System.out.println(service + " " + receiveServiceId);
+					
+					if (receiveServiceId == null) { // receiveService 레코드 생성 실패
+						// 삽입된 레코드 삭제 부분 추가해야 함
+						
+						request.setAttribute("reservationFailed", true);
+						request.setAttribute("care", care);
+						return "redirect:/reservation/reserve";
+					}
+					else {
+						String recvId = Integer.toString(careId) + pet.replaceAll("[^0-9]", "") + service.replaceAll("[^0-9]", "");
+						
+						CareDetails cd = new CareDetails(
+											recvId,
+											care,
+											new Service(service),
+											new Pet(pet),
+											"N"
+										);
+						
+						careDetails.add(cd);
+					}
+				}
+			}
 
-		Care care = new Care(request.getParameter("fromDate"), request.getParameter("toDate"), money,
-				request.getParameter("cautionText"), null, null, new Member(userId),
-				new PetSitter(new Member("M0000006")));
-		return "redirect:/member/memberMyPage";
+			care.setCareList(careDetails);
+			
+			request.setAttribute("reservationFailed", false);
+			request.setAttribute("care", care);
+			return "redirect:/member/memberMyPage";
+		}
 	}
 }

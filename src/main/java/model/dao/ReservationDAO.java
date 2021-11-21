@@ -18,9 +18,16 @@ public class ReservationDAO {
           Object[] param = new Object[] {care.getSitter().getSitter().getId(), care.getCompanion().getId(),
 	    		  care.getStartDate(), care.getEndDate(), care.getTotalPrice(), care.getNotes(), care.getStatus()};   
           jdbcUtil.setSqlAndParameters(sql, param);
+          
+          String key[] = {"care_id"}; 
 	      try {
-	         int rs = jdbcUtil.executeUpdate();      
-	         return rs;
+	         int result = jdbcUtil.executeUpdate(key);
+	         ResultSet rs = jdbcUtil.getGeneratedKeys(); 
+	         int generatedKey = 0;
+	         if (rs.next()) {
+	        	 generatedKey = rs.getInt(1);
+	        	 return generatedKey;
+	         }
 	      } catch (Exception ex) {
 	          jdbcUtil.rollback();
 	    	  ex.printStackTrace();

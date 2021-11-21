@@ -624,11 +624,6 @@
 
         <div id="periodWrap">
         	<div id="periodInner">
-            <div id="ableCalWrap">
-                <div id="calendar"></div>
-                <div id="calIntro">* 회색 부분은 예약이 불가능한 날짜입니다.</div>
-            </div>
-
             <div id="askPeriodTit">언제 맡기시나요?</div>
             <form method="GET" action="<c:url value='/reservation/reserve'/>">
 	            <input type="hidden" name="sitterId" value="${sitterInfo.sitter.id}" />
@@ -640,6 +635,7 @@
 	                    <input type="text" name="toDate" id="toDate" placeholder="체크아웃 날짜" onfocus="this.blur()" onChange="getPrice()"/>
 	                </div>
 	            </div>
+	            <div id="calIntro">* 회색 부분은 예약이 불가능한 날짜입니다.</div>
 	            <div id="carePriceKind">*1박케어: ${fn:split(sitterInfo.calculatedPrice,',')[0]}원 / 데이케어: ${fn:split(sitterInfo.calculatedPrice,',')[1]}원</div>
 	            <div id="carePrice"></div>
 	            <button id="reservationBtn">예약하기</button>

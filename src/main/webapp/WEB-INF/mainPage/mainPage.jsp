@@ -31,10 +31,19 @@
         	var schedules = JSON.parse('${careSchedules}');
         	console.log(schedules);
         	for (key in schedules) {
+        		var color = '';
+        		if (schedules[key].status == 'X')
+        			color = '#FFA07A';
+        		else if (schedules[key].status == 'Y')
+        			color ='#FFDAB9';
+        		else
+        			color = '#FF7F50';
             	calendar.addEvent({
-            		title: schedules[key].sitter.sitter.id,
+            		title: schedules[key].sitter.sitter.id + "님의 돌봄 서비스",
             		start: schedules[key].startDate,
-            		end: schedules[key].endDate
+            		end: schedules[key].endDate,
+            		allDay: true,
+            		color: color
             	})
         	}
 		});

@@ -209,13 +209,6 @@ input:-ms-input-placeholder {
     color: #7AAFFF;
 }
 
-#carePrice {
-    float: right;
-    margin-top: 20px;
-    font-size: 18px;
-    color: red;
-}
-
 #selectPetTit {
     margin: 0px 0px 20px 0px;
     font-size: 14px;

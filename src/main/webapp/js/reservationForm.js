@@ -19,9 +19,9 @@ $(function() {
 		else {
 			// <반려동물명> 서비스 리스트 출력
 			var newDivElement = document.createElement("div");
-			$(newDivElement).html("[ " + petName + " ] 서비스 리스트 <br>");
+			$(newDivElement).html("[ " + petName + " ]의 서비스 리스트 <br>");
 			$(newDivElement).attr("id", petName);
-			$(newDivElement).css("margin", "15px");
+			$(newInputElement).css("margin-bottom", "20px");
 
 			// 가능 서비스 리스트 출력
 			for (key in ableService) {
@@ -30,7 +30,8 @@ $(function() {
 				$(newInputElement).attr("id", "service");
 				$(newInputElement).attr("name", petId);
 				$(newInputElement).attr("value", key);
-				$(newInputElement).css("margin", "10px");
+				$(newInputElement).css("margin-bottom", "20px");
+				$(newInputElement).css("margin-right", "10px");
 
 				$(newDivElement).append(newInputElement);
 

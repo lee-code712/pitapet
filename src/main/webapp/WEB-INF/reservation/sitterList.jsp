@@ -298,6 +298,11 @@
 	font-size: 18px;
 }
 
+#petSitterImg {
+	width: 300px;
+    height: 200px;
+}
+
 #petSitterIntro {
 	font-size: 14px;
 }

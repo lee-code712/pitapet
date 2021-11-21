@@ -412,10 +412,6 @@
         	color: #89A0F2;
         	border-radius :50px;
         }
-        
-        .fc-scroller {
-		   overflow-y: hidden !important;
-		}
     </style>
     
     <script>

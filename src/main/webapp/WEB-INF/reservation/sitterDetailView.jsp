@@ -444,7 +444,6 @@
 	 	console.log(schedules);
 	    var disabledDays = [];
 	    for (key in schedules) {
-	    	disabledDays.push(key.split(' ')[0]);
 	    	disabledDays.push(schedules[key].split(' ')[0]);
 	    }
 	    console.log(disabledDays);
@@ -452,23 +451,22 @@
 	    // 특정일 선택막기
 	    function disableAllTheseDays(date) {
 	        var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+	        m = cfSetAddZero(m);
+	        d = cfSetAddZero(d);
+	        console.log(y, m, d);
 	        for (var i = 0; i < disabledDays.length; i++) {
-	            if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) {
+	            if($.inArray(y + '-' + (m + 1) + '-' + d,disabledDays) != -1) {
 	                return [false];
 	            }
 	        }
-	        var dateArr = '${dateArr}'.split('');
-	        var s = '';
-	        for (var i = 0; i < 7; i++) {
-	        	if(dateArr[i] == '0') {
-	        		if (i == 6)
-	        			s += 'date.getDay() != 0';
-	        		else
-	        			s+= 'date.getDay() != ' + (i + 1) + ' && ';
-	        		return [(s)];
-	        	}
-	        }
 	        return [true];
+	    }
+	    
+	    function cfSetAddZero(target) {    
+	        if (target <= 9)
+	        	return "0" + target;
+	        else
+	        	return target;
 	    }
      </script>
 	

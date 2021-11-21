@@ -1,5 +1,6 @@
 package controller.reservation;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,20 +57,39 @@ public class ViewSitterDetailController implements Controller {
 
 		request.setAttribute("sitterInfo", sitter);
 
-		// 돌보미 돌봄 가능시간대 전달
+		// 예약 불가능 일자 전달
+		Map<String, String> scheduleMap = new HashMap<>();
+		Calendar cal = Calendar.getInstance();
+		Date date = new Date();
+		cal.setTime(date);
+
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String unparsedAbleDay = sitter.getAbleDate();
 		String parsedAbleDay = Integer.toBinaryString(unparsedAbleDay.charAt(0));
-		request.setAttribute("ableDate", parsedAbleDay);
-
-		// 돌봄 불가능 일자 전달
+		String[] ableDateArr = parsedAbleDay.split("");
+		for (int i = 0; i < 32; i++) {
+			int dayNum = cal.get(Calendar.DAY_OF_WEEK);
+			int idx = 0;
+			if (dayNum == 1)
+				idx = 6;
+			else if (dayNum == 2)
+				idx = 0;
+			else
+				idx = dayNum - 2;
+			if(ableDateArr[idx].equals("0")) {
+				String strDate = simpleDateFormat.format(cal.getTime());
+				scheduleMap.put(strDate, strDate);
+			}
+			cal.add(Calendar.DATE, 1);
+		}
+		
 		List<Care> careSchedules = careMan.findCareSchedules(memberId);
 		careSchedules.addAll(careMan.findCareSchedulesOfSitter(sitterId));
-		
 		if (careSchedules != null) {
 			Iterator<Care> iterator = careSchedules.iterator();
-			Map<String, String> scheduleMap = new HashMap<>();
 			while (iterator.hasNext()) {
 				Care care = iterator.next();
+				cal.setTime(date);
 				scheduleMap.put(care.getStartDate(), care.getEndDate());
 			}
 			ObjectMapper mapper = new ObjectMapper();

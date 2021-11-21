@@ -152,7 +152,7 @@ a { color:#000000;text-decoration:none; }
     width: 120px;
     height: 40px;
     border-radius: 5px;
-    background: #7AAFFF;
+    background: #89A0F2;
     color: white;
     border: none;
     cursor: pointer;

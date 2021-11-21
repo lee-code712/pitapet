@@ -1,6 +1,8 @@
 package controller.reservation;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -102,6 +104,7 @@ public class ReserveController implements Controller {
 
 		// 예약 처리
 		// PetSitterManager petsitterMan = PetSitterManager.getInstance();
+		CareManager careMan = CareManager.getInstance();
 		ReservationManager reservationMan = ReservationManager.getInstance();
 		ServiceManager serviceMan = ServiceManager.getInstance();
 
@@ -119,7 +122,15 @@ public class ReserveController implements Controller {
 		 * if (dateLength == 0) money = dayMoney; else money = dateLength * nightMoney;
 		 */
 		
-		Care care = new Care(request.getParameter("fromDate"), request.getParameter("toDate"), 30000,
+		String toDate = request.getParameter("toDate") + " 00:00:01";
+		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		// String 타입을 Date 타입으로 변환
+		Date formatDate = dtFormat.parse(toDate);
+		// Date타입의 변수를 새롭게 지정한 포맷으로 변환
+		toDate = newDtFormat.format(formatDate);
+		
+		Care care = new Care(request.getParameter("fromDate"), toDate, 30000,
 				request.getParameter("cautionText"), "X", null, new Member(userId),
 				new PetSitter(new Member(request.getParameter("sitterId"))));
 		
@@ -142,7 +153,8 @@ public class ReserveController implements Controller {
 					System.out.println(service + " " + receiveServiceId);
 					
 					if (receiveServiceId == null) { // receiveService 레코드 생성 실패
-						// 삽입된 레코드 삭제 부분 추가해야 함
+						serviceMan.deleteReceiveService(careId); // 삽입된 receive_service 레코드 삭제
+						careMan.deleteCare(careId); // 삽입된 care 레코드 삭제
 						
 						request.setAttribute("reservationFailed", true);
 						request.setAttribute("care", care);
@@ -150,15 +162,7 @@ public class ReserveController implements Controller {
 					}
 					else {
 						String recvId = Integer.toString(careId) + pet.replaceAll("[^0-9]", "") + service.replaceAll("[^0-9]", "");
-						
-						CareDetails cd = new CareDetails(
-											recvId,
-											care,
-											new Service(service),
-											new Pet(pet),
-											"N"
-										);
-						
+						CareDetails cd = new CareDetails(recvId, care, new Service(service), new Pet(pet), "N");
 						careDetails.add(cd);
 					}
 				}

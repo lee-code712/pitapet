@@ -44,4 +44,8 @@ public class CareManager {
 		}
 		return needReviewCareList;
 	}
+	
+	public int deleteCare(int careId) throws SQLException {
+		return careDAO.deleteCare(careId);
+	}
 }

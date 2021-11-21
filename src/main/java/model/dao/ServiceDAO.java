@@ -75,4 +75,19 @@ public class ServiceDAO {
 		return null;
 	}
 
+	public int deleteReceiveService(int careId) throws SQLException {
+		String sql = "DELETE FROM receive_service "
+				+ "WHERE care_id = ?";     
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {careId});	
+						
+		try {
+			int rs = jdbcUtil.executeUpdate();			
+			return rs;					
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}		
+		return 0;
+	}
 }

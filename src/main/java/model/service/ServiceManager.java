@@ -30,4 +30,8 @@ public class ServiceManager {
 	public String createReceiveService(int careId, String petId, String serviceId) throws SQLException {
 		   return serviceDAO.createReceiveService(careId, petId, serviceId);
 	}
+	
+	public int deleteReceiveService(int careId) throws SQLException {
+		return serviceDAO.deleteReceiveService(careId);
+	}
 }

@@ -14,7 +14,7 @@ public class ReservationDAO {
 	   }
 	   
 	   public int createCare(Care care) throws SQLException {
-		  String sql = "INSERT INTO CARE VALUES (?, ?, care_seq.nextval, ?, ?, ?, ?, ?)";
+		  String sql = "INSERT INTO CARE VALUES (?, ?, care_seq.nextval, ?, TO_DATE(?, 'yyyy/MM/dd HH24:mi:ss'), ?, ?, ?)";
           Object[] param = new Object[] {care.getSitter().getSitter().getId(), care.getCompanion().getId(),
 	    		  care.getStartDate(), care.getEndDate(), care.getTotalPrice(), care.getNotes(), care.getStatus()};   
           jdbcUtil.setSqlAndParameters(sql, param);

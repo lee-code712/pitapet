@@ -470,10 +470,6 @@
 
 <body id="pageBg">
 	<%@include file="../components/header.jsp" %>
-	<p>조회기간을 선택해주세요~ 
-            <input type="text" id="datepicker1">
-            <input type="text" id="datepicker2">
-        </p>
 
     <div id="pageWrap">
     <div id="pageTit">돌보미 상세 정보</div>

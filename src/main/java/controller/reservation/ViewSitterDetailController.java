@@ -100,10 +100,12 @@ public class ViewSitterDetailController implements Controller {
 
 		// 돌보미 후기 전달
 		List<Review> reviews = reviewMan.findReviewListOfSitter(sitterId);
-		for (Review review : reviews) {
-			List<String> imgList = reviewMan.findReviewAttachments(review.getCareInfo().getCompanion().getId(),
-					review.getCareInfo().getId());
-			review.setImages(imgList);
+		if (reviews != null) {
+			for (Review review : reviews) {
+				List<String> imgList = reviewMan.findReviewAttachments(review.getCareInfo().getCompanion().getId(),
+						review.getCareInfo().getId());
+				review.setImages(imgList);
+			}
 		}
 		request.setAttribute("reviews", reviews);
 		

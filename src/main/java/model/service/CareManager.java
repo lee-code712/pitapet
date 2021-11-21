@@ -37,10 +37,12 @@ public class CareManager {
 	public List<Care> findCareOfDoNotReview(String memberId, String sitterId) throws SQLException {
 		List<Care> careList = careDAO.findCareList(memberId, sitterId);
 		List<Care> needReviewCareList = new ArrayList<Care>();
-		for (Care care : careList) {
-			boolean isExist = reviewDAO.isExistReview(care.getId());
-			if (!isExist)
-				needReviewCareList.add(care);
+		if (careList != null) {
+			for (Care care : careList) {
+				boolean isExist = reviewDAO.isExistReview(care.getId());
+				if (!isExist)
+					needReviewCareList.add(care);
+			}
 		}
 		return needReviewCareList;
 	}

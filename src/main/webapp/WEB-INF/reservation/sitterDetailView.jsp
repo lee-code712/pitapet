@@ -611,7 +611,8 @@
             </div>
 
             <div id="askPeriodTit">언제 맡기시나요?</div>
-            <form method="GET" action="<c:url value='/reservation/reserve'><c:param name="sitterId" value="${param.sitterId}"/></c:url>">
+            <form method="GET" action="<c:url value='/reservation/reserve'/>">
+	            <input type="hidden" name="sitterId" value="${petsitterInfo.sitter.id}" />
 	            <div id="pickPeriodWrap">
 	                <img src="/images/calendar.svg" id="calendarImg" />
 	                <div id="pickPeriodInner">

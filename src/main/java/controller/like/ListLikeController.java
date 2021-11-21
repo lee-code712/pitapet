@@ -32,19 +32,20 @@ public class ListLikeController implements Controller{
 		List<LikeList> likeLists = likeman.findLikeListOfMember(UserSessionUtils.getLoginUserId(session));
 		List<PetSitter> likeSitterLists = new ArrayList<PetSitter>();
 		
-		for (LikeList likeList : likeLists) {
-			PetSitter likeSitter = sitterman.findPetSitter(likeList.getLikeSitter().getSitter().getId());
-			String[] address = likeSitter.getSitter().getAddress().split(" ");
-			String city = null;
-			for (int j = 0; j < address.length; j++) {
-				if (address[j].matches("(.*)로")) {
-					city = address[j].substring(0, address[j].length() - 1);
+		if (likeLists != null) {
+			for (LikeList likeList : likeLists) {
+				PetSitter likeSitter = sitterman.findPetSitter(likeList.getLikeSitter().getSitter().getId());
+				String[] address = likeSitter.getSitter().getAddress().split(" ");
+				String city = null;
+				for (int j = 0; j < address.length; j++) {
+					if (address[j].matches("(.*)로")) {
+						city = address[j].substring(0, address[j].length() - 1);
+					}
 				}
+				likeSitter.getSitter().setAddress(city);
+				likeSitterLists.add(likeSitter);
 			}
-			likeSitter.getSitter().setAddress(city);
-			likeSitterLists.add(likeSitter);
 		}
-		
 		request.setAttribute("likeSitterLists", likeSitterLists);
 		
 		return "/like/likeList.jsp";

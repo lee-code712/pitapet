@@ -52,21 +52,23 @@ public class MainPageController implements Controller{
 		
 		List<Review> randomReviews = reviews.subList(0, 3);
 		
-		for (Review review : randomReviews) {
-			Member sitterMemInfo = memMan.findMember(review.getCareInfo().getSitter().getSitter().getId());
-			String[] address = sitterMemInfo.getAddress().split(" ");
-			String city = null;
-			for (int j = 0; j < address.length; j++) {
-				if (address[j].matches("(.*)로")) {
-					city = address[j].substring(0, address[j].length() - 1);
+		if (randomReviews != null) {
+			for (Review review : randomReviews) {
+				Member sitterMemInfo = memMan.findMember(review.getCareInfo().getSitter().getSitter().getId());
+				String[] address = sitterMemInfo.getAddress().split(" ");
+				String city = null;
+				for (int j = 0; j < address.length; j++) {
+					if (address[j].matches("(.*)로")) {
+						city = address[j].substring(0, address[j].length() - 1);
+					}
 				}
+				review.getCareInfo().getSitter().getSitter().setAddress(city);
+				
+				// 파일 이미지 경로 set
+				List<String> imgList = reviewMan.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
+				review.setImages(imgList);
+				// System.out.println(imgList.get(0));
 			}
-			review.getCareInfo().getSitter().getSitter().setAddress(city);
-			
-			// 파일 이미지 경로 set
-			List<String> imgList = reviewMan.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
-			review.setImages(imgList);
-			System.out.println(imgList.get(0));
 		}
 		request.setAttribute("reviews", randomReviews);
 		

@@ -44,9 +44,11 @@ public class MemberMyPageController implements Controller{
 		// System.out.println(careList);
 		
 		// Sitter에 member 정보 매핑
-		for (Care care:careList) {
-			String sitterId = care.getSitter().getSitter().getId();
-			care.getSitter().setSitter(memberMan.findMember(sitterId));
+		if (careList != null) {
+			for (Care care:careList) {
+				String sitterId = care.getSitter().getSitter().getId();
+				care.getSitter().setSitter(memberMan.findMember(sitterId));
+			}	
 		}
 		
         return "/member/memberMyPage.jsp";

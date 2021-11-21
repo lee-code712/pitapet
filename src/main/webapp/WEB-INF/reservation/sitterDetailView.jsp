@@ -446,14 +446,12 @@
 	    for (key in schedules) {
 	    	disabledDays.push(schedules[key].split(' ')[0]);
 	    }
-	    console.log(disabledDays);
 
 	    // 특정일 선택막기
 	    function disableAllTheseDays(date) {
 	        var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
 	        m = cfSetAddZero(m);
 	        d = cfSetAddZero(d);
-	        console.log(y, m, d);
 	        for (var i = 0; i < disabledDays.length; i++) {
 	            if($.inArray(y + '-' + (m + 1) + '-' + d,disabledDays) != -1) {
 	                return [false];
@@ -465,8 +463,22 @@
 	    function cfSetAddZero(target) {    
 	        if (target <= 9)
 	        	return "0" + target;
-	        else
-	        	return target;
+	        return target;
+	    }
+	    
+	    function getPrice() {
+	    	var start = new Date($("#fromDate").val());
+	    	var end = new Date($("#toDate").val());
+	    	var dateDiff = Math.ceil((end.getTime() - start.getTime()) / (1000 * 3600 * 24));
+	    	console.log(dateDiff);
+	    	if (dateDiff == 0)
+	    		$('#carePrice').text('데이케어 ${fn:split(sitterInfo.calculatedPrice,',')[1]}원');
+	    	else {
+	    		var price = '${fn:split(sitterInfo.calculatedPrice,',')[0]}';
+	    		price = price * dateDiff
+	    		$('#carePrice').text(dateDiff + '박케어 ' + price +'원');
+	    		console.log(price);
+	    	}
 	    }
      </script>
 	
@@ -616,11 +628,11 @@
 	                <div id="pickPeriodInner">
 	                    <input type="text" name="fromDate" id="fromDate" placeholder="체크인 날짜" onfocus="this.blur()" />
 	                    <img src="/images/arrow.svg"/>
-	                    <input type="text" name="toDate" id="toDate" placeholder="체크아웃 날짜" onfocus="this.blur()" />
+	                    <input type="text" name="toDate" id="toDate" placeholder="체크아웃 날짜" onfocus="this.blur()" onChange="getPrice()"/>
 	                </div>
 	            </div>
-	            <div id="carePriceKind">*1박케어: 32,000원 / 데이케어: 22,000원</div>
-	            <div id="carePrice">1박 32,000원</div>
+	            <div id="carePriceKind">*1박케어: ${fn:split(sitterInfo.calculatedPrice,',')[0]}원 / 데이케어: ${fn:split(sitterInfo.calculatedPrice,',')[1]}원</div>
+	            <div id="carePrice"></div>
 	            <button id="reservationBtn">예약하기</button>
         	</form>
         </div>

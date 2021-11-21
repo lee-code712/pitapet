@@ -57,11 +57,13 @@ public class MainPageController implements Controller{
 		
 		// 메인페이지에 띄울 3개의 랜덤 리뷰 전달
 		List<Review> reviews = reviewMan.findReviewList();
-		Collections.shuffle(reviews);
-		
-		List<Review> randomReviews = reviews.subList(0, 3);
-		
+		List<Review> randomReviews = new ArrayList<>();
+
 		if (randomReviews != null) {
+			Collections.shuffle(reviews);
+			
+			randomReviews = reviews.subList(0, 3);
+			
 			for (Review review : randomReviews) {
 				Member sitterMemInfo = memMan.findMember(review.getCareInfo().getSitter().getSitter().getId());
 				String[] address = sitterMemInfo.getAddress().split(" ");

@@ -109,4 +109,41 @@ public class PetDAO {
 		}
 		return null;
 	}
+	
+	public ArrayList<Pet> findCarePetList(Integer careId) throws SQLException {
+		String sql = "SELECT DISTINCT pet_id, name, birth, gender, kind_id "
+				+ "FROM pet JOIN receive_service USING (pet_id) " 
+				+ "WHERE care_id = ?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { careId });
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next()) {
+				ArrayList<Pet> petList = new ArrayList<>();
+
+				Pet pet = new Pet(rs.getString("pet_id"));
+				pet.setName(rs.getString("name"));
+				pet.setBirth(rs.getString("birth"));
+				pet.setGender(rs.getString("gender"));
+				pet.setKind(new PetKind(rs.getString("kind_id")));
+				petList.add(pet);
+
+				while (rs.next()) {
+					pet = new Pet(rs.getString("pet_id"));
+					pet.setName(rs.getString("name"));
+					pet.setBirth(rs.getString("birth"));
+					pet.setGender(rs.getString("gender"));
+					pet.setKind(new PetKind(rs.getString("kind_id")));
+					petList.add(pet);
+				}
+
+				return petList;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}	
 }

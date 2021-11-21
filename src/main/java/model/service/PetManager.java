@@ -1,9 +1,11 @@
 package model.service;
 
+import java.util.List;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.dao.PetDAO;
+import model.dto.CareDetails;
 import model.dto.Pet;
 import model.dto.PetKind;
 
@@ -33,5 +35,17 @@ public class PetManager {
 	
 	public ArrayList<String> findPetAttachments(String memberId, String petId) throws SQLException {
 		return (ArrayList<String>) petDAO.findPetAttachments(memberId, petId);
+	}
+	
+	public ArrayList<CareDetails> findCarePetList(Integer careId) throws SQLException {
+		ArrayList<Pet> petList = petDAO.findCarePetList(careId);
+		ArrayList<CareDetails> careDetailList = new ArrayList<CareDetails>();
+		if(petList != null) {
+			for (Pet pet : petList) {
+				careDetailList.add(new CareDetails(pet));
+				System.out.println(pet.getName());
+			}
+		}
+		return careDetailList;
 	}
 }

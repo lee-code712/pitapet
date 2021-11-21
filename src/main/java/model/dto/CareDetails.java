@@ -13,6 +13,11 @@ public class CareDetails {
 		this.id = id;
 	}
 	
+	public CareDetails(Pet carePet) {
+		super();
+		this.carePet = carePet;
+	}
+	
 	public CareDetails(String id, Care careInfo, Service serviceInfo, Pet carePet, String check) {
 		super();
 		this.id = id;

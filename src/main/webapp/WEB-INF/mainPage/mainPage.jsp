@@ -32,6 +32,15 @@
         	console.log(schedules);
         	for (key in schedules) {
         		var color = '';
+        		var petNames = '';
+        		console.log(schedules[key].careList.length);
+        		for (var i = 0; i < schedules[key].careList.length; i++) {
+        			petNames += schedules[key].careList[i].carePet.name;
+        			if (i == schedules[key].careList.length - 1)
+        				break;
+        			petNames += ", ";
+        		}
+        			
         		if (schedules[key].status == 'X')
         			color = '#FFA07A';
         		else if (schedules[key].status == 'Y')
@@ -39,7 +48,7 @@
         		else
         			color = '#FF7F50';
             	calendar.addEvent({
-            		title: schedules[key].sitter.sitter.id + "님의 돌봄 서비스",
+            		title: petNames + " 돌봄 예약",
             		start: schedules[key].startDate,
             		end: schedules[key].endDate,
             		allDay: true,

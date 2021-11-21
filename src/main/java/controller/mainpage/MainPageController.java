@@ -11,9 +11,12 @@ import controller.Controller;
 import controller.member.UserSessionUtils;
 import model.dto.Review;
 import model.dto.Care;
+import model.dto.CareDetails;
 import model.dto.Member;
+import model.dto.Pet;
 import model.service.CareManager;
 import model.service.MemberManager;
+import model.service.PetManager;
 import model.service.ReviewManager;
 
 public class MainPageController implements Controller{
@@ -24,6 +27,7 @@ public class MainPageController implements Controller{
 		CareManager careMan = CareManager.getInstance();
 		ReviewManager reviewMan = ReviewManager.getInstance();
 		MemberManager memMan = MemberManager.getInstance();
+		PetManager petMan = PetManager.getInstance();
 		
 		// session에 id정보가 없는지 확인
 		if(UserSessionUtils.hasLogined(session)) {
@@ -34,6 +38,11 @@ public class MainPageController implements Controller{
 					Map<Integer, Care> scheduleMap = new HashMap<Integer, Care>();
 					while(iterator.hasNext()) {
 						Care care = iterator.next();
+						ArrayList<CareDetails> CareDetailList = petMan.findCarePetList(care.getId());
+						System.out.println(CareDetailList);
+						if (CareDetailList != null) {
+							care.setCareList(CareDetailList);
+						}
 						scheduleMap.put(care.getId(), care);
 					}
 					ObjectMapper mapper = new ObjectMapper();   

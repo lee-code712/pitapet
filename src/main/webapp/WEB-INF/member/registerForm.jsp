@@ -20,6 +20,9 @@
 </head>
 
 <body id="joinBg">
+	 <c:if test="${registerFailed}">
+	    <script> alert('${exception}'); </script>
+	 </c:if>
 	<form name="form" method="POST" action="<c:url value='/member/register'/>">
 	<div id="joinWrap">
         <div id="joinTit">PIT A PET</div>
@@ -45,7 +48,7 @@
             <input type="text" placeholder="주소" id="joinAddress" name="address" />
         </div>
 
-        <button type="submit" id="joinBtn" onClick="userCreate()">가입하기</button>
+        <button type="submit" id="joinBtn" onClick="return userCreate()">가입하기</button>
      </div>
    </form> 
 </body>
@@ -78,7 +81,7 @@
     function userCreate() {
 		if (form.password.value != form.checkPassword.value) {
 			alert("비밀번호가 일치하지 않습니다.");
-			form.name.focus();
+			form.checkPassword.focus();
 			return false;
 		}
 		form.submit();

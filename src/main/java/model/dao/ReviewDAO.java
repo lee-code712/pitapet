@@ -20,18 +20,27 @@ public class ReviewDAO {
 
 	// 전체 리뷰 반환
 	public List<Review> findReviewList() throws SQLException {
-		String sql = "SELECT review_id, write_date, content, rate, care_id, member_id, sitter_id "
-				+ "FROM review JOIN care USING (care_id)";
+		String sql = "SELECT review_id, write_date, content, rate, c.care_id, c.member_id, c.sitter_id, address "
+				+ "FROM review r JOIN care c ON (r.care_id = c.care_id) "
+				+ "JOIN member m ON (c.sitter_id = m.member_id)";
 		jdbcUtil.setSqlAndParameters(sql, null);
 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
 			List<Review> reviews = new ArrayList<Review>();
 			while (rs.next()) {
-				Review review = new Review(rs.getString("review_id"), rs.getString("write_date"),
-						rs.getString("content"), rs.getFloat("rate"),
-						new Care(rs.getInt("care_id"), new Member(rs.getString("member_id")),
-								new PetSitter(new Member(rs.getString("sitter_id")))));
+				Review review = new Review(
+						rs.getString("review_id"), 
+						rs.getString("write_date"),
+						rs.getString("content"), 
+						rs.getFloat("rate"),
+						new Care(
+								rs.getInt("care_id"), 
+								new Member(rs.getString("member_id")),
+								new PetSitter(
+										new Member(
+												rs.getString("sitter_id"),
+												rs.getString("address")))));
 				reviews.add(review);
 			}
 			return reviews;

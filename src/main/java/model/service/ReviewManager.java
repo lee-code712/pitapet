@@ -1,8 +1,11 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import model.dto.Member;
 import model.dto.Review;
 import model.dao.ReviewDAO;
 
@@ -20,6 +23,33 @@ public class ReviewManager {
 
 	public static ReviewManager getInstance() {
 		return reviewMan;
+	}
+	
+	public List<Review> getRandomReviews() throws SQLException {
+		List<Review> reviewList = reviewDAO.findReviewList();
+		List<Review> randomReviews = null;
+
+		if (reviewList != null) {
+			Collections.shuffle(reviewList);			
+			randomReviews = reviewList.subList(0, 3);
+			
+			for (Review review : randomReviews) {
+				String[] address = review.getCareInfo().getSitter().getSitter().getAddress().split(" ");
+				String city = null;
+				for (int j = 0; j < address.length; j++) {
+					if (address[j].matches("(.*)로")) {
+						city = address[j].substring(0, address[j].length() - 1);
+					}
+				}
+				review.getCareInfo().getSitter().getSitter().setAddress(city);
+				
+				// 파일 이미지 경로 set
+				List<String> imgList = reviewMan.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
+				review.setImages(imgList);
+			}
+		}
+		
+		return randomReviews;
 	}
 
 	public List<Review> findReviewList() throws SQLException {

@@ -17,10 +17,12 @@ public class PetSitterDAO {
 		jdbcUtil = new JDBCUtil();   // JDBCUtil 객체 생성
 	}
 	
+	/* 돌보미 전체 리스트 조회 (프로필 이미지 포함) */
 	public ArrayList<PetSitter> findPetSitterList() throws SQLException {
-		String sql = "SELECT ps.sitter_id, ps.tag, ps.notes, ps.sitter_like, ps.sitter_view, m.address "
-                 + "FROM member m JOIN petsitter ps ON (m.member_id = ps.sitter_id) "        
-				 + "WHERE ps.public_status = 'Y'";
+		String sql = "SELECT ps.sitter_id, ps.tag, ps.notes, ps.sitter_like, ps.sitter_view, m.address, img_src "
+                + "FROM member m JOIN petsitter ps ON (m.member_id = ps.sitter_id) "
+				+ "JOIN attachment atm ON (m.member_id = atm.member_id) "        
+				+ "WHERE ps.public_status = 'Y' AND atm.category_id = 'AtchId04'";
 		jdbcUtil.setSqlAndParameters(sql, null);
 	      try {
 	         ResultSet rs = jdbcUtil.executeQuery();
@@ -29,7 +31,8 @@ public class PetSitterDAO {
 	        	 PetSitter sitter = new PetSitter (
 	        			 new Member (
 	        					 rs.getString("sitter_id"), 
-	        					 rs.getString("address")),
+	        					 rs.getString("address"),
+	        					 rs.getString("img_src")),
 	        			 rs.getString("tag"),
 	        			 rs.getString("notes"),
 	        			 rs.getInt("sitter_like"),
@@ -37,13 +40,14 @@ public class PetSitterDAO {
 	        	 sitterList.add(sitter);
 	        	 while (rs.next()) {
 	        		 sitter = new PetSitter (
-	        			 new Member (
-	        					 rs.getString("sitter_id"), 
-	        					 rs.getString("address")),
-	        			 rs.getString("tag"),
-	        			 rs.getString("notes"),
-	        			 rs.getInt("sitter_like"),
-	        			 rs.getInt("sitter_view"));
+		        			 new Member (
+		        					 rs.getString("sitter_id"), 
+		        					 rs.getString("address"),
+		        					 rs.getString("img_src")),
+		        			 rs.getString("tag"),
+		        			 rs.getString("notes"),
+		        			 rs.getInt("sitter_like"),
+		        			 rs.getInt("sitter_view"));
 	        		 sitterList.add(sitter);
 	        	 }
 	            return sitterList;
@@ -68,7 +72,7 @@ public class PetSitterDAO {
 		String sql = "SELECT ps.sitter_id, ps.public_status, ps.able_date, ps.caculated_price, "
 				+ "ps.tag, ps.notes, ps.avg_rate, ps.sitter_like, ps.sitter_view, ps.apply_id, m.address "
                 + "FROM member m JOIN petsitter ps ON (m.member_id = ps.sitter_id) "        
-				 + "WHERE ps.sitter_id = ?";
+				+ "WHERE ps.sitter_id = ?";
 		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {sitterId});
 		

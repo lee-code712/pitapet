@@ -18,7 +18,7 @@ public class ReviewDAO {
 		jdbcUtil = new JDBCUtil(); // JDBCUtil 객체 생성
 	}
 
-	// 전체 리뷰 반환
+	/* 전체 리뷰 반환 */
 	public List<Review> findReviewList() throws SQLException {
 		String sql = "SELECT review_id, write_date, content, rate, c.care_id, c.member_id, c.sitter_id, address "
 				+ "FROM review r JOIN care c ON (r.care_id = c.care_id) "

@@ -16,7 +16,7 @@ public class CareDAO {
 		jdbcUtil = new JDBCUtil();	// JDBCUtil 객체 생성
 	}
 	
-	//보호자의 돌봄 내역 반환
+	/* 보호자의 돌봄 내역 반환 */
 	public List<Care> findCareSchedules(String memberId) throws SQLException {
 		String sql = "SELECT care_id, start_date, end_date, sitter_id, care_status "
 				+ "FROM care "
@@ -51,7 +51,7 @@ public class CareDAO {
 		return null;
 	}
 	
-	//돌보미의 돌봄 내역 반환
+	/* 돌보미의 돌봄 내역 반환 */
 	public List<Care> findCareSchedulesOfSitter(String sitterId) throws SQLException {
 		String sql = "SELECT care_id, start_date, end_date, member_id, care_status "
 				+ "FROM care "

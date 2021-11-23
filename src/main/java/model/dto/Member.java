@@ -26,6 +26,13 @@ public class Member {
 		this.address = address;
 	}
 	
+	public Member(String id, String address, String profileImage) {
+		super();
+		this.id = id;
+		this.address = address;
+		this.profileImage = profileImage;
+	}
+	
 	public Member(String id, String password, String name, String birth, String gender, String email, String phone, String address, String identity) {
 		super();
 		this.id = id;

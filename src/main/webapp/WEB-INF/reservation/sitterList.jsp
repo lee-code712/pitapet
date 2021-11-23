@@ -587,12 +587,7 @@ select {
 				<c:param name="sitterId" value="${petsitter.sitter.id}" />
 			</c:url>
 			<div id="petSitterInfoBox" onClick="location.href='${viewUrl}'">
-				<c:if test="${petsitter.sitter.profileImage eq null}">
-					<img src="/images/petSitterNullImg.svg" id="petSitterImg" />
-				</c:if>
-				<c:if test="${petsitter.sitter.profileImage ne null}">
-					<img src="${petsitter.sitter.profileImage}" id="petSitterImg" />
-				</c:if>
+				<img src="${petsitter.sitter.profileImage}" id="petSitterImg" />
 				<div id="likeCountWrap">
 					<img src="/images/smallHeart.svg" is="likeCountImg" />
 					<div id="likeCount">${petsitter.like}</div>
@@ -600,25 +595,28 @@ select {
 				<div id="petSitterInfoInner">
 					<div id="petSitterNameLikeWrap">
 						<div id="petSitterName">${petsitter.sitter.id} 반려동물 돌보미</div>
-
-						<c:set var="findCk" value="false" />
-						<c:forEach var="likesitter" items="${likeSitters}"
-							varStatus="status">
-							<c:if test="${findCk == false}">
-								<c:choose>
-									<c:when
-										test="${likesitter.likeSitter.sitter.id == petsitter.sitter.id}">
-										<img src="/images/likeOn.svg" is="likeOnImg" />
-										<c:set var="findCk" value="true" />
-									</c:when>
-									<c:otherwise>
-										<c:if test="${status.last}">
-											<img src="/images/like.svg" is="likeImg" />
-										</c:if>
-									</c:otherwise>
-								</c:choose>
-							</c:if>
-						</c:forEach>
+						<c:if test = "${empty likeSitters}">
+							<img src="/images/like.svg" is="likeImg" />
+						</c:if>
+						<c:if test = "${not empty likeSitters}">
+							<c:set var="findCk" value="false" />
+							<c:forEach var="likesitter" items="${likeSitters}" varStatus="status">
+								<c:if test="${findCk == false}">
+									<c:choose>
+										<c:when
+											test="${likesitter.likeSitter.sitter.id == petsitter.sitter.id}">
+											<img src="/images/likeOn.svg" is="likeOnImg" />
+											<c:set var="findCk" value="true" />
+										</c:when>
+										<c:otherwise>
+											<c:if test="${status.last}">
+												<img src="/images/like.svg" is="likeImg" />
+											</c:if>
+										</c:otherwise>
+									</c:choose>
+								</c:if>
+							</c:forEach>
+						</c:if>
 					</div>
 					<div id="sitterLocationWrap">
 						<img src="/images/location.svg" id="locationImg" />${petsitter.sitter.address}

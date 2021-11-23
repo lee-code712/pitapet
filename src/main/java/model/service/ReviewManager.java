@@ -25,6 +25,7 @@ public class ReviewManager {
 		return reviewMan;
 	}
 	
+	/* 메인페이지에 출력할 랜덤 리뷰 리스트 반환 */
 	public List<Review> getRandomReviews() throws SQLException {
 		List<Review> reviewList = reviewDAO.findReviewList();
 		List<Review> randomReviews = null;

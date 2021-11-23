@@ -38,6 +38,7 @@ public class CareManager {
 		return careMan;
 	}
 	
+	/* 돌봄 스케줄을 맵에 저장해 반환 */
 	public Map<Integer, Care> getCareScheduleMap(Member member) throws SQLException {
 		List<Care> careSchedules = new ArrayList<>();
 		if (member.getIdentity().equals("C")) {

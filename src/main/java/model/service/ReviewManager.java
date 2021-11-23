@@ -1,11 +1,9 @@
 package model.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import model.dto.Member;
 import model.dto.Review;
 import model.dao.ReviewDAO;
 
@@ -42,10 +40,9 @@ public class ReviewManager {
 						city = address[j].substring(0, address[j].length() - 1);
 					}
 				}
-				review.getCareInfo().getSitter().getSitter().setAddress(city);
-				
+				review.getCareInfo().getSitter().getSitter().setAddress(city);			
 				// 파일 이미지 경로 set
-				List<String> imgList = reviewMan.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
+				List<String> imgList = reviewDAO.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
 				review.setImages(imgList);
 			}
 		}
@@ -53,12 +50,29 @@ public class ReviewManager {
 		return randomReviews;
 	}
 
+	/* 특정 돌보미의 후기 리스트 반환 */
+	public List<Review> findReviewListOfSitter(String sitterId) throws SQLException {
+		List<Review> reviews = reviewDAO.findReviewListOfSitter(sitterId);
+		if (reviews != null) {
+			for (Review review : reviews) {
+				String[] address = review.getCareInfo().getSitter().getSitter().getAddress().split(" ");
+				String city = null;
+				for (int j = 0; j < address.length; j++) {
+					if (address[j].matches("(.*)로")) {
+						city = address[j].substring(0, address[j].length() - 1);
+					}
+				}
+				review.getCareInfo().getSitter().getSitter().setAddress(city);			
+				// 파일 이미지 경로 set
+				List<String> imgList = reviewDAO.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
+				review.setImages(imgList);
+			}
+		}
+		return reviews;
+	}
+	
 	public List<Review> findReviewList() throws SQLException {
 		return reviewDAO.findReviewList();
-	}
-
-	public List<Review> findReviewListOfSitter(String sitterId) throws SQLException {
-		return reviewDAO.findReviewListOfSitter(sitterId);
 	}
 
 	public List<String> findReviewAttachments(String memberId, int careId) throws SQLException {

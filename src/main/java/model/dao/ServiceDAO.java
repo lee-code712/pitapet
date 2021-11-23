@@ -16,6 +16,7 @@ public class ServiceDAO {
 		jdbcUtil = new JDBCUtil(); // JDBCUtil 객체 생성
 	}
 
+	/* 특정 돌보미의 제공 서비스 리스트 검색 */
 	public ArrayList<Service> findProvideServiceList(String sitterId) throws SQLException {
 		String sql = "SELECT service_id, s.title, s.content "
 				+ "FROM provide_service prvds JOIN service s USING (service_id) "

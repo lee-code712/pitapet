@@ -412,6 +412,11 @@
         	color: #89A0F2;
         	border-radius :50px;
         }
+        
+        #sitterNewImg {
+			width: 100px;
+			height: 90px;
+        }
     </style>
 	
 	<script>
@@ -521,7 +526,7 @@
         <div id="pageBody">
         <div id="petSitterInfoWrap">
             <div id="sitterInfo">
-                <img src="/images/petSitterNewImg.svg" id="sitterNewImg"/>
+                <img src="${sitterInfo.sitter.profileImage}" id="sitterNewImg"/>
                 <div id="sitterInfoInner">
                     <div id="sitterNameLikeWrap">
                         <div id="sitterName">${sitterInfo.sitter.id} 반려동물 돌보미</div>

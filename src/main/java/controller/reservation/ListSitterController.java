@@ -35,16 +35,12 @@ public class ListSitterController implements Controller {
 		if (sitterMap != null) {
 			Iterator<Integer> iterator = sitterMap.keySet().iterator();
 	        if (iterator.hasNext()) {
-	        	Integer totalPage = iterator.next();
-	        	
+	        	Integer totalPage = iterator.next();        	
 	        	ArrayList<Integer> pageInfo = new ArrayList<Integer>();
 				pageInfo.add(totalPage);
 				pageInfo.add(currentPage);
 				request.setAttribute("pageInfo", pageInfo);
 				request.setAttribute("petSitterList", sitterMap.get(totalPage));
-				
-				System.out.println(totalPage);
-				System.out.println(sitterMap.get(totalPage));
 	        }
 			// 현재 로그인한 사용자의 likeList 전달
 			List<LikeList> likeSitters = likelistMan.findLikeListOfMember(UserSessionUtils.getLoginUserId(session));

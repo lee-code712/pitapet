@@ -25,8 +25,9 @@ public class CareDAO {
 						
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();			
-			List<Care> careList = new ArrayList<Care>();	
-			while (rs.next()) {
+			List<Care> careList = null;
+			if (rs.next()) {
+				careList = new ArrayList<Care>();
 				Care care = new Care(			
 						rs.getInt("care_id"),
 						rs.getString("start_date"),
@@ -34,20 +35,28 @@ public class CareDAO {
 						new Member(memberId),
 						new PetSitter(
 								new Member(
-										rs.getString("sitter_id")
-								)
-						),
-						rs.getString("care_status")
-				);
-				careList.add(care);				
+										rs.getString("sitter_id"))),
+						rs.getString("care_status"));
+				careList.add(care);	
+				while (rs.next()) {
+					care = new Care(			
+						rs.getInt("care_id"),
+						rs.getString("start_date"),
+						rs.getString("end_date"),
+						new Member(memberId),
+						new PetSitter(
+								new Member(
+										rs.getString("sitter_id"))),
+							rs.getString("care_status"));
+					careList.add(care);				
 				}		
-				return careList;					
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			} finally {
-				jdbcUtil.close();
-			}
-		
+				return careList;	
+			}					
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
 		return null;
 	}
 	
@@ -60,27 +69,36 @@ public class CareDAO {
 						
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();			
-			List<Care> careList = new ArrayList<Care>();	
-			while (rs.next()) {
+			List<Care> careList = null;	
+			if (rs.next()) {
+				careList = new ArrayList<Care>();
 				Care care = new Care(			
 						rs.getInt("care_id"),
 						rs.getString("start_date"),
 						rs.getString("end_date"),
 						new Member(rs.getString("member_id")),
 						new PetSitter(
-								new Member(sitterId)
-						),
-						rs.getString("care_status")
-				);
-				careList.add(care);				
+								new Member(sitterId)),
+						rs.getString("care_status"));
+				careList.add(care);	
+				while (rs.next()) {
+					care = new Care(			
+						rs.getInt("care_id"),
+						rs.getString("start_date"),
+						rs.getString("end_date"),
+						new Member(rs.getString("member_id")),
+						new PetSitter(
+								new Member(sitterId)),
+						rs.getString("care_status"));
+					careList.add(care);				
 				}		
-				return careList;					
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			} finally {
-				jdbcUtil.close();
-			}
-		
+				return careList;	
+			}				
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
 		return null;
 	}
 	

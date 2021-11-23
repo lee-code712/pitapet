@@ -7,16 +7,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import model.dao.PetDAO;
 import model.dao.PetSitterDAO;
+import model.dao.ServiceDAO;
+import model.dto.PetKind;
 import model.dto.PetSitter;
+import model.dto.Service;
 
 public class PetSitterManager {
 	private static PetSitterManager sitterMan = new PetSitterManager();
 	private PetSitterDAO sitterDAO;
+	private ServiceDAO serviceDAO;
+	private PetDAO petDAO;
 
 	private PetSitterManager() {
 		try {
 			sitterDAO = new PetSitterDAO();
+			serviceDAO = new ServiceDAO();
+			petDAO = new PetDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,13 +75,29 @@ public class PetSitterManager {
 		}
 		return null;
 	}
+	
+	/* 돌보미 상세정보 반환 (제공서비스, 돌봄 가능 종 리스트 포함) */
+	public PetSitter findPetSitter(String sitterId) throws SQLException {
+		PetSitter sitter = sitterDAO.findPetSitter(sitterId);
+		List<Service> prvdServiceList = serviceDAO.findProvideServiceList(sitterId);
+		List<PetKind> ablePetKindList = petDAO.findAblePetKindList(sitterId);
+		sitter.getMyApplyInfo().setServices(prvdServiceList);
+		sitter.getMyApplyInfo().setKinds(ablePetKindList);
+		
+		String[] address = sitter.getSitter().getAddress().split(" ");
+		String city = null;
+		for (int j = 0; j < address.length; j++) {
+			if (address[j].matches("(.*)로"))
+				city = address[j].substring(0, address[j].length() - 1);
+		}
+		sitter.getSitter().setAddress(city);
+
+		return sitter;
+	}
 
 	public ArrayList<PetSitter> findPetSitterList() throws SQLException {
 		return sitterDAO.findPetSitterList();
 	}
 
-	public PetSitter findPetSitter(String sitter_id) throws SQLException {
-		return sitterDAO.findPetSitter(sitter_id);
-	}
 
 }

@@ -52,25 +52,42 @@ public class ReviewDAO {
 		return null;
 	}
 
-	// 선택한 sitter의 리뷰 반환
+	/* 선택한 sitter의 리뷰 반환 */
 	public List<Review> findReviewListOfSitter(String sitterId) throws SQLException {
-		String sql = "SELECT review_id, write_date, content, rate, care_id, member_id, sitter_id "
-				+ "FROM review JOIN care USING (care_id) " + "WHERE sitter_id = ?";
+		String sql = "SELECT review_id, write_date, content, rate, care_id, c.member_id, c.sitter_id, m.address "
+				+ "FROM review r JOIN care c USING (care_id) "
+				+ "JOIN member m ON (c.sitter_id = m.member_id) "
+				+ "WHERE sitter_id = ?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { sitterId });
 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
 			List<Review> reviews = new ArrayList<Review>();
 			if (rs.next()) {
-				Review review = new Review(rs.getString("review_id"), rs.getString("write_date"),
-						rs.getString("content"), rs.getFloat("rate"),
-						new Care(rs.getInt("care_id"), new Member(rs.getString("member_id")),
-								new PetSitter(new Member(rs.getString("sitter_id")))));
+				Review review = new Review(
+						rs.getString("review_id"), 
+						rs.getString("write_date"),
+						rs.getString("content"), 
+						rs.getFloat("rate"),
+						new Care(rs.getInt("care_id"), 
+								new Member(rs.getString("member_id")),
+								new PetSitter(
+										new Member(
+												rs.getString("sitter_id"), 
+												rs.getString("address")))));
 				reviews.add(review);
 				while (rs.next()) {
-					review = new Review(rs.getString("review_id"), rs.getString("write_date"), rs.getString("content"),
-							rs.getFloat("rate"), new Care(rs.getInt("care_id"), new Member(rs.getString("member_id")),
-									new PetSitter(new Member(rs.getString("sitter_id")))));
+					review = new Review(
+							rs.getString("review_id"), 
+							rs.getString("write_date"), 
+							rs.getString("content"),
+							rs.getFloat("rate"), 
+							new Care(rs.getInt("care_id"), 
+									new Member(rs.getString("member_id")),
+									new PetSitter(
+											new Member(
+													rs.getString("sitter_id"), 
+													rs.getString("address")))));
 					reviews.add(review);
 				}
 				return reviews;

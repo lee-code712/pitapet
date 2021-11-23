@@ -53,6 +53,7 @@ public class PetDAO {
 		return null;
 	}
 
+	/* 특정 돌보미의 돌봄 가능 종 리스트 검색 */
 	public ArrayList<PetKind> findAblePetKindList(String sitterId) throws SQLException {
 		String sql = "SELECT kind_id, large_category, small_category "
 				+ "FROM available_pet_kind JOIN pet_kind USING (kind_id) " + "WHERE sitter_id = ?";

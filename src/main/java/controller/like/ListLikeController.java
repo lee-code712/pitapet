@@ -13,6 +13,7 @@ import controller.member.UserSessionUtils;
 import model.dto.Care;
 import model.dto.LikeList;
 import model.dto.PetSitter;
+import model.dto.Review;
 import model.service.LikeListManager;
 import model.service.PetSitterManager;
 
@@ -28,24 +29,8 @@ public class ListLikeController implements Controller{
 			 return "redirect:/mainpage";
 		}
 		
-		// 사용자의 좋아요 목록을 검색해 전달
-		List<LikeList> likeLists = likeman.findLikeListOfMember(UserSessionUtils.getLoginUserId(session));
-		List<PetSitter> likeSitterLists = new ArrayList<PetSitter>();
-		
-		if (likeLists != null) {
-			for (LikeList likeList : likeLists) {
-				PetSitter likeSitter = sitterman.findPetSitter(likeList.getLikeSitter().getSitter().getId());
-				String[] address = likeSitter.getSitter().getAddress().split(" ");
-				String city = null;
-				for (int j = 0; j < address.length; j++) {
-					if (address[j].matches("(.*)로")) {
-						city = address[j].substring(0, address[j].length() - 1);
-					}
-				}
-				likeSitter.getSitter().setAddress(city);
-				likeSitterLists.add(likeSitter);
-			}
-		}
+		// 사용자가 좋아요를 누른 돌보미 목록을 전달
+		List<PetSitter> likeSitterLists = likeman.findLikeSitterOfMember(UserSessionUtils.getLoginUserId(session));
 		request.setAttribute("likeSitterLists", likeSitterLists);
 		
 		return "/like/likeList.jsp";

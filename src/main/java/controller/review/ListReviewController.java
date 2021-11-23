@@ -27,7 +27,6 @@ public class ListReviewController implements Controller{
 		
 		HttpSession session = request.getSession();
 		ReviewManager reviewMan = ReviewManager.getInstance();
-		MemberManager memMan = MemberManager.getInstance();
 		
 		// session에 id정보가 없는지 확인
 		if (!UserSessionUtils.hasLogined(session)) {
@@ -36,25 +35,6 @@ public class ListReviewController implements Controller{
 		}	
 		
 		List<Review> reviews = reviewMan.findReviewList();
-		
-		if (reviews != null ) {
-			for (Review review : reviews) {
-				Member sitterMemInfo = memMan.findMember(review.getCareInfo().getSitter().getSitter().getId());
-				String[] address = sitterMemInfo.getAddress().split(" ");
-				System.out.println(Arrays.toString(address));
-				String city = null;
-				for (int j = 0; j < address.length; j++) {
-					if (address[j].matches("(.*)로")) {
-						city = address[j].substring(0, address[j].length() - 1);
-						//System.out.println(city);
-					}
-				}
-				review.getCareInfo().getSitter().getSitter().setAddress(city);
-				
-				List<String> imgList = reviewMan.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
-				review.setImages(imgList);
-			}
-		}
 		request.setAttribute("reviews", reviews);
 		
 		return "/review/reviewList.jsp";

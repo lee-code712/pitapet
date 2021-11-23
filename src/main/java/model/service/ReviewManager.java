@@ -1,9 +1,11 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import model.dto.Member;
 import model.dto.Review;
 import model.dao.ReviewDAO;
 
@@ -71,8 +73,26 @@ public class ReviewManager {
 		return reviews;
 	}
 	
+	//전체 리뷰 반환
 	public List<Review> findReviewList() throws SQLException {
-		return reviewDAO.findReviewList();
+		List<Review> reviewList = reviewDAO.findReviewList();
+	
+		if (reviewList != null ) {
+			for (Review review : reviewList) {
+				String[] address = review.getCareInfo().getSitter().getSitter().getAddress().split(" ");
+				String city = null;
+				for (int j = 0; j < address.length; j++) {
+					if (address[j].matches("(.*)로")) {
+						city = address[j].substring(0, address[j].length() - 1);
+					}
+				}
+				review.getCareInfo().getSitter().getSitter().setAddress(city);
+				
+				List<String> imgList = reviewDAO.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
+				review.setImages(imgList);
+			}
+		}
+		return reviewList;
 	}
 
 	public List<String> findReviewAttachments(String memberId, int careId) throws SQLException {

@@ -11,6 +11,7 @@ import controller.Controller;
 import controller.member.UserSessionUtils;
 import model.dto.Review;
 import model.dto.Care;
+import model.dto.Member;
 import model.service.CareManager;
 import model.service.ReviewManager;
 
@@ -25,7 +26,9 @@ public class MainPageController implements Controller{
 		// session에 id정보가 없는지 확인
 		if(UserSessionUtils.hasLogined(session)) {
 			// 로그인 상태면 돌봄 스케줄 정보 검색해 전달
-			Map<Integer, Care> scheduleMap = careMan.getCareScheduleMap(UserSessionUtils.getLoginUserId(session));
+			Member member = new Member(UserSessionUtils.getLoginUserId(session));
+			member.setIdentity((String) session.getAttribute("identity"));
+			Map<Integer, Care> scheduleMap = careMan.getCareScheduleMap(member);
 			if (scheduleMap != null) {
 				ObjectMapper mapper = new ObjectMapper();   
 				String schedules = mapper.writeValueAsString(scheduleMap);					

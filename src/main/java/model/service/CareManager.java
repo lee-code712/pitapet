@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import controller.member.UserSessionUtils;
 import model.dto.Care;
 import model.dto.CareDetails;
+import model.dto.Member;
 import model.dto.Pet;
 import model.dao.CareDAO;
 import model.dao.PetDAO;
@@ -37,8 +38,16 @@ public class CareManager {
 		return careMan;
 	}
 	
-	public Map<Integer, Care> getCareScheduleMap(String memberId) throws SQLException {
-		List<Care> careSchedules = careDAO.findCareSchedules(memberId);
+	public Map<Integer, Care> getCareScheduleMap(Member member) throws SQLException {
+		List<Care> careSchedules = new ArrayList<>();
+		if (member.getIdentity().equals("C")) {
+			careSchedules = careDAO.findCareSchedules(member.getId());
+		}
+		else {
+			careSchedules = careDAO.findCareSchedules(member.getId());
+			careSchedules.addAll(careDAO.findCareSchedulesOfSitter(member.getId()));
+		}
+		
 		if(careSchedules != null) {
 			Iterator<Care> iterator = careSchedules.iterator();
 			Map<Integer, Care> scheduleMap = new HashMap<Integer, Care>();

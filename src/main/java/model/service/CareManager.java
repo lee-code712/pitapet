@@ -47,7 +47,11 @@ public class CareManager {
 		}
 		else {
 			careSchedules = careDAO.findCareSchedules(member.getId());
-			careSchedules.addAll(careDAO.findCareSchedulesOfSitter(member.getId()));
+			List<Care> careSchedulesOfSitter = careDAO.findCareSchedulesOfSitter(member.getId());
+			if (careSchedulesOfSitter != null)
+				careSchedules.addAll(careSchedulesOfSitter);
+			else
+				careSchedules = careSchedulesOfSitter;
 		}
 		
 		if(careSchedules != null) {

@@ -32,7 +32,7 @@
 
 		<c:forEach var="likeSitter" items="${likeSitterLists}">
 			<div id="petSitterInfoBox">
-				<img src="/images/petSitterNullImg.svg" id="petSitterImg" />
+				<img src="${likeSitter.sitter.profileImage}" id="petSitterImg" />
 				<div id="petSitterLocation">${likeSitter.sitter.address}</div>
 				<div id="likeCountWrap">
 					<img src="/images/smallHeart.svg" is="likeCountImg" />

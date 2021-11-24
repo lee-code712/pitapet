@@ -22,7 +22,20 @@
 </head>
 
 <body>
-	<%@include file="../components/header.jsp" %>
+		<div id="headerWrap">
+        	<div id="headerInner">
+	        	<div id="logoWrap">
+	            	<c:url value="/manager/listSitterApply" var="managerMainUrl"/>
+	            	<img src="/images/adminRank.svg" />
+	        		<div id="logo" onClick="location.href='${managerMainUrl}'">PIT A PET</div>
+	        	</div>
+         
+	         	<div id="gnb">
+	         		<c:url value='/member/logout' var="url"/>
+	                <button id="headerLoginBtn" onclick="location.href='${url}'">로그아웃</button>
+            	</div>
+        	</div>
+    	</div>
 
     <div id="pageWrap">
         <div id="pageTit">지원사항 목록</div>

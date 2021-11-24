@@ -27,7 +27,10 @@ public class LoginController implements Controller {
             String memberIdentity = manager.findMember(memberId).getIdentity();
             session.setAttribute("identity", memberIdentity);
             
-            return "redirect:/mainpage";			
+            if(memberIdentity.equals("M"))
+            	return "redirect:/manager/listSitterApply";
+            else
+            	return "redirect:/mainpage";			
 		} catch (MemberNotFoundException e) {
             request.setAttribute("loginIdFailed", true);
 			request.setAttribute("exception", e);

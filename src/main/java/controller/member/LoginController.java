@@ -29,12 +29,12 @@ public class LoginController implements Controller {
             
             return "redirect:/mainpage";			
 		} catch (MemberNotFoundException e) {
-            request.setAttribute("loginFailed", true);
+            request.setAttribute("loginIdFailed", true);
 			request.setAttribute("exception", e);
             
 			return "/member/loginForm.jsp";			
 		} catch (PasswordMismatchException e) {
-            request.setAttribute("loginFailed", true);
+            request.setAttribute("loginPwFailed", true);
 			request.setAttribute("exception", e);
            
 			return "/member/loginForm.jsp";			

@@ -30,6 +30,12 @@
 <body id="loginBg">
 	<div id="loginWrap">
         <div id="loginTit">PIT A PET</div>
+        <c:if test="${loginIdFailed}">
+	    	<script> alert('${exception}'); </script>
+	 	</c:if>
+	 	<c:if test="${loginPwFailed}">
+	    	<script> alert('${exception}'); </script>
+	 	</c:if>
         <form name="form" method="POST" action="<c:url value='/member/login'/>">
         	<div id="loginInner">
 		        <input type="text" placeholder="아이디" id="loginId" name="memberId" />

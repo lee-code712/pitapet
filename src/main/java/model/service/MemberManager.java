@@ -38,7 +38,11 @@ public class MemberManager {
          throws SQLException, MemberNotFoundException, PasswordMismatchException {
          Member member = memberDAO.findMember(memberId);
 
-         if (!member.matchPassword(password)) {
+         if (member == null) {
+ 			throw new MemberNotFoundException("존재하지 않는 아이디입니다.");
+ 		}
+         
+         if (member != null && !member.matchPassword(password)) {
             throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
          }
          return true;

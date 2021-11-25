@@ -1,6 +1,7 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import model.dto.PetSitterApplication;
 import model.dao.PetSitterApplicationDAO;
@@ -23,6 +24,10 @@ public class PetSitterApplicationManager {
 	
 	public String getApprovalStatus(String memberId) throws SQLException {
 		return petSitterApplicationDAO.getApprovalStatus(memberId);
+	}
+	
+	public List<PetSitterApplication> findApplicationList() throws SQLException {
+		return petSitterApplicationDAO.findApplicationList();
 	}
 
 }

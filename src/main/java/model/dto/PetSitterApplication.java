@@ -20,6 +20,13 @@ public class PetSitterApplication {
 		this.id = id;
 	}
 	
+	public PetSitterApplication(String id, String applyDate, Member applicant) {
+		super();
+		this.id = id;
+		this.applyDate = applyDate;
+		this.applicant = applicant;
+	}
+	
 	public String getId() {
 		return id;
 	}

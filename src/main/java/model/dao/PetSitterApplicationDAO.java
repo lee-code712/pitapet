@@ -2,8 +2,14 @@ package model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import model.dto.Care;
+import model.dto.Member;
+import model.dto.PetSitter;
 import model.dto.PetSitterApplication;
+import model.dto.Review;
 
 public class PetSitterApplicationDAO {
 	private JDBCUtil jdbcUtil = null;
@@ -23,6 +29,32 @@ public class PetSitterApplicationDAO {
 				String approval_status = rs.getString("approval_status");
 				return approval_status;
 			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
+	
+	//돌보미에 지원한 대기 상태인 사람들의 아이디와 지원날짜
+	public List<PetSitterApplication> findApplicationList() throws SQLException {
+		String sql = "SELECT apply_id, apply_date, member_id "
+				+ "FROM petsitter_application pa JOIN member m ON (pa.member_id = m.member_id) "
+				+ "WHERE approval_status='X'";
+		jdbcUtil.setSqlAndParameters(sql, null);
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			List<PetSitterApplication> applicationLists = new ArrayList<PetSitterApplication>();
+			while (rs.next()) {
+				PetSitterApplication pApplication = new PetSitterApplication(
+						rs.getString("apply_id"), 
+						rs.getString("apply_date"),
+						new Member(rs.getString("member_id")));
+				applicationLists.add(pApplication);
+			}
+			return applicationLists;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {

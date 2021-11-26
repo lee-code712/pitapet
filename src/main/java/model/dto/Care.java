@@ -55,6 +55,18 @@ public class Care {
 		this.sitter = sitter;
 	}
 	
+	public Care(int id, String startDate, String endDate, int totalPrice, String notes, String status, Member companion, PetSitter sitter) {
+		super();
+		this.id = id;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.totalPrice = totalPrice;
+		this.notes = notes;
+		this.status = status;
+		this.companion = companion;
+		this.sitter = sitter;
+	}
+	
 	public int getId() {
 		return id;
 	}

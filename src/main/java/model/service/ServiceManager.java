@@ -2,9 +2,14 @@ package model.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import model.dao.ServiceDAO;
 import model.dto.Care;
+import model.dto.Pet;
 import model.dto.Service;
 
 public class ServiceManager {
@@ -33,5 +38,17 @@ public class ServiceManager {
 	
 	public int deleteReceiveService(int careId) throws SQLException {
 		return serviceDAO.deleteReceiveService(careId);
+	}
+	
+	public Map<String, Service> getServiceMap(List<Service> ableService) throws SQLException {
+		Iterator<Service> iterator = ableService.iterator();
+		Map<String, Service> serviceMap = new HashMap<String, Service>();
+		
+		while (iterator.hasNext()) {
+			Service service = iterator.next();
+			serviceMap.put(service.getId(), service);
+		}
+		
+		return serviceMap;
 	}
 }

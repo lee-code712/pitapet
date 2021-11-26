@@ -15,6 +15,7 @@ import model.dto.CareDetails;
 import model.dto.Member;
 import model.dto.Pet;
 import model.dto.PetSitter;
+import model.dto.Service;
 import model.dao.CareDAO;
 import model.dao.PetDAO;
 import model.dao.ReviewDAO;
@@ -144,5 +145,4 @@ public class CareManager {
 	public List<Care> findCareSchedulesOfSitter(String sitterId) throws SQLException {
 		return careDAO.findCareSchedulesOfSitter(sitterId);
 	}
-
 }

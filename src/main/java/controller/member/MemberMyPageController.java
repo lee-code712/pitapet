@@ -41,7 +41,6 @@ public class MemberMyPageController implements Controller{
 		
 		List<Care> careList = careMan.findCareSchedules(userId);
 		request.setAttribute("careList", careList);
-		// System.out.println(careList);
 		
 		// Sitter에 member 정보 매핑
 		if (careList != null) {

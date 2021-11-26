@@ -46,21 +46,13 @@
                 <th>신청일</th>
                 <th></th>
             </tr>
-            <tr>
-                <td>pitapet123</td>
-                <td>2021-09-19 ~ 2021-09-20</td>
-                <td><button id="applyDetailBtn">자세히 보기</button></td>
-            </tr>
-            <tr>
-                <td>pitapet123</td>
-                <td>2021-09-19 ~ 2021-09-20</td>
-                <td><button id="applyDetailBtn">자세히 보기</button></td>
-            </tr>
-            <tr>
-                <td>pitapet123</td>
-                <td>2021-09-19 ~ 2021-09-20</td>
-                <td><button id="applyDetailBtn">자세히 보기</button></td>
-            </tr>
+            <c:forEach var="applicant" items="${applicantList}"> 
+	            <tr>
+	                <td>${applicant.applicant.id}</td>
+	                <td>${applicant.applyDate}</td>
+	                <td><button id="applyDetailBtn">자세히 보기</button></td>
+	            </tr>
+            </c:forEach>
         </table>
     </div>
 </body>

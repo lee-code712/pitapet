@@ -495,6 +495,7 @@ a {
 	border-radius: 50px;
 	color: #89A0F2;
 	border: 1px solid #89A0F2;
+	background-color: white;
 }
 
 #num {
@@ -507,6 +508,7 @@ a {
 	border-radius: 50px;
 	color: #C4C4C4;
 	border: 1px solid #C4C4C4;
+	background-color: white;
 }
 
 #next {

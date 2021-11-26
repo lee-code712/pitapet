@@ -16,9 +16,6 @@ import controller.reservation.*;
 import controller.review.*;
 import controller.sitter.*;
 
-
-
-
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     
@@ -38,7 +35,7 @@ public class RequestMapping {
         
         mappings.put("/member/register/form", new ForwardController("/member/registerForm.jsp"));
         mappings.put("/member/memberMyPage", new MemberMyPageController());
-        mappings.put("/member/updateMember", new ForwardController("/member/memberUpdateForm.jsp"));
+        mappings.put("/member/updateMember", new UpdateMemberController());
         mappings.put("/member/applySitter", new ForwardController("/member/sitterApplyForm.jsp"));
         mappings.put("/member/updateSitterApply", new ForwardController("/member/sitterApplyUpdateForm.jsp"));
         mappings.put("/member/register", new RegisterController());

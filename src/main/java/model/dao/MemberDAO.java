@@ -98,4 +98,26 @@ private JDBCUtil jdbcUtil = null;
 	      }
 		   return 0;
 	   }
+   
+   public int update(Member updateInfo) throws SQLException {
+		String sql = "UPDATE member "
+					+ "SET password=?, email=?, phone=?, address=? "
+					+ "WHERE member_id=?";
+		Object[] param = new Object[] {updateInfo.getPassword(), updateInfo.getEmail(), 
+				updateInfo.getPhone(), updateInfo.getAddress(), updateInfo.getId()};				
+		jdbcUtil.setSqlAndParameters(sql, param);
+			
+		try {				
+			int result = jdbcUtil.executeUpdate();
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}		
+		return 0;
+	}
 }

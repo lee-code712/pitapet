@@ -42,7 +42,8 @@
             <div id="myInfoWrap">
                 <div id="myInfoTitWrap">
                     <div id="myInfoTit">내 정보</div>
-                    <img src="/images/infoEdit.svg" id="editBtn" />
+                    <c:url value='/member/updateMember' var="updateMemberUrl"/>
+                    <img src="/images/infoEdit.svg" id="editBtn" onclick="location.href='${updateMemberUrl}'" />
                 </div>
                 <c:if test="${memberInfo.profileImage eq null}">
 					<img src="/images/myPageNullImg.svg" id="profileImg" />

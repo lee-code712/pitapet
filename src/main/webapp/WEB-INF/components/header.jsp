@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/header.css"/>
-    <link rel="shortcut icon" href="#">
     
     <script>
 		function accessAlert() {
@@ -42,9 +41,7 @@
             	<div id="reviewLink" onclick="location.href='${reviewListUrl}'">이용 후기</div>
                 
                 <c:if test="${!isNotLogined}">
-                	<c:url value='/reservation/listSitter' var="sitterListUrl">
-                		<c:param name="currentPage" value="1"/>
-                	</c:url>
+                	<c:url value='/reservation/listSitter' var="sitterListUrl" />
                 	<div id="sitterListLink" onclick="location.href='${sitterListUrl}'">돌보미 조회</div>
                 	
                 	<c:url value='/like/listLike' var="likeListUrl"/>

@@ -27,7 +27,12 @@ public class ListSitterController implements Controller {
 		PetSitterManager sitterMan = PetSitterManager.getInstance();
 		LikeListManager likelistMan = LikeListManager.getInstance();
 		
-		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		String page = request.getParameter("currentPage");
+		int currentPage;
+		if (page == null)
+			currentPage = 1;
+		else
+			currentPage = Integer.parseInt(page);
 		
 		// session에 id정보가 없으면 mainpage 호출 리다이렉션
 		if(!UserSessionUtils.hasLogined(session)) {

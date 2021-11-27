@@ -567,19 +567,23 @@ select {
 		<div id="searchToolsWrap">
 			<div id="pageTit">돌보미 정보 조회</div>
 			<div id="searchTools">
-				<select id="choiceBox">
-					<option value="city">지역</option>
-					<option value="tag">태그</option>
-				</select>
-				<div id="searchWrap">
-					<input type="text" placeholder="검색어를 입력하세요." id="searchText" /> <img
-						src="/images/search.svg" id="searchImg" />
-				</div>
+				<form method="GET" action="/reservation/searchSitter">
+					<select id="choiceBox" name="searchOption">
+						<option value="city">지역</option>
+						<option value="tag">태그</option>
+					</select>
+					<div id="searchWrap">	
+						<input type="text" placeholder="검색어를 입력하세요." id="searchText" name="keyword" /> 
+						<input type='image' src="/images/search.svg" id="searchImg" />
+					</div>
+				</form>
 				<div class="dropdown">
-					<img src="/images/hamburgerBar.svg" id="hamburgerBarImg"
-						class="dropbtn" />
+					<img src="/images/hamburgerBar.svg" id="hamburgerBarImg" class="dropbtn" />
 					<div class="dropdown-content">
-						<a href="#">인기순</a> <a href="#">조회순</a>
+						<a href="<c:url value='/reservation/searchSitter'>
+							<param name='searchOption' value='bestLike'/></c:url>">인기순</a> 
+						<a href="<c:url value='/reservation/searchSitter'>
+							<param name='searchOption' value='bestView'/></c:url>">조회순</a>
 					</div>
 				</div>
 			</div>

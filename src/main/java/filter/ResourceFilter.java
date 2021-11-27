@@ -24,6 +24,7 @@ public class ResourceFilter implements Filter {
         resourcePrefixs.add("/fonts");
         resourcePrefixs.add("/images");
         resourcePrefixs.add("/upload");
+        resourcePrefixs.add("/favicon.ico");
     }
 
     private RequestDispatcher defaultRequestDispatcher;

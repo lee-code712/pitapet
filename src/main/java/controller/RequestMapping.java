@@ -61,7 +61,7 @@ public class RequestMapping {
         mappings.put("/like/listLike", new ListLikeController());
         // manager
         mappings.put("/manager/listSitterApply", new ListSitterApplyController());
-        mappings.put("/manager/viewApply", new ForwardController("/manager/applicationView.jsp"));
+        mappings.put("/manager/viewApply", new ViewApplyController());
         
         logger.info("Initialized Request Mapping!");
     }

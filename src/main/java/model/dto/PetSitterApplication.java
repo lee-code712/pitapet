@@ -27,6 +27,15 @@ public class PetSitterApplication {
 		this.applicant = applicant;
 	}
 	
+	public PetSitterApplication(String id, String applyDate, String career, String certification, String introduction, Member applicant) {
+		super();
+		this.id = id;
+		this.applyDate = applyDate;
+		this.career = career;
+		this.certification = certification;
+		this.introduction = introduction;
+		this.applicant = applicant;
+	}
 	public String getId() {
 		return id;
 	}

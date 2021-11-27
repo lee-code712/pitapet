@@ -46,13 +46,16 @@
                 <th>신청일</th>
                 <th></th>
             </tr>
-            <c:forEach var="applicant" items="${applicantList}"> 
-	            <tr>
-	                <td>${applicant.applicant.id}</td>
-	                <td>${applicant.applyDate}</td>
-	                <td><button id="applyDetailBtn">자세히 보기</button></td>
-	            </tr>
-            </c:forEach>
+	            <c:forEach var="applicant" items="${applicantList}"> 
+	            	<c:url value="/manager/viewApply" var="viewUrl">
+						<c:param name="applyId" value="${applicant.id}" />
+					</c:url>
+		            <tr>
+		                <td>${applicant.applicant.id}</td>
+		                <td>${applicant.applyDate}</td>
+		                <td><button id="applyDetailBtn" onClick="location.href='${viewUrl}'">자세히 보기</button></td>
+		            </tr> 
+	            </c:forEach>
         </table>
     </div>
 </body>

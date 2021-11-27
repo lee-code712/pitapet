@@ -22,20 +22,33 @@
 </head>
 
 <body>
-	<%@include file="../components/header.jsp" %>
+	<div id="headerWrap">
+        	<div id="headerInner">
+	        	<div id="logoWrap">
+	            	<c:url value="/manager/listSitterApply" var="managerMainUrl"/>
+	            	<img src="/images/adminRank.svg" />
+	        		<div id="logo" onClick="location.href='${managerMainUrl}'">PIT A PET</div>
+	        	</div>
+         
+	         	<div id="gnb">
+	         		<c:url value='/member/logout' var="url"/>
+	                <button id="headerLoginBtn" onclick="location.href='${url}'">로그아웃</button>
+            	</div>
+        	</div>
+    	</div>
 
     <div id="pageWrap">
         <div id="pageTit">지원 정보</div>
         <div id="applyBox">
             <div id="applyImgWrap">
                 <img src="../images/applyNullImg.svg" />
-                <div id="targetLocation">상월곡</div>
+                <div id="targetLocation">${applicantDetail.applicant.address}</div>
             </div>
 
             <div id="applyInfo">
-                <div id="sitterName">###반려동물 돌보미</div>
+                <div id="sitterName">${applicantDetail.applicant.id}</div>
                 <div id="detailTit">(제목)</div>
-                <div id="detailIntro">(소개)</div>
+                <div id="detailIntro">${applicantDetail.introduction}</div>
                 <div id="serviceCaringWrap">
                     <div id="petSitterServiceWrap">
                         <div id="serviceTit">제공 서비스</div> 
@@ -48,7 +61,7 @@
                             <div id="caringPet">소형견</div>
                             <div id="caringPet">고양이</div>
                         </div>
-                        <div id="lookUpDate">2021-11-01</div>
+                        <div id="lookUpDate">${applicant.applyDate}</div>
                     </div>
                 </div>
             </div>

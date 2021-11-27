@@ -69,4 +69,56 @@ public class PetSitterApplicationDAO {
 		}
 		return null;
 	}
+	
+	public PetSitterApplication findApplication(String applyId) throws SQLException {
+		String sql = "SELECT apply_date, career, certification, introduction, member_id, address "
+				+ "FROM petsitter_application ps JOIN member m USING(member_id)"
+				+ "WHERE apply_id=?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {applyId});
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if(rs.next()) {
+				PetSitterApplication applyInfo = new PetSitterApplication(
+						applyId,
+						rs.getString("apply_date"), 
+						rs.getString("career"),
+						rs.getString("certification"),
+						rs.getString("introduction"),
+						new Member(rs.getString("member_id")
+								,rs.getString("address")));
+				return applyInfo;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+		
+	}
+	
+	// 돌보미 지원서 첨부파일 반환
+	public List<String> findApplyAttachments(String memberId) throws SQLException {
+		String sql = "SELECT img_src " + "FROM attachment " + "WHERE member_id=? AND category_id=? AND img_src LIKE ?";
+
+		String like = "%application-" + memberId + "-%";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId, "AtchId02", like }); // JDBCUtil에 query문과 매개 변수 설정
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			List<String> imgList = new ArrayList<String>();
+			while (rs.next()) {
+				String img_src = rs.getString("img_src");
+				imgList.add(img_src);
+			}
+			return imgList;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
 }

@@ -242,6 +242,9 @@
 	box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 	background: white;
 	border-radius: 10px;
+}
+
+#petSitterName {
 	cursor: pointer;
 }
 
@@ -557,6 +560,10 @@ select {
 	object-fit: cover;
 	border-radius: 10px;
 }
+
+#likeOnImg, #likeImg {
+	cursor: pointer;
+}
 </style>
 </head>
 
@@ -592,17 +599,25 @@ select {
 			<c:url value="/reservation/viewSitterDetail" var="viewUrl">
 				<c:param name="sitterId" value="${petsitter.sitter.id}" />
 			</c:url>
-			<div id="petSitterInfoBox" onClick="location.href='${viewUrl}'">
+			<div id="petSitterInfoBox">
 				<img src="${petsitter.sitter.profileImage}" id="petSitterImg" />
 				<div id="likeCountWrap">
 					<img src="/images/smallHeart.svg" is="likeCountImg" />
 					<div id="likeCount">${petsitter.like}</div>
 				</div>
 				<div id="petSitterInfoInner">
+					<c:url value='/like/changeLike' var='addLikeUrl'>
+						<c:param name='status' value='add' />
+						<c:param name='sitterId' value='${petsitter.sitter.id}' />
+					</c:url>
+					<c:url value='/like/changeLike' var='cancelLikeUrl'>
+						<c:param name='status' value='cancel' />
+						<c:param name='sitterId' value='${petsitter.sitter.id}' />
+					</c:url>
 					<div id="petSitterNameLikeWrap">
-						<div id="petSitterName">${petsitter.sitter.id} 반려동물 돌보미</div>
+						<div id="petSitterName" onClick="location.href='${viewUrl}'">${petsitter.sitter.id} 반려동물 돌보미</div>
 						<c:if test = "${empty likeSitters}">
-							<img src="/images/like.svg" is="likeImg" />
+							<img src="/images/like.svg" id="likeImg" onClick="location.href='${addLikeUrl}'"/>
 						</c:if>
 						<c:if test = "${not empty likeSitters}">
 							<c:set var="findCk" value="false" />
@@ -611,12 +626,12 @@ select {
 									<c:choose>
 										<c:when
 											test="${likesitter.likeSitter.sitter.id == petsitter.sitter.id}">
-											<img src="/images/likeOn.svg" is="likeOnImg" />
+											<img src="/images/likeOn.svg" id="likeOnImg" onClick="location.href='${cancelLikeUrl}'"/>
 											<c:set var="findCk" value="true" />
 										</c:when>
 										<c:otherwise>
 											<c:if test="${status.last}">
-												<img src="/images/like.svg" is="likeImg" />
+												<img src="/images/like.svg" id="likeImg" onClick="location.href='${addLikeUrl}'"/>
 											</c:if>
 										</c:otherwise>
 									</c:choose>

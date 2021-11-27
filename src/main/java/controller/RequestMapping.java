@@ -60,6 +60,7 @@ public class RequestMapping {
         mappings.put("/review/listReview", new ListReviewController());
         // like
         mappings.put("/like/listLike", new ListLikeController());
+        mappings.put("/like/changeLike", new LikeController());
         // manager
         mappings.put("/manager/listSitterApply", new ListSitterApplyController());
         mappings.put("/manager/viewApply", new ViewApplyController());

@@ -2,11 +2,13 @@ package model.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 
 import model.dao.PetDAO;
@@ -43,8 +45,23 @@ public class PetManager {
 
 		return userPets;
 	}
+	
+	/* 전체 돌보미들의 돌봄 가능 종 리스트 반환 */
+	public ArrayList<PetKind> findAllAblePetKindList() throws SQLException {
+//		ArrayList<PetKind> petKindList = petDAO.findAllAblePetKindList();
+//		Set<String> set = new HashSet<String>();
+//		for (PetKind petKind : petKindList)
+//			set.add(petKind.getLargeCategory());
+//		Map<String, List<PetKind>> petKindMap = new HashMap<>();
+//		for (Iterator<String> i = set.iterator(); i.hasNext();) {
+//			
+//		}
+//
+//		
+		return petDAO.findAllAblePetKindList();
+	}
 
-	public ArrayList<PetKind> findAblePetKindLsit(String sitterId) throws SQLException {
+	public ArrayList<PetKind> findAblePetKindList(String sitterId) throws SQLException {
 		return petDAO.findAblePetKindList(sitterId);
 	}
 

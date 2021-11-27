@@ -52,6 +52,36 @@ public class PetDAO {
 		}
 		return null;
 	}
+	
+	/* 전체 돌보미의 돌봄 가능 종 리스트 검색 */
+	public ArrayList<PetKind> findAllAblePetKindList() throws SQLException {
+		String sql = "SELECT DISTINCT kind_id, large_category, small_category "
+				+ "FROM available_pet_kind JOIN pet_kind USING (kind_id) "
+				+ "ORDER BY large_category";
+
+		jdbcUtil.setSqlAndParameters(sql, null);
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next()) {
+				ArrayList<PetKind> petKindList = new ArrayList<>();
+				PetKind petKind = new PetKind(rs.getString("kind_id"), rs.getString("large_category"),
+						rs.getString("small_category"));
+				petKindList.add(petKind);
+				while (rs.next()) {
+					petKind = new PetKind(rs.getString("kind_id"), rs.getString("large_category"),
+							rs.getString("small_category"));
+					petKindList.add(petKind);
+				}
+				return petKindList;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
 
 	/* 특정 돌보미의 돌봄 가능 종 리스트 검색 */
 	public ArrayList<PetKind> findAblePetKindList(String sitterId) throws SQLException {

@@ -56,7 +56,7 @@ public class ReserveController implements Controller {
 			request.setAttribute("toDate", toDate);
 
 			// 돌봄 가능 동물종 리스트
-			List<PetKind> ablePetKinds = petMan.findAblePetKindLsit(sitterId);
+			List<PetKind> ablePetKinds = petMan.findAblePetKindList(sitterId);
 			request.setAttribute("ablePetKinds", ablePetKinds);
 
 			// 로그인한 유저의 반려동물 리스트

@@ -12,23 +12,31 @@ import javax.servlet.http.HttpSession;
 import controller.Controller;
 import controller.member.UserSessionUtils;
 import model.service.LikeListManager;
+import model.service.PetManager;
 import model.service.PetSitterManager;
 import model.dto.PetSitter;
 import model.dto.LikeList;
+import model.dto.PetKind;
 
 public class ListSitterController implements Controller {
 
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	
 		HttpSession session = request.getSession();
+		PetManager petMan = PetManager.getInstance();
 		PetSitterManager sitterMan = PetSitterManager.getInstance();
 		LikeListManager likelistMan = LikeListManager.getInstance();
+		
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		// session에 id정보가 없으면 mainpage 호출 리다이렉션
 		if(!UserSessionUtils.hasLogined(session)) {
 			 return "redirect:/mainpage";
 		}
+		
+		// 동물 종 카테고리 리스트 전달(돌보미들이 선택한 돌봄 가능 돌물종으로 제한)
+		List<PetKind> petKindList = petMan.findAllAblePetKindList();
+		request.setAttribute("petKindList", petKindList);
 		
 		// 페이지 정보 및 현재 페이지에 출력 될 돌보미 리스트를 전달
 		Map<Integer, List<PetSitter>> sitterMap = sitterMan.getPetSittersOfPage(currentPage);
@@ -46,6 +54,7 @@ public class ListSitterController implements Controller {
 			List<LikeList> likeSitters = likelistMan.findLikeListOfMember(UserSessionUtils.getLoginUserId(session));
 			request.setAttribute("likeSitters", likeSitters);
 		}
+		
 		// 지역 및 동물 맞춤 추천 돌보미 전달
 		
 		

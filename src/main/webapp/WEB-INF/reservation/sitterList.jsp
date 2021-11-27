@@ -760,24 +760,21 @@ select {
 			<div>카테고리</div>
 		</div>
 		<ul>
-			<li><a href="#">대분류</a>
-				<ul>
-					<li><a href="#">소분류</a></li>
-					<li><a href="#">소분류</a></li>
-					<li><a href="#">소분류</a></li>
-				</ul></li>
-			<li><a href="#">대분류</a>
-				<ul>
-					<li><a href="#">소분류</a></li>
-					<li><a href="#">소분류</a></li>
-					<li><a href="#">소분류</a></li>
-				</ul></li>
-			<li><a href="#">대분류</a>
-				<ul>
-					<li><a href="#">소분류</a></li>
-					<li><a href="#">소분류</a></li>
-					<li><a href="#">소분류</a></li>
-				</ul></li>
+			<c:set var="category" value="${petKindList[0].largeCategory}"/>
+			<c:forEach var="petKind" items="${petKindList}" varStatus="status">
+				<c:if test="${status.first || petKind.largeCategory != category}">
+					<c:set var="category" value="${petKind.largeCategory}"/>
+					<c:if test="${!status.first}">
+						</ul></li>
+					</c:if>
+					<li><a href="#">${category}</a>
+					<ul>
+				</c:if>
+				<li><a href="#">${petKind.smallCategory}</a></li>
+				<c:if test="${status.last}">
+					</ul></li>
+				</c:if>	
+			</c:forEach>
 		</ul>
 	</nav>
 </body>

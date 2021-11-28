@@ -87,15 +87,58 @@ public class PetSitterDAO {
 	        			 rs.getInt("sitter_like"),
 	        			 rs.getInt("sitter_view"),
 	        			 new PetSitterApplication(rs.getString("apply_id")));
-	        	 
-	            return sitter;
-	         }
-	      } catch (Exception ex) {
-	         ex.printStackTrace();
-	      } finally {
-	         jdbcUtil.close();      
-	      }
-	      return null;
-	   }
 
+				return sitter;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
+	
+	/* 특정 돌보미의 좋아요 수 업데이트 */
+	public int updateLikes(String sitterId, String status) throws SQLException {
+		String sql = "UPDATE petsitter ";
+		if (status.equals("add"))
+			sql += "SET sitter_like = sitter_like + 1 ";
+		else
+			sql += "SET sitter_like = sitter_like - 1 ";
+		sql += "WHERE sitter_id = ?";
+		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { sitterId });
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+
+			return recordCount;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}
+		return 0;	
+	}
+	
+	/* 특정 돌보미의 조회 수 업데이트 */
+	public int updateViews(String sitterId) throws SQLException {
+		String sql = "UPDATE petsitter " 
+				+ "SET sitter_view = sitter_view + 1 "
+				+ "WHERE sitter_id = ?";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { sitterId });
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+
+			return recordCount;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}
+		return 0;	
+	}
+		
 }

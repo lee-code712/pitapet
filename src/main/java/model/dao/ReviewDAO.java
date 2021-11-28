@@ -27,8 +27,8 @@ public class ReviewDAO {
 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
-			List<Review> reviews = new ArrayList<Review>();
-			while (rs.next()) {
+			if (rs.next()) {
+				List<Review> reviews = new ArrayList<Review>();
 				Review review = new Review(
 						rs.getString("review_id"), 
 						rs.getString("write_date"),
@@ -42,8 +42,23 @@ public class ReviewDAO {
 												rs.getString("sitter_id"),
 												rs.getString("address")))));
 				reviews.add(review);
+				while (rs.next()) {
+					review = new Review(
+							rs.getString("review_id"), 
+							rs.getString("write_date"),
+							rs.getString("content"), 
+							rs.getFloat("rate"),
+							new Care(
+									rs.getInt("care_id"), 
+									new Member(rs.getString("member_id")),
+									new PetSitter(
+											new Member(
+													rs.getString("sitter_id"),
+													rs.getString("address")))));
+					reviews.add(review);
+				}
+				return reviews;
 			}
-			return reviews;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -124,7 +139,7 @@ public class ReviewDAO {
 		return null;
 	}
 	
-	// 선택한 sitter의 리뷰 반환
+	/* 특정 돌봄 내역에 대하여 리뷰가 존재하는지 확인 */
 	public boolean isExistReview(Integer careId) throws SQLException {
 		String sql = "SELECT review_id "
 				+ "FROM review JOIN care USING (care_id) " 

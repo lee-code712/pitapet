@@ -59,12 +59,18 @@ public class LikeListManager {
 		int count = likeListDAO.add(memberId, sitterId);
 		if (count == 0)
 			return false;
+		count = petSitterDAO.updateLikes(sitterId, "add");
+		if (count == 0)
+			return false;
 		return true;
 	}
 	
 	/* like 삭제 */
 	public boolean remove(String memberId, String sitterId) throws SQLException {
 		int count = likeListDAO.remove(memberId, sitterId);
+		if (count == 0)
+			return false;
+		count = petSitterDAO.updateLikes(sitterId, "remove");
 		if (count == 0)
 			return false;
 		return true;

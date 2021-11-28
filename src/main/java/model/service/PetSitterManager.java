@@ -95,6 +95,14 @@ public class PetSitterManager {
 		return sitter;
 	}
 
+	/* 돌보미 조회수 추가 */
+	public boolean updateViews(String sitterId) throws SQLException {
+		int count = sitterDAO.updateViews(sitterId);
+		if (count == 0)
+			return false;
+		return true;
+	}
+	
 	public ArrayList<PetSitter> findPetSitterList() throws SQLException {
 		return sitterDAO.findPetSitterList();
 	}

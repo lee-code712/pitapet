@@ -36,6 +36,9 @@ public class ViewSitterDetailController implements Controller {
 		// 돌보미 상세 정보 전달
 		PetSitter sitter = sitterMan.findPetSitter(sitterId);
 		request.setAttribute("sitterInfo", sitter);
+		boolean isUpdated = sitterMan.updateViews(sitterId);
+		if (!isUpdated)
+			request.setAttribute("updateFailed", true);
 
 		// 예약 불가능 일자 전달
 		Map<String, String> scheduleMap = careMan.getDisableDays(memberId, sitter);

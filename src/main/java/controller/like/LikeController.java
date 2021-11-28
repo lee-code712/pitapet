@@ -17,9 +17,7 @@ public class LikeController implements Controller {
 		String status = (String) request.getParameter("status");
 		String sitterId = (String) request.getParameter("sitterId");
 		String memberId = UserSessionUtils.getLoginUserId(session);
-		
-		System.out.println(status + " " + sitterId + " " + memberId);
-		
+
 		if (status.equals("add")) {
 			// 좋아요 레코드 추가
 			boolean isAdded = likeListMan.add(memberId, sitterId);

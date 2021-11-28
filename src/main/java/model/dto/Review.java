@@ -24,6 +24,14 @@ public class Review {
 		this.careInfo = careInfo;
 	}
 	
+	public Review(String content, float rate, Care careInfo, List<String> images) {
+		super();
+		this.content = content;
+		this.rate = rate;
+		this.careInfo = careInfo;
+		this.images = images;
+	}
+
 	public String getId() {
 		return id;
 	}

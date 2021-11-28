@@ -586,15 +586,19 @@
 
             <div id="reviewWriteWrap">
             	<c:if test="${not empty careListOfReview}">
-	                <div id="subPageTit">리뷰 작성</div>
-	                <textarea placeholder="(내용)" id="reviewContent"></textarea>
-	                <div id="reviewBtnWrap">
-	                    <div>
-	                        <img src="/images/fileImg.svg" />
-	                        <input type="file" />
-	                    </div>
-	                    <button id="reviewBtn">등록</button>
-	                </div>
+            		<form method="POST" action="<c:url value='/review/addReview'/>" enctype="multipart/form-data">
+		                <div id="subPageTit">리뷰 작성</div>
+		                <input type="hidden" name="careId" value="${careListOfReview.get(0).id}" />
+		                <input type="hidden" name="sitterId" value="${sitterInfo.sitter.id}" />
+		                <textarea placeholder="(내용)" id="reviewContent" name="content"></textarea>
+		                <div id="reviewBtnWrap">
+		                    <div>
+		                        <img src="/images/fileImg.svg" />
+		                        <input type="file" name="picture" />
+		                    </div>
+		                    <button id="reviewBtn">등록</button>
+		                </div>
+	                </form>
                 </c:if>
             </div>
 

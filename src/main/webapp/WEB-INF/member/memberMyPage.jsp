@@ -55,7 +55,8 @@
                     <div id="name">${memberInfo.name}</div>
                     <div id="phone">${memberInfo.phone}</div>
                     <div id="myPageBtnWrap">
-                        <button id="petInfoBtn">반려동물 정보</button>
+                    	<c:url value='/pet/listPet' var="listPetUrl"/>
+                        <button id="petInfoBtn" onclick="location.href='${listPetUrl}'">반려동물 정보</button>
                         <c:if test="${applicationStatus eq null}">
                         	<c:url value='/member/applySitter' var="applySitterUrl"/>
                         	<button id="applySitterBtn" onclick="location.href='${applySitterUrl}'">돌보미 지원</button>

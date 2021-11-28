@@ -77,6 +77,11 @@ td {
     height: 100px;
 }
 
+#petImg {
+	width: 90px;
+    height: 90px;
+}
+
 #deleteImg {
     margin-left: 60px;
     cursor: pointer;

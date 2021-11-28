@@ -46,6 +46,11 @@ public class PetManager {
 		return userPets;
 	}
 	
+	/* 전체 반려동물 종 리스트 검색 */
+	public ArrayList<PetKind> findAllPetKindList() throws SQLException {
+		return petDAO.findAllPetKindList();
+	}
+	
 	/* 전체 돌보미들의 돌봄 가능 종 리스트 반환 */
 	public ArrayList<PetKind> findAllAblePetKindList() throws SQLException {
 //		ArrayList<PetKind> petKindList = petDAO.findAllAblePetKindList();

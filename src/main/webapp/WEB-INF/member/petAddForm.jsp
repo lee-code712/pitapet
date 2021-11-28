@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="/css/footer.css"/>
     <link rel="stylesheet" href="/css/petUpdateForm.css"/>
     
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="/js/petAddForm.js"></script>
+    
     <style>
 	    #logo {
 		    z-index: 1;
@@ -27,6 +30,7 @@
     <div id="pageWrap">
         <div id="pageTit">반려동물 정보</div>
         
+        <form name="form" method="POST" action="<c:url value='/pet/addPet'/>" >
         <table>
             <tr>
                 <td id="tableTit">반려동물 정보</td>
@@ -36,29 +40,40 @@
             <tr>
                 <td id="tdTit">종류</td>
                 <td>
-                    <select id="joinPetKind"> 
-                        <option>대형견</option> 
-                        <option>소형견</option> 
-                        <option>고양이</option> 
-                    </select>
+                    <select id="joinPetKind" name="petKind"> 
+                    	<c:forEach var="petKind" items="${petKindList}" varStatus="status">
+	                        <option value="${petKind.id}">${petKind.largeCategory} - ${petKind.smallCategory}</option>
+                        </c:forEach>
+                    </select>	
                 </td>
             </tr>
 
             <tr>
                 <td id="tdTit">이름</td>
-                <td><input type="text" placeholder="이름을 입력하세요." id="textDesign" /></td>
+                <td><input type="text" name="name" placeholder="이름을 입력하세요." id="textDesign" /></td>
             </tr>
 
             <tr>
                 <td id="tdTit">생년월일</td>
-                <td><input type="text" placeholder="생년월일 6자리를 입력하세요. ex) 000513" id="textDesign" /></td>
+                <td><input type="date" id="birth" name="birth" /></td>
+            </tr>
+            
+            <tr>
+                <td id="tdTit">성별</td>
+                <td>
+					<select id="joinPetKind" name="gender"> 
+						<option value="M">수컷</option>
+						<option value="F">암컷</option>
+                    </select>	
+				</td>
             </tr>
         </table>
-
+        
         <div id="btnWrap">
-            <button id="cancelBtn">취소</button>
-            <button id="addBtn">추가</button> 
+            <button id="cancelBtn" onclick="addPet(this.id)">취소</button>
+            <button id="addBtn" onclick="addPet(this.id)">추가</button> 
         </div>
+        </form>
     </div>
     
     <div id="footerWrap">

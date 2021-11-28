@@ -54,6 +54,36 @@ public class PetDAO {
 		return null;
 	}
 	
+	/* 전체 반려동물 종 리스트 검색 */
+	public ArrayList<PetKind> findAllPetKindList() throws SQLException {
+		String sql = "SELECT kind_id, large_category, small_category "
+				+ "FROM pet_kind "
+				+ "ORDER BY large_category";
+
+		jdbcUtil.setSqlAndParameters(sql, null);
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next()) {
+				ArrayList<PetKind> petKindList = new ArrayList<>();
+				PetKind petKind = new PetKind(rs.getString("kind_id"), rs.getString("large_category"),
+						rs.getString("small_category"));
+				petKindList.add(petKind);
+				while (rs.next()) {
+					petKind = new PetKind(rs.getString("kind_id"), rs.getString("large_category"),
+							rs.getString("small_category"));
+					petKindList.add(petKind);
+				}
+				return petKindList;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
+	
 	/* 전체 돌보미의 돌봄 가능 종 리스트 검색 */
 	public ArrayList<PetKind> findAllAblePetKindList() throws SQLException {
 		String sql = "SELECT DISTINCT kind_id, large_category, small_category "

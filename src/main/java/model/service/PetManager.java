@@ -105,4 +105,20 @@ public class PetManager {
 	public Pet findPetInfo(String petId) throws SQLException {
 		return petDAO.findPetInfo(petId);
 	}
-}
+	
+	public Pet addPet(String memberId, String name, String birth, String gender, String kindId) {
+		Pet pet = petDAO.addPet(memberId, name, birth, gender, kindId);
+		
+		/*
+		 * PetKind petKind = petMan.findPetKindInfo(pet.getKind().getId());
+		 * pet.setKind(petKind);
+		 */
+		
+		return pet;
+	}
+	
+	public PetKind findPetKindInfo(String kindId) {
+		return petDAO.findPetKindInfo(kindId);
+	}
+	
+}	

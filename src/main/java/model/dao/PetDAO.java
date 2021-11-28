@@ -237,4 +237,64 @@ public class PetDAO {
 		}
 		return null;
 	}
+	
+	public Pet addPet(String memberId, String name, String birth, String gender, String kindId) {
+		 String sql = "INSERT INTO PET VALUES (?, ?, ?, ?, ?, ?)";
+		 String petId = birth.replaceAll("-", "").substring(2, 8) + memberId.substring(memberId.length() - 2, memberId.length()); // 수정 필요
+         Object[] param = new Object[] {petId , name, birth, gender, memberId, kindId };   
+         jdbcUtil.setSqlAndParameters(sql, param);
+
+	      try {
+	    	  int result = jdbcUtil.executeUpdate();
+				
+				sql = "SELECT pet_id, name, birth, gender, member_id, kind_id "
+						+ "FROM pet "
+						+ "WHERE pet_id = ?";
+				param = new Object[] { petId };
+				jdbcUtil.setSqlAndParameters(sql, param);
+				ResultSet rs = jdbcUtil.executeQuery();
+				if (rs.next()) {
+					Pet pet = new Pet (
+								petId,
+								rs.getString("name"),
+								rs.getString("birth"),
+								rs.getString("gender"),
+								new PetKind(rs.getString("kind_id")),
+								new Member(rs.getString("member_id"))
+							);
+					return pet;
+				}
+	      } catch (Exception ex) {
+	          jdbcUtil.rollback();
+	    	  ex.printStackTrace();
+	      } finally {
+	    	 jdbcUtil.commit();
+	         jdbcUtil.close();      
+	      }
+		   return null;
+	}
+	
+	public PetKind findPetKindInfo(String kindId) {
+		String sql = "SELECT kind_id, large_category, small_category "
+				+ "FROM pet_kind " 
+				+ "WHERE kind_id = ?";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { kindId });
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next()) {
+				PetKind petKind = new PetKind (
+							kindId, rs.getString("large_category"), rs.getString("small_category")
+						);
+				
+				return petKind;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
 }

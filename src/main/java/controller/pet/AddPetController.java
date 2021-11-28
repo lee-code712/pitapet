@@ -20,7 +20,7 @@ public class AddPetController implements Controller {
 		
 		// 반려동물 추가 form 이동
 		if (request.getMethod().equals("GET")) {
-			// 동물 종 카테고리 리스트 전달(돌보미들이 선택한 돌봄 가능 돌물종으로 제한)
+			// 동물 종 카테고리 리스트 전달
 			List<PetKind> petKindList = petMan.findAllPetKindList();
 			request.setAttribute("petKindList", petKindList);
 			
@@ -40,9 +40,11 @@ public class AddPetController implements Controller {
 		Pet pet = petMan.addPet(userId, name, birth, gender, kindId);
 		
 		if (pet != null) {
-			return "redirect:/member/petView";
+			return "redirect:/pet/listPet";
 		}
 		else {
+			List<PetKind> petKindList = petMan.findAllPetKindList();
+			request.setAttribute("petKindList", petKindList);
 			request.setAttribute("petInfo", pet);
 			request.setAttribute("addFailed", true);
 			return "/member/petAddForm.jsp";

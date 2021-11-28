@@ -30,6 +30,10 @@
     <div id="pageWrap">
         <div id="pageTit">반려동물 정보</div>
         
+        <c:if test="${addFailed}">
+			<script> alert("반려동물 추가에 실패했습니다."); </script>
+		</c:if>
+        
         <form name="form" method="POST" action="<c:url value='/pet/addPet'/>" >
         <table>
             <tr>

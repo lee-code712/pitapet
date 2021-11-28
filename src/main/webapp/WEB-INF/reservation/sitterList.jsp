@@ -611,7 +611,7 @@ select {
 						<c:param name='sitterId' value='${petsitter.sitter.id}' />
 					</c:url>
 					<c:url value='/like/changeLike' var='cancelLikeUrl'>
-						<c:param name='status' value='cancel' />
+						<c:param name='status' value='remove' />
 						<c:param name='sitterId' value='${petsitter.sitter.id}' />
 					</c:url>
 					<div id="petSitterNameLikeWrap">

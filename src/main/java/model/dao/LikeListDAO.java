@@ -39,5 +39,41 @@ public class LikeListDAO {
             jdbcUtil.close();      
          }
          return null;
-      }   
+   }
+   
+   public int add(String memberId, String sitterId) throws SQLException {
+		String sql = "INSERT INTO likelist (member_id, sitter_id) " 
+				+ "VALUES (?, ?)";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId, sitterId });
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+
+			return recordCount;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}
+		return 0;
+	}
+   
+	public int remove(String memberId, String sitterId) throws SQLException {
+		String sql = "DELETE FROM likelist " 
+				+ "WHERE member_id=? AND sitter_id=?";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId, sitterId });
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+
+			return recordCount;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}
+		return 0;
+	}
 }

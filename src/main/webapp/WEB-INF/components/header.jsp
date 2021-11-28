@@ -41,7 +41,9 @@
             	<div id="reviewLink" onclick="location.href='${reviewListUrl}'">이용 후기</div>
                 
                 <c:if test="${!isNotLogined}">
-                	<c:url value='/reservation/listSitter' var="sitterListUrl" />
+                	<c:url value='/reservation/searchSitter' var="sitterListUrl">
+                		<c:param name="currentPage" value="1" />
+                	</c:url>
                 	<div id="sitterListLink" onclick="location.href='${sitterListUrl}'">돌보미 조회</div>
                 	
                 	<c:url value='/like/listLike' var="likeListUrl"/>

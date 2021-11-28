@@ -27,13 +27,13 @@ public class ListSitterController implements Controller {
 		PetSitterManager sitterMan = PetSitterManager.getInstance();
 		LikeListManager likelistMan = LikeListManager.getInstance();
 		
-		String page = request.getParameter("currentPage");
+		String page = (String) request.getParameter("currentPage");
 		int currentPage;
 		if (page == null)
 			currentPage = 1;
 		else
 			currentPage = Integer.parseInt(page);
-		
+
 		// session에 id정보가 없으면 mainpage 호출 리다이렉션
 		if(!UserSessionUtils.hasLogined(session)) {
 			 return "redirect:/mainpage";
@@ -44,7 +44,9 @@ public class ListSitterController implements Controller {
 		request.setAttribute("petKindList", petKindList);
 		
 		// 페이지 정보 및 현재 페이지에 출력 될 돌보미 리스트를 전달
-		Map<Integer, List<PetSitter>> sitterMap = sitterMan.getPetSittersOfPage(currentPage);
+		@SuppressWarnings("unchecked")
+		List<PetSitter> sitters = (List<PetSitter>) request.getAttribute("searchSitters");
+		Map<Integer, List<PetSitter>> sitterMap = sitterMan.getPetSittersOfPage(sitters, currentPage);
 		if (sitterMap != null) {
 			Iterator<Integer> iterator = sitterMap.keySet().iterator();
 	        if (iterator.hasNext()) {

@@ -35,8 +35,10 @@ public class PetSitterManager {
 	}
 	
 	/* 페이지에 출력될 펫시터 리스트 및 페이지 정보 반환 */
-	public Map<Integer, List<PetSitter>> getPetSittersOfPage(int currentPage) throws SQLException {
-		ArrayList<PetSitter> sitterList = sitterDAO.findPetSitterList();
+	public Map<Integer, List<PetSitter>> getPetSittersOfPage(List<PetSitter> sitters, int currentPage) throws SQLException {
+		ArrayList<PetSitter> sitterList = (ArrayList<PetSitter>) sitters;
+		if (sitterList == null)
+			sitterList = sitterDAO.findPetSitterList();
 		
 		if (sitterList != null) {
 			int rpp = 2;

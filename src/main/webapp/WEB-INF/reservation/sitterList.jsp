@@ -588,9 +588,9 @@ select {
 					<img src="/images/hamburgerBar.svg" id="hamburgerBarImg" class="dropbtn" />
 					<div class="dropdown-content">
 						<a href="<c:url value='/reservation/searchSitter'>
-							<param name='searchOption' value='bestLike'/></c:url>">인기순</a> 
+							<param name='searchOption' value='rankLike'/></c:url>">인기순</a> 
 						<a href="<c:url value='/reservation/searchSitter'>
-							<param name='searchOption' value='bestView'/></c:url>">조회순</a>
+							<param name='searchOption' value='rankView'/></c:url>">조회순</a>
 					</div>
 				</div>
 			</div>
@@ -662,7 +662,7 @@ select {
 				<c:set var="currentPage" value="${pageInfo.get(1)}" />
 				<c:set var="totalPage" value="${pageInfo.get(0)}" />
 				<c:if test="${currentPage > 1}">
-					<c:url value='/reservation/listSitter' var="preUrl">
+					<c:url value='/reservation/searchSitter' var="preUrl">
 						<c:param name="currentPage" value="${currentPage - 1}" />
 					</c:url>
 					<a href="${preUrl}" id="pre">이전</a>
@@ -673,7 +673,7 @@ select {
 							<div id="numOn">${i}</div>
 						</c:when>
 						<c:otherwise>
-							<c:url value='/reservation/listSitter' var="url">
+							<c:url value='/reservation/searchSitter' var="url">
 								<c:param name="currentPage" value="${i}" />
 							</c:url>
 							<div id="num" onClick="location.href='${url}'">${i}</div>
@@ -681,7 +681,7 @@ select {
 					</c:choose>
 				</c:forEach>
 				<c:if test="${currentPage < totalPage}">
-					<c:url value='/reservation/listSitter' var="postUrl">
+					<c:url value='/reservation/searchSitter' var="postUrl">
 						<c:param name="currentPage" value="${currentPage + 1}" />
 					</c:url>
 					<a href="${postUrl}" id="next">다음</a>
@@ -789,7 +789,10 @@ select {
 					<li><a href="#">${category}</a>
 					<ul>
 				</c:if>
-				<li><a href="#">${petKind.smallCategory}</a></li>
+				<li><a href="<c:url value='/reservation/searchSitter'>
+								<c:param name='searchOption' value='category'/>
+								<c:param name='smallCategory' value='${petKind.smallCategory}'/>
+								</c:url>">${petKind.smallCategory}</a></li>
 				<c:if test="${status.last}">
 					</ul></li>
 				</c:if>	

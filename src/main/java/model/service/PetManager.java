@@ -96,4 +96,8 @@ public class PetManager {
 		}
 		return petMap;
 	}
+	
+	public Pet findPetInfo(String petId) throws SQLException {
+		return petDAO.findPetInfo(petId);
+	}
 }

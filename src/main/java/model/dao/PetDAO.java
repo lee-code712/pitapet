@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.dto.Member;
 import model.dto.Pet;
 import model.dto.PetKind;
 
@@ -176,5 +177,34 @@ public class PetDAO {
 			jdbcUtil.close();
 		}
 		return null;
-	}	
+	}
+	
+	public Pet findPetInfo(String petId) throws SQLException {
+		String sql = "SELECT pet_id, name, birth, gender, member_id, kind_id "
+				+ "FROM pet " 
+				+ "WHERE pet_id = ?";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { petId });
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next()) {
+				Pet pet = new Pet (
+							petId,
+							rs.getString("name"),
+							rs.getString("birth"),
+							rs.getString("gender"),
+							new PetKind(rs.getString("kind_id")),
+							new Member(rs.getString("member_id"))
+						);
+				
+				return pet;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
 }

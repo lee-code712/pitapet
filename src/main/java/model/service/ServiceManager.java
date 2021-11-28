@@ -9,6 +9,7 @@ import java.util.Map;
 
 import model.dao.ServiceDAO;
 import model.dto.Care;
+import model.dto.CareDetails;
 import model.dto.Pet;
 import model.dto.Service;
 
@@ -50,5 +51,13 @@ public class ServiceManager {
 		}
 		
 		return serviceMap;
+	}
+	
+	public List<CareDetails> findReceiveServiceByCareId(Care care) throws SQLException {
+		return serviceDAO.findReceiveServiceByCareId(care);
+	}
+	
+	public Service findServiceInfo(String serviceId) throws SQLException {
+		return serviceDAO.findServiceInfo(serviceId);
 	}
 }

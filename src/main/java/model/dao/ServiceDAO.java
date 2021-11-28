@@ -3,9 +3,13 @@ package model.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.dto.Care;
+import model.dto.CareDetails;
 import model.dto.Member;
+import model.dto.Pet;
+import model.dto.PetKind;
 import model.dto.PetSitter;
 import model.dto.Service;
 
@@ -90,5 +94,67 @@ public class ServiceDAO {
 			jdbcUtil.close();
 		}		
 		return 0;
+	}
+	
+	public List<CareDetails> findReceiveServiceByCareId(Care care) throws SQLException {
+		String sql = "SELECT care_id, rcv_id, pet_id, service_id "
+				+ "FROM receive_service "
+				+ "WHERE care_id = ?";     
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {care.getId()});	
+						
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			
+			if (rs.next()) {
+				List<CareDetails> rsList = new ArrayList<CareDetails>();	
+				CareDetails cd = new CareDetails(	
+						rs.getString("rcv_id"),
+						care,
+						new Service(rs.getString("service_id")),
+						new Pet(rs.getString("pet_id"))
+				);
+				rsList.add(cd);	
+				while (rs.next()) {
+					cd = new CareDetails(			
+							rs.getString("rcv_id"),
+							care,
+							new Service(rs.getString("service_id")),
+							new Pet(rs.getString("pet_id"))
+					);
+					rsList.add(cd);	
+				}
+				return rsList;
+			}								
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}		
+		return null;
+	}
+	
+	public Service findServiceInfo(String serviceId) throws SQLException {
+		String sql = "SELECT service_id, title, content "
+				+ "FROM service " 
+				+ "WHERE service_id = ?";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { serviceId });
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next()) {
+				Service service = new Service (
+							serviceId,
+							rs.getString("title"),
+							rs.getString("content")
+						);
+				
+				return service;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
 	}
 }

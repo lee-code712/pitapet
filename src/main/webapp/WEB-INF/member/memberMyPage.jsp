@@ -86,7 +86,8 @@
            
                     <c:forEach var="care" items="${careList}">            	
                    		<c:if test="${care.status eq 'X'}">
-                   			<tr>
+                   			<c:url value='/reservation/viewReservation?careId=${care.id}' var="viewReservationUrl"/>
+                   			<tr onclick="location.href='${viewReservationUrl}'">
 	                    		<td>${care.sitter.sitter.name}</td>
 	                    		<td>${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}</td>
 	                   			<td>예약완료</td>
@@ -97,7 +98,8 @@
                    		</c:if>
                    		
                    		<c:if test="${care.status eq 'Y'}">
-                   			<tr>
+                   			<c:url value='/reservation/viewReservation?careId=${care.id}' var="viewReservationUrl"/>
+                   			<tr onclick="location.href='${viewReservationUrl}'">
 	                    		<td>${care.sitter.sitter.name}</td>
 	                    		<td>${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}</td>
 	                   			<td>진행중</td>
@@ -108,8 +110,8 @@
                    		</c:if>
                    		
                    		<c:if test="${care.status eq 'Z'}">
-            
-                   			<tr>
+							<c:url value='/reservation/viewReservation?careId=${care.id}' var="viewReservationUrl"/>
+                   			<tr onclick="location.href='${viewReservationUrl}'">
 	                    		<td>${care.sitter.sitter.name}</td>
 	                    		<td>${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}</td>
 	                   			<td>돌봄완료</td>

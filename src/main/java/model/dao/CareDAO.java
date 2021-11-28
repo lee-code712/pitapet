@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.dto.Care;
+import model.dto.CareDetails;
 import model.dto.Member;
 import model.dto.PetSitter;
 
@@ -161,5 +162,25 @@ public class CareDAO {
 			jdbcUtil.close();
 		}		
 		return 0;
+	}
+	
+	public String getCheckInfo(String rcvId) throws SQLException {
+		String sql = "SELECT care_check "
+				+ "FROM care_checklist "
+				+ "WHERE rcv_id = ?";     
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {rcvId});	
+						
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			
+			if (rs.next()) {
+				String check = rs.getString("care_check");
+				return check;	
+			}					
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
 	}
 }

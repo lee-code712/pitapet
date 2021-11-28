@@ -16,6 +16,16 @@ public class Pet {
 		this.id = id;
 	}
 	
+	public Pet(String id, String name, String birth, String gender, PetKind kind, Member myCompanion) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.birth = birth;
+		this.gender = gender;
+		this.kind = kind;
+		this.myCompanion = myCompanion;
+	}
+	
 	public String getId() {
 		return id;
 	}

@@ -18,6 +18,14 @@ public class CareDetails {
 		this.carePet = carePet;
 	}
 	
+	public CareDetails(String id, Care careInfo, Service serviceInfo, Pet carePet) {
+		super();
+		this.id = id;
+		this.careInfo = careInfo;
+		this.serviceInfo = serviceInfo;
+		this.carePet = carePet;
+	}
+	
 	public CareDetails(String id, Care careInfo, Service serviceInfo, Pet carePet, String check) {
 		super();
 		this.id = id;

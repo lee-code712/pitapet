@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import model.dto.Care;
 import model.dto.Member;
+import model.dto.PetSitter;
 
 public class ReservationDAO {
 	private JDBCUtil jdbcUtil = null;
@@ -36,5 +37,34 @@ public class ReservationDAO {
 	         jdbcUtil.close();      
 	      }
 		   return 0;
+	   }
+	   
+	   public Care findReservation(int careId) throws SQLException {
+		   String sql = "SELECT sitter_id, member_id, care_id, start_date, end_date, total_price, notes, care_status "
+	                 + "FROM care "
+	                 + "WHERE care_id=? ";              
+	      jdbcUtil.setSqlAndParameters(sql, new Object[] {careId});
+
+	      try {
+	         ResultSet rs = jdbcUtil.executeQuery();      
+	         if (rs.next()) {                  
+	            Care care = new Care(
+	               careId,
+	               rs.getString("start_date"),
+	               rs.getString("end_date"),
+	               rs.getInt("total_price"),
+	               rs.getString("notes"),
+	               rs.getString("care_status"),               
+	               new Member(rs.getString("member_id")),
+	               new PetSitter(new Member(rs.getString("sitter_id")))
+	            );
+	            return care;
+	         }
+	      } catch (Exception ex) {
+	         ex.printStackTrace();
+	      } finally {
+	         jdbcUtil.close();      
+	      }
+	      return null;
 	   }
 }

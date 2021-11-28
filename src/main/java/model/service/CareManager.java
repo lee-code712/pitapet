@@ -145,4 +145,8 @@ public class CareManager {
 	public List<Care> findCareSchedulesOfSitter(String sitterId) throws SQLException {
 		return careDAO.findCareSchedulesOfSitter(sitterId);
 	}
+	
+	public String getCheckInfo(String rcvId) throws SQLException {
+		return careDAO.getCheckInfo(rcvId);
+	}
 }

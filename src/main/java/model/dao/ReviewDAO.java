@@ -158,4 +158,44 @@ public class ReviewDAO {
 		return false;
 	}
 	
+	/* 리뷰 추가 */
+	public int add(Review review) throws SQLException {
+		String sql = "INSERT INTO review (review_id, write_date, content, rate, care_id) " 
+				+ "VALUES (review_seq.NEXTVAL, SYSDATE, ?, ?, ?)";
+		
+		Object[] obj = new Object[] {review.getContent(), review.getRate(), review.getCareInfo().getId()};
+		jdbcUtil.setSqlAndParameters(sql, obj);
+		
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+
+			return recordCount;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}
+		return 0;
+	}
+	
+	/* 리뷰 첨부파일(이미지) 추가 */
+	public int addAttachment(String imgSrc, String memberId) throws SQLException {
+		String sql = "INSERT INTO attachment (img_src, member_id, category_id) " 
+				+ "VALUES (?, ?, 'AtchId03')";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { imgSrc, memberId });
+		
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+
+			return recordCount;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}
+		return 0;
+	}	
 }

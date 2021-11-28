@@ -1,11 +1,9 @@
 package model.service;
 
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import model.dto.Member;
 import model.dto.Review;
 import model.dao.ReviewDAO;
 
@@ -71,6 +69,20 @@ public class ReviewManager {
 			}
 		}
 		return reviews;
+	}
+	
+	/* 리뷰 추가 */
+	public boolean add(Review review, String memberId) throws SQLException {
+		int count = reviewDAO.add(review);
+		if (count == 0) return false;
+		
+		List<String> images = review.getImages();
+		for (String imgSrc : images) {
+			imgSrc = "/upload/" + imgSrc;
+			count = reviewDAO.addAttachment(imgSrc, memberId);
+			if (count == 0) return false;
+		}
+		return true;
 	}
 	
 	//전체 리뷰 반환

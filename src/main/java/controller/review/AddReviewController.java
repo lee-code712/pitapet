@@ -27,6 +27,7 @@ public class AddReviewController implements Controller {
 		HttpSession session = request.getSession();
 		ReviewManager reviewMan = ReviewManager.getInstance();
 		
+		String memberId = UserSessionUtils.getLoginUserId(session);
 		String content = null;
 		String careId = null;
 		String sitterId = null;
@@ -40,8 +41,7 @@ public class AddReviewController implements Controller {
 		
 		boolean check = ServletFileUpload.isMultipartContent(request);
 		if(check) {//파일 전송이 포함된 상태가 맞다면
-			ServletContext context = request.getServletContext();
-			String path = context.getRealPath("/upload");
+			String path = "C:/Users/User/git/pitapet/src/main/webapp/upload"; // 내 경로로 해야 함..
 			File dir = new File(path);
 			
 			if(!dir.exists()) dir.mkdir();
@@ -93,18 +93,21 @@ public class AddReviewController implements Controller {
                 			//실제 C:\Web_Java\aaa.gif라고 하면 aaa.gif만 추출하기 위한 코드이다.
                 			File file = new File(dir, filename);
                 			String ext = filename.substring(filename.lastIndexOf( "." ));
-                			filename = "care-" + careId + "-" + cnt + ext;
-                			File newFile = new File(dir, filename);
-                			file.renameTo(newFile);
+                			String newFilename = "care-" + careId + "-" + cnt + ext;
+                			File newFile = new File(dir, newFilename);
                 			item.write(file);
+                			file.renameTo(newFile);
                 			//파일을 upload 경로에 실제로 저장한다.
-                			files.add(filename);
+                			files.add(newFilename);
                 			cnt++;
                 		}
                 	}
-                	Review review = new Review(content, (float)5.0, 
-        					new Care(Integer.parseInt(careId)), files);
                 }
+                Review review = new Review(content, (float)5.0, 
+    					new Care(Integer.parseInt(careId)), files);
+            	boolean isAdded = reviewMan.add(review, memberId);
+            	if (!isAdded)
+            		request.setAttribute("addFailed", true);
 			}catch(SizeLimitExceededException e) {
 			//업로드 되는 파일의 크기가 지정된 최대 크기를 초과할 때 발생하는 예외처리
 				e.printStackTrace();           

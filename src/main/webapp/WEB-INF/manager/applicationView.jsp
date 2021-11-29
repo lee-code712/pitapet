@@ -22,6 +22,9 @@
 </head>
 
 <body>
+	<c:if test="${updateFailed}">
+	    <script> alert('돌보미 등급 조정에 실패했습니다.'); </script>
+	 </c:if>
 	<div id="headerWrap">
         	<div id="headerInner">
 	        	<div id="logoWrap">
@@ -62,7 +65,14 @@
             </div>
         </div>
         <div id="acceptBtnWrap">
-            <button id="acceptBtn">승인하기</button>
+        	<c:url value='/manager/refuse' var="refuse">
+				<c:param name="applyId" value="${applicantDetail.id}" />
+			</c:url>
+        	<button id="acceptBtn" onclick="location.href='${refuse}'">거절하기</button>
+        	<c:url value='/manager/approval' var="approval">
+				<c:param name="applyId" value="${applicantDetail.id}" />
+			</c:url>
+            <button id="acceptBtn" onClick="location.href='${approval}'">승인하기</button>
         </div>
     </div>
 </body>

@@ -121,4 +121,46 @@ public class PetSitterApplicationDAO {
 		}
 		return null;
 	}
+	
+	public int applyStatus(String applyId) throws SQLException {
+		String sql = "UPDATE petsitter_application "
+					+ "SET approval_status='Y' "
+					+ "WHERE apply_id=?";
+		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {applyId});
+			
+		try {				
+			int result = jdbcUtil.executeUpdate();
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}		
+		return 0;
+	}
+	
+	public int refuseStatus(String applyId) throws SQLException {
+		String sql = "UPDATE petsitter_application "
+					+ "SET approval_status='Z' "
+					+ "WHERE apply_id=?";
+		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {applyId});
+			
+		try {				
+			int result = jdbcUtil.executeUpdate();
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}		
+		return 0;
+	}
 }

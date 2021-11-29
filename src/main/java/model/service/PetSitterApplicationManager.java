@@ -54,4 +54,12 @@ public class PetSitterApplicationManager {
 		
 		return application;
 	}
+	
+	public int applyStatus(String applyId) throws SQLException {
+		return petSitterApplicationDAO.applyStatus(applyId);
+	}
+	
+	public int refuseStatus(String applyId) throws SQLException {
+		return petSitterApplicationDAO.refuseStatus(applyId);
+	}
 }

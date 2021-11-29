@@ -565,6 +565,16 @@ select {
 	cursor: pointer;
 }
 </style>
+<script type="text/javascript">
+	function search() {
+		if (form.searchText.value == "") {
+			alert("검색어를 입력하세요.");
+			form.searchText.focus();
+			return false;
+		}
+		form.submit();
+	}
+</script>
 </head>
 
 <body id="pageBg">
@@ -574,19 +584,38 @@ select {
 		<div id="searchToolsWrap">
 			<div id="pageTit">돌보미 정보 조회</div>
 			<div id="searchTools">
-				<form method="GET" action="/reservation/searchSitter">
+				<form name="form" method="GET" action="/reservation/searchSitter">
 					<select id="choiceBox" name="searchOption">
 						<option value="city">지역</option>
-						<option value="tag">태그</option>
+						<c:choose>
+							<c:when test="${sessionScope.searchOption.get(0) == 'tag'}">
+								<option value="tag" selected>태그</option>
+							</c:when>
+							<c:otherwise>
+								<option value="tag">태그</option>
+							</c:otherwise>
+						</c:choose>
 					</select>
-					<div id="searchWrap">	
-						<input type="text" placeholder="검색어를 입력하세요." id="searchText" name="keyword" /> 
+					<div id="searchWrap">
+						<c:choose>
+							<c:when test="${sessionScope.searchOption.get(0) == 'city'
+								|| sessionScope.searchOption.get(0) == 'tag'}">
+								<input type="text" placeholder="검색어를 입력하세요." id="searchText" 
+									name="keyword" value="${sessionScope.searchOption.get(1)}"/>
+							</c:when>
+							<c:otherwise>
+								<input type="text" placeholder="검색어를 입력하세요." id="searchText" name="keyword" />
+							</c:otherwise>
+						</c:choose>
 						<input type="hidden" name="currentPage" value="1" />
-						<input type='image' src="/images/search.svg" id="searchImg" />
+						<input type='image' src="/images/search.svg" id="searchImg" onclick="search()"/>
 					</div>
 				</form>
 			</div>
 		</div>
+		<c:if test="${empty petSitterList}">
+			검색 결과가 없습니다.
+		</c:if>
 		<c:forEach var="petsitter" items="${petSitterList}">
 			<c:url value="/reservation/viewSitterDetail" var="viewUrl">
 				<c:param name="sitterId" value="${petsitter.sitter.id}" />

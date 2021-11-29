@@ -22,7 +22,8 @@ public class PetSitterDAO {
 		String sql = "SELECT ps.sitter_id, ps.tag, ps.notes, ps.sitter_like, ps.sitter_view, m.address, img_src "
                 + "FROM member m JOIN petsitter ps ON (m.member_id = ps.sitter_id) "
 				+ "JOIN attachment atm ON (m.member_id = atm.member_id) "        
-				+ "WHERE ps.public_status = 'Y' AND atm.category_id = 'AtchId04'";
+				+ "WHERE ps.public_status = 'Y' AND atm.category_id = 'AtchId04' "
+				+ "ORDER BY ps.sitter_like DESC";
 		jdbcUtil.setSqlAndParameters(sql, null);
 	      try {
 	         ResultSet rs = jdbcUtil.executeQuery();
@@ -65,15 +66,21 @@ public class PetSitterDAO {
 		String sql = "SELECT ps.sitter_id, ps.tag, ps.notes, ps.sitter_like, ps.sitter_view, m.address, img_src "
                 + "FROM member m JOIN petsitter ps ON (m.member_id = ps.sitter_id) "
 				+ "JOIN attachment atm ON (m.member_id = atm.member_id) ";
-		String keyword = "%" + options.get(1) + "%";
-		if (options.get(0).equals("city"))
+		String keyword = "";
+		if (options.get(0).equals("city")) {
+			keyword = "%" + options.get(1) + "%";
 			sql += "WHERE m.address LIKE ? AND ps.public_status = 'Y' AND atm.category_id = 'AtchId04'";
-		else if (options.get(0).equals("tag"))
+		}
+		else if (options.get(0).equals("tag")) {
+			keyword = "%" + options.get(1) + "%";
 			sql += "WHERE ps.tag LIKE ? AND ps.public_status = 'Y' AND atm.category_id = 'AtchId04'";
+		}
 		else if (options.get(0).equals("category")) {
+			keyword = options.get(1);
 			sql += "JOIN available_pet_kind apk ON (ps.sitter_id = apk.sitter_id) ";
 			sql += "WHERE apk.kind_id = ? AND ps.public_status = 'Y' AND atm.category_id = 'AtchId04'";
 		}
+		sql += "ORDER BY ps.sitter_like DESC";
 		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { keyword });
 	      try {

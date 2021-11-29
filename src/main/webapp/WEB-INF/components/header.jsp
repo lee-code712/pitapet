@@ -43,7 +43,7 @@
                 <c:if test="${!isNotLogined}">
                 	<c:url value='/reservation/searchSitter' var="sitterListUrl">
                 		<c:param name="currentPage" value="1" />
-                		<c:param name="selectOption" value="list" />
+                		<c:param name="searchOption" value="list" />
                 	</c:url>
                 	<div id="sitterListLink" onclick="location.href='${sitterListUrl}'">돌보미 조회</div>
                 	

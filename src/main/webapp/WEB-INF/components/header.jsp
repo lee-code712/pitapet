@@ -41,7 +41,7 @@
             	<div id="reviewLink" onclick="location.href='${reviewListUrl}'">이용 후기</div>
                 
                 <c:if test="${!isNotLogined}">
-                	<c:url value='/reservation/searchSitter' var="sitterListUrl">
+                	<c:url value='/reservation/listSitter' var="sitterListUrl">
                 		<c:param name="currentPage" value="1" />
                 		<c:param name="searchOption" value="list" />
                 	</c:url>

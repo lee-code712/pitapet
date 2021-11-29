@@ -20,6 +20,7 @@ import model.dto.PetKind;
 
 public class ListSitterController implements Controller {
 
+	@SuppressWarnings("unchecked")
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	
 		HttpSession session = request.getSession();
@@ -27,26 +28,27 @@ public class ListSitterController implements Controller {
 		PetSitterManager sitterMan = PetSitterManager.getInstance();
 		LikeListManager likelistMan = LikeListManager.getInstance();
 		
-		String page = (String) request.getParameter("currentPage");
-		int currentPage;
-		if (page == null)
-			currentPage = 1;
-		else
-			currentPage = Integer.parseInt(page);
-
 		// session에 id정보가 없으면 mainpage 호출 리다이렉션
 		if(!UserSessionUtils.hasLogined(session)) {
-			 return "redirect:/mainpage";
+			return "redirect:/mainpage";
 		}
 		
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		List<String> options = new ArrayList<>();
+		options.add((String) request.getParameter("searchOption"));
+		options.add((String) request.getParameter("keyword"));
+		
+		if (options.get(0) == null)
+			options = (List<String>) session.getAttribute("searchOption");
+		else
+			session.setAttribute("searchOption", options);
+
 		// 동물 종 카테고리 리스트 전달(돌보미들이 선택한 돌봄 가능 돌물종으로 제한)
 		List<PetKind> petKindList = petMan.findAllAblePetKindList();
 		request.setAttribute("petKindList", petKindList);
 		
 		// 페이지 정보 및 현재 페이지에 출력 될 돌보미 리스트를 전달
-		@SuppressWarnings("unchecked")
-		List<PetSitter> sitters = (List<PetSitter>) session.getAttribute("searchSitters");
-		Map<Integer, List<PetSitter>> sitterMap = sitterMan.getPetSittersOfPage(sitters, currentPage);
+		Map<Integer, List<PetSitter>> sitterMap = sitterMan.getPetSittersOfPage(options, currentPage);
 		if (sitterMap != null) {
 			Iterator<Integer> iterator = sitterMap.keySet().iterator();
 	        if (iterator.hasNext()) {

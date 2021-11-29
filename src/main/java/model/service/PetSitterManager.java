@@ -35,10 +35,15 @@ public class PetSitterManager {
 	}
 	
 	/* 페이지에 출력될 펫시터 리스트 및 페이지 정보 반환 */
-	public Map<Integer, List<PetSitter>> getPetSittersOfPage(List<PetSitter> sitters, int currentPage) throws SQLException {
-		ArrayList<PetSitter> sitterList = (ArrayList<PetSitter>) sitters;
-		if (sitterList == null)
+	public Map<Integer, List<PetSitter>> getPetSittersOfPage(List<String> options, int currentPage) throws SQLException {
+		ArrayList<PetSitter> sitterList = null;
+		if (options.get(0).equals("list"))
 			sitterList = sitterDAO.findPetSitterList();
+		else {
+			sitterList = sitterDAO.findPetSitterListByKeyword(options);
+			if (sitterList == null)
+				sitterList = new ArrayList<PetSitter>(); // 검색 결과를 찾지 못했을 때를 구분하기 위해 비어있는 리스트 생성
+		}
 		
 		if (sitterList != null) {
 			int rpp = 2;
@@ -76,14 +81,6 @@ public class PetSitterManager {
 			return sitterMap;
 		}
 		return null;
-	}
-	
-	/* 돌보미 리스트 검색 */
-	public ArrayList<PetSitter> findPetSitterListByKeyword(List<String> options) throws SQLException {
-		ArrayList<PetSitter> sitters = sitterDAO.findPetSitterListByKeyword(options);
-		if (sitters == null)
-			sitters = new ArrayList<>(); // 검색 결과를 찾지 못했을 때 구분하기 위해 비어있는 리스트 생성
-		return sitters;
 	}
 	
 	/* 돌보미 상세정보 반환 (제공서비스, 돌봄 가능 종 리스트 포함) */

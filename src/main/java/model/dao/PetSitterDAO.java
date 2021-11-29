@@ -23,7 +23,7 @@ public class PetSitterDAO {
                 + "FROM member m JOIN petsitter ps ON (m.member_id = ps.sitter_id) "
 				+ "JOIN attachment atm ON (m.member_id = atm.member_id) "        
 				+ "WHERE ps.public_status = 'Y' AND atm.category_id = 'AtchId04' "
-				+ "ORDER BY ps.sitter_like DESC";
+				+ "ORDER BY ps.sitter_like DESC, ps.sitter_view DESC";
 		jdbcUtil.setSqlAndParameters(sql, null);
 	      try {
 	         ResultSet rs = jdbcUtil.executeQuery();
@@ -80,7 +80,7 @@ public class PetSitterDAO {
 			sql += "JOIN available_pet_kind apk ON (ps.sitter_id = apk.sitter_id) ";
 			sql += "WHERE apk.kind_id = ? AND ps.public_status = 'Y' AND atm.category_id = 'AtchId04'";
 		}
-		sql += "ORDER BY ps.sitter_like DESC";
+		sql += "ORDER BY ps.sitter_like DESC, ps.sitter_view DESC";
 		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { keyword });
 	      try {

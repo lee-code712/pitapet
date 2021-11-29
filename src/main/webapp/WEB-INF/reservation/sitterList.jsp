@@ -584,7 +584,7 @@ select {
 		<div id="searchToolsWrap">
 			<div id="pageTit">돌보미 정보 조회</div>
 			<div id="searchTools">
-				<form name="form" method="GET" action="/reservation/searchSitter">
+				<form name="form" method="GET" action="/reservation/listSitter">
 					<select id="choiceBox" name="searchOption">
 						<option value="city">지역</option>
 						<c:choose>
@@ -683,7 +683,7 @@ select {
 				<c:set var="currentPage" value="${pageInfo.get(1)}" />
 				<c:set var="totalPage" value="${pageInfo.get(0)}" />
 				<c:if test="${currentPage > 1}">
-					<c:url value='/reservation/searchSitter' var="preUrl">
+					<c:url value='/reservation/listSitter' var="preUrl">
 						<c:param name="currentPage" value="${currentPage - 1}" />
 					</c:url>
 					<a href="${preUrl}" id="pre">이전</a>
@@ -694,7 +694,7 @@ select {
 							<div id="numOn">${i}</div>
 						</c:when>
 						<c:otherwise>
-							<c:url value='/reservation/searchSitter' var="url">
+							<c:url value='/reservation/listSitter' var="url">
 								<c:param name="currentPage" value="${i}" />
 							</c:url>
 							<div id="num" onClick="location.href='${url}'">${i}</div>
@@ -702,7 +702,7 @@ select {
 					</c:choose>
 				</c:forEach>
 				<c:if test="${currentPage < totalPage}">
-					<c:url value='/reservation/searchSitter' var="postUrl">
+					<c:url value='/reservation/listSitter' var="postUrl">
 						<c:param name="currentPage" value="${currentPage + 1}" />
 					</c:url>
 					<a href="${postUrl}" id="next">다음</a>
@@ -810,7 +810,7 @@ select {
 					<li><a href="#">${category}</a>
 					<ul>
 				</c:if>
-				<li><a href="<c:url value='/reservation/searchSitter'>
+				<li><a href="<c:url value='/reservation/listSitter'>
 								<c:param name='searchOption' value='category'/>
 								<c:param name='keyword' value='${petKind.id}'/>
 								<c:param name='currentPage' value='1' />

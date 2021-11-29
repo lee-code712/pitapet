@@ -98,7 +98,7 @@ public class PetSitterApplicationDAO {
 		
 	}
 	
-	// 돌보미 지원서 첨부파일 반환
+	// 돌보미 지원서 자격증 첨부파일 반환
 	public List<String> findApplyAttachments(String memberId) throws SQLException {
 		String sql = "SELECT img_src " + "FROM attachment " + "WHERE member_id=? AND category_id=? AND img_src LIKE ?";
 

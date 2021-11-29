@@ -20,8 +20,6 @@ public class ViewApplyController implements Controller {
     	PetSitterApplication applicantDetail = psApplicationMan.findApplication(applyId);
     	request.setAttribute("applicantDetail", applicantDetail);
     	
-    	
-    	
     	return "/manager/applicationView.jsp";
     }
 }

@@ -41,27 +41,22 @@
         <div id="pageTit">지원 정보</div>
         <div id="applyBox">
             <div id="applyImgWrap">
-                <img src="../images/applyNullImg.svg" />
+                <c:if test="${applicantDetail.applicant.profileImage eq null}">
+					<img src="../images/applyNullImg.svg" id="profileImg" />
+				</c:if>
+				<c:if test="${applicantDetail.applicant.profileImage ne null}">
+					<img src="${applicantDetail.applicant.profileImage}" id="profileImg" />
+				</c:if>
                 <div id="targetLocation">${applicantDetail.applicant.address}</div>
             </div>
 
             <div id="applyInfo">
                 <div id="sitterName">${applicantDetail.applicant.id}</div>
-                <div id="detailTit">(제목)</div>
-                <div id="detailIntro">${applicantDetail.introduction}</div>
+                <div id="detailTit">${applicantDetail.introduction}</div>
+                <div id="detailIntro">경력: ${applicantDetail.career} / 자격증: ${applicantDetail.certification}</div>
                 <div id="serviceCaringWrap">
-                    <div id="petSitterServiceWrap">
-                        <div id="serviceTit">제공 서비스</div> 
-                        <div id="petSitterService">(제공서비스)</div>
-                    </div>
                     <div id="caringDateWrap">
-                        <div id="caringPetsWrap">
-                            <div id="caringTit">돌봄 가능 반려동물</div>
-                            <div id="caringPet">대형견</div>
-                            <div id="caringPet">소형견</div>
-                            <div id="caringPet">고양이</div>
-                        </div>
-                        <div id="lookUpDate">${applicant.applyDate}</div>
+                        <div id="lookUpDate">${applicantDetail.applyDate}</div>
                     </div>
                 </div>
             </div>

@@ -3,16 +3,21 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import model.dto.PetKind;
 import model.dto.PetSitterApplication;
+import model.dao.MemberDAO;
+import model.dao.PetDAO;
 import model.dao.PetSitterApplicationDAO;
 
 public class PetSitterApplicationManager {
 	private static PetSitterApplicationManager applycationMan = new PetSitterApplicationManager();
 	private PetSitterApplicationDAO petSitterApplicationDAO;
+	private MemberDAO memberDAO;
 	
 	private PetSitterApplicationManager() {
 		try {
 			petSitterApplicationDAO = new PetSitterApplicationDAO();
+			memberDAO = new MemberDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}			
@@ -32,6 +37,7 @@ public class PetSitterApplicationManager {
 	
 	public PetSitterApplication findApplication(String applyId) throws SQLException {
 		PetSitterApplication application = petSitterApplicationDAO.findApplication(applyId);
+		String profileImg = memberDAO.findProfileAttachment(application.getApplicant().getId());
 		String[] address = application.getApplicant().getAddress().split(" ");
 		String city = null;
 		for (int j = 0; j < address.length; j++) {
@@ -43,6 +49,8 @@ public class PetSitterApplicationManager {
 		
 		List<String> imgList = petSitterApplicationDAO.findApplyAttachments(application.getApplicant().getId());
 		application.setImages(imgList);
+		
+		application.getApplicant().setProfileImage(profileImg);
 		
 		return application;
 	}

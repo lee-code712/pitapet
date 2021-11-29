@@ -66,6 +66,8 @@ public class RequestMapping {
         // manager
         mappings.put("/manager/listSitterApply", new ListSitterApplyController());
         mappings.put("/manager/viewApply", new ViewApplyController());
+        mappings.put("/manager/approval", new ApprovalSitterController());
+        mappings.put("/manager/refuse", new RefuseSitterController());
         
         logger.info("Initialized Request Mapping!");
     }

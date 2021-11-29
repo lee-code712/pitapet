@@ -1,5 +1,8 @@
 package controller.reservation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,26 +16,33 @@ public class SearchSitterController implements Controller {
 			
 			String option = (String) request.getParameter("searchOption");
 			if (option == null) {
-				String currentPage = (String) request.getParameter("currentPage");
-				return "redirect:/reservation/listSitter?currentPage=" + currentPage;
+				option = (String) session.getAttribute("searchOption");
 			}
 			
-			if (option.equals("city")) {
-				// 지역으로 키원드 검색
+			if (option.equals("list")) {
+				// 돌보미 조회 목록 호출 시 세션에 저장된 옵션정보 삭제
+				if (session.getAttribute("searchOption") != null)
+					session.removeAttribute("searchOption");
 			}
-			else if (option.equals("tag")) {
-				// 태그로 키워드 검색
+			else {
+				String keyword = (String) request.getParameter("keyword");
+				List<String> options = new ArrayList<>();
+				options.add(option);
+				options.add(keyword);
+				if (option.equals("city")) {
+					// 지역으로 키워드 검색
+				}
+				else if (option.equals("tag")) {
+					// 태그로 키워드 검색
+				}
+				else if (option.equals("category")) {
+					// 카테고리에서 선택한 종(키워드)으로 검색
+				}
+				// 세션에 옵션정보 저장
+				session.setAttribute("searchOption", options);
 			}
-			else if (option.equals("rankLike")) {
-				// 종아요 순으로 정렬
-			}
-			else if (option.equals("rankView")) {
-				// 조회 순으로 정렬
-			}
-			else if (option.equals("category")) {
-				// 카테고리에서 선택한 종으로 검색
-			}
-			
-			return "redirect:/reservation/listSitter";
+				
+			String currentPage = (String) request.getParameter("currentPage");
+			return "redirect:/reservation/listSitter?currentPage=" + currentPage;
 	}
 }

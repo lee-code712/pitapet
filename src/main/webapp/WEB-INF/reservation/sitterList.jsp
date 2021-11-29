@@ -581,18 +581,10 @@ select {
 					</select>
 					<div id="searchWrap">	
 						<input type="text" placeholder="검색어를 입력하세요." id="searchText" name="keyword" /> 
+						<input type="hidden" name="currentPage" value="1" />
 						<input type='image' src="/images/search.svg" id="searchImg" />
 					</div>
 				</form>
-				<div class="dropdown">
-					<img src="/images/hamburgerBar.svg" id="hamburgerBarImg" class="dropbtn" />
-					<div class="dropdown-content">
-						<a href="<c:url value='/reservation/searchSitter'>
-							<param name='searchOption' value='rankLike'/></c:url>">인기순</a> 
-						<a href="<c:url value='/reservation/searchSitter'>
-							<param name='searchOption' value='rankView'/></c:url>">조회순</a>
-					</div>
-				</div>
 			</div>
 		</div>
 		<c:forEach var="petsitter" items="${petSitterList}">
@@ -791,7 +783,8 @@ select {
 				</c:if>
 				<li><a href="<c:url value='/reservation/searchSitter'>
 								<c:param name='searchOption' value='category'/>
-								<c:param name='smallCategory' value='${petKind.smallCategory}'/>
+								<c:param name='keyword' value='${petKind.id}'/>
+								<c:param name='currentPage' value='1' />
 								</c:url>">${petKind.smallCategory}</a></li>
 				<c:if test="${status.last}">
 					</ul></li>

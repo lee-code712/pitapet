@@ -632,7 +632,7 @@
                                 <img src="/images/reviewNewImg.svg" id="reviewImg"/>
                             </c:if>
                             <c:if test="${review.images ne null}">
-                                <img src="${review.images[0]}" id="reviewImg"/>
+                                <img src="${pageContext.request.contextPath}${review.images[0]}" id="reviewImg"/>
                             </c:if>
                             <div id="reviewScopeWrap">
                                 <img src="/images/star.svg" />

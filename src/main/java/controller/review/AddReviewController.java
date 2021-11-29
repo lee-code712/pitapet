@@ -41,7 +41,8 @@ public class AddReviewController implements Controller {
 		
 		boolean check = ServletFileUpload.isMultipartContent(request);
 		if(check) {//파일 전송이 포함된 상태가 맞다면
-			String path = "C:/Users/User/git/pitapet/src/main/webapp/upload"; // 내 경로로 해야 함..
+			ServletContext context = request.getServletContext();
+			String path = context.getRealPath("/upload");
 			File dir = new File(path);
 			
 			if(!dir.exists()) dir.mkdir();

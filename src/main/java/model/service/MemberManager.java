@@ -34,7 +34,7 @@ public class MemberManager {
 		return this.memberDAO;
 	}
 
-	public boolean login(String memberId, String password)
+	public Member login(String memberId, String password)
 			throws SQLException, MemberNotFoundException, PasswordMismatchException {
 		Member member = memberDAO.findMember(memberId);
 
@@ -45,7 +45,7 @@ public class MemberManager {
 		if (member != null && !member.matchPassword(password)) {
 			throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
 		}
-		return true;
+		return member;
 	}
 
 	public Member findMember(String memberId) throws SQLException {

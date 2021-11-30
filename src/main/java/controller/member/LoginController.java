@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import model.service.MemberManager;
+import model.dto.Member;
 import model.service.exception.MemberNotFoundException;
 import model.service.exception.PasswordMismatchException;
 
@@ -17,17 +18,15 @@ public class LoginController implements Controller {
 		
 		try {
 			// 모델에 로그인 처리를 위임
-			MemberManager manager = MemberManager.getInstance();
-			manager.login(memberId, password);
+			MemberManager memMan = MemberManager.getInstance();
+			Member member = memMan.login(memberId, password);
 	
 			// 세션에 사용자 아이디, 등급 저장
 			HttpSession session = request.getSession();
             session.setAttribute(UserSessionUtils.USER_SESSION_KEY, memberId);
+            session.setAttribute("identity", member.getIdentity());
             
-            String memberIdentity = manager.findMember(memberId).getIdentity();
-            session.setAttribute("identity", memberIdentity);
-            
-            if(memberIdentity.equals("M"))
+            if(member.getIdentity().equals("M"))
             	return "redirect:/manager/listSitterApply";
             else
             	return "redirect:/mainpage";			

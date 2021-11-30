@@ -3,25 +3,30 @@ package model.service;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import model.dao.MemberDAO;
 import model.dao.PetDAO;
 import model.dao.PetSitterDAO;
 import model.dao.ServiceDAO;
+import model.dto.Member;
 import model.dto.PetKind;
 import model.dto.PetSitter;
 import model.dto.Service;
 
 public class PetSitterManager {
 	private static PetSitterManager sitterMan = new PetSitterManager();
+	private MemberDAO memberDAO;
 	private PetSitterDAO sitterDAO;
 	private ServiceDAO serviceDAO;
 	private PetDAO petDAO;
 
 	private PetSitterManager() {
 		try {
+			memberDAO = new MemberDAO();
 			sitterDAO = new PetSitterDAO();
 			serviceDAO = new ServiceDAO();
 			petDAO = new PetDAO();
@@ -79,6 +84,24 @@ public class PetSitterManager {
 			sitterMap.put(totalPage, pagingSitters);
 			
 			return sitterMap;
+		}
+		return null;
+	}
+	
+	/* 추천 돌보미 반환 */
+	public PetSitter getRecommendPetSitter(String memberId) throws SQLException {
+		ArrayList<PetSitter> sitters = sitterDAO.findPetSitterListOfRecommend(memberId);
+		// Member memberInfo = memberDAO.findMember(memberId);
+		if (sitters != null) {
+			Collections.shuffle(sitters);
+			String[] address = sitters.get(0).getSitter().getAddress().split(" ");
+			String city = null;
+			for (int j = 0; j < address.length; j++) {
+				if (address[j].matches("(.*)로"))
+					city = address[j].substring(0, address[j].length() - 1);
+			}
+			sitters.get(0).getSitter().setAddress(city);
+			return sitters.get(0);
 		}
 		return null;
 	}

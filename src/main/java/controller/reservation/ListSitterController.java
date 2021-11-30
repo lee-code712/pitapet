@@ -32,12 +32,15 @@ public class ListSitterController implements Controller {
 		if(!UserSessionUtils.hasLogined(session)) {
 			return "redirect:/mainpage";
 		}
+		String memberId = UserSessionUtils.getLoginUserId(session);
 		
+		// page정보, option정보를 파라미터로 가져옴
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		List<String> options = new ArrayList<>();
 		options.add((String) request.getParameter("searchOption"));
 		options.add((String) request.getParameter("keyword"));
 		
+		// 파라미터로 가져온 option정보가 없다면 세션에서 option정보를 가져옴(페이지만 선택했을 때)
 		if (options.get(0) == null)
 			options = (List<String>) session.getAttribute("searchOption");
 		else
@@ -60,13 +63,14 @@ public class ListSitterController implements Controller {
 				request.setAttribute("petSitterList", sitterMap.get(totalPage));
 	        }
 			// 현재 로그인한 사용자의 likeList 전달
-			List<LikeList> likeSitters = likelistMan.findLikeListOfMember(UserSessionUtils.getLoginUserId(session));
+			List<LikeList> likeSitters = likelistMan.findLikeListOfMember(memberId);
 			request.setAttribute("likeSitters", likeSitters);
 			session.removeAttribute("searchSitters");
 		}
 		
 		// 지역 및 동물 맞춤 추천 돌보미 전달
-		
+		PetSitter recommendSitter = sitterMan.getRecommendPetSitter(memberId);
+		request.setAttribute("recoSitter", recommendSitter);
 		
         return "/reservation/sitterList.jsp";
     }

@@ -119,6 +119,54 @@ public class PetSitterDAO {
 	      return null;
 	}
 	
+	
+	/* 추천 돌보미 리스트 조회(현재 사용자의 반려동물과 같은 종 돌봄이 가능한 돌보미) */
+	public ArrayList<PetSitter> findPetSitterListOfRecommend(String memberId) throws SQLException {
+		String sql = "SELECT ps.sitter_id, ps.tag, ps.notes, ps.sitter_like, ps.sitter_view, m.address, img_src "
+                + "FROM member m JOIN petsitter ps ON (m.member_id = ps.sitter_id) "
+				+ "JOIN attachment atm ON (m.member_id = atm.member_id) "
+				+ "JOIN available_pet_kind apk ON (ps.sitter_id = apk.sitter_id) "
+				+ "WHERE ps.public_status = 'Y' AND atm.category_id = 'AtchId04' "
+				+ "AND apk.kind_id IN (SELECT p.kind_id FROM member usr JOIN PET p ON (usr.member_id = p.member_id) " 
+				+ "WHERE usr.member_id = ?)";
+		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId });
+	      try {
+	         ResultSet rs = jdbcUtil.executeQuery();
+	         if (rs.next()) {                  
+	        	 ArrayList<PetSitter> sitterList = new ArrayList<>();
+	        	 PetSitter sitter = new PetSitter (
+	        			 new Member (
+	        					 rs.getString("sitter_id"), 
+	        					 rs.getString("address"),
+	        					 rs.getString("img_src")),
+	        			 rs.getString("tag"),
+	        			 rs.getString("notes"),
+	        			 rs.getInt("sitter_like"),
+	        			 rs.getInt("sitter_view"));
+	        	 sitterList.add(sitter);
+	        	 while (rs.next()) {
+	        		 sitter = new PetSitter (
+		        			 new Member (
+		        					 rs.getString("sitter_id"), 
+		        					 rs.getString("address"),
+		        					 rs.getString("img_src")),
+		        			 rs.getString("tag"),
+		        			 rs.getString("notes"),
+		        			 rs.getInt("sitter_like"),
+		        			 rs.getInt("sitter_view"));
+	        		 sitterList.add(sitter);
+	        	 }
+	            return sitterList;
+	         }
+	      } catch (Exception ex) {
+	         ex.printStackTrace();
+	      } finally {
+	         jdbcUtil.close();      
+	      }
+	      return null;
+	}	
+	
 	/* 돌보미 정보 반환 */
 	public PetSitter findPetSitter(String sitterId) throws SQLException {
 		String sql = "SELECT ps.sitter_id, ps.public_status, ps.able_date, ps.caculated_price, "

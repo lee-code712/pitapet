@@ -714,75 +714,75 @@ select {
 			<div id="reviewTit">추천</div>
 
 			<div id="reviewBoxWrap">
-
-				<div id="reviewBox">
-					<img src="/images/recommendNullImg.svg" id="reviewImg" />
-					<div id="reviewBoxInner">
-						<div id="reviewBoxContent">
-							<div id="reviewerDateWrap">
-								<div id="reviewer">###보호자님</div>
-								<div id="reviewDate">2021-11-01</div>
-							</div>
-							<div id="locationWrap">
-								<img src="/images/location.svg" id="locationImg" /> 상월곡
-							</div>
-							<div id="review">(리뷰 작성)</div>
+				<c:if test="${empty recoSitter}">
+					매칭되는 추천 돌보미가 없습니다.
+				</c:if>
+				<c:if test="${!empty recoSitter}">
+					<c:url value="/reservation/viewSitterDetail" var="viewUrl">
+						<c:param name="sitterId" value="${recoSitter.sitter.id}" />
+					</c:url>
+					<div id="petSitterInfoBox">
+						<img src="${recoSitter.sitter.profileImage}" id="petSitterImg" />
+						<div id="likeCountWrap">
+							<img src="/images/smallHeart.svg" is="likeCountImg" />
+							<div id="likeCount">${recoSitter.like}</div>
 						</div>
-						<div id="targetScopeWrap">
-							<div id="reviewTarget">about ###반려동물 돌보미</div>
-							<div id="scopeWrap">
-								<img src="../images/star.svg" />
-								<div id="scope">5.0</div>
+						<div id="petSitterInfoInner">
+							<c:url value='/like/changeLike' var='addLikeUrl'>
+								<c:param name='status' value='add' />
+								<c:param name='sitterId' value='${recoSitter.sitter.id}' />
+							</c:url>
+							<c:url value='/like/changeLike' var='cancelLikeUrl'>
+								<c:param name='status' value='remove' />
+								<c:param name='sitterId' value='${recoSitter.sitter.id}' />
+							</c:url>
+							<div id="petSitterNameLikeWrap">
+								<div id="petSitterName" onClick="location.href='${viewUrl}'">${recoSitter.sitter.id}
+									반려동물 돌보미</div>
+								<c:if test="${empty likeSitters}">
+									<img src="/images/like.svg" id="likeImg"
+										onClick="location.href='${addLikeUrl}'" />
+								</c:if>
+								<c:if test="${not empty likeSitters}">
+									<c:set var="findCk" value="false" />
+									<c:forEach var="likesitter" items="${likeSitters}"
+										varStatus="status">
+										<c:if test="${findCk == false}">
+											<c:choose>
+												<c:when
+													test="${likesitter.likeSitter.sitter.id == petsitter.sitter.id}">
+													<img src="/images/likeOn.svg" id="likeOnImg"
+														onClick="location.href='${cancelLikeUrl}'" />
+													<c:set var="findCk" value="true" />
+												</c:when>
+												<c:otherwise>
+													<c:if test="${status.last}">
+														<img src="/images/like.svg" id="likeImg"
+															onClick="location.href='${addLikeUrl}'" />
+													</c:if>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
+									</c:forEach>
+								</c:if>
+							</div>
+							<div id="sitterLocationWrap">
+								<img src="/images/location.svg" id="locationImg" />${recoSitter.sitter.address}
+							</div>
+							<div id="petSitterIntro">${recoSitter.notes}</div>
+							<div id="serviceCaringWrap">
+								<div id="caringDateWrap">
+									<div id="caringPetsWrap">
+										<c:set var="tags" value="${fn:split(recoSitter.tag,',')}" />
+										<c:forEach var="tag" items="${tags}">
+											<div id="caringPet">#${tag}</div>
+										</c:forEach>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<div id="reviewBox">
-					<img src="/images/recommendNullImg.svg" id="reviewImg" />
-					<div id="reviewBoxInner">
-						<div id="reviewBoxContent">
-							<div id="reviewerDateWrap">
-								<div id="reviewer">###보호자님</div>
-								<div id="reviewDate">2021-11-01</div>
-							</div>
-							<div id="locationWrap">
-								<img src="/images/location.svg" id="locationImg" /> 상월곡
-							</div>
-							<div id="review">(리뷰 작성)</div>
-						</div>
-						<div id="targetScopeWrap">
-							<div id="reviewTarget">about ###반려동물 돌보미</div>
-							<div id="scopeWrap">
-								<img src="../images/star.svg" />
-								<div id="scope">5.0</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div id="reviewBox">
-					<img src="/images/recommendNullImg.svg" id="reviewImg" />
-					<div id="reviewBoxInner">
-						<div id="reviewBoxContent">
-							<div id="reviewerDateWrap">
-								<div id="reviewer">###보호자님</div>
-								<div id="reviewDate">2021-11-01</div>
-							</div>
-							<div id="locationWrap">
-								<img src="/images/location.svg" id="locationImg" /> 상월곡
-							</div>
-							<div id="review">(리뷰 작성)</div>
-						</div>
-						<div id="targetScopeWrap">
-							<div id="reviewTarget">about ###반려동물 돌보미</div>
-							<div id="scopeWrap">
-								<img src="../images/star.svg" />
-								<div id="scope">5.0</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>

@@ -750,7 +750,7 @@ select {
 										<c:if test="${findCk == false}">
 											<c:choose>
 												<c:when
-													test="${likesitter.likeSitter.sitter.id == petsitter.sitter.id}">
+													test="${likesitter.likeSitter.sitter.id == recoSitter.sitter.id}">
 													<img src="/images/likeOn.svg" id="likeOnImg"
 														onClick="location.href='${cancelLikeUrl}'" />
 													<c:set var="findCk" value="true" />

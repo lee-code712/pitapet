@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.dto.PetKind;
+import model.dto.PetSitter;
 import model.dto.PetSitterApplication;
 import model.dao.MemberDAO;
 import model.dao.PetDAO;
@@ -61,5 +62,9 @@ public class PetSitterApplicationManager {
 	
 	public int refuseStatus(String applyId) throws SQLException {
 		return petSitterApplicationDAO.refuseStatus(applyId);
+	}
+	
+	public int createBasicSitter(String memberId, String applyId) throws SQLException {
+	      return petSitterApplicationDAO.createBasicSitter(memberId, applyId);
 	}
 }

@@ -71,6 +71,7 @@
         	<button id="acceptBtn" onclick="location.href='${refuse}'">거절하기</button>
         	<c:url value='/manager/approval' var="approval">
 				<c:param name="applyId" value="${applicantDetail.id}" />
+				<c:param name="memberId" value="${applicantDetail.applicant.id}" />
 			</c:url>
             <button id="acceptBtn" onClick="location.href='${approval}'">승인하기</button>
         </div>

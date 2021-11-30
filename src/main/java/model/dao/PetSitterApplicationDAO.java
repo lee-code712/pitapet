@@ -70,6 +70,7 @@ public class PetSitterApplicationDAO {
 		return null;
 	}
 	
+	//돌보미 지원서 반환
 	public PetSitterApplication findApplication(String applyId) throws SQLException {
 		String sql = "SELECT apply_date, career, certification, introduction, member_id, address "
 				+ "FROM petsitter_application ps JOIN member m USING(member_id)"
@@ -122,6 +123,7 @@ public class PetSitterApplicationDAO {
 		return null;
 	}
 	
+	//관리자의 돌보미 승인
 	public int applyStatus(String applyId) throws SQLException {
 		String sql = "UPDATE petsitter_application "
 					+ "SET approval_status='Y' "
@@ -143,6 +145,7 @@ public class PetSitterApplicationDAO {
 		return 0;
 	}
 	
+	//관리자의 돌보미 거절
 	public int refuseStatus(String applyId) throws SQLException {
 		String sql = "UPDATE petsitter_application "
 					+ "SET approval_status='Z' "
@@ -150,6 +153,26 @@ public class PetSitterApplicationDAO {
 		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {applyId});
 			
+		try {				
+			int result = jdbcUtil.executeUpdate();
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}		
+		return 0;
+	}
+	
+	//돌보미 승인시 기본적인 펫시터 객체 생성
+	public int createBasicSitter(String memberId, String applyId) throws SQLException {
+		String sql = "INSERT INTO PETSITTER(sitter_id, public_status, able_date, sitter_like, sitter_view, apply_id) VALUES (?, ?, ?, ?, ?, ?)";
+				
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, 'N', 'N', 0, 0, applyId}); 
+
 		try {				
 			int result = jdbcUtil.executeUpdate();
 			return result;

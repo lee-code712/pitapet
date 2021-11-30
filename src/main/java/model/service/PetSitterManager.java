@@ -136,6 +136,11 @@ public class PetSitterManager {
 	public ArrayList<PetSitter> findPetSitterList() throws SQLException {
 		return sitterDAO.findPetSitterList();
 	}
+	
+	/*보호자에서 돌보미로 등급 조정*/
+	public int upgradeSitter(String memberId) throws SQLException {
+		return sitterDAO.upgradeSitter(memberId);
+	}
 
 
 }

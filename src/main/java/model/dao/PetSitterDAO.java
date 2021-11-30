@@ -247,5 +247,27 @@ public class PetSitterDAO {
 		}
 		return 0;	
 	}
+	
+	/*보호자에서 돌보미로 등급 조정*/
+	public int upgradeSitter(String memberId) throws SQLException {
+		String sql = "UPDATE member "
+					+ "SET identity='S' "
+					+ "WHERE member_id=?";
+		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId});
+			
+		try {				
+			int result = jdbcUtil.executeUpdate();
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}		
+		return 0;
+	}
 		
 }

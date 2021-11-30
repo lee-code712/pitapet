@@ -1,6 +1,7 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -80,7 +81,7 @@ public class CareManager {
 		Calendar cal = Calendar.getInstance();
 		Date date = new Date();
 		cal.setTime(date);
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		Map<String, String> scheduleMap = new HashMap<>();
 		String unparsedAbleDay = sitter.getAbleDate();
@@ -96,28 +97,40 @@ public class CareManager {
 			else
 				idx = dayNum - 2;
 			if(ableDateArr[idx].equals("0")) {
-				String strDate = simpleDateFormat.format(cal.getTime());
+				String strDate = sdf.format(cal.getTime());
 				scheduleMap.put(strDate, strDate);
 			}
 			cal.add(Calendar.DATE, 1);
 		}
 		
 		List<Care> careSchedules = careDAO.findCareSchedules(memberId);
+		List<Care> careSchedulesOfSitter = careDAO.findCareSchedulesOfSitter(sitter.getSitter().getId());
+		if (careSchedules == null || careSchedulesOfSitter == null)
+			careSchedules = careSchedulesOfSitter;
+		else
+			careSchedules.addAll(careSchedulesOfSitter);
+		
 		if (careSchedules != null) {
-			List<Care> careSchedulesOfSitter = careDAO.findCareSchedulesOfSitter(sitter.getSitter().getId());
-			if (careSchedulesOfSitter != null) {
-				careSchedules.addAll(careSchedulesOfSitter);
-			}
-			
 			Iterator<Care> iterator = careSchedules.iterator();
 			while (iterator.hasNext()) {
 				Care care = iterator.next();
-				cal.setTime(date);
-				scheduleMap.put(care.getStartDate(), care.getEndDate());
+				String start = care.getStartDate();
+				String end = care.getEndDate();
+				try {
+					Date startDate = sdf.parse(start);
+					Date endDate = sdf.parse(end);
+					cal.setTime(startDate);
+					while (cal.getTime().before(endDate) || cal.getTime().equals(endDate)) {
+						String strDate = sdf.format(cal.getTime());
+						scheduleMap.put(strDate, strDate);
+						cal.add(Calendar.DATE, 1);
+					}
+				}
+				catch (ParseException e) { e.printStackTrace(); }
 			}
 			return scheduleMap;
 		}
-		return null; // 왜 daad code??
+		return null;
 	}
 	
 	/* 후기를 작성해야 하는 돌봄내역 리스트 반환 */

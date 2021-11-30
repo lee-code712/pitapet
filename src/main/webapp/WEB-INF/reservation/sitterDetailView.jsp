@@ -446,11 +446,11 @@
 	    
 	 	// 불가능한 날짜들 배열
 	 	var schedules = JSON.parse('${schedules}');
-	 	console.log(schedules);
 	    var disabledDays = [];
 	    for (key in schedules) {
 	    	disabledDays.push(schedules[key].split(' ')[0]);
 	    }
+	 	console.log(disabledDays);
 
 	    // 특정일 선택막기
 	    function disableAllTheseDays(date) {
@@ -465,7 +465,7 @@
 	        return [true];
 	    }
 	    
-	    function cfSetAddZero(target) {    
+	    function cfSetAddZero(target) {
 	        if (target <= 9)
 	        	return "0" + target;
 	        return target;

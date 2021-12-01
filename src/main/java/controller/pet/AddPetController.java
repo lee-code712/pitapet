@@ -37,7 +37,7 @@ public class AddPetController implements Controller {
 		String kindId = request.getParameter("petKind");
 		
 		Pet pet = new Pet(name, birth, gender, new PetKind(kindId), null);
-		boolean isAdded = petMan.addPet(userId, pet);
+		boolean isAdded = false; //petMan.addPet(userId, pet);
 		if (!isAdded) {
 			session.setAttribute("petInfo", pet);
 			return "redirect:/pet/addPet?addFailed=true";

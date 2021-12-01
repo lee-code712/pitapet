@@ -23,7 +23,6 @@ var today = new Date();
 	        });
 	    
 	 	// 불가능한 날짜들 배열
-	 	var schedules = JSON.parse('${schedules}');
 	    var disabledDays = [];
 	    for (key in schedules) {
 	    	disabledDays.push(schedules[key].split(' ')[0]);

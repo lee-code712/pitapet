@@ -1,7 +1,6 @@
 package model.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.Map;
 import model.dao.ServiceDAO;
 import model.dto.Care;
 import model.dto.CareDetails;
-import model.dto.Pet;
 import model.dto.Service;
 
 public class ServiceManager {
@@ -29,18 +27,7 @@ public class ServiceManager {
 		return serviceMan;
 	}
 
-	public ArrayList<Service> findProvideServiceList(String sitterId) throws SQLException {
-		return serviceDAO.findProvideServiceList(sitterId);
-	}
-	
-	public String createReceiveService(int careId, String petId, String serviceId) throws SQLException {
-		   return serviceDAO.createReceiveService(careId, petId, serviceId);
-	}
-	
-	public int deleteReceiveService(int careId) throws SQLException {
-		return serviceDAO.deleteReceiveService(careId);
-	}
-	
+	/* 제공받을 서비스 맵으로 반환 */
 	public Map<String, Service> getServiceMap(List<Service> ableService) throws SQLException {
 		Iterator<Service> iterator = ableService.iterator();
 		Map<String, Service> serviceMap = new HashMap<String, Service>();
@@ -53,6 +40,14 @@ public class ServiceManager {
 		return serviceMap;
 	}
 	
+	public String createReceiveService(int careId, String petId, String serviceId) throws SQLException {
+		   return serviceDAO.createReceiveService(careId, petId, serviceId);
+	}
+	
+	public int deleteReceiveService(int careId) throws SQLException {
+		return serviceDAO.deleteReceiveService(careId);
+	}
+
 	public List<CareDetails> findReceiveServiceByCareId(Care care) throws SQLException {
 		return serviceDAO.findReceiveServiceByCareId(care);
 	}

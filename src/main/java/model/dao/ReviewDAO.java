@@ -52,11 +52,10 @@ public class ReviewDAO {
 		return null;
 	}
 
-	/* 선택한 sitter의 리뷰 반환 */
+	/* 선택한 돌보미의 리뷰 반환 */
 	public List<Review> findReviewListOfSitter(String sitterId) throws SQLException {
 		String sql = "SELECT review_id, write_date, content, rate, care_id, c.member_id, c.sitter_id, m.address, img_src "
-				+ "FROM review r JOIN care c USING (care_id) "
-				+ "JOIN member m ON (c.sitter_id = m.member_id) "
+				+ "FROM review r JOIN care c USING (care_id) " + "JOIN member m ON (c.sitter_id = m.member_id) "
 				+ "JOIN attachment atm ON (m.member_id = atm.member_id) "
 				+ "WHERE sitter_id = ? AND atm.category_id = 'AtchId04'";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { sitterId });
@@ -65,32 +64,18 @@ public class ReviewDAO {
 			ResultSet rs = jdbcUtil.executeQuery();
 			List<Review> reviews = new ArrayList<Review>();
 			if (rs.next()) {
-				Review review = new Review(
-						rs.getString("review_id"), 
-						rs.getString("write_date"),
-						rs.getString("content"), 
-						rs.getFloat("rate"),
-						new Care(rs.getInt("care_id"), 
-								new Member(rs.getString("member_id")),
-								new PetSitter(
-										new Member(
-												rs.getString("sitter_id"), 
-												rs.getString("address"), 
-												rs.getString("img_src")))));
+				Review review = new Review(rs.getString("review_id"), rs.getString("write_date"),
+						rs.getString("content"), rs.getFloat("rate"),
+						new Care(rs.getInt("care_id"), new Member(rs.getString("member_id")),
+								new PetSitter(new Member(rs.getString("sitter_id"), rs.getString("address"),
+										rs.getString("img_src")))));
 				reviews.add(review);
 				while (rs.next()) {
-					review = new Review(
-							rs.getString("review_id"), 
-							rs.getString("write_date"), 
-							rs.getString("content"),
-							rs.getFloat("rate"), 
-							new Care(rs.getInt("care_id"), 
-									new Member(rs.getString("member_id")),
-									new PetSitter(
-											new Member(
-													rs.getString("sitter_id"), 
-													rs.getString("address"),
-													rs.getString("img_src")))));
+					review = new Review(rs.getString("review_id"), rs.getString("write_date"), rs.getString("content"),
+							rs.getFloat("rate"),
+							new Care(rs.getInt("care_id"), new Member(rs.getString("member_id")),
+									new PetSitter(new Member(rs.getString("sitter_id"), rs.getString("address"),
+											rs.getString("img_src")))));
 					reviews.add(review);
 				}
 				return reviews;
@@ -103,7 +88,7 @@ public class ReviewDAO {
 		return null;
 	}
 
-	// 리뷰 첨부파일 반환
+	/* 리뷰 첨부파일 반환 */
 	public List<String> findReviewAttachments(String memberId, int careId) throws SQLException {
 		String sql = "SELECT img_src " + "FROM attachment " + "WHERE member_id=? AND category_id=? AND img_src LIKE ?";
 

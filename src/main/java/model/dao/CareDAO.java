@@ -85,7 +85,7 @@ public class CareDAO {
 	      return null;
 	   }
 	
-	//보호자-돌보미 간 돌봄 완료 내역 반환
+	/* 보호자-돌보미 간 돌봄 완료 내역 반환 */
 	public List<Care> findCareList(String memberId, String sitterId) throws SQLException {
 		String sql = "SELECT care_id, start_date, end_date, member_id, care_status "
 				+ "FROM care "

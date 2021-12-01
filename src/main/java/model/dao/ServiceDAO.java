@@ -7,10 +7,7 @@ import java.util.List;
 
 import model.dto.Care;
 import model.dto.CareDetails;
-import model.dto.Member;
 import model.dto.Pet;
-import model.dto.PetKind;
-import model.dto.PetSitter;
 import model.dto.Service;
 
 public class ServiceDAO {

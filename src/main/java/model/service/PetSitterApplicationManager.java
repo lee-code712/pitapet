@@ -22,6 +22,7 @@ public class PetSitterApplicationManager {
 		return applycationMan;
 	}
 	
+	/* 회원의 돌보미 지원 상태 반환 */
 	public String getApprovalStatus(String memberId) throws SQLException {
 		return petSitterApplicationDAO.getApprovalStatus(memberId);
 	}

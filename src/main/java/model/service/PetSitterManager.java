@@ -69,7 +69,7 @@ public class PetSitterManager {
 			List<PetSitter> pagingSitters = sitterList.subList(startIndex, endIndex);
 			if (pagingSitters != null)
 				for (PetSitter sitter : pagingSitters)
-					sitter = addSitterProperties(sitter);
+					sitter = updateSitterProperties(sitter);
 			Map<Integer, List<PetSitter>> sitterMap = new HashMap<Integer, List<PetSitter>>();
 			sitterMap.put(totalPage, pagingSitters);
 			
@@ -84,7 +84,7 @@ public class PetSitterManager {
 		// Member memberInfo = memberDAO.findMember(memberId);
 		if (sitters != null) {
 			Collections.shuffle(sitters);
-			sitters.set(0, addSitterProperties(sitters.get(0)));
+			sitters.set(0, updateSitterProperties(sitters.get(0)));
 			return sitters.get(0);
 		}
 		return null;
@@ -96,7 +96,7 @@ public class PetSitterManager {
 
 		if (likeSitterLists != null)
 			for (PetSitter sitter : likeSitterLists)
-				sitter = addSitterProperties(sitter);
+				sitter = updateSitterProperties(sitter);
 	
 		return likeSitterLists;
 	}
@@ -109,7 +109,7 @@ public class PetSitterManager {
 		
 		sitter.setServices(prvdServiceList);
 		sitter.setKinds(ablePetKindList);	
-		sitter = addSitterProperties(sitter);
+		sitter = updateSitterProperties(sitter);
 
 		return sitter;
 	}
@@ -127,8 +127,8 @@ public class PetSitterManager {
 		return sitterDAO.upgradeSitter(memberId);
 	}
 
-	/* 돌보미의 속성 중 주소  추가 */
-	public PetSitter addSitterProperties(PetSitter sitter) throws SQLException {
+	/* 돌보미 멤버변수 내용 수정 */
+	public PetSitter updateSitterProperties(PetSitter sitter) throws SQLException {
 		String[] address = sitter.getSitter().getAddress().split(" ");
 		String city = null;
 		for (int j = 0; j < address.length; j++) {

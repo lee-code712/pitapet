@@ -5,11 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.dto.Care;
 import model.dto.Member;
-import model.dto.PetSitter;
 import model.dto.PetSitterApplication;
-import model.dto.Review;
 
 public class PetSitterApplicationDAO {
 	private JDBCUtil jdbcUtil = null;
@@ -18,6 +15,7 @@ public class PetSitterApplicationDAO {
 	      jdbcUtil = new JDBCUtil();   // JDBCUtil 객체 생성
 	   }
 
+	/* 회원의 돌보미 지원 상태 조회 */
 	public String getApprovalStatus(String memberId) throws SQLException {
 		String sql = "SELECT approval_status " + "FROM petsitter_application "
 				+ "WHERE member_id=? ";
@@ -70,7 +68,7 @@ public class PetSitterApplicationDAO {
 		return null;
 	}
 	
-	/* 돌보미 지원서 반환 */
+	/* 돌보미 지원 정보 반환 */
 	public PetSitterApplication findApplication(String applyId) throws SQLException {
 		String sql = "SELECT apply_date, career, certification, introduction, member_id, address, img_src "
 				+ "FROM petsitter_application ps JOIN member m USING(member_id) "
@@ -125,7 +123,7 @@ public class PetSitterApplicationDAO {
 		return null;
 	}
 	
-	//관리자의 돌보미 승인
+	/* 관리자의 돌보미 승인 */
 	public int applyStatus(String applyId) throws SQLException {
 		String sql = "UPDATE petsitter_application "
 					+ "SET approval_status='Y' "
@@ -147,7 +145,7 @@ public class PetSitterApplicationDAO {
 		return 0;
 	}
 	
-	//관리자의 돌보미 거절
+	/* 관리자의 돌보미 거절 */
 	public int refuseStatus(String applyId) throws SQLException {
 		String sql = "UPDATE petsitter_application "
 					+ "SET approval_status='Z' "

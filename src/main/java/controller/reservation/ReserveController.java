@@ -1,8 +1,6 @@
 package controller.reservation;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +28,7 @@ public class ReserveController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		HttpSession session = request.getSession();
+		ServiceManager serviceMan = ServiceManager.getInstance();
 		
 		String sitterId = (String) request.getParameter("sitterId");
 		String memberId = UserSessionUtils.getLoginUserId(session);
@@ -44,15 +43,7 @@ public class ReserveController implements Controller {
 			request.setAttribute("petsitterInfo", petsitterInfo);
 			List<Service> ableService = petsitterInfo.getServices();
 			if (ableService != null) {
-				Iterator<Service> iterator = ableService.iterator();
-				Map<String, Service> serviceMap = new HashMap<String, Service>();
-				while (iterator.hasNext()) {
-					Service service = iterator.next();
-					serviceMap.put(service.getId(), service);
-				}
-				ObjectMapper mapper = new ObjectMapper();
-				String services = mapper.writeValueAsString(serviceMap);
-
+				Map<String, Service> services = serviceMan.getServiceMap(ableService);
 				request.setAttribute("ableService", services);
 			}
 
@@ -71,9 +62,7 @@ public class ReserveController implements Controller {
 
 		// 예약 처리
 		CareManager careMan = CareManager.getInstance();
-		ServiceManager serviceMan = ServiceManager.getInstance();
 
-		// care 레코드 생성
 		Care care = new Care(request.getParameter("fromDate"), request.getParameter("toDate"), 
 				Integer.parseInt(request.getParameter("totalPrice")), request.getParameter("cautionText"), 
 				"X", null, new Member(memberId), new PetSitter(new Member(sitterId)));

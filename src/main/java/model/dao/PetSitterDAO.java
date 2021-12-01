@@ -94,7 +94,6 @@ public class PetSitterDAO {
 		return null;
 	}
 	
-	
 	/* 추천 돌보미 리스트 조회(현재 사용자의 반려동물과 같은 종 돌봄이 가능한 돌보미) */
 	public ArrayList<PetSitter> findPetSitterListOfRecommend(String memberId) throws SQLException {
 		String sql = "SELECT ps.sitter_id, ps.tag, ps.notes, ps.sitter_like, ps.sitter_view, m.address, img_src "
@@ -165,7 +164,7 @@ public class PetSitterDAO {
 		return null;
 	}	
 	
-	/* 돌보미 정보 반환 */
+	/* 돌보미 상세 정보 반환 */
 	public PetSitter findPetSitter(String sitterId) throws SQLException {
 		String sql = "SELECT ps.sitter_id, ps.public_status, ps.able_date, ps.caculated_price, "
 				+ "ps.tag, ps.notes, ps.avg_rate, ps.sitter_like, ps.sitter_view, ps.apply_id, m.address, img_src "

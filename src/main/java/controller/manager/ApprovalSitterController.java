@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
-import model.dto.PetSitter;
 import model.service.PetSitterApplicationManager;
 import model.service.PetSitterManager;
 

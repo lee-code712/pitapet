@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import model.dao.PetDAO;
-import model.dto.CareDetails;
 import model.dto.Pet;
 import model.dto.PetKind;
 
@@ -32,11 +31,10 @@ public class PetManager {
 
 	/* 특정 회원의 반려동물 리스트 반환 */
 	public ArrayList<Pet> findPetListOfMember(String memberId) throws SQLException {
-		ArrayList<Pet> userPets = petDAO.findPetListOfMember(memberId);
-		
+		ArrayList<Pet> userPets = petDAO.findPetListOfMember(memberId);		
 		if (userPets != null) {
 			for (Pet pet : userPets) {
-				List<String> imgList = petMan.findPetAttachments(memberId, pet.getId());
+				List<String> imgList = petDAO.findPetAttachments(memberId, pet.getId());
 				pet.setImages(imgList);
 			}
 		}
@@ -54,32 +52,12 @@ public class PetManager {
 		return petDAO.findAllAblePetKindList();
 	}
 
-	public ArrayList<PetKind> findAblePetKindList(String sitterId) throws SQLException {
-		return petDAO.findAblePetKindList(sitterId);
-	}
-
-	public ArrayList<String> findPetAttachments(String memberId, String petId) throws SQLException {
-		return (ArrayList<String>) petDAO.findPetAttachments(memberId, petId);
-	}
-
-	public ArrayList<CareDetails> findCarePetList(Integer careId) throws SQLException {
-		ArrayList<Pet> petList = petDAO.findCarePetList(careId);
-		ArrayList<CareDetails> careDetailList = new ArrayList<CareDetails>();
-		if (petList != null) {
-			for (Pet pet : petList) {
-				careDetailList.add(new CareDetails(pet));
-				System.out.println(pet.getName());
-			}
-		}
-		return careDetailList;
-	}
-
+	/* 보호자의 반려동물 중 특정 돌보미가 돌봄 가능한 동물을 맵으로 반환 */
 	public Map<String, Pet> getAbleCarePetMap(String memberId, String sitterId) throws SQLException {
 		ArrayList<Pet> userPets = (ArrayList<Pet>) petDAO.findAbleCarePetList(memberId, sitterId);
-		System.out.println(userPets);
 		if (userPets != null) {
 			for (Pet pet : userPets) {
-				List<String> imgList = petMan.findPetAttachments(memberId, pet.getId());
+				List<String> imgList = petDAO.findPetAttachments(memberId, pet.getId());
 				pet.setImages(imgList);
 			}
 			Iterator<Pet> iterator = userPets.iterator();
@@ -99,22 +77,33 @@ public class PetManager {
 		return null;
 	}
 	
-	public Pet findPetInfo(String petId) throws SQLException {
-		return petDAO.findPetInfo(petId);
-	}
-	
+	/* 반려동물 추가 */
 	public boolean addPet(String memberId, Pet pet) {
 		int count = petDAO.addPet(memberId, pet);
 		if (count == 0) return false;
 		return true;
-		/*
-		 * PetKind petKind = petMan.findPetKindInfo(pet.getKind().getId());
-		 * pet.setKind(petKind);
-		 */
+	}	
+	
+	public Pet findPetInfo(String petId) throws SQLException {
+		return petDAO.findPetInfo(petId);
 	}
 	
-	public PetKind findPetKindInfo(String kindId) {
-		return petDAO.findPetKindInfo(kindId);
-	}
-	
+//	public ArrayList<PetKind> findAblePetKindList(String sitterId) throws SQLException {
+//	return petDAO.findAblePetKindList(sitterId);
+//}
+
+//public ArrayList<String> findPetAttachments(String memberId, String petId) throws SQLException {
+//	return (ArrayList<String>) petDAO.findPetAttachments(memberId, petId);
+//}
+
+//public ArrayList<CareDetails> findCarePetList(Integer careId) throws SQLException {
+//	ArrayList<Pet> petList = petDAO.findCarePetList(careId);
+//	ArrayList<CareDetails> careDetailList = new ArrayList<CareDetails>();
+//	if (petList != null) {
+//		for (Pet pet : petList) {
+//			careDetailList.add(new CareDetails(pet));
+//		}
+//	}
+//	return careDetailList;
+//}
 }	

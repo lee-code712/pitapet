@@ -16,6 +16,7 @@ public class PetDAO {
 		jdbcUtil = new JDBCUtil(); // JDBCUtil 객체 생성
 	}
 
+	/* 회원의 반려동물 리스트 조회 */
 	public ArrayList<Pet> findPetListOfMember(String memberId) throws SQLException {
 		String sql = "SELECT pet_id, name, birth, gender, kind_id, large_category, small_category "
 				+ "FROM pet JOIN pet_kind USING (kind_id) " + "WHERE member_id = ?";
@@ -184,6 +185,7 @@ public class PetDAO {
 		return null;
 	}
 
+	/* 반려동물의 이미지 리스트 반환 */
 	public List<String> findPetAttachments(String memberId, String petId) throws SQLException {
 		String sql = "SELECT img_src " + "FROM attachment " + "WHERE member_id=? AND img_src LIKE ?";
 
@@ -248,6 +250,29 @@ public class PetDAO {
 		return null;
 	}
 	
+	/* 반려동물 추가 */
+	public int addPet(String memberId, Pet pet) {
+		 String sql = "INSERT INTO PET VALUES (?, ?, ?, ?, ?, ?)";
+		 String petId = pet.getBirth().replaceAll("-", "").substring(2, 8) + memberId.substring(memberId.length() - 2, memberId.length()); // 수정 필요
+         
+		 Object[] param = new Object[] {petId , pet.getName(), pet.getBirth(), pet.getGender(), 
+				 memberId, pet.getKind().getId() };   
+         jdbcUtil.setSqlAndParameters(sql, param);
+
+	      try {
+	    	  int recordCount = jdbcUtil.executeUpdate();
+	    	  
+	    	  return recordCount;
+	      } catch (Exception ex) {
+	          jdbcUtil.rollback();
+	    	  ex.printStackTrace();
+	      } finally {
+	    	 jdbcUtil.commit();
+	         jdbcUtil.close();      
+	      }
+		   return 0;
+	}
+	
 	public Pet findPetInfo(String petId) throws SQLException {
 		String sql = "SELECT pet_id, name, birth, gender, member_id, kind_id "
 				+ "FROM pet " 
@@ -277,49 +302,4 @@ public class PetDAO {
 		return null;
 	}
 	
-	public int addPet(String memberId, Pet pet) {
-		 String sql = "INSERT INTO PET VALUES (?, ?, ?, ?, ?, ?)";
-		 String petId = pet.getBirth().replaceAll("-", "").substring(2, 8) + memberId.substring(memberId.length() - 2, memberId.length()); // 수정 필요
-         
-		 Object[] param = new Object[] {petId , pet.getName(), pet.getBirth(), pet.getGender(), 
-				 memberId, pet.getKind().getId() };   
-         jdbcUtil.setSqlAndParameters(sql, param);
-
-	      try {
-	    	  int recordCount = jdbcUtil.executeUpdate();
-	    	  
-	    	  return recordCount;
-	      } catch (Exception ex) {
-	          jdbcUtil.rollback();
-	    	  ex.printStackTrace();
-	      } finally {
-	    	 jdbcUtil.commit();
-	         jdbcUtil.close();      
-	      }
-		   return 0;
-	}
-	
-	public PetKind findPetKindInfo(String kindId) {
-		String sql = "SELECT kind_id, large_category, small_category "
-				+ "FROM pet_kind " 
-				+ "WHERE kind_id = ?";
-
-		jdbcUtil.setSqlAndParameters(sql, new Object[] { kindId });
-
-		try {
-			ResultSet rs = jdbcUtil.executeQuery();
-			if (rs.next()) {
-				PetKind petKind = new PetKind (
-							kindId, rs.getString("large_category"), rs.getString("small_category")
-						);
-				
-				return petKind;
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();
-		}
-		return null;
-	}
 }

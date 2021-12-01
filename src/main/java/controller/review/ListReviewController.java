@@ -1,25 +1,14 @@
 package controller.review;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import controller.Controller;
 import controller.member.UserSessionUtils;
-import model.dto.Care;
-import model.dto.CareDetails;
-import model.dto.Member;
 import model.dto.Review;
-import model.service.MemberManager;
 import model.service.ReviewManager;
 
 public class ListReviewController implements Controller{

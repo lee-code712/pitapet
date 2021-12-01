@@ -2,21 +2,14 @@ package model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-import model.dto.Care;
 import model.dto.Member;
 
 public class MemberDAO {
 private JDBCUtil jdbcUtil = null;
-private JDBCUtil jdbcUtil2 = null;
    
    public MemberDAO() {         
       jdbcUtil = new JDBCUtil();   // JDBCUtil 객체 생성
-      jdbcUtil2= new JDBCUtil();
    }
    
    /* 특정 회원정보 반환 */
@@ -50,30 +43,6 @@ private JDBCUtil jdbcUtil2 = null;
       }
       return null;
    }
-    
-//   public String findProfileAttachment(String memberId) throws SQLException {   
-//	     String sql = "SELECT img_src "
-//	                + "FROM attachment "
-//	                + "WHERE member_id=? AND img_src LIKE ?"; 
-//	    	       
-//	     String like = "%profile-" + memberId + "-%";
-//	     like = like.replaceAll(" ", "");
-//	       
-//	     jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, like});   // JDBCUtil에 query문과 매개 변수 설정
-//
-//	     try {
-//	        ResultSet rs = jdbcUtil.executeQuery();  
-//	        if (rs.next()) {                  
-//	           String img_src = rs.getString("img_src");
-//	           return img_src;
-//	        }
-//	     } catch (Exception ex) {
-//	        ex.printStackTrace();
-//	     } finally {
-//	        jdbcUtil.close();      
-//	     }
-//	     return null;
-//	  }
    
    /* 회원정보 생성 */
    public int createMember(Member newMember) throws SQLException {

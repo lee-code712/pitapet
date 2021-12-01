@@ -33,7 +33,7 @@ public class ReviewManager {
 			randomReviews = reviewList.subList(0, 3);
 			
 			for (Review review : randomReviews)
-				review = addReviewProperties(review);
+				review = updateReviewProperties(review);
 		}
 		
 		return randomReviews;
@@ -44,7 +44,7 @@ public class ReviewManager {
 		List<Review> reviews = reviewDAO.findReviewListOfSitter(sitterId);
 		if (reviews != null)
 			for (Review review : reviews)
-				review = addReviewProperties(review);
+				review = updateReviewProperties(review);
 
 		return reviews;
 	}
@@ -63,30 +63,18 @@ public class ReviewManager {
 		return true;
 	}
 	
-	//전체 리뷰 반환
+	/* 전체 리뷰 반환 */
 	public List<Review> findReviewList() throws SQLException {
-		List<Review> reviewList = reviewDAO.findReviewList();
-	
-		if (reviewList != null ) {
-			for (Review review : reviewList) {
-				String[] address = review.getCareInfo().getSitter().getSitter().getAddress().split(" ");
-				String city = null;
-				for (int j = 0; j < address.length; j++) {
-					if (address[j].matches("(.*)로")) {
-						city = address[j].substring(0, address[j].length() - 1);
-					}
-				}
-				review.getCareInfo().getSitter().getSitter().setAddress(city);
-				
-				List<String> imgList = reviewDAO.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
-				review.setImages(imgList);
-			}
-		}
+		List<Review> reviewList = reviewDAO.findReviewList();	
+		
+		if (reviewList != null)
+			for (Review review : reviewList)
+				review = updateReviewProperties(review);
 		return reviewList;
 	}
 
-	/* 리뷰의 속성 중 주소, 이미지  추가 */
-	public Review addReviewProperties(Review review) throws SQLException {
+	/* 리뷰 멤버변수 내용 수정 */
+	public Review updateReviewProperties(Review review) throws SQLException {
 		String[] address = review.getCareInfo().getSitter().getSitter().getAddress().split(" ");
 		String city = null;
 		for (int j = 0; j < address.length; j++) {

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import controller.Controller;
 import controller.member.UserSessionUtils;
 import model.dto.Care;
-import model.service.ReservationManager;
+import model.service.CareManager;
 
 public class ViewReservationController implements Controller {
 
@@ -17,11 +17,11 @@ public class ViewReservationController implements Controller {
 		HttpSession session = request.getSession();
 		String userId = UserSessionUtils.getLoginUserId(session);
 		
-		ReservationManager reservationMan = ReservationManager.getInstance();
+		CareManager careMan = CareManager.getInstance();
 		
 		String careId = (String) request.getParameter("careId");
 		
-		Care care = reservationMan.findReservation(Integer.parseInt(careId));
+		Care care = careMan.findReservation(Integer.parseInt(careId));
 		
 		request.setAttribute("reservationInfo", care);		
 		return "/reservation/reservationView.jsp";

@@ -147,6 +147,69 @@ public class CareManager {
 		return needReviewCareList;
 	}
 	
+	/* 돌봄 예약(돌봄 내역 생성) */
+	public Care createCare(int totalPrice, String fromDate, String toDate, String cautionText, String memberId, String sitterId) throws SQLException, ParseException {
+		toDate = toDate + " 00:00:01";
+		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		// String 타입을 Date 타입으로 변환
+		Date formatDate = dtFormat.parse(toDate);
+		// Date타입의 변수를 새롭게 지정한 포맷으로 변환
+		toDate = newDtFormat.format(formatDate);
+
+		Care care = new Care(fromDate, toDate, totalPrice, cautionText,
+				"X", null, new Member(memberId), new PetSitter(new Member(sitterId)));
+		
+		care.setId(careDAO.createCare(care));
+		
+		return care;
+	}
+	
+	/* 돌봄 예약내역 반환 */
+	public Care findReservation(int careId) throws SQLException {
+		// care 정보
+		Care care = careDAO.findReservation(careId);
+		// care 정보 중 petSitter 정보
+		MemberManager memberMan = MemberManager.getInstance();
+		Member member = memberMan.findMember(care.getSitter().getSitter().getId());
+		PetSitterManager petSitterMan = PetSitterManager.getInstance();
+		PetSitter petSitter = petSitterMan.findPetSitter(care.getSitter().getSitter().getId());
+		petSitter.setSitter(member);
+		care.setSitter(petSitter);
+		
+		// receive_service 정보
+		ServiceManager serviceMan = ServiceManager.getInstance();
+		List<CareDetails> careDetails = serviceMan.findReceiveServiceByCareId(care);
+		care.setCareList(careDetails);
+
+		// careDetails 정보 중 pet 정보, service 정보
+		PetManager petMan = PetManager.getInstance();
+		for (int i = 0; i < careDetails.size(); i++) {
+			CareDetails cd = careDetails.get(i);
+			Pet pet = petMan.findPetInfo(cd.getCarePet().getId());
+			Service service = serviceMan.findServiceInfo(cd.getServiceInfo().getId());
+
+			careDetails.get(i).setCarePet(pet);
+			careDetails.get(i).setServiceInfo(service);
+		}
+		care.setCareList(careDetails);
+		
+		// care_checklist 정보 - care_checklist 정보는 돌봄일지가 1개 이상일 때 생성되므로
+		if (!care.getStatus().equals("X")) { // 돌봄 진행, 돌봄 완료인 경우에만 찾음
+			CareManager careMan = CareManager.getInstance();
+			for (int i = 0; i < careDetails.size(); i++) {
+				CareDetails cd = careDetails.get(i);
+				String check = careMan.getCheckInfo(cd.getId());
+				if (check != null) {
+					careDetails.get(i).setCheck(check);
+				}
+ 			}
+			care.setCareList(careDetails);
+		}
+		
+		return care;
+	}
+	
 	public int deleteCare(int careId) throws SQLException {
 		return careDAO.deleteCare(careId);
 	}

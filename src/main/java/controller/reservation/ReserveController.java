@@ -22,7 +22,6 @@ import model.dto.Service;
 import model.service.CareManager;
 import model.service.PetManager;
 import model.service.PetSitterManager;
-import model.service.ReservationManager;
 import model.service.ServiceManager;
 
 public class ReserveController implements Controller {
@@ -72,11 +71,10 @@ public class ReserveController implements Controller {
 
 		// 예약 처리
 		CareManager careMan = CareManager.getInstance();
-		ReservationManager reservationMan = ReservationManager.getInstance();
 		ServiceManager serviceMan = ServiceManager.getInstance();
 
 		// care 레코드 생성
-		Care care = reservationMan.createCare(Integer.parseInt(request.getParameter("totalPrice")), request.getParameter("fromDate")
+		Care care = careMan.createCare(Integer.parseInt(request.getParameter("totalPrice")), request.getParameter("fromDate")
 				, request.getParameter("toDate"), request.getParameter("cautionText")
 				, userId, sitterId);
 		

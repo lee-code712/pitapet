@@ -38,9 +38,11 @@ public class PetManager {
 		ArrayList<Pet> userPets = petDAO.findPetListOfMember(memberId);
 
 		// 로그인한 유저의 반려동물 별 사진 리스트
-		for (Pet pet : userPets) {
-			List<String> imgList = petMan.findPetAttachments(memberId, pet.getId());
-			pet.setImages(imgList);
+		if (userPets != null) {
+			for (Pet pet : userPets) {
+				List<String> imgList = petMan.findPetAttachments(memberId, pet.getId());
+				pet.setImages(imgList);
+			}
 		}
 
 		return userPets;

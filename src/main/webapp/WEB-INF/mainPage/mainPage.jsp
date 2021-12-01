@@ -22,47 +22,49 @@
     <script src="/js/main.js"></script>
     
     <script>
-		document.addEventListener('DOMContentLoaded', function() {
-			var calendarEl = document.getElementById('calendar');
-        	var calendar = new FullCalendar.Calendar(calendarEl, {
-				initialView: 'dayGridMonth'
-			});
-        	calendar.render();
-        	
-        	var schedules = JSON.parse('${careSchedules}');
-        	console.log(schedules);
-        	for (key in schedules) {
-        		var petNames = '';
-        		console.log(schedules[key].careList.length);
-        		for (var i = 0; i < schedules[key].careList.length; i++) {
-        			petNames += schedules[key].careList[i].carePet.name;
-        			if (i == schedules[key].careList.length - 1)
-        				break;
-        			petNames += ", ";
-        		}
-        		var color = '';
-        		var status = '';
-        		if (schedules[key].status == 'X') {
-        			color = '#FF4500';
-        			status = ' 돌봄 예약';
-        		}
-        		else if (schedules[key].status == 'Y') {
-        			color ='#FF6347';
-        			status = ' 돌봄 진행';
-        		}
-        		else {
-        			color = '#FFA07A';
-        			status = ' 돌봄 완료';
-        		}
-            	calendar.addEvent({
-            		title: petNames + status,
-            		start: schedules[key].startDate,
-            		end: schedules[key].endDate,
-            		allDay: true,
-            		color: color
-            	})
-        	}
-		});
+	    document.addEventListener('DOMContentLoaded', function() {
+	    	var calendarEl = document.getElementById('calendar');
+	    	var calendar = new FullCalendar.Calendar(calendarEl, {
+	    		initialView: 'dayGridMonth'
+	    	});
+	    	calendar.render();
+	    	
+	    	var schedules = JSON.parse('${careSchedules}');
+	    	console.log(schedules);
+	    	for (key in schedules) {
+	    		var name = '';
+	    		var color = '';
+	    		if ('${sessionScope.id}' == schedules[key].companion.id) {
+	        		for (var i = 0; i < schedules[key].careList.length; i++) {
+	        			name += schedules[key].careList[i].carePet.name;
+	        			if (i == schedules[key].careList.length - 1)
+	        				break;
+	        			name += ", ";
+	        		}        
+	        		color = '#FFA07A';
+	    		}
+	    		else {
+	    			name = schedules[key].companion.id + "님";
+	    			color = '#FF4500';
+	    		}
+	
+	    		var status = '';
+	    		if (schedules[key].status == 'X')
+	    			status = ' 돌봄 예약';
+	    		else if (schedules[key].status == 'Y')
+	    			status = ' 돌봄 진행';
+	    		else
+	    			status = ' 돌봄 완료';
+	
+	        	calendar.addEvent({
+	        		title: name + status,
+	        		start: schedules[key].startDate,
+	        		end: schedules[key].endDate,
+	        		allDay: true,
+	        		color: color
+	        	})
+	    	}
+	    });
     </script>
 </head>
 

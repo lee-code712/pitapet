@@ -12,13 +12,6 @@
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
     <link rel="stylesheet" href="/css/careDiary.css"/>
-    
-    <style>
-	    #logo {
-		    z-index: 1;
-		   	margin-left: 14px;
-		}
-	</style>
 </head>
 
 <body>

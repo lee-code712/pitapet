@@ -1,4 +1,34 @@
-@charset "UTF-8";
+#logo {
+    z-index: 1;
+   	margin-left: 14px;
+}
+
+#petSitterImg {
+	width: 354px;
+	height: 242px;
+	object-fit: cover;
+	border-radius: 10px;
+}
+
+#pageBg {
+	background: #F8F9FA;
+}
+
+#petSitterInfoBox {
+	background: white;
+	box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+
+#caringPet {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 20px;
+	padding: 4px 8px;
+	color: #E3C1A2;
+	border: 1px solid #E3C1A2;
+	border-radius: 50px;
+}
 
 #headerWrap {
     border-bottom: 1px solid rgba(150, 150, 150, 0.2);

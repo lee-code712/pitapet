@@ -12,16 +12,8 @@
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
     <link rel="stylesheet" href="/css/petUpdateForm.css"/>
-    
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="/js/petAddForm.js"></script>
-    
-    <style>
-	    #logo {
-		    z-index: 1;
-		   	margin-left: 14px;
-		}
-	</style>
 </head>
 
 <body>

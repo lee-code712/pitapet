@@ -88,3 +88,8 @@ td {
     border-radius: 50px;
     cursor: pointer;
 }
+
+#logo {
+    z-index: 1;
+   	margin-left: 14px;
+}

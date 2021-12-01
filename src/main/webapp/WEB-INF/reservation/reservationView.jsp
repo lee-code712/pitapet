@@ -5,62 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>예약 상세 정보</title>
-<link rel="stylesheet" href="/css/header.css" />
-<link rel="stylesheet" href="/css/footer.css" />
-<style>
-#pageWrap {
-    margin: 100px auto 0px auto;
-    width: 1194px;
-}
-
-#pageTit {
-    margin-bottom: 100px;
-    font-size: 24px;
-}
-	
-	#headerWrap {
-	border-bottom: 1px solid rgba(150, 150, 150, 0.2);
-}
-
-table {
-	width: 1194px;
-	border: 1px solid #EAEAEA;
-}
-
-#sitterInfoWrap {
-	margin-bottom: 80px;
-}
-
-#tableTit {
-	background: #F3F3F3;
-	height: 40px;
-}
-
-tr, td {
-	border: 1px solid #EAEAEA;
-	text-align: center;
-	height: 40px;
-}
-
-#logo {
-	z-index: 1;
-	margin-left: 14px;
-}
-
-#pageSubTit {
-	display: flex;
-	align-items: center;
-	margin-bottom: 20px;
-	height: 40px;
-}
-
-#soleImg {
-	margin-right: 10px;
-}
-</style>
+	<meta charset="UTF-8">
+	<title>예약 상세 정보</title>
+	<link rel="stylesheet" href="/css/header.css" />
+	<link rel="stylesheet" href="/css/footer.css" />
+	<link rel="stylesheet" href="/css/reservationView.css" />
 </head>
+
 <body>
 	<%@include file="../components/header.jsp"%>
 	

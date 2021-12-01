@@ -10,21 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/loginForm.css"/>
-    <script>
-	function login() {
-		if (form.memberId.value == "") {
-			alert("사용자 ID를 입력하십시오.");
-			form.memberId.focus();
-			return false;
-		} 
-		if (form.password.value == "") {
-			alert("비밀번호를 입력하십시오.");
-			form.password.focus();
-			return false;
-		}		
-		form.submit();
-	}
-</script>
+    <script src="/js/loginForm.js"></script>
 </head>
 
 <body id="loginBg">

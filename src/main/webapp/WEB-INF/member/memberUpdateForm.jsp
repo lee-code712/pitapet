@@ -4,26 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<title>내 정보</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet" href="/css/header.css" />
-<link rel="stylesheet" href="/css/footer.css" />
-<link rel="stylesheet" href="/css/memberUpdateForm.css" />
-
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="/js/memberUpdateForm.js"></script>
-
-<style>
-#logo {
-	z-index: 1;
-	margin-left: 14px;
-}
-</style>
+	<meta charset="UTF-8" />
+	<title>내 정보</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/css/header.css" />
+	<link rel="stylesheet" href="/css/footer.css" />
+	<link rel="stylesheet" href="/css/memberUpdateForm.css" />
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="/js/memberUpdateForm.js"></script>
 </head>
 
 <body>

@@ -26,3 +26,8 @@
 	width: 316px;
 	height: 200px;
 }
+
+#logo {
+    z-index: 1;
+   	margin-left: 14px;
+}

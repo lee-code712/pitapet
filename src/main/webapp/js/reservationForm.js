@@ -57,3 +57,6 @@ function reservation() {
 	
 	form.submit();
 }
+
+var ableService = JSON.parse('${ableService}');
+var userPetsJson = JSON.parse('${userPetsJson}');

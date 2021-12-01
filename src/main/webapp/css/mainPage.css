@@ -114,24 +114,30 @@ table.calendar td{
 #reviewBox {
     margin-right: 50px;
     width: 364px;
-    border: 1px solid #EAEAEA;
-    border-radius: 10px;
+    height: 424px;
+    border-radius: 5px;
     position: relative;
+    background: white;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 }
 
 #reviewBoxInner {
     display: flex;
     flex-direction: column;
-    width: 324px;
+    width: 364px;
     height: 200px;
-    padding: 20px;
     border-radius: 10px;
+}
+
+* {
+	padding: 0px;
+	margin: 0px;
 }
 
 #reviewerDateWrap {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 16px;
+    align-items: center;
 }
 
 #reviewer {
@@ -146,26 +152,6 @@ table.calendar td{
 #review {
     font-size: 14px;
     color: #757575;
-}
-
-#targetScopeWrap {
-    display: flex;
-    justify-content: space-between;
-    margin-top: auto;
-}
-
-#scopeWrap {
-    display: flex;
-}
-
-#reviewTarget {
-    font-size: 12px;
-    color: #C4C4C4;
-}
-
-#scope {
-    margin-left: 6px;
-    font-size: 12px;
 }
 
 #reviewerTargetWrap {
@@ -184,3 +170,116 @@ table.calendar td{
     color:#7AAFFF;
     cursor: pointer;
 }
+    	
+      #logo {
+    z-index: 1;
+   	margin-left: 14px;
+}
+
+  	#reviewImg {
+	width: 364px;
+	height: 190px;
+	object-fit: cover;
+	border-radius: 5px 5px 0px 0px;
+}
+
+#targetLocation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    width: 70px;
+    height: 24px;
+    background-color: #757575;
+    color: white;
+    border-radius: 10px 0px 10px 0px;
+    font-size: 12px;
+    position: absolute;
+    top:2.8%;
+    left:10%;
+    transform: translate(-50%, -50%);
+}
+
+#scheduleTit {
+	margin: 80px 0px;
+}
+
+#scheduleWrap {
+	margin: 60px 0px;
+}
+
+#demo {
+	z-index: 0;
+}
+      	
+     	.carousel-inner > .carousel-item > img{ 
+         	width: 300px; height: 800px;
+         	object-fit: cover;
+      }
+         
+      #bannerText {
+    position: absolute;
+    top: 620px;
+    left: 45%;
+    transform: (-50%, 0%);
+}
+
+#bannerTit {
+    font-family: 'Righteous', cursive;
+    font-size: 48px;
+    color: black;
+}
+
+#bannerSubTit {
+    padding-left: 68px;
+    color: #FB7D71;
+    font-size: 24px;
+}
+
+#bannerInfo {
+    margin: 10px 0px 0px 4px;
+    color: #535353;
+}
+
+#targetScopeWrap {
+     		display: flex;
+     		justify-content: space-between;
+     		align-items: center;
+     		padding: 8px 20px;
+     		width: 100%;
+     		border-top: 1px solid #EAEAEA;
+     	}
+     	
+     	#scopeWrap {
+     		display: flex;
+     		margin-top: auto;
+     	}
+     	
+     	#scope {
+     		margin-left: 4px;
+     	}
+     	
+     	#reviewBoxContent {
+     		padding: 20px;
+     	}
+     	
+     	#locationWrap {
+     		display: flex;
+     		align-items: center;
+     		margin-bottom: 10px;
+     		color: #C4C4C4;
+     		font-size: 12px;
+     	}
+     	
+     	#locationImg {
+     		margin-right: 4px;
+     	}
+     	
+     	#review {
+     		height: 96px;
+     	}
+     	
+     	#reviewTarget {
+     		color: #C4C4C4;
+     		font-size: 12px;
+     	}

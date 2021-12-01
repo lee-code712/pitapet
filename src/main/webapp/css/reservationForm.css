@@ -10,7 +10,6 @@
 }
 
 #targetName {
-    margin-bottom: 100px;
     font-size: 24px;
 }
 
@@ -103,7 +102,12 @@ a { color:#000000;text-decoration:none; }
 }
 
 #petName {
+    padding: 2px 4px;
     font-size: 14px;
+    border: 1px slid #535353;
+    background: white;
+    color: #535353;
+    border-radius: 50px;
 }
 
 #petBirth {
@@ -117,14 +121,6 @@ a { color:#000000;text-decoration:none; }
     color: #E3C1A2;
 }
 
-#reviewText {
-    padding: 20px;
-    width: 1154px;
-    height: 160px;
-    font-size: 14px;
-    resize: none;
-    border: 1px solid #C4C4C4;
-}
 
 #reservationBtn {
     margin-top: 80px;
@@ -132,7 +128,7 @@ a { color:#000000;text-decoration:none; }
     width: 120px;
     height: 40px;
     border-radius: 5px;
-    background: #7AAFFF;
+    background: #89A0F2;
     color: white;
     border: none;
     cursor: pointer;
@@ -220,4 +216,114 @@ input:-ms-input-placeholder {
 
 #ableTimeWrap {
     height: 382px;
+}
+
+#carePrice {
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+	font-size: 16px;
+	color: #89A0F2;
+}
+
+#petCheckBoxWrap {
+	margin-right: 60px;
+	padding: 20px;
+	width: 200px;
+	height: 260px;
+	border-radius: 10px;
+	box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+
+#tagCheckWrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+#petInfoName {
+margin-top: 20px;
+}
+
+#checkbox {
+	width: 20px;
+	height: 20px;
+}
+
+#petPickWrap {
+	display: flex;
+	overflow-x: scroll;
+}
+
+#petInfoBirth {
+	margin-top: 4px;
+	font-size: 14px;
+	color: #C4C4C4;
+}
+
+#petInfoKind {
+	font-size: 12px;
+	color: #E3C1A2;
+}
+
+#petCheckImg {
+	width: 200px;
+	height: 150px;
+	object-fit: cover;
+	border-radius: 5px;
+}
+
+#logo {
+    z-index: 1;
+   	margin-left: 14px;
+}
+
+#pageBg {
+	background-color: #F8F9FA;
+}
+
+#petCheckBoxWrap {
+	background-color: white;
+}
+
+#dollarImg {
+	margin-right: 6px;
+}
+
+#petSitterService {
+	padding: 20px 20px 0px 20px;
+	width: 1154px;
+	background: white;
+	border-radius: 5px;
+	border: 1px solid #EAEDEF;
+}
+
+#reviewText {
+    padding: 20px;
+    width: 1154px;
+    height: 160px;
+    font-size: 14px;
+    resize: none;
+    background: white;
+	border-radius: 5px;
+	border: 1px solid #EAEDEF;
+}
+
+#reviewText:focus {
+	outline: none;
+}
+
+#petPickWrap::-webkit-scrollbar {
+  width: 10px;
+}
+
+#petPickWrap::-webkit-scrollbar-thumb {
+  background-color: #2f3542;
+  border-radius: 10px;
+}
+
+#petPickWrap::-webkit-scrollbar-track {
+  background-color: none;
+  border-radius: 10px;
 }

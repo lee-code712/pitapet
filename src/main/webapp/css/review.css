@@ -15,26 +15,26 @@
 }
 
 #reviewBox {
-    margin-right: 50px;
     width: 364px;
-    border: 1px solid #EAEAEA;
-    border-radius: 10px;
+    height: 424px;
+    border-radius: 5px;
     position: relative;
+    background: white;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
 }
 
 #reviewBoxInner {
     display: flex;
     flex-direction: column;
-    width: 324px;
+    width: 364px;
     height: 200px;
-    padding: 20px;
     border-radius: 10px;
 }
 
 #reviewerDateWrap {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 16px;
+    align-items: center;
 }
 
 #reviewer {
@@ -48,35 +48,77 @@
 
 #review {
     font-size: 14px;
-    color: #757575;
+	color: #757575;
+	height: 96px;
 }
 
 #targetScopeWrap {
-    display: flex;
-    justify-content: space-between;
-    margin-top: auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 8px 20px;
+	width: 324px;
+	border-top: 1px solid #EAEAEA;
 }
 
 #scopeWrap {
     display: flex;
+    margin-top: auto;
 }
 
-#reviewTarget {
-    font-size: 12px;
-    color: #C4C4C4;
-}
 
 #scope {
-    margin-left: 6px;
-    font-size: 12px;
-}
-
-#reviewerTargetWrap {
-    display: flex;
+    margin-left: 4px;
 }
 
 #reviewBoxWrap {
     display: flex;
     width: 1460px;
     flex-wrap: wrap;
+}
+
+#reviewImg {
+	width: 364px;
+	height: 190px;
+	object-fit: cover;
+	border-radius: 5px 5px 0px 0px;
+}
+
+
+#logo {
+    z-index: 1;
+   	margin-left: 14px;
+}
+
+#reviewBoxContent {
+ 	padding: 20px;
+ }
+    
+#locationWrap {
+ 	display: flex;
+ 	align-items: center;
+ 	margin: 4px 0px 10px 0px;
+ 	color: #C4C4C4;
+	font-size: 12px;
+}
+
+#locationImg {
+   	margin-right: 4px;
+}
+ 	
+#reviewTarget {
+  	color: #C4C4C4;
+  	font-size: 12px;
+}
+  
+#reviewBg {
+	background: #F8F9FA;
+}
+  
+#reviewBoxWrap {
+	display: inline-flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border-radius: 5px;
+    gap: 50px;
 }

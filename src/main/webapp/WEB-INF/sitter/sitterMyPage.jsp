@@ -14,13 +14,6 @@
     <link rel="stylesheet" href="/css/myPage.css"/>
     <link rel="stylesheet" href="/css/sitterMyPage.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    
-    <style>
-	    #logo {
-		    z-index: 1;
-		   	margin-left: 14px;
-		}
-	</style>
 </head>
 
 <body>

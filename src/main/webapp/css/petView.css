@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+#logo {
+    z-index: 1;
+   	margin-left: 14px;
+}
+
 #headerWrap {
     border-bottom: 1px solid rgba(150, 150, 150, 0.2);
 }
@@ -22,7 +27,6 @@
 }
 
 table {
-    width: 100%;
     border: 1px solid #EAEAEA;
     border-collapse: collapse;
     border-radius: 5px;
@@ -73,8 +77,9 @@ td {
 #petInfoBox {
     display: flex;
     align-items: center;
-    width: 1154px;
+    width: 1054px;
     height: 100px;
+    background-color: white;
 }
 
 #petImg {

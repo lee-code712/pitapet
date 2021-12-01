@@ -76,20 +76,29 @@ public class PetManager {
 		return careDetailList;
 	}
 
-	public Map<String, Pet> getPetMapOfMember(List<Pet> userPets) throws SQLException {
-		Iterator<Pet> iterator = userPets.iterator();
-		Map<String, Pet> petMap = new HashMap<String, Pet>();
-		while (iterator.hasNext()) {
-			Pet pet = iterator.next();
-			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
-			String[] today = sdf.format(new Date()).split("-");
-			String[] birth = pet.getBirth().split(" ")[0].split("-");
-			int year = Integer.valueOf(today[0]) - Integer.valueOf(birth[0]) + 1;
-			pet.setBirth(String.valueOf(year));
-
-			petMap.put(pet.getId(), pet);
+	public Map<String, Pet> getAbleCarePetMap(String memberId, String sitterId) throws SQLException {
+		ArrayList<Pet> userPets = (ArrayList<Pet>) petDAO.findAbleCarePetList(memberId, sitterId);
+		System.out.println(userPets);
+		if (userPets != null) {
+			for (Pet pet : userPets) {
+				List<String> imgList = petMan.findPetAttachments(memberId, pet.getId());
+				pet.setImages(imgList);
+			}
+			Iterator<Pet> iterator = userPets.iterator();
+			Map<String, Pet> petMap = new HashMap<String, Pet>();
+			while (iterator.hasNext()) {
+				Pet pet = iterator.next();
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
+				String[] today = sdf.format(new Date()).split("-");
+				String[] birth = pet.getBirth().split(" ")[0].split("-");
+				int year = Integer.valueOf(today[0]) - Integer.valueOf(birth[0]) + 1;
+				pet.setBirth(String.valueOf(year));
+	
+				petMap.put(pet.getId(), pet);
+			}
+			return petMap;
 		}
-		return petMap;
+		return null;
 	}
 	
 	public Pet findPetInfo(String petId) throws SQLException {

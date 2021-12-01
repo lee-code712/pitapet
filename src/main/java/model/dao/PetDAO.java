@@ -54,6 +54,47 @@ public class PetDAO {
 		return null;
 	}
 	
+	/* 보호자의 반려동물 중 선택한 돌보미가 돌봄 가능한 동물 리스트 */
+	public List<Pet> findAbleCarePetList(String memberId, String sitterId) throws SQLException {
+		String sql = "SELECT pet_id, name, birth, gender, kind_id, large_category, small_category "
+				+ "FROM pet JOIN pet_kind USING (kind_id) " 
+				+ "JOIN available_pet_kind apk USING (kind_id) "
+				+ "WHERE member_id = ? AND apk.sitter_id = ?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId, sitterId });
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next()) {
+				ArrayList<Pet> petList = new ArrayList<>();
+
+				Pet pet = new Pet(rs.getString("pet_id"));
+				pet.setName(rs.getString("name"));
+				pet.setBirth(rs.getString("birth"));
+				pet.setGender(rs.getString("gender"));
+				pet.setKind(new PetKind(rs.getString("kind_id"), rs.getString("large_category"),
+						rs.getString("small_category")));
+				petList.add(pet);
+
+				while (rs.next()) {
+					pet = new Pet(rs.getString("pet_id"));
+					pet.setName(rs.getString("name"));
+					pet.setBirth(rs.getString("birth"));
+					pet.setGender(rs.getString("gender"));
+					pet.setKind(new PetKind(rs.getString("kind_id"), rs.getString("large_category"),
+							rs.getString("small_category")));
+					petList.add(pet);
+				}
+
+				return petList;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
+	
 	/* 전체 반려동물 종 리스트 검색 */
 	public ArrayList<PetKind> findAllPetKindList() throws SQLException {
 		String sql = "SELECT kind_id, large_category, small_category "

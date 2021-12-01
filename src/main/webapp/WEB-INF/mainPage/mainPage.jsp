@@ -30,7 +30,7 @@
 	    	calendar.render();
 	    	
 	    	var schedules = JSON.parse('${careSchedules}');
-	    	console.log(schedules);
+	    	// console.log(schedules);
 	    	for (key in schedules) {
 	    		var name = '';
 	    		var color = '';
@@ -56,10 +56,11 @@
 	    		else
 	    			status = ' 돌봄 완료';
 	
+	    		let endDate = new Date(schedules[key].endDate);
 	        	calendar.addEvent({
 	        		title: name + status,
 	        		start: schedules[key].startDate,
-	        		end: schedules[key].endDate,
+	        		end: endDate.setDate(endDate.getDate() + 1),
 	        		allDay: true,
 	        		color: color
 	        	})

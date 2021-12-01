@@ -20,6 +20,50 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="/js/mainPage.js"></script>
     <script src="/js/main.js"></script>
+    
+    <script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var calendarEl = document.getElementById('calendar');
+        	var calendar = new FullCalendar.Calendar(calendarEl, {
+				initialView: 'dayGridMonth'
+			});
+        	calendar.render();
+        	
+        	var schedules = JSON.parse('${careSchedules}');
+        	console.log(schedules);
+        	for (key in schedules) {
+        		var petNames = '';
+        		console.log(schedules[key].careList.length);
+        		for (var i = 0; i < schedules[key].careList.length; i++) {
+        			petNames += schedules[key].careList[i].carePet.name;
+        			if (i == schedules[key].careList.length - 1)
+        				break;
+        			petNames += ", ";
+        		}
+        		var color = '';
+        		var status = '';
+        		if (schedules[key].status == 'X') {
+        			color = '#FF4500';
+        			status = ' 돌봄 예약';
+        		}
+        		else if (schedules[key].status == 'Y') {
+        			color ='#FF6347';
+        			status = ' 돌봄 진행';
+        		}
+        		else {
+        			color = '#FFA07A';
+        			status = ' 돌봄 완료';
+        		}
+            	calendar.addEvent({
+            		title: petNames + status,
+            		start: schedules[key].startDate,
+            		end: schedules[key].endDate,
+            		allDay: true,
+            		color: color
+            	})
+        	}
+		});
+    </script>
 </head>
 
 <body>

@@ -22,7 +22,7 @@
 	<div id="sitterListWrap">
 		<div id="searchToolsWrap">
 			<div id="pageTit">돌보미 정보 조회</div>
-				<form name="form" method="GET" action="/reservation/listSitter">
+				<form name="form" method="GET" action="/reservation/listSitter" onsubmit="return search()">
 					<div id="searchTools">
 					<select id="choiceBox" name="searchOption">
 						<option value="city">지역</option>
@@ -47,7 +47,7 @@
 							</c:otherwise>
 						</c:choose>
 						<input type="hidden" name="currentPage" value="1" />
-						<input type='image' src="/images/search.svg" id="searchImg" onclick="search()"/>
+						<input type="image" src="/images/search.svg" id="searchImg"/>
 					</div>
 					</div>
 				</form>

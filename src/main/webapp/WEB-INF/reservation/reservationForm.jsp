@@ -360,8 +360,8 @@ margin-top: 20px;
 
 	<form name="form" method="POST" action="<c:url value='/reservation/reserve'/>" onsubmit="return reservation()">
 	<div id="reservationFormWrap">
-		<input type="hidden" name="fromDate" value="${fromDate}" />
-		<input type="hidden" name="toDate" value="${toDate}" />
+		<input type="hidden" name="fromDate" value="${param.fromDate}" />
+		<input type="hidden" name="toDate" value="${param.toDate}" />
 		<input type="hidden" name="totalPrice" value="${param.totalPrice}" />
 		<input type="hidden" name="sitterId" value="${petsitterInfo.sitter.id}" />
 		
@@ -369,19 +369,22 @@ margin-top: 20px;
 		<div id="carePrice"><img src="/images/dollarImg.svg" id="dollarImg" />이용 요금 ${param.totalPrice}원</div>
 		<div id="subPageTit">반려동물 선택하기</div>
 		<div id="petPickWrap">
-			<c:forEach var="pet" items="${userPets}">
+			<c:if test="${empty userPetsMap}">
+				돌봄 가능한 반려동물이 없습니다.<br/>
+			</c:if>
+			<c:forEach var="pet" items="${userPetsMap}">
 				<div id="petCheckBoxWrap">
-					<c:if test="${pet.images eq null}">
+					<c:if test="${pet.value.images eq null}">
 						<img src="/images/petCheckImg.svg" id="petCheckImg" />
 					</c:if>
-					<c:if test="${pet.images ne null}">
-						<img src="${pet.images[0]}" id="petCheckImg" />
+					<c:if test="${pet.value.images ne null}">
+						<img src="${pet.value.images[0]}" id="petCheckImg" />
 					</c:if>
-					<div id="petInfoName">${pet.name}</div>
-					<div id="petInfoBirth">${pet.birth}살</div>
+					<div id="petInfoName">${pet.value.name}</div>
+					<div id="petInfoBirth">${pet.value.birth}살</div>
 					<div id="tagCheckWrap">
-						<div id="petInfoKind">#${pet.kind.smallCategory}</div>
-						<input type="checkbox" class="checkbox" name="pet" value="${pet.id}" />
+						<div id="petInfoKind">#${pet.value.kind.smallCategory}</div>
+						<input type="checkbox" class="checkbox" name="pet" value="${pet.key}" />
 					</div>
 				</div>
 			</c:forEach>

@@ -1,6 +1,8 @@
 package controller.reservation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +42,19 @@ public class ReserveController implements Controller {
 			// 펫시터 정보
 			PetSitter petsitterInfo = sitterMan.findPetSitter(sitterId);
 			request.setAttribute("petsitterInfo", petsitterInfo);
+			List<Service> ableService = petsitterInfo.getMyApplyInfo().getServices();
+			if (ableService != null) {
+				Iterator<Service> iterator = ableService.iterator();
+				Map<String, Service> serviceMap = new HashMap<String, Service>();
+				while (iterator.hasNext()) {
+					Service service = iterator.next();
+					serviceMap.put(service.getId(), service);
+				}
+				ObjectMapper mapper = new ObjectMapper();
+				String services = mapper.writeValueAsString(serviceMap);
+
+				request.setAttribute("ableService", services);
+			}
 
 			// 로그인한 유저의 반려동물 리스트 js에서 사용하기 위해 JSON 객체로 저장
 			Map<String, Pet> ablePetMap = petMan.getAbleCarePetMap(userId, sitterId);
@@ -47,7 +62,9 @@ public class ReserveController implements Controller {
 			if (ablePetMap != null) {
 				ObjectMapper mapper = new ObjectMapper();
 				String pets = mapper.writeValueAsString(ablePetMap);
+				request.setAttribute("userPetsMap", ablePetMap);
 				request.setAttribute("userPetsJson", pets);
+				System.out.println(pets);
 			}
 
 			return "/reservation/reservationForm.jsp";

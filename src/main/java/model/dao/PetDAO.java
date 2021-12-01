@@ -277,7 +277,7 @@ public class PetDAO {
 		return null;
 	}
 	
-	public Pet addPet(String memberId, Pet pet) {
+	public int addPet(String memberId, Pet pet) {
 		 String sql = "INSERT INTO PET VALUES (?, ?, ?, ?, ?, ?)";
 		 String petId = pet.getBirth().replaceAll("-", "").substring(2, 8) + memberId.substring(memberId.length() - 2, memberId.length()); // 수정 필요
          
@@ -286,25 +286,9 @@ public class PetDAO {
          jdbcUtil.setSqlAndParameters(sql, param);
 
 	      try {
-	    	  int result = jdbcUtil.executeUpdate();
-				
-				sql = "SELECT pet_id, name, birth, gender, member_id, kind_id "
-						+ "FROM pet "
-						+ "WHERE pet_id = ?";
-				param = new Object[] { petId };
-				jdbcUtil.setSqlAndParameters(sql, param);
-				ResultSet rs = jdbcUtil.executeQuery();
-				if (rs.next()) {
-					pet = new Pet (
-							petId,
-							rs.getString("name"),
-							rs.getString("birth"),
-							rs.getString("gender"),
-							new PetKind(rs.getString("kind_id")),
-							new Member(rs.getString("member_id"))
-						);
-					return pet;
-				}
+	    	  int recordCount = jdbcUtil.executeUpdate();
+	    	  
+	    	  return recordCount;
 	      } catch (Exception ex) {
 	          jdbcUtil.rollback();
 	    	  ex.printStackTrace();
@@ -312,7 +296,7 @@ public class PetDAO {
 	    	 jdbcUtil.commit();
 	         jdbcUtil.close();      
 	      }
-		   return null;
+		   return 0;
 	}
 	
 	public PetKind findPetKindInfo(String kindId) {

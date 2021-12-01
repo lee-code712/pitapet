@@ -22,7 +22,7 @@
     <div id="pageWrap">
         <div id="pageTit">반려동물 정보</div>
         
-        <c:if test="${addFailed}">
+        <c:if test="${param.addFailed}">
 			<script> alert("반려동물 추가에 실패했습니다."); </script>
 		</c:if>
         
@@ -46,7 +46,14 @@
 	
 	            <tr>
 	                <td id="tdTit">이름</td>
-	                <td><input type="text" name="name" placeholder="이름을 입력하세요." id="textDesign" /></td>
+	                <td>
+	                <c:if test="${param.addFailed}">
+	                	<input type="text" name="name" placeholder="이름을 입력하세요." id="textDesign" value="${sessionScope.petInfo.name}" />
+	                </c:if>
+	                <c:if test="${!param.addFailed}">
+	                	<input type="text" name="name" placeholder="이름을 입력하세요." id="textDesign" />
+	                </c:if>	
+	                </td>
 	            </tr>
 	
 	            <tr>

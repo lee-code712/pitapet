@@ -4,13 +4,15 @@ function addPet(id) {
 	}
 	
 	if (id == "addBtn") {
-		if ( !$("input[name=name]").val()) {
+		if (form.name.value == "") {
 			alert("반려동물의 이름을 입력해 주세요.");
+			form.name.focus();
 			return false;
 		}
 	
-		if ( !$("#birth").val()) {
+		if (form.birth.value == "") {
 			alert("반려동물의 생년월일을 입력해 주세요.");
+			form.birth.focus();
 			return false;
 		}
 	

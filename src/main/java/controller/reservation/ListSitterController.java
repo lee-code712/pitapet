@@ -65,7 +65,6 @@ public class ListSitterController implements Controller {
 			// 현재 로그인한 사용자의 likeList 전달
 			List<LikeList> likeSitters = likelistMan.findLikeListOfMember(memberId);
 			request.setAttribute("likeSitters", likeSitters);
-			// session.removeAttribute("searchSitters");
 		}
 		
 		// 지역 및 동물 맞춤 추천 돌보미 전달

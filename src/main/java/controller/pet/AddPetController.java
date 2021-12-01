@@ -16,6 +16,8 @@ public class AddPetController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
 		PetManager petMan = PetManager.getInstance();
 		
 		// 반려동물 추가 form 이동
@@ -27,29 +29,23 @@ public class AddPetController implements Controller {
 			return "/member/petAddForm.jsp";
 		}
 		
-		// 반려동물 추가
-		
-		HttpSession session = request.getSession();
+		// 반려동물 추가 처리 
 		String userId = UserSessionUtils.getLoginUserId(session);
-		
 		String name = request.getParameter("name");
 		String birth = request.getParameter("birth");
 		String gender = request.getParameter("gender");
 		String kindId = request.getParameter("petKind");
 		
 		Pet pet = new Pet(name, birth, gender, new PetKind(kindId), null);
-		pet = petMan.addPet(userId, pet);
+		boolean isAdded = petMan.addPet(userId, pet);
+		if (!isAdded) {
+			session.setAttribute("petInfo", pet);
+			return "redirect:/pet/addPet?addFailed=true";
+		}
 		
-		if (pet != null) {
-			return "redirect:/pet/listPet";
-		}
-		else {
-			List<PetKind> petKindList = petMan.findAllPetKindList();
-			request.setAttribute("petKindList", petKindList);
-			request.setAttribute("petInfo", pet);
-			request.setAttribute("addFailed", true);
-			return "/member/petAddForm.jsp";
-		}
+		if (session.getAttribute("petInfo") != null)
+			session.removeAttribute("petInfo");
+		return "redirect:/pet/listPet";
 	}
 
 }

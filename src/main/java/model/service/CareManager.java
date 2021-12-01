@@ -141,21 +141,16 @@ public class CareManager {
 	}
 	
 	/* 돌봄 예약(돌봄 내역 생성) */
-	public Care createCare(int totalPrice, String fromDate, String toDate, String cautionText, String memberId, String sitterId) throws SQLException, ParseException {
-		toDate = toDate + " 00:00:01";
+	public int createCare(Care care) throws SQLException, ParseException {
+		care.setEndDate(care.getEndDate() + " 00:00:01");
 		SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		// String 타입을 Date 타입으로 변환
-		Date formatDate = dtFormat.parse(toDate);
+		Date formatDate = dtFormat.parse(care.getEndDate());
 		// Date타입의 변수를 새롭게 지정한 포맷으로 변환
-		toDate = newDtFormat.format(formatDate);
-
-		Care care = new Care(fromDate, toDate, totalPrice, cautionText,
-				"X", null, new Member(memberId), new PetSitter(new Member(sitterId)));
+		care.setEndDate(newDtFormat.format(formatDate));
 		
-		care.setId(careDAO.createCare(care));
-		
-		return care;
+		return careDAO.createCare(care);
 	}
 	
 	/* 돌봄 예약내역 반환 */

@@ -15,11 +15,12 @@ public class ListPetController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		HttpSession session = request.getSession();
+		PetManager petMan = PetManager.getInstance();
 		String userId = UserSessionUtils.getLoginUserId(session);
 
 		// 로그인한 유저의 반려동물 리스트
-		PetManager petMan = PetManager.getInstance();
 		List<Pet> listPet = petMan.findPetListOfMember(userId);
 		request.setAttribute("petList", listPet);
 

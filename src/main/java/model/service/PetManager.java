@@ -2,19 +2,15 @@ package model.service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 
 import model.dao.PetDAO;
-import model.dto.Care;
 import model.dto.CareDetails;
-import model.dto.Member;
 import model.dto.Pet;
 import model.dto.PetKind;
 
@@ -34,10 +30,10 @@ public class PetManager {
 		return petMan;
 	}
 
+	/* 특정 회원의 반려동물 리스트 반환 */
 	public ArrayList<Pet> findPetListOfMember(String memberId) throws SQLException {
 		ArrayList<Pet> userPets = petDAO.findPetListOfMember(memberId);
-
-		// 로그인한 유저의 반려동물 별 사진 리스트
+		
 		if (userPets != null) {
 			for (Pet pet : userPets) {
 				List<String> imgList = petMan.findPetAttachments(memberId, pet.getId());
@@ -107,13 +103,14 @@ public class PetManager {
 		return petDAO.findPetInfo(petId);
 	}
 	
-	public Pet addPet(String memberId, Pet pet) {
+	public boolean addPet(String memberId, Pet pet) {
+		int count = petDAO.addPet(memberId, pet);
+		if (count == 0) return false;
+		return true;
 		/*
 		 * PetKind petKind = petMan.findPetKindInfo(pet.getKind().getId());
 		 * pet.setKind(petKind);
 		 */
-		
-		return petDAO.addPet(memberId, pet);
 	}
 	
 	public PetKind findPetKindInfo(String kindId) {

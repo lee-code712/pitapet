@@ -1,8 +1,10 @@
 package model.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Pet {
+@SuppressWarnings("serial")
+public class Pet implements Serializable {
 	private String id;
 	private String name;
 	private String birth;

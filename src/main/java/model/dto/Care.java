@@ -1,8 +1,10 @@
 package model.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Care {
+@SuppressWarnings("serial")
+public class Care implements Serializable {
 	private int id;
 	private String startDate;
 	private String endDate;

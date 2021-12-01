@@ -139,7 +139,7 @@ public class CareDAO {
 
 		String key[] = { "care_id" };
 		try {
-			int result = jdbcUtil.executeUpdate(key);
+			jdbcUtil.executeUpdate(key);
 			ResultSet rs = jdbcUtil.getGeneratedKeys();
 			int generatedKey = 0;
 			if (rs.next()) {

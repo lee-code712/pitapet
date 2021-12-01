@@ -11,7 +11,7 @@ public class Pet implements Serializable {
 	private String gender;
 	private PetKind kind;
 	private Member myCompanion;
-	private List<String> images;
+	private String petImage;
 	
 	public Pet(String id) {
 		super();
@@ -28,13 +28,13 @@ public class Pet implements Serializable {
 		this.myCompanion = myCompanion;
 	}
 	
-	public Pet(String name, String birth, String gender, PetKind kind, List<String> images) {
+	public Pet(String name, String birth, String gender, PetKind kind, String petImage) {
 		super();
 		this.name = name;
 		this.birth = birth;
 		this.gender = gender;
 		this.kind = kind;
-		this.images = images;
+		this.petImage = petImage;
 	}
 
 	public String getId() {
@@ -73,13 +73,11 @@ public class Pet implements Serializable {
 	public void setMyCompanion(Member myCompanion) {
 		this.myCompanion = myCompanion;
 	}
-
-	public List<String> getImages() {
-		return images;
+	public String getPetImage() {
+		return petImage;
 	}
-
-	public void setImages(List<String> images) {
-		this.images = images;
-	}	
+	public void setPetImage(String petImage) {
+		this.petImage = petImage;
+	}
 	
 }

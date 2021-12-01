@@ -33,11 +33,11 @@
 			<c:forEach var="pet" items="${petList}">
 	            <tr id="petInfoBoxWrap">
 	                <td id="petInfoBox">
-		                <c:if test="${pet.images eq null}">
+		                <c:if test="${pet.petImage eq null}">
 							<img src="/images/petImg.svg" id="petImg"/>
 						</c:if>
-						<c:if test="${pet.images ne null}">
-							<img src="${pet.images[0]}" id="petImg"/>
+						<c:if test="${pet.petImage ne null}">
+							<img src="${pet.petImage}" id="petImg"/>
 						</c:if>
 	                    <div id="petInfoWrap">
 	                        <div id="petName">${pet.name}</div>

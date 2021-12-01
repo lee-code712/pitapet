@@ -1,6 +1,5 @@
 package model.service;
 
-import java.util.List;
 import java.util.Map;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -32,12 +31,9 @@ public class PetManager {
 	/* 특정 회원의 반려동물 리스트 반환 */
 	public ArrayList<Pet> findPetListOfMember(String memberId) throws SQLException {
 		ArrayList<Pet> userPets = petDAO.findPetListOfMember(memberId);		
-		if (userPets != null) {
-			for (Pet pet : userPets) {
-				List<String> imgList = petDAO.findPetAttachments(memberId, pet.getId());
-				pet.setImages(imgList);
-			}
-		}
+		if (userPets != null) 
+			for (Pet pet : userPets)
+				pet.setPetImage(petDAO.findPetAttachment(memberId, pet.getId()));
 
 		return userPets;
 	}
@@ -56,10 +52,9 @@ public class PetManager {
 	public Map<String, Pet> getAbleCarePetMap(String memberId, String sitterId) throws SQLException {
 		ArrayList<Pet> userPets = (ArrayList<Pet>) petDAO.findAbleCarePetList(memberId, sitterId);
 		if (userPets != null) {
-			for (Pet pet : userPets) {
-				List<String> imgList = petDAO.findPetAttachments(memberId, pet.getId());
-				pet.setImages(imgList);
-			}
+			for (Pet pet : userPets)
+				pet.setPetImage(petDAO.findPetAttachment(memberId, pet.getId()));
+		
 			Iterator<Pet> iterator = userPets.iterator();
 			Map<String, Pet> petMap = new HashMap<String, Pet>();
 			while (iterator.hasNext()) {

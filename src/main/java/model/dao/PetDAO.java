@@ -185,8 +185,8 @@ public class PetDAO {
 		return null;
 	}
 
-	/* 반려동물의 이미지 리스트 반환 */
-	public List<String> findPetAttachments(String memberId, String petId) throws SQLException {
+	/* 반려동물의 이미지 반환 */
+	public String findPetAttachment(String memberId, String petId) throws SQLException {
 		String sql = "SELECT img_src " + "FROM attachment " + "WHERE member_id=? AND img_src LIKE ?";
 
 		String like = "%pet-" + petId + "-%";
@@ -196,16 +196,9 @@ public class PetDAO {
 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
-			List<String> imgList = new ArrayList<String>();
 			if (rs.next()) {
 				String img_src = rs.getString("img_src");
-				imgList.add(img_src);
-
-				while (rs.next()) {
-					img_src = rs.getString("img_src");
-					imgList.add(img_src);
-				}
-				return imgList;
+				return img_src;
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

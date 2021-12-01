@@ -38,11 +38,11 @@
 			</c:if>
 			<c:forEach var="pet" items="${userPetsMap}">
 				<div id="petCheckBoxWrap">
-					<c:if test="${pet.value.images eq null}">
+					<c:if test="${pet.value.petImage eq null}">
 						<img src="/images/petCheckImg.svg" id="petCheckImg" />
 					</c:if>
-					<c:if test="${pet.value.images ne null}">
-						<img src="${pet.value.images[0]}" id="petCheckImg" />
+					<c:if test="${pet.value.petImage ne null}">
+						<img src="${pet.value.petImage}" id="petCheckImg" />
 					</c:if>
 					<div id="petInfoName">${pet.value.name}</div>
 					<div id="petInfoBirth">${pet.value.birth}살</div>

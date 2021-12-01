@@ -26,6 +26,15 @@ public class Pet {
 		this.myCompanion = myCompanion;
 	}
 	
+	public Pet(String name, String birth, String gender, PetKind kind, List<String> images) {
+		super();
+		this.name = name;
+		this.birth = birth;
+		this.gender = gender;
+		this.kind = kind;
+		this.images = images;
+	}
+
 	public String getId() {
 		return id;
 	}

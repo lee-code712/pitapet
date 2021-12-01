@@ -52,9 +52,9 @@ public class MemberManager {
 		return memberDAO.findMember(memberId);
 	}
 
-	public String findProfileAttachment(String memberId) throws SQLException {
-		return (String) memberDAO.findProfileAttachment(memberId);
-	}
+//	public String findProfileAttachment(String memberId) throws SQLException {
+//		return (String) memberDAO.findProfileAttachment(memberId);
+//	}
 
 	public int createMember(Member newMember) throws SQLException, ExistingIdException {
 		if (memberDAO.findMember(newMember.getId()) != null) {

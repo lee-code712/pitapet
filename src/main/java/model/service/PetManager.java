@@ -53,16 +53,6 @@ public class PetManager {
 	
 	/* 전체 돌보미들의 돌봄 가능 종 리스트 반환 */
 	public ArrayList<PetKind> findAllAblePetKindList() throws SQLException {
-//		ArrayList<PetKind> petKindList = petDAO.findAllAblePetKindList();
-//		Set<String> set = new HashSet<String>();
-//		for (PetKind petKind : petKindList)
-//			set.add(petKind.getLargeCategory());
-//		Map<String, List<PetKind>> petKindMap = new HashMap<>();
-//		for (Iterator<String> i = set.iterator(); i.hasNext();) {
-//			
-//		}
-//
-//		
 		return petDAO.findAllAblePetKindList();
 	}
 
@@ -106,15 +96,13 @@ public class PetManager {
 		return petDAO.findPetInfo(petId);
 	}
 	
-	public Pet addPet(String memberId, String name, String birth, String gender, String kindId) {
-		Pet pet = petDAO.addPet(memberId, name, birth, gender, kindId);
-		
+	public Pet addPet(String memberId, Pet pet) {
 		/*
 		 * PetKind petKind = petMan.findPetKindInfo(pet.getKind().getId());
 		 * pet.setKind(petKind);
 		 */
 		
-		return pet;
+		return petDAO.addPet(memberId, pet);
 	}
 	
 	public PetKind findPetKindInfo(String kindId) {

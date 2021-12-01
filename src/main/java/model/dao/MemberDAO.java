@@ -18,9 +18,9 @@ private JDBCUtil jdbcUtil = null;
    }
    
    public Member findMember(String memberId) throws SQLException {
-        String sql = "SELECT password, name, birth, gender, email, phone, address, identity "
-                 + "FROM member "
-                 + "WHERE member_id=? ";              
+        String sql = "SELECT password, name, birth, gender, email, phone, address, identity, img_src "
+                 + "FROM member JOIN attachment USING (member_id) "
+                 + "WHERE member_id=? AND category_id = 'AtchId04'";              
       jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId});   // JDBCUtil에 query문과 매개 변수 설정
 
       try {
@@ -35,7 +35,8 @@ private JDBCUtil jdbcUtil = null;
                rs.getString("email"),               
                rs.getString("phone"),
                rs.getString("address"),
-               rs.getString("identity")
+               rs.getString("identity"),
+               rs.getString("img_src")
             );
             return member;
          }
@@ -47,29 +48,29 @@ private JDBCUtil jdbcUtil = null;
       return null;
    }
      
-   public String findProfileAttachment(String memberId) throws SQLException {   
-	     String sql = "SELECT img_src "
-	                + "FROM attachment "
-	                + "WHERE member_id=? AND img_src LIKE ?"; 
-	    	       
-	     String like = "%profile-" + memberId + "-%";
-	     like = like.replaceAll(" ", "");
-	       
-	     jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, like});   // JDBCUtil에 query문과 매개 변수 설정
-
-	     try {
-	        ResultSet rs = jdbcUtil.executeQuery();  
-	        if (rs.next()) {                  
-	           String img_src = rs.getString("img_src");
-	           return img_src;
-	        }
-	     } catch (Exception ex) {
-	        ex.printStackTrace();
-	     } finally {
-	        jdbcUtil.close();      
-	     }
-	     return null;
-	  }
+//   public String findProfileAttachment(String memberId) throws SQLException {   
+//	     String sql = "SELECT img_src "
+//	                + "FROM attachment "
+//	                + "WHERE member_id=? AND img_src LIKE ?"; 
+//	    	       
+//	     String like = "%profile-" + memberId + "-%";
+//	     like = like.replaceAll(" ", "");
+//	       
+//	     jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, like});   // JDBCUtil에 query문과 매개 변수 설정
+//
+//	     try {
+//	        ResultSet rs = jdbcUtil.executeQuery();  
+//	        if (rs.next()) {                  
+//	           String img_src = rs.getString("img_src");
+//	           return img_src;
+//	        }
+//	     } catch (Exception ex) {
+//	        ex.printStackTrace();
+//	     } finally {
+//	        jdbcUtil.close();      
+//	     }
+//	     return null;
+//	  }
    
    public int createMember(Member newMember) throws SQLException {
 		  String sql = "INSERT INTO MEMBER VALUES (?, ?, ?, TO_DATE(?, 'YYYYMMDD'), ?, ?, ?, ?, ?)";

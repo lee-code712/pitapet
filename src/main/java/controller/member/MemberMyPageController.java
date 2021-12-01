@@ -32,8 +32,6 @@ public class MemberMyPageController implements Controller{
 		String userId = UserSessionUtils.getLoginUserId(session);
 		
 		Member memberInfo = memberMan.findMember(userId);
-		String profileImg = memberMan.findProfileAttachment(userId);
-		memberInfo.setProfileImage(profileImg);
 		request.setAttribute("memberInfo", memberInfo);
 		
 		String applicationStatus = applicationMan.getApprovalStatus(userId);

@@ -238,10 +238,12 @@ public class PetDAO {
 		return null;
 	}
 	
-	public Pet addPet(String memberId, String name, String birth, String gender, String kindId) {
+	public Pet addPet(String memberId, Pet pet) {
 		 String sql = "INSERT INTO PET VALUES (?, ?, ?, ?, ?, ?)";
-		 String petId = birth.replaceAll("-", "").substring(2, 8) + memberId.substring(memberId.length() - 2, memberId.length()); // 수정 필요
-         Object[] param = new Object[] {petId , name, birth, gender, memberId, kindId };   
+		 String petId = pet.getBirth().replaceAll("-", "").substring(2, 8) + memberId.substring(memberId.length() - 2, memberId.length()); // 수정 필요
+         
+		 Object[] param = new Object[] {petId , pet.getName(), pet.getBirth(), pet.getGender(), 
+				 memberId, pet.getKind().getId() };   
          jdbcUtil.setSqlAndParameters(sql, param);
 
 	      try {
@@ -254,14 +256,14 @@ public class PetDAO {
 				jdbcUtil.setSqlAndParameters(sql, param);
 				ResultSet rs = jdbcUtil.executeQuery();
 				if (rs.next()) {
-					Pet pet = new Pet (
-								petId,
-								rs.getString("name"),
-								rs.getString("birth"),
-								rs.getString("gender"),
-								new PetKind(rs.getString("kind_id")),
-								new Member(rs.getString("member_id"))
-							);
+					pet = new Pet (
+							petId,
+							rs.getString("name"),
+							rs.getString("birth"),
+							rs.getString("gender"),
+							new PetKind(rs.getString("kind_id")),
+							new Member(rs.getString("member_id"))
+						);
 					return pet;
 				}
 	      } catch (Exception ex) {

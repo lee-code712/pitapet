@@ -38,7 +38,6 @@ public class PetSitterApplicationManager {
 	
 	public PetSitterApplication findApplication(String applyId) throws SQLException {
 		PetSitterApplication application = petSitterApplicationDAO.findApplication(applyId);
-		String profileImg = memberDAO.findProfileAttachment(application.getApplicant().getId());
 		String[] address = application.getApplicant().getAddress().split(" ");
 		String city = null;
 		for (int j = 0; j < address.length; j++) {
@@ -50,8 +49,6 @@ public class PetSitterApplicationManager {
 		
 		List<String> imgList = petSitterApplicationDAO.findApplyAttachments(application.getApplicant().getId());
 		application.setImages(imgList);
-		
-		application.getApplicant().setProfileImage(profileImg);
 		
 		return application;
 	}

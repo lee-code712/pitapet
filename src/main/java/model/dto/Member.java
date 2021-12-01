@@ -42,7 +42,7 @@ public class Member {
 		this.email = email;
 	}
 	
-	public Member(String id, String password, String name, String birth, String gender, String email, String phone, String address, String identity) {
+	public Member(String id, String password, String name, String birth, String gender, String email, String phone, String address, String identity, String profileImage) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -53,6 +53,7 @@ public class Member {
 		this.address = address;
 		this.email = email;
 		this.identity = identity;
+		this.profileImage = profileImage;
 	}
 	
 	public Member(String id, String password, String name, String birth, String gender, String email, String phone, String address) {

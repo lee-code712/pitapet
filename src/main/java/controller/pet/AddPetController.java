@@ -37,7 +37,8 @@ public class AddPetController implements Controller {
 		String gender = request.getParameter("gender");
 		String kindId = request.getParameter("petKind");
 		
-		Pet pet = petMan.addPet(userId, name, birth, gender, kindId);
+		Pet pet = new Pet(name, birth, gender, new PetKind(kindId), null);
+		pet = petMan.addPet(userId, pet);
 		
 		if (pet != null) {
 			return "redirect:/pet/listPet";

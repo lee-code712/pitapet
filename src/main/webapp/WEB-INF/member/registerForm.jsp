@@ -45,41 +45,4 @@
      </div>
    </form> 
 </body>
-<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
-
-<script id="rendered-js" >
-    var gender = document.getElementsByClassName("gender");
-
-    function handleClick(event) {
-        console.log(event.target);
-
-        console.log(event.target.classList);
-
-        if (event.target.classList[1] === "clicked") {
-            event.target.classList.remove("clicked");
-        } else {
-            for (var i = 0; i < gender.length; i++) {if (window.CP.shouldStopExecution(0)) break;
-                gender[i].classList.remove("clicked");
-            }window.CP.exitedLoop(0);
-            event.target.classList.add("clicked");
-        }
-    }
-
-    function init() {
-        for (var i = 0; i < gender.length; i++) {if (window.CP.shouldStopExecution(1)) break;
-            gender[i].addEventListener("click", handleClick);
-        }window.CP.exitedLoop(1);
-    }
-    
-    function userCreate() {
-		if (form.password.value != form.checkPassword.value) {
-			alert("비밀번호가 일치하지 않습니다.");
-			form.checkPassword.focus();
-			return false;
-		}
-		form.submit();
-    }
-    
-    init();
-</script>
 </html>

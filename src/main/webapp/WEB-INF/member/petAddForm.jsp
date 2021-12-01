@@ -27,48 +27,48 @@
 		</c:if>
         
         <form name="form" method="POST" action="<c:url value='/pet/addPet'/>" >
-        <table>
-            <tr>
-                <td id="tableTit">반려동물 정보</td>
-                <td id="tableTit"></td>
-            </tr>
-
-            <tr>
-                <td id="tdTit">종류</td>
-                <td>
-                    <select id="joinPetKind" name="petKind"> 
-                    	<c:forEach var="petKind" items="${petKindList}" varStatus="status">
-	                        <option value="${petKind.id}">${petKind.largeCategory} - ${petKind.smallCategory}</option>
-                        </c:forEach>
-                    </select>	
-                </td>
-            </tr>
-
-            <tr>
-                <td id="tdTit">이름</td>
-                <td><input type="text" name="name" placeholder="이름을 입력하세요." id="textDesign" /></td>
-            </tr>
-
-            <tr>
-                <td id="tdTit">생년월일</td>
-                <td><input type="date" id="birth" name="birth" /></td>
-            </tr>
-            
-            <tr>
-                <td id="tdTit">성별</td>
-                <td>
-					<select id="joinPetKind" name="gender"> 
-						<option value="M">수컷</option>
-						<option value="F">암컷</option>
-                    </select>	
-				</td>
-            </tr>
-        </table>
-        
-        <div id="btnWrap">
-            <button id="cancelBtn" onclick="addPet(this.id)">취소</button>
-            <button id="addBtn" onclick="addPet(this.id)">추가</button> 
-        </div>
+	        <table>
+	            <tr>
+	                <td id="tableTit">반려동물 정보</td>
+	                <td id="tableTit"></td>
+	            </tr>
+	
+	            <tr>
+	                <td id="tdTit">종류</td>
+	                <td>
+	                    <select id="joinPetKind" name="petKind"> 
+	                    	<c:forEach var="petKind" items="${petKindList}" varStatus="status">
+		                        <option value="${petKind.id}">${petKind.largeCategory} - ${petKind.smallCategory}</option>
+	                        </c:forEach>
+	                    </select>	
+	                </td>
+	            </tr>
+	
+	            <tr>
+	                <td id="tdTit">이름</td>
+	                <td><input type="text" name="name" placeholder="이름을 입력하세요." id="textDesign" /></td>
+	            </tr>
+	
+	            <tr>
+	                <td id="tdTit">생년월일</td>
+	                <td><input type="date" id="birth" name="birth" /></td>
+	            </tr>
+	            
+	            <tr>
+	                <td id="tdTit">성별</td>
+	                <td>
+						<select id="joinPetKind" name="gender"> 
+							<option value="M">수컷</option>
+							<option value="F">암컷</option>
+	                    </select>	
+					</td>
+	            </tr>
+	        </table>
+	        
+	        <div id="btnWrap">
+	            <button id="cancelBtn" onclick="addPet(this.id)">취소</button>
+	            <button id="addBtn" onclick="addPet(this.id)">추가</button> 
+	        </div>
         </form>
     </div>
     

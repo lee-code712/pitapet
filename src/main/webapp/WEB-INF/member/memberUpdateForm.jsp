@@ -70,8 +70,7 @@
 	</div>
 
 	<div id="footerWrap">
-		<div id="footerText">Copyrights © 2021 by 윤김구이. All Rights
-			Reserved.</div>
+		<div id="footerText">Copyrights © 2021 by 윤김구이. All Rights Reserved.</div>
 	</div>
 </body>
 </html>

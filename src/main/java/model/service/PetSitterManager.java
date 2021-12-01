@@ -8,21 +8,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import model.dao.MemberDAO;
 import model.dao.PetDAO;
 import model.dao.PetSitterDAO;
 import model.dao.ServiceDAO;
+import model.dto.Member;
 import model.dto.PetKind;
 import model.dto.PetSitter;
 import model.dto.Service;
 
 public class PetSitterManager {
 	private static PetSitterManager sitterMan = new PetSitterManager();
+	private MemberDAO memberDAO;
 	private PetSitterDAO sitterDAO;
 	private ServiceDAO serviceDAO;
 	private PetDAO petDAO;
 
 	private PetSitterManager() {
 		try {
+			memberDAO = new MemberDAO();
 			sitterDAO = new PetSitterDAO();
 			serviceDAO = new ServiceDAO();
 			petDAO = new PetDAO();
@@ -81,9 +85,25 @@ public class PetSitterManager {
 	/* 추천 돌보미 반환 */
 	public PetSitter getRecommendPetSitter(String memberId) throws SQLException {
 		ArrayList<PetSitter> sitters = sitterDAO.findPetSitterListOfRecommend(memberId);
-		// Member memberInfo = memberDAO.findMember(memberId);
 		if (sitters != null) {
 			Collections.shuffle(sitters);
+			
+			Member memberInfo = memberDAO.findMember(memberId);
+			String[] address = memberInfo.getAddress().split(" ");
+			String city = null;
+			for (int j = 0; j < address.length; j++) {
+				if (address[j].matches("(.*)[시|도]")) {
+					city = address[j].substring(0, address[j].length() - 1);
+					break;
+				}
+			}
+			
+			for (PetSitter sitter : sitters) {
+				if(sitter.getSitter().getAddress().contains(city)) {
+					sitter = updateSitterProperties(sitter);
+					return sitter;
+				}
+			}
 			sitters.set(0, updateSitterProperties(sitters.get(0)));
 			return sitters.get(0);
 		}
@@ -132,8 +152,10 @@ public class PetSitterManager {
 		String[] address = sitter.getSitter().getAddress().split(" ");
 		String city = null;
 		for (int j = 0; j < address.length; j++) {
-			if (address[j].matches("(.*)로"))
+			if (address[j].matches("(.*)로")) {
 				city = address[j].substring(0, address[j].length() - 1);
+				break;
+			}
 		}
 		sitter.getSitter().setAddress(city);
 		

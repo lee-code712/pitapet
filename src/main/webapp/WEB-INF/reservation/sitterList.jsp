@@ -151,7 +151,7 @@
 
 		<div id="reviewWrap">
 			<div id="reviewTit">추천</div>
-
+			회원의 지역(시/도) 및 반려동물을 기준으로 매칭한 추천 돌보미
 			<div id="reviewBoxWrap">
 				<c:if test="${empty recoSitter}">
 					매칭되는 추천 돌보미가 없습니다.

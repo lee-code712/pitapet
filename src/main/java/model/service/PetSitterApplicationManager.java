@@ -3,22 +3,16 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import model.dto.PetKind;
-import model.dto.PetSitter;
 import model.dto.PetSitterApplication;
-import model.dao.MemberDAO;
-import model.dao.PetDAO;
 import model.dao.PetSitterApplicationDAO;
 
 public class PetSitterApplicationManager {
 	private static PetSitterApplicationManager applycationMan = new PetSitterApplicationManager();
 	private PetSitterApplicationDAO petSitterApplicationDAO;
-	private MemberDAO memberDAO;
 	
 	private PetSitterApplicationManager() {
 		try {
 			petSitterApplicationDAO = new PetSitterApplicationDAO();
-			memberDAO = new MemberDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}			
@@ -32,10 +26,12 @@ public class PetSitterApplicationManager {
 		return petSitterApplicationDAO.getApprovalStatus(memberId);
 	}
 	
+	/* 돌보미 지원자 리스트 반환 */
 	public List<PetSitterApplication> findApplicationList() throws SQLException {
 		return petSitterApplicationDAO.findApplicationList();
 	}
 	
+	/* 특정  돌보미 지원자 정보 반환 */
 	public PetSitterApplication findApplication(String applyId) throws SQLException {
 		PetSitterApplication application = petSitterApplicationDAO.findApplication(applyId);
 		String[] address = application.getApplicant().getAddress().split(" ");
@@ -61,7 +57,7 @@ public class PetSitterApplicationManager {
 		return petSitterApplicationDAO.refuseStatus(applyId);
 	}
 	
-	public int createBasicSitter(String memberId, String applyId) throws SQLException {
-	      return petSitterApplicationDAO.createBasicSitter(memberId, applyId);
-	}
+//	public int createBasicSitter(String memberId, String applyId) throws SQLException {
+//	      return petSitterApplicationDAO.createBasicSitter(memberId, applyId);
+//	}
 }

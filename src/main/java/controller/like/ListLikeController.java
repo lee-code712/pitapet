@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import controller.Controller;
 import controller.member.UserSessionUtils;
 import model.dto.PetSitter;
-import model.service.LikeListManager;
 import model.service.PetSitterManager;
 
 public class ListLikeController implements Controller{

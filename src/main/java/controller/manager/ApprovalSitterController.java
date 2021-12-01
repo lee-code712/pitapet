@@ -20,19 +20,19 @@ public class ApprovalSitterController implements Controller {
     	
     	int result = psApplicationMan.applyStatus(applyId);
     	if (result > 0) {
-    		int createResult = psApplicationMan.createBasicSitter(memberId, applyId);
-    		if(createResult > 0) {
+    		// int createResult = psApplicationMan.createBasicSitter(memberId, applyId); // 돌보미 등록시 PetSitter객체가 생성됨
+    		//if(createResult > 0) {
     			int upgradeResult = sitterMan.upgradeSitter(memberId);
     			if(upgradeResult > 0) {
     				return "redirect:/manager/listSitterApply";
     			} else {
     				return "redirect:/manager/viewApply";
     			}
-    		}
-    		else {
-    			request.setAttribute("updateFailed", true);
-    			return "redirect:/manager/viewApply";
-    		}
+    		//}
+//    		else {
+//    			request.setAttribute("updateFailed", true);
+//    			return "redirect:/manager/viewApply";
+//    		}
     	} else {
     		request.setAttribute("updateFailed", true);
     		return "redirect:/manager/viewApply";

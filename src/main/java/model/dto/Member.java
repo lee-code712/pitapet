@@ -20,10 +20,10 @@ public class Member {
 		this.id = id;
 	}
 	
-	public Member(String id, String address) {
+	public Member(String id, String name) {
 		super();
 		this.id = id;
-		this.address = address;
+		this.name = name;
 	}
 	
 	public Member(String id, String address, String profileImage) {
@@ -55,19 +55,7 @@ public class Member {
 		this.identity = identity;
 		this.profileImage = profileImage;
 	}
-	
-	public Member(String id, String password, String name, String birth, String gender, String email, String phone, String address) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.birth = birth;
-		this.gender = gender;
-		this.phone = phone;
-		this.address = address;
-		this.email = email;
-	}
-	
+
 	public String getId() {
 		return id;
 	}

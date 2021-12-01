@@ -13,7 +13,6 @@ import model.dao.PetSitterDAO;
 import model.dao.ServiceDAO;
 import model.dto.PetKind;
 import model.dto.PetSitter;
-import model.dto.Review;
 import model.dto.Service;
 
 public class PetSitterManager {
@@ -123,15 +122,10 @@ public class PetSitterManager {
 		return true;
 	}
 	
-	public ArrayList<PetSitter> findPetSitterList() throws SQLException {
-		return sitterDAO.findPetSitterList();
-	}
-	
 	/*보호자에서 돌보미로 등급 조정*/
 	public int upgradeSitter(String memberId) throws SQLException {
 		return sitterDAO.upgradeSitter(memberId);
 	}
-
 
 	/* 돌보미의 속성 중 주소  추가 */
 	public PetSitter addSitterProperties(PetSitter sitter) throws SQLException {

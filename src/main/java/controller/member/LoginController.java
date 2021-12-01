@@ -13,12 +13,13 @@ import model.service.exception.PasswordMismatchException;
 public class LoginController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	
+    	MemberManager memMan = MemberManager.getInstance();
     	String memberId = request.getParameter("memberId");
 		String password = request.getParameter("password");
 		
 		try {
 			// 모델에 로그인 처리를 위임
-			MemberManager memMan = MemberManager.getInstance();
 			Member member = memMan.login(memberId, password);
 	
 			// 세션에 사용자 아이디, 등급 저장

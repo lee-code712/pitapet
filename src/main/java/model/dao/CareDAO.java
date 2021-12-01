@@ -18,16 +18,17 @@ public class CareDAO {
 	
 	/* 보호자 및 특정 돌보미의 돌봄 스케쥴 조회 */
 	public List<Care> findCareSchedules(String memberId, String sitterId) throws SQLException {
-		String sql = "SELECT DISTINCT care_id, start_date, end_date, member_id, sitter_id, care_status " 
-				+ "FROM care ";
+		String sql = "SELECT DISTINCT care_id, start_date, end_date, c.member_id, m.name, c.sitter_id, care_status " 
+				+ "FROM care c JOIN member m ON (c.sitter_id = m.member_id) ";
 		if (sitterId == null) {
-			sql += "WHERE member_id = ?";
+			sql += "WHERE c.member_id = ? ";
 			jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId });
 		}
 		else {
-			sql += "WHERE member_id = ? OR sitter_id = ?";
+			sql += "WHERE c.member_id = ? OR c.sitter_id = ? ";
 			jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId, memberId });
 		}
+		//sql += "ORDER BY start_date DESC";
 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
@@ -35,12 +36,12 @@ public class CareDAO {
 			if (rs.next()) {
 				careList = new ArrayList<Care>();
 				Care care = new Care(rs.getInt("care_id"), rs.getString("start_date"), rs.getString("end_date"),
-						new Member(rs.getString("member_id")), new PetSitter(new Member(rs.getString("sitter_id"))),
+						new Member(rs.getString("member_id")), new PetSitter(new Member(rs.getString("sitter_id"), rs.getString("name"))),
 						rs.getString("care_status"));
 				careList.add(care);
 				while (rs.next()) {
 					care = new Care(rs.getInt("care_id"), rs.getString("start_date"), rs.getString("end_date"),
-							new Member(rs.getString("member_id")), new PetSitter(new Member(rs.getString("sitter_id"))),
+							new Member(rs.getString("member_id")), new PetSitter(new Member(rs.getString("sitter_id"), rs.getString("name"))),
 							rs.getString("care_status"));
 					careList.add(care);
 				}

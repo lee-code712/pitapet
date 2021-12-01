@@ -37,7 +37,7 @@ public class PetSitterApplicationDAO {
 		return null;
 	}
 	
-	//돌보미에 지원한 대기 상태인 사람들의 아이디와 지원날짜
+	/* 돌보미 지원자 리스트 조회 */
 	public List<PetSitterApplication> findApplicationList() throws SQLException {
 		String sql = "SELECT apply_id, apply_date, member_id "
 				+ "FROM petsitter_application "
@@ -70,7 +70,7 @@ public class PetSitterApplicationDAO {
 		return null;
 	}
 	
-	//돌보미 지원서 반환
+	/* 돌보미 지원서 반환 */
 	public PetSitterApplication findApplication(String applyId) throws SQLException {
 		String sql = "SELECT apply_date, career, certification, introduction, member_id, address, img_src "
 				+ "FROM petsitter_application ps JOIN member m USING(member_id) "
@@ -101,7 +101,7 @@ public class PetSitterApplicationDAO {
 		
 	}
 	
-	// 돌보미 지원서 자격증 첨부파일 반환
+	/* 돌보미 지원서 자격증 첨부파일 반환 */
 	public List<String> findApplyAttachments(String memberId) throws SQLException {
 		String sql = "SELECT img_src " + "FROM attachment " + "WHERE member_id=? AND category_id=? AND img_src LIKE ?";
 
@@ -169,23 +169,23 @@ public class PetSitterApplicationDAO {
 		return 0;
 	}
 	
-	//돌보미 승인시 기본적인 펫시터 객체 생성
-	public int createBasicSitter(String memberId, String applyId) throws SQLException {
-		String sql = "INSERT INTO PETSITTER(sitter_id, public_status, able_date, sitter_like, sitter_view, apply_id) VALUES (?, ?, ?, ?, ?, ?)";
-				
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, 'N', 'N', 0, 0, applyId}); 
-
-		try {				
-			int result = jdbcUtil.executeUpdate();
-			return result;
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		}
-		finally {
-			jdbcUtil.commit();
-			jdbcUtil.close();
-		}		
-		return 0;
-	}
+//	//돌보미 승인시 기본적인 펫시터 객체 생성
+//	public int createBasicSitter(String memberId, String applyId) throws SQLException {
+//		String sql = "INSERT INTO PETSITTER(sitter_id, public_status, able_date, sitter_like, sitter_view, apply_id) VALUES (?, ?, ?, ?, ?, ?)";
+//				
+//		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, 'N', 'N', 0, 0, applyId}); 
+//
+//		try {				
+//			int result = jdbcUtil.executeUpdate();
+//			return result;
+//		} catch (Exception ex) {
+//			jdbcUtil.rollback();
+//			ex.printStackTrace();
+//		}
+//		finally {
+//			jdbcUtil.commit();
+//			jdbcUtil.close();
+//		}		
+//		return 0;
+//	}
 }

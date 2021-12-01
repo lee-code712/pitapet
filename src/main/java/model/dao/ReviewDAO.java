@@ -20,9 +20,11 @@ public class ReviewDAO {
 
 	/* 전체 리뷰 반환 */
 	public List<Review> findReviewList() throws SQLException {
-		String find_review_sql = "SELECT review_id, write_date, content, rate, c.care_id, c.member_id, c.sitter_id, address "
+		String find_review_sql = "SELECT review_id, write_date, content, rate, c.care_id, c.member_id, c.sitter_id, address, img_src "
 				+ "FROM review r JOIN care c ON (r.care_id = c.care_id) "
-				+ "JOIN member m ON (c.sitter_id = m.member_id)";
+				+ "JOIN member m ON (c.sitter_id = m.member_id) "
+				+ "JOIN attachment atm ON (m.member_id = atm.member_id) "
+				+ "WHERE atm.category_id = 'AtchId04'";
 		jdbcUtil.setSqlAndParameters(find_review_sql, null);
 
 		try {
@@ -32,12 +34,12 @@ public class ReviewDAO {
 				Review review = new Review(rs.getString("review_id"), rs.getString("write_date"),
 						rs.getString("content"), rs.getFloat("rate"),
 						new Care(rs.getInt("care_id"), new Member(rs.getString("member_id")),
-								new PetSitter(new Member(rs.getString("sitter_id"), rs.getString("address")))));
+								new PetSitter(new Member(rs.getString("sitter_id"), rs.getString("address"), rs.getString("img_src")))));
 				reviews.add(review);
 				while (rs.next()) {
 					review = new Review(rs.getString("review_id"), rs.getString("write_date"), rs.getString("content"),
 							rs.getFloat("rate"), new Care(rs.getInt("care_id"), new Member(rs.getString("member_id")),
-									new PetSitter(new Member(rs.getString("sitter_id"), rs.getString("address")))));
+									new PetSitter(new Member(rs.getString("sitter_id"), rs.getString("address"), rs.getString("img_src")))));
 					reviews.add(review);
 				}
 				return reviews;
@@ -52,10 +54,11 @@ public class ReviewDAO {
 
 	/* 선택한 sitter의 리뷰 반환 */
 	public List<Review> findReviewListOfSitter(String sitterId) throws SQLException {
-		String sql = "SELECT review_id, write_date, content, rate, care_id, c.member_id, c.sitter_id, m.address "
+		String sql = "SELECT review_id, write_date, content, rate, care_id, c.member_id, c.sitter_id, m.address, img_src "
 				+ "FROM review r JOIN care c USING (care_id) "
 				+ "JOIN member m ON (c.sitter_id = m.member_id) "
-				+ "WHERE sitter_id = ?";
+				+ "JOIN attachment atm ON (m.member_id = atm.member_id) "
+				+ "WHERE sitter_id = ? AND atm.category_id = 'AtchId04'";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { sitterId });
 
 		try {
@@ -72,7 +75,8 @@ public class ReviewDAO {
 								new PetSitter(
 										new Member(
 												rs.getString("sitter_id"), 
-												rs.getString("address")))));
+												rs.getString("address"), 
+												rs.getString("img_src")))));
 				reviews.add(review);
 				while (rs.next()) {
 					review = new Review(
@@ -85,7 +89,8 @@ public class ReviewDAO {
 									new PetSitter(
 											new Member(
 													rs.getString("sitter_id"), 
-													rs.getString("address")))));
+													rs.getString("address"),
+													rs.getString("img_src")))));
 					reviews.add(review);
 				}
 				return reviews;

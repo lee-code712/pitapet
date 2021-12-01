@@ -556,7 +556,7 @@
             <div id="serviceWrap">
                 <div id="subPageTit">이용 서비스</div>
                 <div id="serviceInner">   
-                    <c:forEach var="service" items="${sitterInfo.myApplyInfo.services}" varStatus="status">
+                    <c:forEach var="service" items="${sitterInfo.services}" varStatus="status">
 	                    <div id="service"> 
 	               			<c:choose>
 	               				<c:when test="${service.title eq '산책하기'}"><img src="/images/wark.png" id="serviceImg" /></c:when>
@@ -578,7 +578,7 @@
             <div id="ablePetWrap">
                 <div id="subPageTit">돌봄 가능 반려동물</div>
                 <div id="ablePetInner">
-                    <c:forEach var="kind" items="${sitterInfo.myApplyInfo.kinds}">
+                    <c:forEach var="kind" items="${sitterInfo.kinds}">
                         <div id="ablePet">${kind.smallCategory}</div>
                     </c:forEach>
                 </div>

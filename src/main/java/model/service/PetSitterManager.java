@@ -8,25 +8,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import model.dao.MemberDAO;
 import model.dao.PetDAO;
 import model.dao.PetSitterDAO;
 import model.dao.ServiceDAO;
-import model.dto.Member;
 import model.dto.PetKind;
 import model.dto.PetSitter;
 import model.dto.Service;
 
 public class PetSitterManager {
 	private static PetSitterManager sitterMan = new PetSitterManager();
-	private MemberDAO memberDAO;
 	private PetSitterDAO sitterDAO;
 	private ServiceDAO serviceDAO;
 	private PetDAO petDAO;
 
 	private PetSitterManager() {
 		try {
-			memberDAO = new MemberDAO();
 			sitterDAO = new PetSitterDAO();
 			serviceDAO = new ServiceDAO();
 			petDAO = new PetDAO();
@@ -111,8 +107,8 @@ public class PetSitterManager {
 		PetSitter sitter = sitterDAO.findPetSitter(sitterId);
 		List<Service> prvdServiceList = serviceDAO.findProvideServiceList(sitterId);
 		List<PetKind> ablePetKindList = petDAO.findAblePetKindList(sitterId);
-		sitter.getMyApplyInfo().setServices(prvdServiceList);
-		sitter.getMyApplyInfo().setKinds(ablePetKindList);
+		sitter.setServices(prvdServiceList);
+		sitter.setKinds(ablePetKindList);
 		
 		String[] address = sitter.getSitter().getAddress().split(" ");
 		String city = null;

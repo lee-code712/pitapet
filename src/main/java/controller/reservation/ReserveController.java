@@ -41,7 +41,7 @@ public class ReserveController implements Controller {
 			// 펫시터 정보
 			PetSitter petsitterInfo = sitterMan.findPetSitter(sitterId);
 			request.setAttribute("petsitterInfo", petsitterInfo);
-			List<Service> ableService = petsitterInfo.getMyApplyInfo().getServices();
+			List<Service> ableService = petsitterInfo.getServices();
 			if (ableService != null) {
 				Iterator<Service> iterator = ableService.iterator();
 				Map<String, Service> serviceMap = new HashMap<String, Service>();

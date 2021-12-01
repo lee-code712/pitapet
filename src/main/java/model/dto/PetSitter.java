@@ -1,5 +1,7 @@
 package model.dto;
 
+import java.util.List;
+
 public class PetSitter {
 	private Member sitter;
 	private String publicStatus;
@@ -10,6 +12,8 @@ public class PetSitter {
 	private float avgRate;
 	private int like;
 	private int view;
+	private List<PetKind> kinds;
+	private List<Service> services;
 	private PetSitterApplication myApplyInfo;
 	
 	public PetSitter(Member sitter) {
@@ -101,6 +105,22 @@ public class PetSitter {
 	}
 	public void setView(int view) {
 		this.view = view;
+	}
+	
+	public List<PetKind> getKinds() {
+		return kinds;
+	}
+
+	public void setKinds(List<PetKind> kinds) {
+		this.kinds = kinds;
+	}
+
+	public List<Service> getServices() {
+		return services;
+	}
+
+	public void setServices(List<Service> services) {
+		this.services = services;
 	}
 
 	public PetSitterApplication getMyApplyInfo() {

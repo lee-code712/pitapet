@@ -10,8 +10,6 @@ public class PetSitterApplication {
 	private String certification;
 	private String introduction;
 	private String approvalStatus;
-	private List<PetKind> kinds;
-	private List<Service> services;
 	private Member applicant;
 	private List<String> images;
 	
@@ -71,18 +69,6 @@ public class PetSitterApplication {
 	}
 	public void setApprovalStatus(String approvalStatus) {
 		this.approvalStatus = approvalStatus;
-	}
-	public List<PetKind> getKinds() {
-		return kinds;
-	}
-	public void setKinds(List<PetKind> kinds) {
-		this.kinds = kinds;
-	}
-	public List<Service> getServices() {
-		return services;
-	}
-	public void setServices(List<Service> services) {
-		this.services = services;
 	}
 	public Member getApplicant() {
 		return applicant;

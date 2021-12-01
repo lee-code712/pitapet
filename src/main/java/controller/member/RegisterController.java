@@ -25,8 +25,11 @@ public class RegisterController implements Controller{
 					request.getParameter("name"), request.getParameter("birth"), request.getParameter("gender"),
 					request.getParameter("email"), request.getParameter("phone"), request.getParameter("address"));
 			
-			memMan.createMember(member);	
-			return "/member/loginForm.jsp";
+			int createResult = memMan.createMember(member);
+			if(createResult > 0)
+				return "/member/loginForm.jsp";
+			else
+				return "/member/registerForm.jsp";
 		} catch (ExistingIdException e) {
             request.setAttribute("registerFailed", true);
 			request.setAttribute("exception", e);

@@ -12,9 +12,11 @@ import model.dto.Member;
 
 public class MemberDAO {
 private JDBCUtil jdbcUtil = null;
+private JDBCUtil jdbcUtil2 = null;
    
    public MemberDAO() {         
       jdbcUtil = new JDBCUtil();   // JDBCUtil 객체 생성
+      jdbcUtil2= new JDBCUtil();
    }
    
    public Member findMember(String memberId) throws SQLException {
@@ -74,6 +76,8 @@ private JDBCUtil jdbcUtil = null;
    
    public int createMember(Member newMember) throws SQLException {
 		  String sql = "INSERT INTO MEMBER VALUES (?, ?, ?, TO_DATE(?, 'YYYYMMDD'), ?, ?, ?, ?, ?)";
+		  String sql2 = "INSERT INTO ATTACHMENT VALUES (?, ?, ?)";
+		  int rs = 0, rs2 = 0;
 //		  Date birth = null;
 //		  
 //		  try {
@@ -85,11 +89,15 @@ private JDBCUtil jdbcUtil = null;
 //		  }
 		  
 		  Object[] param = new Object[] {newMember.getId(), newMember.getPassword(), newMember.getName(), newMember.getBirth(),
-				  newMember.getGender(), newMember.getEmail(), newMember.getPhone(), newMember.getAddress(), 'C'};   
+				  newMember.getGender(), newMember.getEmail(), newMember.getPhone(), newMember.getAddress(), 'C'};
+		  
+		  Object[] param2 = new Object[] {newMember.getProfileImage(), newMember.getId(), "AtchId04"};
+		  
 		  jdbcUtil.setSqlAndParameters(sql, param);
+	      jdbcUtil2.setSqlAndParameters(sql2, param2);
+		  
 	      try {
-	         int rs = jdbcUtil.executeUpdate();      
-	         return rs;
+	         rs = jdbcUtil.executeUpdate();
 	      } catch (Exception ex) {
 	          jdbcUtil.rollback();
 	    	  ex.printStackTrace();
@@ -97,7 +105,21 @@ private JDBCUtil jdbcUtil = null;
 	    	 jdbcUtil.commit();
 	         jdbcUtil.close();      
 	      }
-		   return 0;
+	      
+	      try {
+	    	  rs2  = jdbcUtil2.executeUpdate();
+	      } catch (Exception ex) {
+	          jdbcUtil2.rollback();
+	    	  ex.printStackTrace();
+	      } finally {
+	    	 jdbcUtil2.commit();
+	         jdbcUtil2.close();      
+	      }
+	      
+	      if(rs == 1 && rs2 == 1)
+	    	  return 1;
+	      else
+	    	  return 0;
 	   }
    
    public int update(Member updateInfo) throws SQLException {

@@ -61,6 +61,7 @@ public class MemberManager {
 			throw new ExistingIdException(newMember.getId() + "는 존재하는 아이디입니다.");
 		}
 
+		newMember.setProfileImage("/images/detailNulImg.svg");
 		return memberDAO.createMember(newMember);
 	}
 

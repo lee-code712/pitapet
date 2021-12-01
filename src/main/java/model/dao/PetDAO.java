@@ -213,6 +213,7 @@ public class PetDAO {
 		return null;
 	}
 	
+	/* 돌봄 내역에 해당하는 반려동물 리스트 조회  */
 	public ArrayList<Pet> findCarePetList(Integer careId) throws SQLException {
 		String sql = "SELECT DISTINCT pet_id, name, birth, gender, kind_id "
 				+ "FROM pet JOIN receive_service USING (pet_id) " 
@@ -223,14 +224,12 @@ public class PetDAO {
 			ResultSet rs = jdbcUtil.executeQuery();
 			if (rs.next()) {
 				ArrayList<Pet> petList = new ArrayList<>();
-
 				Pet pet = new Pet(rs.getString("pet_id"));
 				pet.setName(rs.getString("name"));
 				pet.setBirth(rs.getString("birth"));
 				pet.setGender(rs.getString("gender"));
 				pet.setKind(new PetKind(rs.getString("kind_id")));
 				petList.add(pet);
-
 				while (rs.next()) {
 					pet = new Pet(rs.getString("pet_id"));
 					pet.setName(rs.getString("name"));
@@ -239,7 +238,6 @@ public class PetDAO {
 					pet.setKind(new PetKind(rs.getString("kind_id")));
 					petList.add(pet);
 				}
-
 				return petList;
 			}
 		} catch (Exception ex) {

@@ -13,6 +13,7 @@ import model.dao.PetSitterDAO;
 import model.dao.ServiceDAO;
 import model.dto.PetKind;
 import model.dto.PetSitter;
+import model.dto.Review;
 import model.dto.Service;
 
 public class PetSitterManager {
@@ -67,15 +68,9 @@ public class PetSitterManager {
 				endIndex = startIndex + rpp;
 			
 			List<PetSitter> pagingSitters = sitterList.subList(startIndex, endIndex);
-			for (PetSitter sitter : pagingSitters) {
-				String[] address = sitter.getSitter().getAddress().split(" ");
-				String city = null;
-				for (int j = 0; j < address.length; j++) {
-					if (address[j].matches("(.*)로"))
-						city = address[j].substring(0, address[j].length() - 1);
-				}
-				sitter.getSitter().setAddress(city);
-			}		
+			if (pagingSitters != null)
+				for (PetSitter sitter : pagingSitters)
+					sitter = addSitterProperties(sitter);
 			Map<Integer, List<PetSitter>> sitterMap = new HashMap<Integer, List<PetSitter>>();
 			sitterMap.put(totalPage, pagingSitters);
 			
@@ -90,16 +85,21 @@ public class PetSitterManager {
 		// Member memberInfo = memberDAO.findMember(memberId);
 		if (sitters != null) {
 			Collections.shuffle(sitters);
-			String[] address = sitters.get(0).getSitter().getAddress().split(" ");
-			String city = null;
-			for (int j = 0; j < address.length; j++) {
-				if (address[j].matches("(.*)로"))
-					city = address[j].substring(0, address[j].length() - 1);
-			}
-			sitters.get(0).getSitter().setAddress(city);
+			sitters.set(0, addSitterProperties(sitters.get(0)));
 			return sitters.get(0);
 		}
 		return null;
+	}
+	
+	/* 특정 회원이 찜한  돌보미 리스트 반환 */
+	public List<PetSitter> findLikeSitterOfMember(String memberId) throws SQLException {
+		List<PetSitter> likeSitterLists = sitterDAO.findPetSitterListOfLike(memberId);
+
+		if (likeSitterLists != null)
+			for (PetSitter sitter : likeSitterLists)
+				sitter = addSitterProperties(sitter);
+	
+		return likeSitterLists;
 	}
 	
 	/* 돌보미 상세정보 반환 (제공서비스, 돌봄 가능 종 리스트 포함) */
@@ -107,16 +107,10 @@ public class PetSitterManager {
 		PetSitter sitter = sitterDAO.findPetSitter(sitterId);
 		List<Service> prvdServiceList = serviceDAO.findProvideServiceList(sitterId);
 		List<PetKind> ablePetKindList = petDAO.findAblePetKindList(sitterId);
-		sitter.setServices(prvdServiceList);
-		sitter.setKinds(ablePetKindList);
 		
-		String[] address = sitter.getSitter().getAddress().split(" ");
-		String city = null;
-		for (int j = 0; j < address.length; j++) {
-			if (address[j].matches("(.*)로"))
-				city = address[j].substring(0, address[j].length() - 1);
-		}
-		sitter.getSitter().setAddress(city);
+		sitter.setServices(prvdServiceList);
+		sitter.setKinds(ablePetKindList);	
+		sitter = addSitterProperties(sitter);
 
 		return sitter;
 	}
@@ -139,4 +133,16 @@ public class PetSitterManager {
 	}
 
 
+	/* 돌보미의 속성 중 주소  추가 */
+	public PetSitter addSitterProperties(PetSitter sitter) throws SQLException {
+		String[] address = sitter.getSitter().getAddress().split(" ");
+		String city = null;
+		for (int j = 0; j < address.length; j++) {
+			if (address[j].matches("(.*)로"))
+				city = address[j].substring(0, address[j].length() - 1);
+		}
+		sitter.getSitter().setAddress(city);
+		
+		return sitter;
+	}
 }

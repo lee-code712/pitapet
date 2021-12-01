@@ -41,20 +41,18 @@ public class CareManager {
 		return careMan;
 	}
 	
+	/* 돌봄 스케쥴을 리스트로 반환 */
+	public List<Care> getCareSchedules(String memberId, String sitterId) throws SQLException {
+		return careDAO.findCareSchedules(memberId, sitterId);
+	}
+	
 	/* 돌봄 스케줄을 맵으로 저장하여 반환 */
 	public Map<Integer, Care> getCareScheduleMap(Member member) throws SQLException {
 		List<Care> careSchedules = new ArrayList<>();
-		if (member.getIdentity().equals("C")) {
-			careSchedules = careDAO.findCareSchedules(member.getId());
-		}
-		else {
-			careSchedules = careDAO.findCareSchedules(member.getId());
-			List<Care> careSchedulesOfSitter = careDAO.findCareSchedulesOfSitter(member.getId());
-			if (careSchedules == null || careSchedulesOfSitter == null)
-				careSchedules = careSchedulesOfSitter;
-			else
-				careSchedules.addAll(careSchedulesOfSitter);
-		}
+		if (member.getIdentity().equals("C"))
+			careSchedules = careDAO.findCareSchedules(member.getId(), null);
+		else
+			careSchedules = careDAO.findCareSchedules(member.getId(), member.getId());
 		
 		if(careSchedules != null) {
 			Iterator<Care> iterator = careSchedules.iterator();
@@ -103,12 +101,7 @@ public class CareManager {
 			cal.add(Calendar.DATE, 1);
 		}
 		
-		List<Care> careSchedules = careDAO.findCareSchedules(memberId);
-		List<Care> careSchedulesOfSitter = careDAO.findCareSchedulesOfSitter(sitter.getSitter().getId());
-		if (careSchedules == null || careSchedulesOfSitter == null)
-			careSchedules = careSchedulesOfSitter;
-		else
-			careSchedules.addAll(careSchedulesOfSitter);
+		List<Care> careSchedules = careDAO.findCareSchedules(memberId, sitter.getSitter().getId());
 		
 		if (careSchedules != null) {
 			Iterator<Care> iterator = careSchedules.iterator();
@@ -212,14 +205,6 @@ public class CareManager {
 	
 	public int deleteCare(int careId) throws SQLException {
 		return careDAO.deleteCare(careId);
-	}
-	
-	public List<Care> findCareSchedules(String memberId) throws SQLException {
-		return careDAO.findCareSchedules(memberId);
-	}
-	
-	public List<Care> findCareSchedulesOfSitter(String sitterId) throws SQLException {
-		return careDAO.findCareSchedulesOfSitter(sitterId);
 	}
 	
 	public String getCheckInfo(String rcvId) throws SQLException {

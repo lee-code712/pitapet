@@ -18,19 +18,10 @@ public class LikeController implements Controller {
 		String sitterId = (String) request.getParameter("sitterId");
 		String memberId = UserSessionUtils.getLoginUserId(session);
 
-		if (status.equals("add")) {
-			// 좋아요 레코드 추가
-			boolean isAdded = likeListMan.add(memberId, sitterId);
-			if (!isAdded) {
-				request.setAttribute("addFailed", true);
-			}
-		}
-		else if (status.equals("remove")) {
-			// 좋아요 레코드 삭제
-			boolean isRemoved = likeListMan.remove(memberId, sitterId);
-			if (!isRemoved) {
-				request.setAttribute("removeFailed", true);
-			}
+		// 좋아요 레코드 추가 또는 삭제
+		boolean isSuccessed = likeListMan.addOrRemove(memberId, sitterId, status);
+		if (!isSuccessed) {
+			request.setAttribute(status + "Failed", true);
 		}
 		
 		String referer = request.getHeader("Referer");

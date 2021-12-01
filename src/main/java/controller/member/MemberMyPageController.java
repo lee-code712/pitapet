@@ -37,7 +37,7 @@ public class MemberMyPageController implements Controller{
 		String applicationStatus = applicationMan.getApprovalStatus(userId);
 		request.setAttribute("applicationStatus", applicationStatus);
 		
-		List<Care> careList = careMan.findCareSchedules(userId);
+		List<Care> careList = careMan.getCareSchedules(userId, null);
 		request.setAttribute("careList", careList);
 		
 		// Sitter에 member 정보 매핑

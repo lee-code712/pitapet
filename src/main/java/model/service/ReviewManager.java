@@ -32,19 +32,8 @@ public class ReviewManager {
 			Collections.shuffle(reviewList);			
 			randomReviews = reviewList.subList(0, 3);
 			
-			for (Review review : randomReviews) {
-				String[] address = review.getCareInfo().getSitter().getSitter().getAddress().split(" ");
-				String city = null;
-				for (int j = 0; j < address.length; j++) {
-					if (address[j].matches("(.*)로")) {
-						city = address[j].substring(0, address[j].length() - 1);
-					}
-				}
-				review.getCareInfo().getSitter().getSitter().setAddress(city);			
-				// 파일 이미지 경로 set
-				List<String> imgList = reviewDAO.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
-				review.setImages(imgList);
-			}
+			for (Review review : randomReviews)
+				review = addReviewProperties(review);
 		}
 		
 		return randomReviews;
@@ -53,21 +42,10 @@ public class ReviewManager {
 	/* 특정 돌보미의 후기 리스트 반환 */
 	public List<Review> findReviewListOfSitter(String sitterId) throws SQLException {
 		List<Review> reviews = reviewDAO.findReviewListOfSitter(sitterId);
-		if (reviews != null) {
-			for (Review review : reviews) {
-				String[] address = review.getCareInfo().getSitter().getSitter().getAddress().split(" ");
-				String city = null;
-				for (int j = 0; j < address.length; j++) {
-					if (address[j].matches("(.*)로")) {
-						city = address[j].substring(0, address[j].length() - 1);
-					}
-				}
-				review.getCareInfo().getSitter().getSitter().setAddress(city);			
-				// 파일 이미지 경로 set
-				List<String> imgList = reviewDAO.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
-				review.setImages(imgList);
-			}
-		}
+		if (reviews != null)
+			for (Review review : reviews)
+				review = addReviewProperties(review);
+
 		return reviews;
 	}
 	
@@ -107,7 +85,19 @@ public class ReviewManager {
 		return reviewList;
 	}
 
-	public List<String> findReviewAttachments(String memberId, int careId) throws SQLException {
-		return reviewDAO.findReviewAttachments(memberId, careId);
+	/* 리뷰의 속성 중 주소, 이미지  추가 */
+	public Review addReviewProperties(Review review) throws SQLException {
+		String[] address = review.getCareInfo().getSitter().getSitter().getAddress().split(" ");
+		String city = null;
+		for (int j = 0; j < address.length; j++) {
+			if (address[j].matches("(.*)로")) {
+				city = address[j].substring(0, address[j].length() - 1);
+			}
+		}
+		review.getCareInfo().getSitter().getSitter().setAddress(city);
+		List<String> images = reviewDAO.findReviewAttachments(review.getCareInfo().getCompanion().getId(), review.getCareInfo().getId());
+		review.setImages(images);
+		
+		return review;
 	}
 }

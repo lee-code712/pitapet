@@ -16,6 +16,7 @@ public class LikeListDAO {
       jdbcUtil = new JDBCUtil();   // JDBCUtil 객체 생성
    }
    
+   /* 특정 회원의 찜 목록 조회 */
    public List<LikeList> findLikeListOfMember(String memberId) throws SQLException {
       String sql = "SELECT sitter_id "
                  + "FROM likelist "        
@@ -41,9 +42,9 @@ public class LikeListDAO {
          return null;
    }
    
-   public int add(String memberId, String sitterId) throws SQLException {
-		String sql = "INSERT INTO likelist (member_id, sitter_id) " 
-				+ "VALUES (?, ?)";
+	/* 좋아요 추가 */
+	public int add(String memberId, String sitterId) throws SQLException {
+		String sql = "INSERT INTO likelist (member_id, sitter_id) " + "VALUES (?, ?)";
 
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId, sitterId });
 		try {
@@ -58,10 +59,10 @@ public class LikeListDAO {
 		}
 		return 0;
 	}
-   
+
+	/* 좋아요 삭제 */
 	public int remove(String memberId, String sitterId) throws SQLException {
-		String sql = "DELETE FROM likelist " 
-				+ "WHERE member_id=? AND sitter_id=?";
+		String sql = "DELETE FROM likelist " + "WHERE member_id=? AND sitter_id=?";
 
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId, sitterId });
 		try {

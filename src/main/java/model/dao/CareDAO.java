@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.dto.Care;
-import model.dto.CareDetails;
 import model.dto.Member;
 import model.dto.PetSitter;
 
@@ -17,84 +16,36 @@ public class CareDAO {
 		jdbcUtil = new JDBCUtil();	// JDBCUtil 객체 생성
 	}
 	
-	/* 보호자의 돌봄 내역 반환 */
-	public List<Care> findCareSchedules(String memberId) throws SQLException {
-		String sql = "SELECT care_id, start_date, end_date, sitter_id, care_status "
-				+ "FROM care "
-				+ "WHERE member_id = ?";     
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId});	
-						
+	/* 보호자 및 특정 돌보미의 돌봄 스케쥴 조회 */
+	public List<Care> findCareSchedules(String memberId, String sitterId) throws SQLException {
+		String sql = "SELECT DISTINCT care_id, start_date, end_date, member_id, sitter_id, care_status " 
+				+ "FROM care ";
+		if (sitterId == null) {
+			sql += "WHERE member_id = ?";
+			jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId });
+		}
+		else {
+			sql += "WHERE member_id = ? OR sitter_id = ?";
+			jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId, memberId });
+		}
+
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			
+			ResultSet rs = jdbcUtil.executeQuery();
 			List<Care> careList = null;
 			if (rs.next()) {
 				careList = new ArrayList<Care>();
-				Care care = new Care(			
-						rs.getInt("care_id"),
-						rs.getString("start_date"),
-						rs.getString("end_date"),
-						new Member(memberId),
-						new PetSitter(
-								new Member(
-										rs.getString("sitter_id"))),
+				Care care = new Care(rs.getInt("care_id"), rs.getString("start_date"), rs.getString("end_date"),
+						new Member(rs.getString("member_id")), new PetSitter(new Member(rs.getString("sitter_id"))),
 						rs.getString("care_status"));
-				careList.add(care);	
+				careList.add(care);
 				while (rs.next()) {
-					care = new Care(			
-						rs.getInt("care_id"),
-						rs.getString("start_date"),
-						rs.getString("end_date"),
-						new Member(memberId),
-						new PetSitter(
-								new Member(
-										rs.getString("sitter_id"))),
+					care = new Care(rs.getInt("care_id"), rs.getString("start_date"), rs.getString("end_date"),
+							new Member(rs.getString("member_id")), new PetSitter(new Member(rs.getString("sitter_id"))),
 							rs.getString("care_status"));
-					careList.add(care);				
-				}		
-				return careList;	
-			}					
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();
-		}
-		return null;
-	}
-	
-	/* 돌보미의 돌봄 내역 반환 */
-	public List<Care> findCareSchedulesOfSitter(String sitterId) throws SQLException {
-		String sql = "SELECT care_id, start_date, end_date, member_id, care_status "
-				+ "FROM care "
-				+ "WHERE sitter_id = ?";     
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {sitterId});	
-						
-		try {
-			ResultSet rs = jdbcUtil.executeQuery();			
-			List<Care> careList = null;	
-			if (rs.next()) {
-				careList = new ArrayList<Care>();
-				Care care = new Care(			
-						rs.getInt("care_id"),
-						rs.getString("start_date"),
-						rs.getString("end_date"),
-						new Member(rs.getString("member_id")),
-						new PetSitter(
-								new Member(sitterId)),
-						rs.getString("care_status"));
-				careList.add(care);	
-				while (rs.next()) {
-					care = new Care(			
-						rs.getInt("care_id"),
-						rs.getString("start_date"),
-						rs.getString("end_date"),
-						new Member(rs.getString("member_id")),
-						new PetSitter(
-								new Member(sitterId)),
-						rs.getString("care_status"));
-					careList.add(care);				
-				}		
-				return careList;	
-			}				
+					careList.add(care);
+				}
+				return careList;
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {

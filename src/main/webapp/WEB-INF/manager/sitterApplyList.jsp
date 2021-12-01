@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/header.css"/>
     <link rel="stylesheet" href="../css/footer.css"/>
-    <link rel="stylesheet" href="../css/sitterApply.css"/>
+    <link rel="stylesheet" href="../css/sitterApplyList.css"/>
     
     <style>
 	    #logo {

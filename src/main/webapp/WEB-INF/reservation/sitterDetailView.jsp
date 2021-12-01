@@ -20,6 +20,7 @@
    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="/css/sitterDetailView.css"/>
     
     <style>
 	    #calendar {
@@ -84,7 +85,7 @@
         }
 
         #subPageTit {
-            margin-bottom: 40px;
+            margin-right: 20px;
             font-size: 16px;
             font-weight: bold;
         }
@@ -515,6 +516,13 @@
 		    z-index: 1;
 		   	margin-left: 14px;
 		}
+		
+		#subPageWrap {
+			display: flex;
+			align-items: center;
+			margin-bottom: 40px;
+			height: 40px;
+		}
 	</style>
 </head>
 
@@ -556,7 +564,7 @@
             <div id="serviceWrap">
                 <div id="subPageTit">이용 서비스</div>
                 <div id="serviceInner">   
-                    <c:forEach var="service" items="${sitterInfo.services}" varStatus="status">
+                    <c:forEach var="service" items="${sitterInfo.myApplyInfo.services}" varStatus="status">
 	                    <div id="service"> 
 	               			<c:choose>
 	               				<c:when test="${service.title eq '산책하기'}"><img src="/images/wark.png" id="serviceImg" /></c:when>
@@ -578,7 +586,7 @@
             <div id="ablePetWrap">
                 <div id="subPageTit">돌봄 가능 반려동물</div>
                 <div id="ablePetInner">
-                    <c:forEach var="kind" items="${sitterInfo.kinds}">
+                    <c:forEach var="kind" items="${sitterInfo.myApplyInfo.kinds}">
                         <div id="ablePet">${kind.smallCategory}</div>
                     </c:forEach>
                 </div>
@@ -587,7 +595,21 @@
             <div id="reviewWriteWrap">
             	<c:if test="${not empty careListOfReview}">
             		<form method="POST" action="<c:url value='/review/addReview'/>" enctype="multipart/form-data">
-		                <div id="subPageTit">리뷰 작성</div>
+		                <div id="subPageWrap">
+			                <div id="subPageTit">리뷰 작성</div>
+			                <select name='reviewStar'>
+							  <option value='' selected>리뷰 별점</option>
+							  <option value='1'>5.0</option>
+							  <option value='2'>4.5</option>
+							  <option value='3'>4.0</option>
+							  <option value='4'>3.5</option>
+							  <option value='5'>3.0</option>
+							  <option value='6'>2.5</option>
+							  <option value='7'>2.0</option>
+							  <option value='8'>1.5</option>
+							  <option value='9'>1.0</option>
+							</select>
+						</div>
 		                <input type="hidden" name="careId" value="${careListOfReview.get(0).id}" />
 		                <input type="hidden" name="sitterId" value="${sitterInfo.sitter.id}" />
 		                <textarea placeholder="(내용)" id="reviewContent" name="content"></textarea>

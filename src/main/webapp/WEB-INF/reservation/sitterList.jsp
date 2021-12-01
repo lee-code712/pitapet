@@ -42,7 +42,8 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 560px;
+	width: 460px;
+	
 }
 
 #choiceBox {
@@ -499,6 +500,7 @@ a {
 	color: #89A0F2;
 	border: 1px solid #89A0F2;
 	background-color: white;
+	cursor: pointer;
 }
 
 #num {
@@ -512,6 +514,7 @@ a {
 	color: #C4C4C4;
 	border: 1px solid #C4C4C4;
 	background-color: white;
+	cursor: pointer;
 }
 
 #next {
@@ -583,8 +586,8 @@ select {
 	<div id="sitterListWrap">
 		<div id="searchToolsWrap">
 			<div id="pageTit">돌보미 정보 조회</div>
-			<div id="searchTools">
 				<form name="form" method="GET" action="/reservation/listSitter">
+					<div id="searchTools">
 					<select id="choiceBox" name="searchOption">
 						<option value="city">지역</option>
 						<c:choose>
@@ -610,8 +613,8 @@ select {
 						<input type="hidden" name="currentPage" value="1" />
 						<input type='image' src="/images/search.svg" id="searchImg" onclick="search()"/>
 					</div>
+					</div>
 				</form>
-			</div>
 		</div>
 		<c:if test="${empty petSitterList}">
 			검색 결과가 없습니다.

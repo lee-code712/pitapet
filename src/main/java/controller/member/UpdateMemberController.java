@@ -32,15 +32,28 @@ public class UpdateMemberController implements Controller {
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
-
-		Member updateInfo = new Member(userId, newPassword, email, phone, address);
-		try {
-			memMan.update(updateInfo, oldPassword);
-		} catch (PasswordMismatchException e) {
-			request.setAttribute("updateFailed", true);
-			request.setAttribute("exception", e);
-			request.setAttribute("updateInfo", updateInfo);
-			return "/member/memberUpdateForm.jsp";
+		
+		if (newPassword == null || "null".equals(newPassword) || newPassword.equals("")) {
+			Member updateInfo = new Member(userId, email, phone, address);
+			try {
+				memMan.update(updateInfo, oldPassword);
+			} catch (PasswordMismatchException e) {
+				request.setAttribute("updateFailed", true);
+				request.setAttribute("exception", e);
+				request.setAttribute("updateInfo", updateInfo);
+				return "/member/memberUpdateForm.jsp";
+			}
+		}
+		else {
+			Member updateInfo = new Member(userId, newPassword, email, phone, address);
+			try {
+				memMan.update(updateInfo, oldPassword);
+			} catch (PasswordMismatchException e) {
+				request.setAttribute("updateFailed", true);
+				request.setAttribute("exception", e);
+				request.setAttribute("updateInfo", updateInfo);
+				return "/member/memberUpdateForm.jsp";
+			}
 		}
 		
 		return "redirect:/member/memberMyPage";

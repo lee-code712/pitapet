@@ -73,11 +73,26 @@ private JDBCUtil jdbcUtil = null;
    
    /* 회원 정보 업데이트 */
    public int update(Member updateInfo) throws SQLException {
-		String sql = "UPDATE member "
+	    String sql = null;
+	    Object[] param = null;
+	    
+	    if (updateInfo.getPassword() == null) {
+	    	sql = "UPDATE member "
+					+ "SET email=?, phone=?, address=? "
+					+ "WHERE member_id=?";
+	    	
+	    	param = new Object[] {updateInfo.getEmail(), 
+					updateInfo.getPhone(), updateInfo.getAddress(), updateInfo.getId()};
+	    }
+	    else {
+	    	sql = "UPDATE member "
 					+ "SET password=?, email=?, phone=?, address=? "
 					+ "WHERE member_id=?";
-		Object[] param = new Object[] {updateInfo.getPassword(), updateInfo.getEmail(), 
-				updateInfo.getPhone(), updateInfo.getAddress(), updateInfo.getId()};				
+	    	
+	    	param = new Object[] {updateInfo.getPassword(), updateInfo.getEmail(), 
+					updateInfo.getPhone(), updateInfo.getAddress(), updateInfo.getId()};
+	    }
+						
 		jdbcUtil.setSqlAndParameters(sql, param);
 			
 		try {				

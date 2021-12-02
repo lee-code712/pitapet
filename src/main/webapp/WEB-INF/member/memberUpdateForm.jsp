@@ -31,6 +31,16 @@
 					<td id="tableTit">내 정보</td>
 					<td id="tableTit"></td>
 				</tr>
+				
+				<tr>
+					<td id="tdTit">이름</td>
+					<td><input type="text" id="textDesign" value="${memberInfo.name}" disabled="true"/></td>
+				</tr>
+				
+				<tr>
+					<td id="tdTit">생년월일</td>
+					<td><input type="text" id="textDesign" value="${memberInfo.birth}" disabled="true"/></td>
+				</tr>
 
 				<tr>
 					<td id="tdTit">기존 비밀번호</td>

@@ -40,7 +40,13 @@ public class MemberManager {
 
 	/* 특정 회원 정보 반환 */
 	public Member findMember(String memberId) throws SQLException {
-		return memberDAO.findMember(memberId);
+		Member member = memberDAO.findMember(memberId);
+		
+		String[] birth = member.getBirth().split(" ");
+		
+		member.setBirth(birth[0]);
+		
+		return member;
 	}
 
 	/* 새로운 회원 생성 */
@@ -51,9 +57,7 @@ public class MemberManager {
 		return memberDAO.createMember(newMember);
 	}
 
-	public int update(Member updateInfo, String oldPassword)
-			throws SQLException, PasswordMismatchException {
-		
+	public int update(Member updateInfo, String oldPassword) throws SQLException, PasswordMismatchException {
 		Member member = memberDAO.findMember(updateInfo.getId());
 
 		if (!member.matchPassword(oldPassword)) {

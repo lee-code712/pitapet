@@ -33,6 +33,14 @@ public class Member {
 		this.profileImage = profileImage;
 	}
 	
+	public Member(String id, String email, String phone, String address) {
+		super();
+		this.id = id;
+		this.phone = phone;
+		this.address = address;
+		this.email = email;
+	}
+	
 	public Member(String id, String password, String email, String phone, String address) {
 		super();
 		this.id = id;

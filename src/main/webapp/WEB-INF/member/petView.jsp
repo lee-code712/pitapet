@@ -13,12 +13,16 @@
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
 	<link rel="stylesheet" href="/css/petView.css"/>
+	<script src="/js/petView.js"></script>
 </head>
 
 <body>
 	<%@include file="../components/header.jsp" %>
 
     <div id="pageWrap">
+    	<c:if test="${param.deleteFailed}">
+			<script> alert("예약 정보가 존재하는 반려동물은 삭제 불가능합니다."); </script>
+		</c:if>
         <div id="pageTit">반려동물 정보</div>
         
         <table>
@@ -46,8 +50,7 @@
 	                    </div>
 	                </td>
 	                <td>	
-	                	<c:url value='/pet/deletePet' var="deletePetUrl"/>
-	                    <img src="/images/delete.svg" id="deleteImg" onclick="location.href='${deletePetUrl}'" />
+	                    <img src="/images/delete.svg" id="deleteImg" onclick="delete_check('${pet.id}')" />
 	                </td>
 	            </tr>
          	</c:forEach>

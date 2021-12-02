@@ -243,7 +243,7 @@ public class PetDAO {
 		String sql = "SELECT COUNT(?) FROM PET";
 		Object[] param = new Object[] { "pet_id" };
 		jdbcUtil.setSqlAndParameters(sql, param);
-		int count = 0;
+		int count = -1;
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
 			if (rs.next()) {
@@ -319,6 +319,45 @@ public class PetDAO {
 			jdbcUtil.close();
 		}
 		return 0;
-	}	
+	}
+	
+	// 반려동물 첨부파일(이미지) 삭제
+	public int removePetAttachments(String petId) throws SQLException {
+		String like = "%" + petId + "%";
+		like = like.replaceAll(" ", "");
+		
+		String sql = "DELETE FROM attachment "
+				+ "WHERE img_src LIKE ?";     
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { like });	
+						
+		try {
+			int rs = jdbcUtil.executeUpdate();
+			return rs;					
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}		
+		return 0;
+	}
 
+	// 반려동물 정보 삭제
+	public int remove(String petId) throws SQLException {
+		String like = "%" + petId + "%";
+		String sql = "DELETE FROM pet "
+				+ "WHERE pet_id LIKE ?";     
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { like });	
+						
+		try {
+			int rs = jdbcUtil.executeUpdate();
+			return rs;					
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}		
+		return 0;
+	}
 }

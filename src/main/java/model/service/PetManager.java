@@ -110,6 +110,17 @@ public class PetManager {
 		return petDAO.findPetInfo(petId);
 	}
 	
+	// 반려동물 삭제
+	public int remove(String petId) throws SQLException {
+		ServiceManager serviceMan = ServiceManager.getInstance();
+		if (serviceMan.countReceiveServiceByPetId(petId) != 0) // 해당 반려동물 관련 예약 정보가 있다면
+			return 0;
+		else {
+			// 반려동물 사진 삭제 // 반려동물 삭제
+			return petDAO.removePetAttachments(petId) + petDAO.remove(petId);
+		}
+	}
+	
 //	public ArrayList<PetKind> findAblePetKindList(String sitterId) throws SQLException {
 //	return petDAO.findAblePetKindList(sitterId);
 //}

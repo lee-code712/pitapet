@@ -55,4 +55,8 @@ public class ServiceManager {
 	public Service findServiceInfo(String serviceId) throws SQLException {
 		return serviceDAO.findServiceInfo(serviceId);
 	}
+	
+	public int countReceiveServiceByPetId(String petId) throws SQLException {
+		return serviceDAO.countReceiveServiceByPetId(petId);
+	}
 }

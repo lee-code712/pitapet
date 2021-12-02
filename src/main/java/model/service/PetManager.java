@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import model.dao.PetDAO;
 import model.dto.Pet;
@@ -32,9 +33,16 @@ public class PetManager {
 	public ArrayList<Pet> findPetListOfMember(String memberId) throws SQLException {
 		ArrayList<Pet> userPets = petDAO.findPetListOfMember(memberId);		
 		if (userPets != null) 
-			for (Pet pet : userPets)
+			for (Pet pet : userPets) {
 				pet.setPetImage(petDAO.findPetAttachment(memberId, pet.getId()));
-
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
+				String[] today = sdf.format(new Date()).split("-");
+				String[] birth = pet.getBirth().split(" ")[0].split("-");
+				int year = Integer.valueOf(today[0]) - Integer.valueOf(birth[0]) + 1;
+				pet.setBirth(String.valueOf(year));
+			}
+		
 		return userPets;
 	}
 	
@@ -72,10 +80,29 @@ public class PetManager {
 		return null;
 	}
 	
+	// 반려동물 아이디 생성
+	public String makePetId() {
+		int count = petDAO.countAllPet();
+		String petId = null;
+		if (count + 1 < 10) {
+			petId = "petId0" + Integer.toString(count + 1);
+		} else {
+			petId = "petId" + Integer.toString(count + 1);
+		}
+		return petId;
+	}
+	
 	/* 반려동물 추가 */
-	public boolean addPet(String memberId, Pet pet) {
+	public boolean addPet(String memberId, Pet pet) throws SQLException {
+		pet.setId(makePetId());
 		int count = petDAO.addPet(memberId, pet);
 		if (count == 0) return false;
+		
+		String image = pet.getPetImage();
+		image = "/upload/" + image;
+		count = petDAO.addAttachment(image, memberId);
+			if (count == 0) return false;
+
 		return true;
 	}	
 	

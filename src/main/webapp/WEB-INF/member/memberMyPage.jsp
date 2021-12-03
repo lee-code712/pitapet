@@ -78,9 +78,12 @@
                         <th></th>
                     </tr>
            
-                    <c:forEach var="care" items="${careList}">            	
-                   		<c:if test="${care.status eq 'X'}">
-                   			<c:url value='/reservation/viewReservation?careId=${care.id}' var="viewReservationUrl"/>
+                    <c:forEach var="care" items="${careList}">     
+                    	<c:url value='/reservation/viewReservation?careId=${care.id}' var="viewReservationUrl"/>
+           				<c:url value='/care/listCareDiary' var='careDiaryUrl'>
+                   			<c:param name='careId' value='${care.id}' />
+                   		</c:url>
+                   		<c:if test="${care.status eq 'X'}">                 			
                    			<tr>
 	                    		<td>${care.sitter.sitter.name}</td>
 	                    		<td>${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}</td>
@@ -92,13 +95,13 @@
                    		</c:if>
                    		
                    		<c:if test="${care.status eq 'Y'}">
-                   			<c:url value='/reservation/viewReservation?careId=${care.id}' var="viewReservationUrl"/>
+
                    			<tr>
 	                    		<td>${care.sitter.sitter.name}</td>
 	                    		<td>${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}</td>
 	                   			<td><a href="${viewReservationUrl}">진행중</a></td>
 	                   			<td>
-		                            <button id="careBtn">돌봄일지</button>
+		                            <button id="careBtn" onClick="location.href='${careDiaryUrl}'">돌봄일지</button>
 		                        </td>
 	                        </tr>
                    		</c:if>
@@ -110,7 +113,7 @@
 	                    		<td>${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}</td>
 	                   			<td><a href="${viewReservationUrl}">돌봄완료</a></td>
 	                   			<td>
-		                            <button id="careBtn">돌봄일지</button>
+		                            <button id="careBtn" onClick="location.href='${careDiaryUrl}'">돌봄일지</button>
 		                            <button id="reviewBtn">리뷰작성</button>
 		                        </td>
 	                        </tr>

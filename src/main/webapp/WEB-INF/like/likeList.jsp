@@ -30,9 +30,27 @@
 					<div id="likeCount">${likeSitter.like}</div>
 				</div>
 				<div id="petSitterInfoInner">
+					<c:url value='/like/changeLike' var='addLikeUrl'>
+						<c:param name='status' value='add' />
+						<c:param name='sitterId' value='${likeSitter.sitter.id}' />
+					</c:url>
+					<c:url value='/like/changeLike' var='cancelLikeUrl'>
+						<c:param name='status' value='remove' />
+						<c:param name='sitterId' value='${likeSitter.sitter.id}' />
+					</c:url>
 					<div id="petSitterNameLikeWrap">
 						<div id="petSitterName">${likeSitter.sitter.id}</div>
-						<img src="/images/likeOn.svg" is="likeOnImg" />
+						<c:set var="likeCk" value="true" />
+						<c:choose>
+						  <c:when test="${likeCk eq 'true'}">
+							<img src="/images/likeOn.svg" id="likeOnImg" onClick="location.href='${cancelLikeUrl}'"/>
+							<c:set var="findCk" value="false" />
+						  </c:when>	
+						  <c:otherwise>
+						    <img src="/images/like.svg" id="likeImg" onClick="location.href='${addLikeUrl}'"/>
+							<c:set var="findCk" value="true" />
+						  </c:otherwise>
+						</c:choose>
 					</div>
 					<div id="petSitterIntro">${likeSitter.notes}</div>
 					<div id="serviceCaringWrap">

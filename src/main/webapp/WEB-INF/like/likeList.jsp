@@ -22,6 +22,9 @@
 		<div id="pageTit">좋아요 목록</div>
 
 		<c:forEach var="likeSitter" items="${likeSitterLists}">
+			<c:url value="/reservation/viewSitterDetail" var="viewUrl">
+				<c:param name="sitterId" value="${likeSitter.sitter.id}" />
+			</c:url>
 			<div id="petSitterInfoBox">
 				<img src="${likeSitter.sitter.profileImage}" id="petSitterImg" />
 				<div id="petSitterLocation">${likeSitter.sitter.address}</div>
@@ -39,7 +42,7 @@
 						<c:param name='sitterId' value='${likeSitter.sitter.id}' />
 					</c:url>
 					<div id="petSitterNameLikeWrap">
-						<div id="petSitterName">${likeSitter.sitter.id}</div>
+						<div id="petSitterName" onClick="location.href='${viewUrl}'">${likeSitter.sitter.id}</div>
 						<c:set var="likeCk" value="true" />
 						<c:choose>
 						  <c:when test="${likeCk eq 'true'}">

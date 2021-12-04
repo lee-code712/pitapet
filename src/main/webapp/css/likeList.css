@@ -153,3 +153,7 @@
     font-size: 14px;
     color: #535353;
 }
+
+#likeOnImg, #likeImg {
+	cursor: pointer;
+}

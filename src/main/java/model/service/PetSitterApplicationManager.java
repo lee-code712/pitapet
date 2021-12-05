@@ -50,12 +50,18 @@ public class PetSitterApplicationManager {
 		return application;
 	}
 	
-	public int applyStatus(String applyId) throws SQLException {
-		return petSitterApplicationDAO.applyStatus(applyId);
-	}
+	public boolean updateStatus(String applyId, String memberId, String status) throws SQLException {
+		int count = 0;
+		
+		if(status.equals("approval"))
+			count = petSitterApplicationDAO.applyStatus(applyId);
 	
-	public int refuseStatus(String applyId) throws SQLException {
-		return petSitterApplicationDAO.refuseStatus(applyId);
+		if(status.equals("refuse"))
+			count = petSitterApplicationDAO.refuseStatus(applyId);
+		
+		if(count == 0)
+			return false;
+		return true;
 	}
 	
 //	public int createBasicSitter(String memberId, String applyId) throws SQLException {

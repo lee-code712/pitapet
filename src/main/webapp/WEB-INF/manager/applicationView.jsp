@@ -58,15 +58,18 @@
             </div>
         </div>
         <div id="acceptBtnWrap">
-        	<c:url value='/manager/refuse' var="refuse">
-				<c:param name="applyId" value="${applicantDetail.id}" />
-			</c:url>
-        	<button id="refuseBtn" onclick="location.href='${refuse}'">거절하기</button>
-        	<c:url value='/manager/approval' var="approval">
+        	<c:url value='/manager/updateStatus' var="refuseUrl">
 				<c:param name="applyId" value="${applicantDetail.id}" />
 				<c:param name="memberId" value="${applicantDetail.applicant.id}" />
+				<c:param name='status' value='refuse' />
 			</c:url>
-            <button id="acceptBtn" onClick="location.href='${approval}'">승인하기</button>
+        	<button id="refuseBtn" onclick="location.href='${refuseUrl}'">거절하기</button>
+        	<c:url value='/manager/updateStatus' var="approvalUrl">
+				<c:param name="applyId" value="${applicantDetail.id}" />
+				<c:param name="memberId" value="${applicantDetail.applicant.id}" />
+				<c:param name='status' value='approval' />
+			</c:url>
+            <button id="acceptBtn" onClick="location.href='${approvalUrl}'">승인하기</button>
         </div>
     </div>
 </body>

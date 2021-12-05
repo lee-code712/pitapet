@@ -132,6 +132,9 @@
 
             <div id="reviewBoxWrap">
             	<c:forEach var="review" items="${reviews}">
+            		<c:url value="/reservation/viewSitterDetail" var="viewUrl">
+						<c:param name="sitterId" value="${review.careInfo.sitter.sitter.id}" />
+					</c:url>
             		<div id="reviewBox">
                     	<c:if test="${review.images eq null}">
                     		<img src="../images/reviewNullImg.svg" id="reviewImg"/>
@@ -152,7 +155,7 @@
 	                        	<div id="review">${review.content}</div>
                         	</div>
                         	<div id="targetScopeWrap">
-                            	<div id="reviewTarget">about ${review.careInfo.sitter.sitter.id}</div>
+                            	<div id="reviewTarget" onClick="location.href='${viewUrl}'">about ${review.careInfo.sitter.sitter.id}</div>
                             	<div id="scopeWrap">
                                 	<img src="../images/star.svg"/>
                                 	<div id="scope">${review.rate}</div>

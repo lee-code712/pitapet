@@ -107,6 +107,7 @@
 }
  	
 #reviewTarget {
+	cursor: pointer;
   	color: #C4C4C4;
   	font-size: 12px;
 }

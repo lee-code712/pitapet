@@ -36,7 +36,10 @@
                 </div>
                 <img src="/images/myPageNullImg.svg" />
                 <div id="myInfo">
-                    <div id="name">(이름)</div>
+                	<div id="cameraWrap">
+	                     <div id="name">(이름)</div>
+	                    <button id="changeImg">사진 변경</button>
+                    </div>
                     <div id="phone">(휴대폰 번호)</div>
                     <div id="myPageBtnWrap">
                         <button id="registerInfoBtn">돌보미 정보 등록</button>

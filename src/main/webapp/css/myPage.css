@@ -86,10 +86,10 @@ justify-content: space-between;
     width: 276px;
 }
 
-#name,
 #phone {
     display: flex;
-    align-content: center;
+    align-items: center;
+    margin-top: 10px;
     height: 34px;
     font-size: 14px;
 }
@@ -179,4 +179,28 @@ table {
     border-radius: 50px;
     background-color: white;
     cursor: pointer;
+}
+
+#name {
+	display: flex;
+	align-items: center;
+ 	font-size: 14px;
+}
+   
+#cameraWrap {
+	display: flex;
+	height: 34px;
+	align-items: center;
+	justify-content: space-between;
+	background: green;
+}
+
+#changeImg {
+	padding: 4px 8px;
+	border-radius: 50px;
+	color: #C4C4C4;
+	border: 1px solid #C4C4C4;
+	background: white;
+	cursor: pointer;
+	font-size: 12px;
 }

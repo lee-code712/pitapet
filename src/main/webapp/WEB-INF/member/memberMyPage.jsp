@@ -38,14 +38,17 @@
                     <c:url value='/member/updateMember' var="updateMemberUrl"/>
                     <img src="/images/infoEdit.svg" id="editBtn" onclick="location.href='${updateMemberUrl}'" />
                 </div>
-                <c:if test="${memberInfo.profileImage eq null}">
-					<img src="/images/myPageNullImg.svg" id="profileImg" />
-				</c:if>
-				<c:if test="${memberInfo.profileImage ne null}">
-					<img src="${memberInfo.profileImage}" id="profileImg" />
-				</c:if>
+	                <c:if test="${memberInfo.profileImage eq null}">
+						<img src="/images/myPageNullImg.svg" id="profileImg" />
+					</c:if>
+					<c:if test="${memberInfo.profileImage ne null}">
+						<img src="${memberInfo.profileImage}" id="profileImg" />
+					</c:if>
                 <div id="myInfo">
-                    <div id="name">${memberInfo.name}</div>
+                	<div id="cameraWrap">
+	                    <div id="name">${memberInfo.name}</div>
+	                    <button id="changeImg">사진 변경</button>
+                    </div>
                     <div id="phone">${memberInfo.phone}</div>
                     <div id="myPageBtnWrap">
                     	<c:url value='/pet/listPet' var="listPetUrl"/>

@@ -11,7 +11,7 @@ import java.util.Map;
 import model.dao.MemberDAO;
 import model.dao.PetDAO;
 import model.dao.PetSitterDAO;
-import model.dao.ServiceDAO;
+import model.dao.mybatis.ServiceDAO;
 import model.dto.Member;
 import model.dto.PetKind;
 import model.dto.PetSitter;

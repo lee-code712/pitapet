@@ -2,5 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="model.dao.mybatis.mapper.ServiceMapper">
-
+	<cache />
+	
+	<select id="selectProvideServicesBySitter" parameterType="String"
+		resultType="Service">
+		SELECT service_id AS id, title, content
+		FROM provide_service JOIN service USING (service_id)
+		WHERE sitter_id = #{id}
+    </select>
 </mapper>

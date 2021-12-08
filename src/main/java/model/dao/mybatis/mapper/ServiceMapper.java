@@ -1,5 +1,9 @@
 package model.dao.mybatis.mapper;
 
-public interface ServiceMapper {
+import java.util.List;
 
+import model.dto.Service;
+
+public interface ServiceMapper {
+	public List<Service> selectProvideServicesBySitter(String sitterId);
 }

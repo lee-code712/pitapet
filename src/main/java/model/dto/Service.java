@@ -1,6 +1,9 @@
 package model.dto;
 
-public class Service {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Service implements Serializable {
 	private String id;
 	private String title;
 	private String content;

@@ -1,8 +1,9 @@
 package model.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Member {
+public class Member implements Serializable{
 	private String id;
 	private String password;
 	private String name;

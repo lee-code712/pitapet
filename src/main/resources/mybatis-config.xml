@@ -29,5 +29,6 @@
 	</environments>
 	<mappers>
 		<mapper resource="model/dao/mybatis/mapper/ServiceMapper.xml" />
+		<mapper resource="model/dao/mybatis/mapper/MemberMapper.xml" />
 	</mappers>
 </configuration>

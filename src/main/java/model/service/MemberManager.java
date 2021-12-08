@@ -2,7 +2,7 @@ package model.service;
 
 import java.sql.SQLException;
 
-import model.dao.MemberDAO;
+import model.dao.mybatis.MemberDAO;
 import model.dto.Member;
 import model.service.exception.ExistingIdException;
 import model.service.exception.MemberNotFoundException;
@@ -60,6 +60,7 @@ public class MemberManager {
 	public int update(Member updateInfo, String oldPassword) throws SQLException, PasswordMismatchException {
 		Member member = memberDAO.findMember(updateInfo.getId());
 
+		System.out.println(member.getPassword() + " " + oldPassword);
 		if (!member.matchPassword(oldPassword)) {
 			throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
 		}

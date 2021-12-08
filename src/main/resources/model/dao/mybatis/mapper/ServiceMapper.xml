@@ -4,10 +4,53 @@
 <mapper namespace="model.dao.mybatis.mapper.ServiceMapper">
 	<cache />
 	
+	<delete id="deleteReceiveService" parameterType="String">
+		DELETE FROM receive_service
+		WHERE care_id = #{id}
+	</delete>
+	
 	<select id="selectProvideServicesBySitter" parameterType="String"
 		resultType="Service">
 		SELECT service_id AS id, title, content
 		FROM provide_service JOIN service USING (service_id)
 		WHERE sitter_id = #{id}
     </select>
+    
+    <!-- <resultMap id="recvServiceResultMap" type="CareDetails">
+		<id column="recvId" jdbcType="VARCHAR" property="id" />
+		<collection property="careInfo" ofType="Care">
+			<id column="careId" jdbcType="INTEGER" property="id" />
+		</collection>
+		<collection property="serviceInfo" ofType="Service">
+			<id column="serviceId" jdbcType="VARCHAR" property="id" />
+			<result column="title" jdbcType="VARCHAR" property="title" />
+			<result column="content" jdbcType="VARCHAR" property="content" />
+		</collection>
+		<collection property="carePet" ofType="Pet">
+			<id column="petId" jdbcType="VARCHAR" property="id" />
+			<result column="birth" jdbcType="VARCHAR" property="birth" />
+			<result column="gender" jdbcType="VARCHAR" property="gender" />
+			<collection property="kind" ofType="PetKind">
+				<id column="kindId" jdbcType="VARCHAR" property="id" />
+			</collection>
+			<collection property="myCompanion" ofType="Member">
+				<id column="memberId" jdbcType="VARCHAR" property="id" />
+			</collection>
+		</collection>
+	</resultMap>
+    
+    <select id="selectReceiveServicesByCare" parameterType="String"
+		resultType="recvServiceResultMap">
+		SELECT care_id AS careId, 
+			rcv_id AS recvId, 
+			service_id AS serviceId, title, content,
+			pet_id AS petId, birth, gender, kind_id AS kind,
+		FROM receive_service rs JOIN pet p USING (pet_id) JOIN service USING (service_id)
+		WHERE care_id = #{id}
+		SELECT service_id AS id, title, content
+		FROM provide_service JOIN service USING (service_id)
+		WHERE sitter_id = #{id}
+    </select>  -->
+    
+    
 </mapper>

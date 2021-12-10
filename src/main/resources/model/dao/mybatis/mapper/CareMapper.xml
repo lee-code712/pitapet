@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.mybatis.mapper.PetMapper">
+	<!-- 보호자 및 특정 돌보미의 돌봄 스케줄 조회 -->
+	<resultMap id="scheResultMap" type="Care">
+		<id column="care_id" jdbcType="INTEGER" property="id" />
+		<result column="start_date" jdbcType="DATE" property="startDate" />
+		<result column="end_date" jdbcType="DATE" property="endDate" />
+		<result column="care_status" jdbcType="VARCHAR" property="status" />
+		<association property="member" column="member_id" javaType="Member">
+			<id column="member_id" jdbcType="VARCHAR" property="memberId" />
+		</association>
+		<association property="sitter" column="sitter_id" javaType="PetSitter">
+			<association property="member" column="member_id" javaType="Member">
+				<id column="sitter_id" jdbcType="VARCHAR" property="sitterId" />
+				<result column="name" jdbcType="VARCHAR" property="name" />
+			</association>
+		</association>
+	</resultMap>
+	
+	<select id="findCareSchedules" parameterType="String" resultMap="scheResultMap"> 
+		SELECT DISTINCT care_id, start_date, end_date, c.member_id, m.name, c.sitter_id, care_status
+        FROM care c JOIN member m ON c.sitter_id = m.member_id      
+        <where>
+			<if test="sitterId == null">
+				c.member_id = #{memberId}
+			</if>
+			<if test="sitterId != null">
+				c.member_id = #{memberId} OR c.sitter_id = #{memberId}
+			</if>
+		</where>			     
+	</select>
+	
+	<!-- 돌봄 예약내역 조회 -->
+	<resultMap id="scheResultMap" type="Care">
+		<id column="care_id" jdbcType="INTEGER" property="id" />
+		<result column="start_date" jdbcType="DATE" property="startDate" />
+		<result column="end_date" jdbcType="DATE" property="endDate" />
+		<result column="total_price" jdbcType="INTEGER" property="status" />
+		<result column="notes" jdbcType="VARCHAR" property="status" />
+		<result column="care_status" jdbcType="VARCHAR" property="status" />
+		<association property="member" column="member_id" javaType="Member">
+			<id column="member_id" jdbcType="VARCHAR" property="memberId" />
+		</association>
+		<association property="sitter" column="sitter_id" javaType="PetSitter">
+			<association property="member" column="member_id" javaType="Member">
+				<id column="sitter_id" jdbcType="VARCHAR" property="sitterId" />
+			</association>
+		</association>
+	</resultMap>
+	
+	<select id="findReservation" parameterType="int" resultMap="careResultMap"> 
+		SELECT sitter_id, member_id, care_id, start_date, end_date, total_price, notes, care_status
+	    FROM care
+	    WHERE care_id = #{careId}      			     
+	</select>
+	
+	<!-- 보호자-돌보미 간 돌봄 완료 내역 반환 -->
+	<resultMap id="clResultMap" type="Care">
+		<id column="care_id" jdbcType="INTEGER" property="id" />
+		<result column="start_date" jdbcType="DATE" property="startDate" />
+		<result column="end_date" jdbcType="DATE" property="endDate" />
+		<result column="care_status" jdbcType="VARCHAR" property="status" />
+		<association property="member" column="member_id" javaType="Member">
+			<id column="member_id" jdbcType="VARCHAR" property="memberId" />
+		</association>
+		<association property="sitter" column="sitter_id" javaType="PetSitter">
+			<association property="member" column="member_id" javaType="Member">
+				<id column="sitter_id" jdbcType="VARCHAR" property="sitterId" />
+			</association>
+		</association>
+	</resultMap>
+	
+	<select id="findCareList" parameterType="String" resultMap="clResultMap"> 
+		SELECT care_id, start_date, end_date, member_id, care_status
+	    FROM care
+	    WHERE WHERE member_id = #{memberId} AND sitter_id = #{sitterId} AND care_status = 'Z'      		     
+	</select>
+	
+	<!-- 돌봄 내역 추가 -->
+	<insert id="createCare" parameterType="Care">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT CareId_seq.nextval AS id FROM DUAL
+		</selectKey>
+				
+		INSERT INTO Care (sitter_id, member_id, care_id, start_date, TO_DATE(end_date, 'YYYY/MM/DD HH24:mi:ss'), total_price, notes, status)
+		VALUES (sitter.sitter.id, companion.id, id, startDate, endDate, totalPrice, notes, status)
+	</insert>
+	
+	<!-- 돌봄 내역 삭제 -->
+	<delete id="deleteCare" parameterType="int">
+		DELETE FROM Care
+		WHERE care_id = #{careId}
+	</delete>
+	
+	<!-- check 정보 반환 -->
+	<select id="getCheckInfo" parameterType="String"> 
+		SELECT care_check	        
+        FROM care_checklist         			
+		WHERE rcv_id = #{rcvId} 		
+    </select>
+</mapper>

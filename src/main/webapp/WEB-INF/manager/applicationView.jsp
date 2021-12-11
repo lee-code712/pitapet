@@ -147,7 +147,20 @@
     <c:if test="${updateFailed}">
 	    <script> alert('돌보미 등급 조정에 실패했습니다.'); </script>
 	</c:if>
-    <%@include file="../components/header.jsp" %>
+    <div id="headerWrap">
+           <div id="headerInner">
+              <div id="logoWrap">
+                  <c:url value="/manager/listSitterApply" var="managerMainUrl"/>
+                  <img src="/images/adminRank.svg" />
+                 <div id="logo" onClick="location.href='${managerMainUrl}'">PIT A PET</div>
+              </div>
+         
+               <div id="gnb">
+                  <c:url value='/member/logout' var="url"/>
+                   <button id="headerLoginBtn" onclick="location.href='${url}'">로그아웃</button>
+               </div>
+           </div>
+    </div>
 
     <div id="pageWrap">
         <div id="pageTit">지원 정보</div>
@@ -173,7 +186,12 @@
                 <div id="service">${applicantDetail.career}</div>
 
                 <div id="subTit">▪ 자격증</div>
-                <img src="./images/certImg.svg" id="certImg"/>
+                	<c:if test="${applicantDetail.images eq null}">
+                    	<img src="./images/certImg.svg" id="certImg"/>
+                    </c:if>
+                    <c:if test="${applicantDetail.images ne null}">
+                    	<img src="${applicantDetail.images[0]}" id="certImg"/>
+                    </c:if>
                 <div id="certName">${applicantDetail.certification}</div>
 
                 <div id="btnWrap">

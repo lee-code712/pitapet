@@ -1,4 +1,4 @@
-package controller.pet;
+package controller.member;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,40 +16,28 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import controller.Controller;
-import controller.member.UserSessionUtils;
-import model.dto.Care;
-import model.dto.Pet;
 import model.dto.PetKind;
-import model.dto.Review;
-import model.service.PetManager;
+import model.service.MemberManager;
 
-public class AddPetController implements Controller {
+public class UpdateProfilePicController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession();
-		PetManager petMan = PetManager.getInstance();
+		
+		MemberManager memberMan = MemberManager.getInstance();
 		
 		// 반려동물 추가 form 이동
 		if (request.getMethod().equals("GET")) {
-			// 동물 종 카테고리 리스트 전달
-			List<PetKind> petKindList = petMan.findAllPetKindList();
-			request.setAttribute("petKindList", petKindList);
-			
-			return "/member/petAddForm.jsp";
+			return "/member/ProfilePicUpdateForm.jsp";
 		}
 		
-		// 반려동물 추가 처리 
+		// 프로필 사진 추가 처리 
 		String userId = UserSessionUtils.getLoginUserId(session);
-		String name = null;
-		String birth = null;
-		String gender = null;
-		String kindId = null;
 		ArrayList<String> files = new ArrayList<>();
+		boolean isUpdated = false;
 		
-		Pet pet = null;
-		boolean isAdded = false;
 		boolean check = ServletFileUpload.isMultipartContent(request);
 		if(check) {//파일 전송이 포함된 상태가 맞다면
 			ServletContext context = request.getServletContext();
@@ -86,14 +74,7 @@ public class AddPetController implements Controller {
                 	//넘어온 값에 대한 한글 처리를 한다.
                 	
                 	if(item.isFormField()) {//일반 폼 데이터라면...
-                		if(item.getFieldName().equals("name")) 
-                			name = value;
-                		else if(item.getFieldName().equals("birth")) 
-                			birth = value;
-                		else if(item.getFieldName().equals("gender"))
-                			gender = value;
-                		else if(item.getFieldName().equals("petKind"))
-                			kindId = value;
+ 
                 	}
                 	else {//파일이라면...
                 		if(item.getFieldName().equals("picture")) {
@@ -106,17 +87,17 @@ public class AddPetController implements Controller {
                 			//실제 C:\Web_Java\aaa.gif라고 하면 aaa.gif만 추출하기 위한 코드이다.
                 			File file = new File(dir, filename);
                 			String ext = filename.substring(filename.lastIndexOf( "." ));
-                			String newFilename = "pet-" + petMan.makePetId() + "-1" + ext;
+                			String newFilename = "profile-" + userId + "-1" + ext;
                 			File newFile = new File(dir, newFilename);
                 			item.write(file);
                 			file.renameTo(newFile);
+                			// memberMan.deleteProfilePic(userId); // 프로필 사진이 존재한다면 삭제한다
                 			//파일을 upload 경로에 실제로 저장한다.
                 			files.add(newFilename);
                 		}
                 	}
                 }
-                pet = new Pet(name, birth, gender, new PetKind(kindId), files.get(0));
-        		isAdded = petMan.addPet(userId, pet);
+                // isUpdated = memberMan.updateProfilePic(userId, files.get(0));
 			}catch(SizeLimitExceededException e) {
 			//업로드 되는 파일의 크기가 지정된 최대 크기를 초과할 때 발생하는 예외처리
 				e.printStackTrace();           
@@ -128,18 +109,11 @@ public class AddPetController implements Controller {
             }
 		}
 		
-		/*
-		 * Pet pet = new Pet(name, birth, gender, new PetKind(kindId), null); boolean
-		 * isAdded = petMan.addPet(userId, pet);
-		 */
-		if (!isAdded) {
-			session.setAttribute("petInfo", pet);
-			return "redirect:/pet/addPet?updateFailed=true";
+		if (!isUpdated) {
+			return "redirect:/member/updateProfilePic?addFailed=true";
 		}
 		
-		if (session.getAttribute("petInfo") != null)
-			session.removeAttribute("petInfo");
-		return "redirect:/pet/listPet";
+		return "redirect:/member/memberMyPage";
 	}
 
 }

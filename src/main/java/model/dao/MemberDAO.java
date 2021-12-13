@@ -108,4 +108,23 @@ private JDBCUtil jdbcUtil = null;
 		}		
 		return 0;
 	}
+   
+   /* 특정 회원의 프로필 사진 삭제 */
+   public int deleteProfilePic (String memberId) throws SQLException {
+	   String like = "%profile-" + memberId + "-%";
+	   String sql = "DELETE FROM attachment "
+				+ "WHERE member_id = ? AND img_src LIKE ?";     
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, like});	
+						
+		try {
+			int rs = jdbcUtil.executeUpdate();			
+			return rs;					
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}		
+		return 0;
+   }
 }

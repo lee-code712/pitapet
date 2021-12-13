@@ -47,7 +47,8 @@
                 <div id="myInfo">
                 	<div id="cameraWrap">
 	                    <div id="name">${memberInfo.name}</div>
-	                    <button id="changeImg">사진 변경</button>
+	                    <c:url value='/member/updateProfilePic' var="updateProfilePicUrl"/>
+	                    <button id="changeImg" onclick="location.href='${updateProfilePicUrl}'">사진 변경</button>
                     </div>
                     <div id="phone">${memberInfo.phone}</div>
                     <div id="myPageBtnWrap">

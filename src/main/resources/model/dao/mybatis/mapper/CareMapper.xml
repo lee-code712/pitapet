@@ -33,7 +33,7 @@
 	</select>
 	
 	<!-- 돌봄 예약내역 조회 -->
-	<resultMap id="scheResultMap" type="Care">
+	<resultMap id="careResultMap" type="Care">
 		<id column="care_id" jdbcType="INTEGER" property="id" />
 		<result column="start_date" jdbcType="DATE" property="startDate" />
 		<result column="end_date" jdbcType="DATE" property="endDate" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="model.dao.mybatis.mapper.PetMapper">
+<mapper namespace="model.dao.mybatis.mapper.CareMapper">
 	<!-- 보호자 및 특정 돌보미의 돌봄 스케줄 조회 -->
 	<resultMap id="scheResultMap" type="Care">
 		<id column="care_id" jdbcType="INTEGER" property="id" />

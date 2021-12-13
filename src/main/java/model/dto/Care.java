@@ -15,6 +15,10 @@ public class Care implements Serializable {
 	private Member companion;
 	private PetSitter sitter;
 	
+	public Care() {
+		super();
+	}
+	
 	public Care(int id) {
 		super();
 		this.id = id;

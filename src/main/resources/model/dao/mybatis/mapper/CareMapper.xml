@@ -4,17 +4,17 @@
 <mapper namespace="model.dao.mybatis.mapper.CareMapper">
 	<!-- 보호자 및 특정 돌보미의 돌봄 스케줄 조회 -->
 	<resultMap id="scheResultMap" type="Care">
-		<id column="care_id" jdbcType="INTEGER" property="id" />
-		<result column="start_date" jdbcType="DATE" property="startDate" />
-		<result column="end_date" jdbcType="DATE" property="endDate" />
-		<result column="care_status" jdbcType="VARCHAR" property="status" />
-		<association property="member" column="member_id" javaType="Member">
-			<id column="member_id" jdbcType="VARCHAR" property="memberId" />
+		<id column="care_id" jdbcType="INTEGER" property="id" javaType="int" />
+		<result column="start_date" jdbcType="DATE" property="startDate" javaType="string" />
+		<result column="end_date" jdbcType="DATE" property="endDate" javaType="string" />
+		<result column="care_status" jdbcType="VARCHAR" property="status"  javaType="string" />
+		<association property="companion" column="member_id" javaType="Member">
+			<id column="member_id" jdbcType="VARCHAR" property="id" javaType="string" />
 		</association>
 		<association property="sitter" column="sitter_id" javaType="PetSitter">
-			<association property="member" column="member_id" javaType="Member">
-				<id column="sitter_id" jdbcType="VARCHAR" property="sitterId" />
-				<result column="name" jdbcType="VARCHAR" property="name" />
+			<association property="sitter" column="member_id" javaType="Member">
+				<id column="sitter_id" jdbcType="VARCHAR" property="id" javaType="string" />
+				<result column="name" jdbcType="VARCHAR" property="name" javaType="string" />
 			</association>
 		</association>
 	</resultMap>
@@ -34,18 +34,18 @@
 	
 	<!-- 돌봄 예약내역 조회 -->
 	<resultMap id="careResultMap" type="Care">
-		<id column="care_id" jdbcType="INTEGER" property="id" />
-		<result column="start_date" jdbcType="DATE" property="startDate" />
-		<result column="end_date" jdbcType="DATE" property="endDate" />
-		<result column="total_price" jdbcType="INTEGER" property="status" />
-		<result column="notes" jdbcType="VARCHAR" property="status" />
-		<result column="care_status" jdbcType="VARCHAR" property="status" />
-		<association property="member" column="member_id" javaType="Member">
-			<id column="member_id" jdbcType="VARCHAR" property="memberId" />
+		<id column="care_id" jdbcType="INTEGER" property="id" javaType="int" />
+		<result column="start_date" jdbcType="DATE" property="startDate" javaType="string" />
+		<result column="end_date" jdbcType="DATE" property="endDate" javaType="string" />
+		<result column="total_price" jdbcType="INTEGER" property="status" javaType="int" />
+		<result column="notes" jdbcType="VARCHAR" property="status" javaType="string" />
+		<result column="care_status" jdbcType="VARCHAR" property="status" javaType="string" />
+		<association property="companion" column="member_id" javaType="Member">
+			<id column="member_id" jdbcType="VARCHAR" property="id" javaType="string" />
 		</association>
 		<association property="sitter" column="sitter_id" javaType="PetSitter">
-			<association property="member" column="member_id" javaType="Member">
-				<id column="sitter_id" jdbcType="VARCHAR" property="sitterId" />
+			<association property="sitter" column="member_id" javaType="Member">
+				<id column="sitter_id" jdbcType="VARCHAR" property="id" javaType="string" />
 			</association>
 		</association>
 	</resultMap>
@@ -58,16 +58,16 @@
 	
 	<!-- 보호자-돌보미 간 돌봄 완료 내역 반환 -->
 	<resultMap id="clResultMap" type="Care">
-		<id column="care_id" jdbcType="INTEGER" property="id" />
-		<result column="start_date" jdbcType="DATE" property="startDate" />
-		<result column="end_date" jdbcType="DATE" property="endDate" />
-		<result column="care_status" jdbcType="VARCHAR" property="status" />
-		<association property="member" column="member_id" javaType="Member">
-			<id column="member_id" jdbcType="VARCHAR" property="memberId" />
+		<id column="care_id" jdbcType="INTEGER" property="id" javaType="int" />
+		<result column="start_date" jdbcType="DATE" property="startDate" javaType="string" />
+		<result column="end_date" jdbcType="DATE" property="endDate" javaType="string" />
+		<result column="care_status" jdbcType="VARCHAR" property="status" javaType="string" />
+		<association property="companion" column="member_id" javaType="Member">
+			<id column="member_id" jdbcType="VARCHAR" property="id" javaType="string" />
 		</association>
 		<association property="sitter" column="sitter_id" javaType="PetSitter">
-			<association property="member" column="member_id" javaType="Member">
-				<id column="sitter_id" jdbcType="VARCHAR" property="sitterId" />
+			<association property="sitter" column="member_id" javaType="Member">
+				<id column="sitter_id" jdbcType="VARCHAR" property="id" javaType="string" />
 			</association>
 		</association>
 	</resultMap>
@@ -75,13 +75,13 @@
 	<select id="findCareList" parameterType="String" resultMap="clResultMap"> 
 		SELECT care_id, start_date, end_date, member_id, care_status
 	    FROM care
-	    WHERE WHERE member_id = #{memberId} AND sitter_id = #{sitterId} AND care_status = 'Z'      		     
+	    WHERE member_id = #{memberId} AND sitter_id = #{sitterId} AND care_status = 'Z'      		     
 	</select>
 	
 	<!-- 돌봄 내역 추가 -->
 	<insert id="createCare" parameterType="Care">
 		<selectKey keyProperty="id" resultType="int" order="BEFORE">
-			SELECT CareId_seq.nextval AS id FROM DUAL
+			SELECT care_seq.nextval AS id FROM DUAL
 		</selectKey>
 				
 		INSERT INTO Care (sitter_id, member_id, care_id, start_date, TO_DATE(end_date, 'YYYY/MM/DD HH24:mi:ss'), total_price, notes, status)

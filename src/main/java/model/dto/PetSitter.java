@@ -16,6 +16,10 @@ public class PetSitter {
 	private List<Service> services;
 	private PetSitterApplication myApplyInfo;
 	
+	public PetSitter() {
+		super();
+	}
+	
 	public PetSitter(Member sitter) {
 		super();
 		this.sitter = sitter;

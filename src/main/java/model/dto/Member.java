@@ -16,6 +16,10 @@ public class Member implements Serializable{
 	private List<Pet> myPets;
 	private String profileImage;
 	
+	public Member() {
+		super();
+	}
+	
 	public Member(String id) {
 		super();
 		this.id = id;

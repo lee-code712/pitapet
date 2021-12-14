@@ -124,13 +124,16 @@ public class PetSitterManager {
 	/* 돌보미 상세정보 반환 (제공서비스, 돌봄 가능 종 리스트 포함) */
 	public PetSitter findPetSitter(String sitterId) throws SQLException {
 		PetSitter sitter = sitterDAO.findPetSitter(sitterId);
-		List<Service> prvdServiceList = serviceDAO.findProvideServiceList(sitterId);
-		List<PetKind> ablePetKindList = petDAO.findAblePetKindList(sitterId);
 		
-		sitter.setServices(prvdServiceList);
-		sitter.setKinds(ablePetKindList);	
-		sitter = updateSitterProperties(sitter);
-
+		if (sitter != null) {
+			List<Service> prvdServiceList = serviceDAO.findProvideServiceList(sitterId);
+			List<PetKind> ablePetKindList = petDAO.findAblePetKindList(sitterId);
+			
+			sitter.setServices(prvdServiceList);
+			sitter.setKinds(ablePetKindList);	
+			sitter = updateSitterProperties(sitter);
+		}
+		
 		return sitter;
 	}
 

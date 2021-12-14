@@ -32,6 +32,7 @@
 					var newInputElement = document.createElement("input");
 					$(newInputElement).attr("type", "button");
 					$(newInputElement).attr("value", "일지추가");
+					$(newInputElement).attr("onClick", "location.href='/care/recordCare'");
 					$("#recordBtnDiv").append(newInputElement);
 				}
 	    	}

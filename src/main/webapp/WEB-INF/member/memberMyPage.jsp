@@ -75,6 +75,10 @@
                         	<c:url value='/member/updateSitterApply' var="updateSitterApplyUrl"/>
                         	<button id="applySitterBtn" onclick="location.href='${updateSitterApplyUrl}'">돌보미 지원 정보 조회/수정</button>
                         </c:if>
+                        <c:if test="${applicationStatus eq 'Y'}">
+                        	<c:url value='/member/updateSitter' var="updateSitterUrl"/>
+                        	<button id="applySitterBtn" onclick="location.href='${updateSitterUrl}'">돌보미 정보 수정</button>
+                        </c:if>
                         <c:if test="${applicationStatus eq 'Z'}">
                         	<button id="applySitterBtn">돌보미 지원 정보 조회</button>
                         </c:if>
@@ -109,7 +113,7 @@
                    		</c:if>
                    		
                    		<c:if test="${care.status eq 'Y'}">
-
+							<c:url value='/care/listCareDiary?careId=${care.id}' var="careDiaryUrl"/>
                    			<tr>
 	                    		<td>${care.sitter.sitter.name}</td>
 	                    		<td>${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}</td>

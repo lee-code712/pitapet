@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import model.dto.Care;
+import model.dto.CareRecord;
 
 public interface CareMapper {
 
@@ -19,6 +20,9 @@ public interface CareMapper {
 	
 	/* 돌봄 내역 생성 */
 	public int createCare(Care care);
+	
+	/* 돌봄일지 리스트 조회 */
+	public List<CareRecord> getCareRecordByCareId(int careId);
 	
 	public int deleteCare(int careId);
 	

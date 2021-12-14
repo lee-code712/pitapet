@@ -13,6 +13,7 @@ import java.util.Map;
 
 import model.dto.Care;
 import model.dto.CareDetails;
+import model.dto.CareRecord;
 import model.dto.Member;
 import model.dto.Pet;
 import model.dto.PetSitter;
@@ -196,6 +197,11 @@ public class CareManager {
 		}
 		
 		return care;
+	}
+	
+	/* 돌봄일지 리스트 반환 */
+	public ArrayList<CareRecord> findCareRecordsByCare(int careId) throws SQLException {
+		return (ArrayList) careDAO.findCareRecordsByCare(careId);
 	}
 	
 	public int deleteCare(int careId) throws SQLException {

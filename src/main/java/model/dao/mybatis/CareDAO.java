@@ -10,6 +10,7 @@ import org.apache.ibatis.session.*;
 
 import model.dao.mybatis.mapper.CareMapper;
 import model.dto.Care;
+import model.dto.CareRecord;
 
 public class CareDAO {
 	private SqlSessionFactory sqlSessionFactory;
@@ -63,6 +64,16 @@ public class CareDAO {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
 			return sqlSession.getMapper(CareMapper.class).createCare(care);
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	/* 돌봄일지 리스트 반환 */
+	public List<CareRecord> findCareRecordsByCare(int careId) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		try {
+			return sqlSession.getMapper(CareMapper.class).getCareRecordByCareId(careId);
 		} finally {
 			sqlSession.close();
 		}

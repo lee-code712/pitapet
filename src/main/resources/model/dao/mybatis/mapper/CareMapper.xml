@@ -100,4 +100,24 @@
         FROM care_checklist         			
 		WHERE rcv_id = #{rcvId} 		
     </select>
+    
+    <!-- 돌봄일지 리스트 조회 -->
+    <select id="getCareRecordByCareId" parameterType="int" resultMap="careRecordMap">
+    	SELECT cr.record_id, cr.write_date, cr.title, cr.content, cr.care_id, 
+    		c.start_date, c.end_date,
+    		ch.care_check, 
+    		s.service_id, s.title, 
+    		p.pet_id, p.name,
+    		m.member_id, m.name,
+    		sm.member_id, sm.name
+		FROM care_record cr
+    		LEFT OUTER JOIN care c ON cr.care_id = c.care_id
+    		LEFT OUTER JOIN member m ON c.member_id = m.member_id
+    		LEFT OUTER JOIN member sm ON c.sitter_id = sm.member_id
+    		LEFT OUTER JOIN care_checklist ch ON cr.record_id = ch.record_id
+    		LEFT OUTER JOIN receive_service rs ON ch.rcv_id = rs.rcv_id
+    		LEFT OUTER JOIN service s ON rs.service_id = s.service_id
+    		LEFT OUTER JOIN pet p ON rs.pet_id = p.pet_id
+		WHERE care_id = #{careId}
+    </select>
 </mapper>

@@ -8,6 +8,10 @@ public class CareDetails {
 	private Pet carePet;
 	private String check;
 	
+	public CareDetails() {
+		super();
+	}
+
 	public CareDetails(String id) {
 		super();
 		this.id = id;

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,16 @@
     <div id="careDiaryPageWrap">
         <div id="pageTit">돌봄 일지</div>
         <div id="careDiaryInner">
-            <div id="careDiaryPetName">###보호자님의 &&&반려동물</div>
+            <div id="careDiaryPetName">
+            	<c:forEach var="pet" items="${careRecordList.get(0).careInfo.carePetList}" varStatus="status">
+            		${pet.name}
+            		<c:if test="${!status.last}">
+            		, 
+            		</c:if>
+            	</c:forEach>
+            	 돌봄일지 [${fn:split(careRecordList.get(0).careInfo.startDate, " ")[0]}
+            	 	~ ${fn:split(careRecordList.get(0).careInfo.endDate, " ")[0]}]
+            </div>
             <div id="careDiaryContent">
             <div id="fullDateWrap">
                 <div id="fullDate">2021년 9월 17일</div>

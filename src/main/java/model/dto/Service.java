@@ -8,6 +8,10 @@ public class Service implements Serializable {
 	private String title;
 	private String content;
 	
+	public Service() {
+		super();
+	}
+	
 	public Service(String id) {
 		super();
 		this.id = id;

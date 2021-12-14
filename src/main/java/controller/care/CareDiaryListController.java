@@ -1,7 +1,7 @@
 package controller.care;
 
-import java.util.ArrayList;
-
+import java.util.List;
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,8 +24,10 @@ public class CareDiaryListController implements Controller {
 		}		
 		
 		int careId = Integer.valueOf(request.getParameter("careId")); 
-		ArrayList<CareRecord> careRecords = careMan.findCareRecordsByCare(careId);
+		List<CareRecord> careRecords = careMan.findCareRecordsByCare(careId);
 		request.setAttribute("careRecordList", careRecords);
+		
+		System.out.println(careRecords);
 		
 		return "/care/careDiary.jsp";
 	}

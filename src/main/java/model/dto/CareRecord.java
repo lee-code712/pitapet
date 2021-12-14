@@ -3,7 +3,7 @@ package model.dto;
 import java.util.List;
 
 public class CareRecord {
-	private String id;
+	private int id;
 	private List<CareDetails> checkList;
 	private String writeDate;
 	private String title;
@@ -11,15 +11,15 @@ public class CareRecord {
 	private Care careInfo;
 	private List<String> images;
 	
-	public CareRecord(String id) {
+	public CareRecord(int id) {
 		super();
 		this.id = id;
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public List<CareDetails> getCheckList() {

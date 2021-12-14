@@ -200,8 +200,8 @@ public class CareManager {
 	}
 	
 	/* 돌봄일지 리스트 반환 */
-	public ArrayList<CareRecord> findCareRecordsByCare(int careId) throws SQLException {
-		return (ArrayList) careDAO.findCareRecordsByCare(careId);
+	public List<CareRecord> findCareRecordsByCare(int careId) throws SQLException {
+		return careDAO.findCareRecordsByCare(careId);
 	}
 	
 	public int deleteCare(int careId) throws SQLException {

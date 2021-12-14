@@ -13,6 +13,10 @@ public class Pet implements Serializable {
 	private Member myCompanion;
 	private String petImage;
 	
+	public Pet() {
+		super();
+	}
+	
 	public Pet(String id) {
 		super();
 		this.id = id;

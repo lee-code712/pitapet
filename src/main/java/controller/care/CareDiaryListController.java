@@ -1,14 +1,13 @@
 package controller.care;
 
 import java.util.List;
-import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import controller.member.UserSessionUtils;
-import model.dto.CareRecord;
+import model.dto.Care;
 import model.service.CareManager;
 
 public class CareDiaryListController implements Controller {
@@ -24,10 +23,10 @@ public class CareDiaryListController implements Controller {
 		}		
 		
 		int careId = Integer.valueOf(request.getParameter("careId")); 
-		List<CareRecord> careRecords = careMan.findCareRecordsByCare(careId);
-		request.setAttribute("careRecordList", careRecords);
-		
-		System.out.println(careRecords);
+		Care care = careMan.findCareRecordsByCare(careId);
+		request.setAttribute("care", care);
+		if (care.getCareRecordList().get(0).getWriteDate() != null)
+			request.setAttribute("writeCount", care.getCareRecordList().size());
 		
 		return "/care/careDiary.jsp";
 	}

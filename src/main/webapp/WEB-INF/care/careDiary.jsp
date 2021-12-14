@@ -13,6 +13,26 @@
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
     <link rel="stylesheet" href="/css/careDiary.css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+    	var start = new Date("${care.startDate}");
+    	var end = new Date("${care.endDate}");
+    	var needCount =  end.getDate() - start.getDate() + 1;
+    	var writeCount = "${writeCount}";
+    	if (writeCount == null || writeCount == '')
+    		writeCount = 0;
+    	else
+    		writeCount = parseInt(writeCount);
+    	var identity = "${sessionScope.identity}";
+    	console.log(needCount, writeCount)
+
+		if ((needCount - writeCount) > 0) {
+			var newInputElement = document.createElement("button");
+			$(newInputElement).attr("type", "button");
+			$(newInputElement).attr("value", "일지작성");
+			$("#recordBtnDiv").append(newInputElement);
+		}
+    </script>
 </head>
 
 <body>
@@ -22,52 +42,58 @@
         <div id="pageTit">돌봄 일지</div>
         <div id="careDiaryInner">
             <div id="careDiaryPetName">
-            	<c:forEach var="pet" items="${careRecordList.get(0).careInfo.carePetList}" varStatus="status">
+            	<c:forEach var="pet" items="${care.carePetList}" varStatus="status">
             		${pet.name}
             		<c:if test="${!status.last}">
             		, 
             		</c:if>
             	</c:forEach>
-            	 돌봄일지 [${fn:split(careRecordList.get(0).careInfo.startDate, " ")[0]}
-            	 	~ ${fn:split(careRecordList.get(0).careInfo.endDate, " ")[0]}]
+            	 돌봄일지 [${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}]
+            	 <div id="recordBtnDiv"></div>
             </div>
             <div id="careDiaryContent">
-            <div id="fullDateWrap">
-                <div id="fullDate">2021년 9월 17일</div>
-            </div>
-                <div id="careDiaryCardWrap">
-                    <div id="careDiaryCard">
-                        <div id="careDiaryPetSitterName">
-                            ###반려동물 돌보미
-                        </div>
-                        <img src="/images/diaryImg.svg" id="diaryImg" />
-                        <div id="diaryContentWrap">
-                            <div id="diaryTit">(제목)</div>
-                            <div id="diaryContent">(내용)</div>
-                            <div id="diaryServiceInfo">* 산책 3번 / 밥 많이 먹음 / 배식O / 목욕O</div>
-                        </div>
-                    </div>
-                    <div id="diaryDateWarp">
-                        <div id="diaryDate">오후 10:29</div>
-                    </div>
-                </div>
-
-                <div id="careDiaryCardWrap">
-                    <div id="careDiaryCard">
-                        <div id="careDiaryPetSitterName">
-                            ###반려동물 돌보미
-                        </div>
-                        <img src="/images/diaryImg.svg" id="diaryImg" />
-                        <div id="diaryContentWrap">
-                            <div id="diaryTit">(제목)</div>
-                            <div id="diaryContent">(내용)</div>
-                            <div id="diaryServiceInfo">* 산책 3번 / 밥 많이 먹음 / 배식O / 목욕O</div>
-                        </div>
-                    </div>
-                    <div id="diaryDateWarp">
-                        <div id="diaryDate">오후 10:29</div>
-                    </div>
-                </div>
+            <c:if test="${care.careRecordList[0].writeDate == null}">
+            	작성한 돌봄일지가 없습니다.
+            </c:if>
+            <c:if test="${care.careRecordList[0].writeDate != null}">
+	            <c:forEach var="careRecord" items="${care.careRecordList}" varStatus="status">
+	            	<div id="fullDateWrap">
+	            		<c:set var="writeDate" value="${fn:split(careRecord.writeDate, ' ')[0]}"/>
+	            		<c:set var="writeTime" value="${fn:split(careRecord.writeDate, ' ')[1]}"/>
+	                	<div id="fullDate">
+	                		${fn:split(writeDate, "-")[0]}년 ${fn:split(writeDate, "-")[1]}월 ${fn:split(writeDate, "-")[2]}일
+	                	</div>
+	            	</div>
+	                <div id="careDiaryCardWrap">
+	                    <div id="careDiaryCard">
+	                        <div id="careDiaryPetSitterName">
+	                            ###반려동물 돌보미
+	                        </div>
+	                        <img src="/images/diaryImg.svg" id="diaryImg" />
+	                        <div id="diaryContentWrap">
+	                            <div id="diaryTit">${careRecord.title}</div>
+	                            <div id="diaryContent">${careRecord.content}</div>
+	                            <div id="diaryServiceInfo">
+	                            	★ 돌봄 체크 리스트 </br>
+	                            	<c:forEach var="careDetail" items="${careRecord.checkList}" varStatus="status">
+	                            		${careDetail.carePet.name} - ${careDetail.serviceInfo.title} 
+	                            		<c:if test="${careDetail.check == 'Y'}">
+	                            			▣
+	                            		</c:if>
+	                            		<c:if test="${careDetail.check == 'N'}">
+	                            			□
+	                            		</c:if>
+	                            		<br/> 
+	                            	</c:forEach>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div id="diaryDateWarp">
+	                        <div id="diaryDate">${fn:split(writeTime, ':')[0]}시 ${fn:split(writeTime, ':')[0]}분</div>
+	                    </div>
+	                </div>
+	            </c:forEach>
+            </c:if>
             </div>
         </div>
     </div>

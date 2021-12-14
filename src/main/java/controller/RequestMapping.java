@@ -37,7 +37,7 @@ public class RequestMapping {
         mappings.put("/member/updateMember", new UpdateMemberController());
         mappings.put("/member/updateSitter", new UpdateSitterController());
         mappings.put("/member/updateProfilePic", new UpdateProfilePicController());
-        mappings.put("/member/applySitter", new ForwardController("/member/sitterApplyForm.jsp"));
+        mappings.put("/member/applySitter", new ApplySitterController());
         mappings.put("/member/updateSitterApply", new ForwardController("/member/sitterApplyUpdateForm.jsp"));
         mappings.put("/member/register", new RegisterController());
         // pet

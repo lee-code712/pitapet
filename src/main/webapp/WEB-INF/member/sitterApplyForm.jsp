@@ -19,6 +19,7 @@
     
     <div id="pageWrap">
         <div id="pageTit">돌보미 지원</div>
+        
         <div id="introTit">자기소개</div>
         <div id="introTextWrap">
             <textarea placeholder="내용을 입력하세요." id="introText"></textarea>
@@ -33,12 +34,6 @@
         <div id="infoContent"><input type="radio" checked id="blank" /> 유 <input type="radio" id="blank" /> 무</div>
         <div id="fileWrap"><img src="../images/fileImg.svg" id="fileImg" /> <input type="file"/></div> 
         <div id="fileWarning">* 자격증 사진을 첨부하세요.</div>
-
-        <div id="infoTit">제공 서비스</div>
-        <div id="infoContent"><input type="checkbox" checked id="blank" /> 배식하기 <input type="checkbox" id="blank" /> 산책하기 <input type="checkbox" id="blank" /> 목욕하기 <input type="checkbox" id="blank" /> 픽업가능 <input type="checkbox" id="blank" /> 실내놀이 <input type="checkbox" id="blank" /> 미용관리</div>
-
-        <div id="infoTit">돌봄 가능 반려동물</div>
-        <div id="infoContent"><input type="checkbox" checked id="blank" /> 대형견 <input type="checkbox" id="blank" /> 소형견 <input type="checkbox" id="blank" /> 고양이</div>
 
         <div id="btnWrap">
             <button id="applyBtn">완료</button>

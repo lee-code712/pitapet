@@ -14,7 +14,8 @@ public class Care implements Serializable {
 	private List<CareDetails> careList;
 	private Member companion;
 	private PetSitter sitter;
-	private List<Pet> carePetList;
+	private List<Pet> carePetList; // 추가
+	private List<CareRecord> careRecordList; // 추가
 	
 	public Care() {
 		super();
@@ -134,5 +135,11 @@ public class Care implements Serializable {
 	public void setCarePetList(List<Pet> carePetList) {
 		this.carePetList = carePetList;
 	}
-	
+	public List<CareRecord> getCareRecordList() {
+		return careRecordList;
+	}
+	public void setCareRecordList(List<CareRecord> careRecordList) {
+		this.careRecordList = careRecordList;
+	}
+
 }

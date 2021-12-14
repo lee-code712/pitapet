@@ -22,7 +22,7 @@ public interface CareMapper {
 	public int createCare(Care care);
 	
 	/* 돌봄일지 리스트 조회 */
-	public List<CareRecord> getCareRecordByCareId(int careId);
+	public Care getCareRecordByCareId(int careId);
 	
 	public int deleteCare(int careId);
 	

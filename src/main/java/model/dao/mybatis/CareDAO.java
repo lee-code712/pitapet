@@ -70,7 +70,7 @@ public class CareDAO {
 	}
 	
 	/* 돌봄일지 리스트 반환 */
-	public List<CareRecord> findCareRecordsByCare(int careId) {
+	public Care findCareRecordsByCare(int careId) {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
 			return sqlSession.getMapper(CareMapper.class).getCareRecordByCareId(careId);

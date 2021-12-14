@@ -17,6 +17,10 @@
 	<script src="/js/reservationForm.js"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<script>
+		var ableService = JSON.parse('${ableService}');
+		var userPetsJson = JSON.parse('${userPetsJson}');
+	</script>
 </head>
 
 <body id="pageBg">

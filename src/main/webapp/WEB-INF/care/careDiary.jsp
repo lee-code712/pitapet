@@ -27,10 +27,8 @@
     	console.log(needCount, writeCount)
 
 		if ((needCount - writeCount) > 0) {
-			var newInputElement = document.createElement("button");
-			$(newInputElement).attr("type", "button");
-			$(newInputElement).attr("value", "일지작성");
-			$("#recordBtnDiv").append(newInputElement);
+			$('#recordBtnDiv').text("dd");
+			console.log("실행됨");
 		}
     </script>
 </head>
@@ -49,6 +47,7 @@
             		</c:if>
             	</c:forEach>
             	 돌봄일지 [${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}]
+            	 (보호자: ${care.companion.name})
             	 <div id="recordBtnDiv"></div>
             </div>
             <div id="careDiaryContent">
@@ -67,7 +66,7 @@
 	                <div id="careDiaryCardWrap">
 	                    <div id="careDiaryCard">
 	                        <div id="careDiaryPetSitterName">
-	                            ###반려동물 돌보미
+	                        	작성자: ${care.sitter.sitter.name} 돌보미
 	                        </div>
 	                        <img src="/images/diaryImg.svg" id="diaryImg" />
 	                        <div id="diaryContentWrap">

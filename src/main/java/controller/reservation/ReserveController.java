@@ -42,11 +42,14 @@ public class ReserveController implements Controller {
 			PetSitter petsitterInfo = sitterMan.findPetSitter(sitterId);
 			request.setAttribute("petsitterInfo", petsitterInfo);
 			List<Service> ableService = petsitterInfo.getServices();
+
 			if (ableService != null) {
-				Map<String, Service> services = serviceMan.getServiceMap(ableService);
+				Map<String, Service> serviceMap = serviceMan.getServiceMap(ableService);
+				ObjectMapper mapper = new ObjectMapper();
+				String services = mapper.writeValueAsString(serviceMap);
 				request.setAttribute("ableService", services);
 			}
-
+			
 			// 로그인한 유저의 반려동물 리스트 js에서 사용하기 위해 JSON 객체로 저장
 			Map<String, Pet> ablePetMap = petMan.getAbleCarePetMap(memberId, sitterId);
 			System.out.println(ablePetMap);

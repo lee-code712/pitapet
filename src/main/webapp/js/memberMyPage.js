@@ -22,7 +22,7 @@ function searchSitterPageInfo() {
 	$(newTableElement).attr("id", "infoTable");
 	var newTrElement = document.createElement("tr");
 	var newThElement = document.createElement("th");
-	$(newThElement).html("돌보미 정보 공개 상태");
+	$(newThElement).html("정보 공개 상태");
 	$(newTrElement).append(newThElement);
 	var newThElement2 = document.createElement("th");
 	$(newThElement2).html("가능 요일");
@@ -34,16 +34,21 @@ function searchSitterPageInfo() {
 	$(newThElement4).html("태그");
 	$(newTrElement).append(newThElement4);
 	var newThElement5 = document.createElement("th");
-	$(newThElement5).html("돌보미 소개글");
+	$(newThElement5).html("소개글");
 	$(newTrElement).append(newThElement5);
 	$(newTableElement).append(newTrElement);
 	
 	var newTrElement2 = document.createElement("tr");
 	var newTdElement = document.createElement("td");
-	$(newTdElement).html(publicStatus);
+	if (publicStatus == "Y") {
+		$(newTdElement).html("공개");
+	}
+	else {
+		$(newTdElement).html("비공개");
+	}
 	$(newTrElement2).append(newTdElement);
 	var newTdElement2 = document.createElement("td");
-	$(newTdElement2).html(ableDate);
+	$(newTdElement2).html(ableDate.charCodeAt(0).toString(2));
 	$(newTrElement2).append(newTdElement2);
 	var newTdElement3 = document.createElement("td");
 	$(newTdElement3).html(calculatedPrice);

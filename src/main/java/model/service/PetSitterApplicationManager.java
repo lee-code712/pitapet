@@ -67,4 +67,26 @@ public class PetSitterApplicationManager {
 //	public int createBasicSitter(String memberId, String applyId) throws SQLException {
 //	      return petSitterApplicationDAO.createBasicSitter(memberId, applyId);
 //	}
+	
+	//돌보미 지원 아이디 생성
+		public String makeApplicationId() {
+			int count = petSitterApplicationDAO.countAllApplication();
+			String applicationId = null;
+			if (count + 1 < 10) {
+				applicationId = "aplyId0" + Integer.toString(count + 1);
+			} else {
+				applicationId = "aplyId" + Integer.toString(count + 1);
+			}
+			return applicationId;
+		}
+		
+		// 돌보미 지원 추가
+		public boolean addApplication(String memberId, PetSitterApplication app) throws SQLException {
+			app.setId(makeApplicationId());
+			int count = petSitterApplicationDAO.addApplication(memberId, app);
+			if (count == 0) 
+				return false;
+			return true;
+		}	
+
 }

@@ -186,4 +186,46 @@ public class PetSitterApplicationDAO {
 //		}		
 //		return 0;
 //	}
+	
+	// 시스템에 등록된 돌보미 지원 수 반환
+			public int countAllApplication() {
+				String sql = "SELECT COUNT(?) FROM PETSITTER_APPLICATION";
+				Object[] param = new Object[] { "apply_id" };
+				jdbcUtil.setSqlAndParameters(sql, param);
+				int count = -1;
+				try {
+					ResultSet rs = jdbcUtil.executeQuery();
+					if (rs.next()) {
+						count = rs.getInt(1);
+					}
+				} catch (Exception ex) {
+					jdbcUtil.rollback();
+					ex.printStackTrace();
+				} finally {
+					jdbcUtil.commit();
+					jdbcUtil.close();
+				}
+				return count;
+			}
+			
+			//돌보미 지원 추가
+			public int addApplication(String memberId, PetSitterApplication applicationInfo) {
+				String sql = "INSERT INTO PETSITTER_APPLICATION VALUES (?, SYSDATE, ?, ?, ?, ?, ?)";
+				Object[] param = new Object[] {applicationInfo.getId(), applicationInfo.getCareer(), applicationInfo.getCertification(),
+						applicationInfo.getIntroduction(), applicationInfo.getApprovalStatus(), memberId};
+				jdbcUtil.setSqlAndParameters(sql, param);
+
+				try {
+					int recordCount = jdbcUtil.executeUpdate();
+					return recordCount;
+				} catch (Exception ex) {
+					jdbcUtil.rollback();
+					ex.printStackTrace();
+				} finally {
+					jdbcUtil.commit();
+					jdbcUtil.close();
+				}
+				return 0;
+			}
+
 }

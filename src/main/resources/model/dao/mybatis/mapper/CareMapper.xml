@@ -37,7 +37,7 @@
 		<id column="care_id" jdbcType="INTEGER" property="id" javaType="int" />
 		<result column="start_date" jdbcType="DATE" property="startDate" javaType="string" />
 		<result column="end_date" jdbcType="DATE" property="endDate" javaType="string" />
-		<result column="total_price" jdbcType="INTEGER" property="status" javaType="int" />
+		<result column="total_price" jdbcType="INTEGER" property="totalPrice" javaType="int" />
 		<result column="notes" jdbcType="VARCHAR" property="status" javaType="string" />
 		<result column="care_status" jdbcType="VARCHAR" property="status" javaType="string" />
 		<association property="companion" column="member_id" javaType="Member">

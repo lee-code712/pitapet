@@ -27,7 +27,7 @@ public class CareDAO {
 	
 	/* 보호자 및 특정 돌보미의 돌봄 스케쥴 조회 */
 	public List<Care> findCareSchedules(String memberId, String sitterId) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
 			List<Care> careList = sqlSession.getMapper(CareMapper.class).findCareSchedules(memberId, sitterId);
 			return careList;
@@ -38,7 +38,7 @@ public class CareDAO {
 	
 	/* 돌봄 예약내역 조회 */
 	public Care findReservation(int careId) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
 			Care care = sqlSession.getMapper(CareMapper.class).findReservation(careId);
 			return care;
@@ -49,7 +49,7 @@ public class CareDAO {
 	
 	/* 보호자-돌보미 간 돌봄 완료 내역 반환 */
 	public List<Care> findCareList(String memberId, String sitterId) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
 			List<Care> careList = sqlSession.getMapper(CareMapper.class).findCareList(memberId, sitterId);
 			return careList;
@@ -60,7 +60,7 @@ public class CareDAO {
 	
 	/* 돌봄 내역 생성 */
 	public int createCare(Care care) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
 			return sqlSession.getMapper(CareMapper.class).createCare(care);
 		} finally {
@@ -69,7 +69,7 @@ public class CareDAO {
 	}
 	
 	public int deleteCare(int careId) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
 			return sqlSession.getMapper(CareMapper.class).deleteCare(careId);
 		} finally {
@@ -78,7 +78,7 @@ public class CareDAO {
 	}
 	
 	public String getCheckInfo(String rcvId) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
 			String check = sqlSession.getMapper(CareMapper.class).getCheckInfo(rcvId);
 			return check;

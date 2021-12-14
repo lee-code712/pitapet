@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="/css/myPage.css"/>
     <link rel="stylesheet" href="/css/memberMyPage.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="/js/memberMyPage.js"></script>
 </head>
 
 <body>
@@ -23,6 +25,9 @@
     <div id="pageWrap">
         <div id="pageTitWrap">
             <div id="pageTit">마이페이지</div>
+            <c:if test="${param.cancelFailed}">
+				<script> alert("예약 취소에 실패했습니다. 예약 취소는 24시간 전까지 가능합니다."); </script>
+			</c:if>
             <c:if test="${sessionScope.identity == 'S'}">
             	<div id="changeBtnWrap">
 	                <button id="memberBtn">보호자</button>
@@ -62,10 +67,6 @@
                         	<c:url value='/member/updateSitterApply' var="updateSitterApplyUrl"/>
                         	<button id="applySitterBtn" onclick="location.href='${updateSitterApplyUrl}'">돌보미 지원 정보 조회/수정</button>
                         </c:if>
-                        <c:if test="${applicationStatus eq 'Y'}">
-                        	<c:url value='/petSitter/sitterMyPage' var="sitterMyPageUrl"/>
-                        	<button id="applySitterBtn" onclick="location.href='${sitterMyPageUrl}'">돌보미 마이페이지</button>
-                        </c:if>
                         <c:if test="${applicationStatus eq 'Z'}">
                         	<button id="applySitterBtn">돌보미 지원 정보 조회</button>
                         </c:if>
@@ -93,7 +94,8 @@
 	                    		<td>${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}</td>
 	                   			<td><a href="${viewReservationUrl}">예약완료</a></td>
 	                   			<td>
-		                            <button id="cancelBtn">취소하기</button>
+	                   				<c:url value='/reservation/cancelReservation?careId=${care.id}' var="cancelReservationUrl"/>
+		                            <button id="cancelBtn" onClick="location.href='${cancelReservationUrl}'">취소하기</button>
 		                        </td>
 	                        </tr>
                    		</c:if>

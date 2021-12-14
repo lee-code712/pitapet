@@ -70,7 +70,7 @@ public class PetSitterApplicationDAO {
 	
 	/* 돌보미 지원 정보 반환 */
 	public PetSitterApplication findApplication(String applyId) throws SQLException {
-		String sql = "SELECT apply_date, career, certification, introduction, member_id, address, img_src "
+		String sql = "SELECT apply_date, career, certification, introduction, member_id, name, gender, phone, address, img_src "
 				+ "FROM petsitter_application ps JOIN member m USING(member_id) "
 				+ "JOIN attachment atm USING (member_id) "
 				+ "WHERE apply_id=? AND atm.category_id = 'AtchId04'";
@@ -86,6 +86,9 @@ public class PetSitterApplicationDAO {
 						rs.getString("certification"),
 						rs.getString("introduction"),
 						new Member(rs.getString("member_id")
+								,rs.getString("name")
+								,rs.getString("gender")
+								,rs.getString("phone")
 								,rs.getString("address")
 								, rs.getString("img_src")));
 				return applyInfo;

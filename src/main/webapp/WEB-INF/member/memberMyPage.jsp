@@ -73,9 +73,13 @@
 	                        	<c:url value='/member/updateSitterApply' var="updateSitterApplyUrl"/>
 	                        	<button id="applySitterBtn" onclick="location.href='${updateSitterApplyUrl}'">돌보미 지원 정보 조회</button>
 	                        </c:when>
-	                        <c:when test="${applicationStatus eq 'Y'}">
+	                        <c:when test="${applicationStatus eq 'Y' && sitterInfo eq null}">
+	                        	<c:url value='/petSitter/registerSitter' var="sitterRegisterUrl"/>
+	                        	<button id="applySitterBtn" onclick="location.href='${sitterRegisterUrl}'">돌보미 정보 등록</button>
+	                        </c:when>
+	                        <c:when test="${applicationStatus eq 'Y' && sitterInfo ne null}">
 	                        	<c:url value='/member/updateSitter' var="updateSitterUrl"/>
-	                        	<button id="applySitterBtn" onclick="location.href='${updateSitterUrl}'">돌보미 정보 수정</button>
+	                        	<button id="applySitterBtn" onclick="location.href='${updateSitterUrl}'">정보 수정</button>
 	                        </c:when>
 	                        <c:when test="${applicationStatus eq 'Z'}">
 	                        	<button id="applySitterBtn">돌보미 지원 정보 조회</button>

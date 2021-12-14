@@ -68,6 +68,16 @@ public class Member implements Serializable{
 		this.identity = identity;
 		this.profileImage = profileImage;
 	}
+	
+	public Member(String id, String name, String gender, String phone, String address, String profileImage) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.gender = gender;
+		this.phone = phone;
+		this.address = address;
+		this.profileImage = profileImage;
+	}
 
 	public String getId() {
 		return id;

@@ -27,36 +27,27 @@
 
             <tr>
                 <td id="tdTit">이름</td>
-                <td><input type="text" placeholder="이름을 입력하세요." id="textDesign" /></td>
-            </tr>
-
-            <tr>
-                <td id="tdTit">생년월일</td>
-                <td><input type="text" placeholder="생년월일 6자리를 입력하세요. ex) 000513" id="textDesign" /></td>
+                <td><input type="text" value="${applicationInfo.applicant.name}" id="textDesign" /></td>
             </tr>
 
             <tr>
                 <td id="tdTit">성별</td>
-                <td>
-                    <input type="radio" value="0" checked /> 남
-                    <input type="radio" value="1" id="radioBox" /> 여
-                    <input type="radio" value="2" id="radioBox" /> 비공개
-                </td>
+                <td><input type="text" value="${applicationInfo.applicant.gender}" id="textDesign" /></td>
             </tr>
 
             <tr>
                 <td id="tdTit">전화번호</td>
-                <td><input type="text" placeholder="전화번호를 입력하세요. (숫자만)" id="textDesign" /></td>
+                <td><input type="text" value="${applicationInfo.applicant.phone}"  id="textDesign" /></td>
             </tr>
 
             <tr>
                 <td id="tdTit">주소</td>
-                <td><input type="text" placeholder="주소를 입력하세요." id="textDesign" /></td>
+                <td><input type="text" value="${applicationInfo.applicant.address}"  id="textDesign" /></td>
             </tr>
 
             <tr>
                 <td id="tdTit">돌보미 경력</td>
-                <td><input type="text" placeholder="돌보미 경력을 입력하세요." id="textDesign" /></td>
+                <td><input type="text" value="${applicationInfo.career}"  id="textDesign" /></td>
             </tr>
 
             <tr>
@@ -65,11 +56,8 @@
             </tr>
 
             <tr>
-                <td id="tdTit">자격증 여부</td>
-                <td>
-                    <input type="radio" value="0" checked /> 유
-                    <input type="radio" value="1" id="radioBox" /> 무
-                </td>
+                <td id="tdTit">자격증</td>
+				<td><input type="text" value="${applicationInfo.certification}"  id="textDesign" /></td>
             </tr>
         </table>
 
@@ -80,7 +68,7 @@
 
             <tr>
                 <td>
-                    <textarea placeholder="내용을 작성하세요." id="introduceText"></textarea>
+                    <textarea value="${applicationInfo.introduction}" id="introduceText"></textarea>
                 </td>
             </tr>
         </table>
@@ -114,7 +102,7 @@
             <tr>
                 <td id="tdTit">이용 금액</td>
                 <td>
-                    <input type="text" placeholder="이용금액(1박케어, 데이케어)을 입력하세요. 예) 32000, 22000" id="textDesign" />
+                    <input type="text" placeholder="이용금액(1박케어,데이케어)을 입력하세요. 예) 32000,22000" id="textDesign" />
                 </td>
             </tr>
 

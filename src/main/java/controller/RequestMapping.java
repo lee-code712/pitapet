@@ -46,7 +46,7 @@ public class RequestMapping {
         mappings.put("/pet/listPet", new ListPetController());
         // sitter
         mappings.put("/petSitter/sitterMyPage", new ForwardController("/sitter/sitterMyPage"));
-        mappings.put("/petSitter/registerSitter", new ForwardController("/sitter/sitterRegisterForm.jsp"));
+        mappings.put("/petSitter/registerSitter", new RegisterSitterController());
         mappings.put("/petSitter/updateSitter", new ForwardController("/sitter/sitterUpdateForm.jsp"));
         mappings.put("/petSitter/viewSitter", new ForwardController("/sitter/sitterView.jsp"));
         // reservation

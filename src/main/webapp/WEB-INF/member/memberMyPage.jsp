@@ -70,8 +70,8 @@
                         
                         <c:choose>
 	                        <c:when test="${applicationStatus eq 'X'}">
-	                        	<c:url value='/member/updateSitterApply' var="updateSitterApplyUrl"/>
-	                        	<button id="applySitterBtn" onclick="location.href='${updateSitterApplyUrl}'">돌보미 지원 정보 조회</button>
+	                        	<c:url value='/member/viewSitterApply' var="viewSitterApplyUrl"/>
+	                        	<button id="applySitterBtn" onclick="location.href='${viewSitterApplyUrl}'">돌보미 지원 정보 조회/삭제</button>
 	                        </c:when>
 	                        <c:when test="${applicationStatus eq 'Y' && sitterInfo eq null}">
 	                        	<c:url value='/petSitter/registerSitter' var="sitterRegisterUrl"/>

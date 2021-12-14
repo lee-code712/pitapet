@@ -1,5 +1,22 @@
 package controller.member;
 
-public class ViewSitterApplyController {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import controller.Controller;
+import model.dto.PetSitterApplication;
+import model.service.PetSitterApplicationManager;
+
+public class ViewSitterApplyController implements Controller{
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		PetSitterApplicationManager appMan = PetSitterApplicationManager.getInstance();
+		HttpSession session = request.getSession();
+		String memberId = UserSessionUtils.getLoginUserId(session);
+		
+		PetSitterApplication applicationInfo = appMan.findApplicationByMemberId(memberId);
+		request.setAttribute("applicationInfo", applicationInfo);
+		
+		return "/member/sitterApplyView.jsp";
+	}
 }

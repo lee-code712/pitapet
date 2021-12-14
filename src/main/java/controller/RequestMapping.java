@@ -40,6 +40,8 @@ public class RequestMapping {
         mappings.put("/member/applySitter", new ApplySitterController());
         mappings.put("/member/updateSitterApply", new ForwardController("/member/sitterApplyUpdateForm.jsp"));
         mappings.put("/member/register", new RegisterController());
+        mappings.put("/member/viewSitterApply", new ViewSitterApplyController());
+        mappings.put("/member/sitterApplyCancel", new CancelSitterApplyController());
         // pet
         mappings.put("/pet/addPet", new AddPetController());
         mappings.put("/pet/deletePet", new DeletePetController());

@@ -70,7 +70,7 @@ public class PetSitterApplicationDAO {
 	
 	/* 돌보미 지원 정보 반환 */
 	public PetSitterApplication findApplication(String applyId) throws SQLException {
-		String sql = "SELECT apply_date, career, certification, introduction, member_id, name, gender, phone, address, img_src "
+		String sql = "SELECT apply_date, career, certification, introduction, member_id, address, img_src "
 				+ "FROM petsitter_application ps JOIN member m USING(member_id) "
 				+ "JOIN attachment atm USING (member_id) "
 				+ "WHERE apply_id=? AND atm.category_id = 'AtchId04'";
@@ -86,6 +86,37 @@ public class PetSitterApplicationDAO {
 						rs.getString("certification"),
 						rs.getString("introduction"),
 						new Member(rs.getString("member_id")
+								,rs.getString("address")
+								, rs.getString("img_src")));
+				return applyInfo;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+		
+	}
+	
+	//아이디로 돌보미 지원내역 찾기
+	public PetSitterApplication findApplicationByMemberId(String memberId) throws SQLException {
+		String sql = "SELECT apply_id, apply_date, career, certification, introduction, member_id, name, gender, phone, address, img_src "
+				+ "FROM petsitter_application ps JOIN member m USING(member_id) "
+				+ "JOIN attachment atm USING (member_id) "
+				+ "WHERE member_id=? AND atm.category_id = 'AtchId04'";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId});
+
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if(rs.next()) {
+				PetSitterApplication applyInfo = new PetSitterApplication(
+						rs.getString("apply_id"),
+						rs.getString("apply_date"), 
+						rs.getString("career"),
+						rs.getString("certification"),
+						rs.getString("introduction"),
+						new Member(memberId
 								,rs.getString("name")
 								,rs.getString("gender")
 								,rs.getString("phone")
@@ -191,44 +222,63 @@ public class PetSitterApplicationDAO {
 //	}
 	
 	// 시스템에 등록된 돌보미 지원 수 반환
-			public int countAllApplication() {
-				String sql = "SELECT COUNT(?) FROM PETSITTER_APPLICATION";
-				Object[] param = new Object[] { "apply_id" };
-				jdbcUtil.setSqlAndParameters(sql, param);
-				int count = -1;
-				try {
-					ResultSet rs = jdbcUtil.executeQuery();
-					if (rs.next()) {
-						count = rs.getInt(1);
-					}
-				} catch (Exception ex) {
-					jdbcUtil.rollback();
-					ex.printStackTrace();
-				} finally {
-					jdbcUtil.commit();
-					jdbcUtil.close();
+		public int countAllApplication() {
+			String sql = "SELECT COUNT(?) FROM PETSITTER_APPLICATION";
+			Object[] param = new Object[] { "apply_id" };
+			jdbcUtil.setSqlAndParameters(sql, param);
+			int count = -1;
+			try {
+				ResultSet rs = jdbcUtil.executeQuery();
+				if (rs.next()) {
+					count = rs.getInt(1);
 				}
-				return count;
+			} catch (Exception ex) {
+				jdbcUtil.rollback();
+				ex.printStackTrace();
+			} finally {
+				jdbcUtil.commit();
+				jdbcUtil.close();
 			}
+			return count;
+		}
 			
-			//돌보미 지원 추가
-			public int addApplication(String memberId, PetSitterApplication applicationInfo) {
-				String sql = "INSERT INTO PETSITTER_APPLICATION VALUES (?, SYSDATE, ?, ?, ?, ?, ?)";
-				Object[] param = new Object[] {applicationInfo.getId(), applicationInfo.getCareer(), applicationInfo.getCertification(),
-						applicationInfo.getIntroduction(), applicationInfo.getApprovalStatus(), memberId};
-				jdbcUtil.setSqlAndParameters(sql, param);
+	//돌보미 지원 추가
+		public int addApplication(String memberId, PetSitterApplication applicationInfo) {
+			String sql = "INSERT INTO PETSITTER_APPLICATION VALUES (?, SYSDATE, ?, ?, ?, ?, ?)";
+			Object[] param = new Object[] {applicationInfo.getId(), applicationInfo.getCareer(), applicationInfo.getCertification(),
+					applicationInfo.getIntroduction(), applicationInfo.getApprovalStatus(), memberId};
+			jdbcUtil.setSqlAndParameters(sql, param);
 
-				try {
-					int recordCount = jdbcUtil.executeUpdate();
-					return recordCount;
-				} catch (Exception ex) {
-					jdbcUtil.rollback();
-					ex.printStackTrace();
-				} finally {
-					jdbcUtil.commit();
-					jdbcUtil.close();
-				}
-				return 0;
+			try {
+				int recordCount = jdbcUtil.executeUpdate();
+				return recordCount;
+			} catch (Exception ex) {
+				jdbcUtil.rollback();
+				ex.printStackTrace();
+			} finally {
+				jdbcUtil.commit();
+				jdbcUtil.close();				
 			}
+			return 0;
+		}
+	
+	// 돌보미 지원 취소
+		public int cancelApplication(String applyId) {
+			String sql = "DELETE FROM PETSITTER_APPLICATION WHERE apply_id=?";
+			Object[] param = new Object[] {applyId};
+			jdbcUtil.setSqlAndParameters(sql, param);
+
+			try {
+				int recordCount = jdbcUtil.executeUpdate();
+				return recordCount;
+			} catch (Exception ex) {
+				jdbcUtil.rollback();
+				ex.printStackTrace();
+			} finally {
+				jdbcUtil.commit();
+				jdbcUtil.close();				
+			}
+			return 0;
+		}
 
 }

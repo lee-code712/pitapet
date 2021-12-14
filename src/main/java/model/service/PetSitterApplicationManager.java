@@ -69,24 +69,42 @@ public class PetSitterApplicationManager {
 //	}
 	
 	//돌보미 지원 아이디 생성
-		public String makeApplicationId() {
-			int count = petSitterApplicationDAO.countAllApplication();
-			String applicationId = null;
-			if (count + 1 < 10) {
-				applicationId = "aplyId0" + Integer.toString(count + 1);
-			} else {
-				applicationId = "aplyId" + Integer.toString(count + 1);
-			}
-			return applicationId;
+	public String makeApplicationId() {
+		int count = petSitterApplicationDAO.countAllApplication();
+		String applicationId = null;
+		if (count + 1 < 10) {
+			applicationId = "aplyId0" + Integer.toString(count + 1);
+		} else {
+			applicationId = "aplyId" + Integer.toString(count + 1);
 		}
+		return applicationId;
+	}
 		
-		// 돌보미 지원 추가
-		public boolean addApplication(String memberId, PetSitterApplication app) throws SQLException {
-			app.setId(makeApplicationId());
-			int count = petSitterApplicationDAO.addApplication(memberId, app);
-			if (count == 0) 
-				return false;
-			return true;
-		}	
+	// 돌보미 지원 추가
+	public boolean addApplication(String memberId, PetSitterApplication app) throws SQLException {
+		app.setId(makeApplicationId());
+		int count = petSitterApplicationDAO.addApplication(memberId, app);
+		if (count == 0) 
+			return false;
+		return true;
+	}
+	
+	//아이디로 돌보미 지원 내역 찾기
+	public PetSitterApplication findApplicationByMemberId(String memberId) throws SQLException {
+		PetSitterApplication application = petSitterApplicationDAO.findApplicationByMemberId(memberId);
+		
+		List<String> imgList = petSitterApplicationDAO.findApplyAttachments(application.getApplicant().getId());
+		application.setImages(imgList);
+			
+		return application;
+	}
+	
+	//돌보미 지원 취소
+	public boolean cancelApplication(String applyId) throws SQLException {
+		int count = petSitterApplicationDAO.cancelApplication(applyId);
+		if(count == 0)
+			return false;
+		return true;
+	}
 
 }

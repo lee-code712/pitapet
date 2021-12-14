@@ -80,6 +80,7 @@
             </div>
         </div>
 
+		<form name="form" method="POST" action="<c:url value='/petSitter/registerSitter' />">    
         <table id="infoRegisterWrap">
             <tr>
                 <td id="tableTit">정보 등록</td>
@@ -127,8 +128,9 @@
         </table>
 
         <div id="btnWrap">
-            <button id="sitterRegisterBtn">저장</button>
+            <button type="submit" id="sitterRegisterBtn">저장</button>
         </div>
+        </form>
     </div>
     
     <div id="footerWrap">

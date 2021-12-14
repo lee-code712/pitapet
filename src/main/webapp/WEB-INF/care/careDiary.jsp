@@ -5,14 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8"/>
+    <meta charset="UTF-8"/>
     <title>돌봄 일지</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
-    <link rel="stylesheet" href="/css/careDiary.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -38,70 +37,283 @@
 	    	}
 	    }
     </script>
+
+    <style>
+    	#logo {
+		    z-index: 1;
+		   	margin-left: 14px;
+		}	
+		
+		#headerWrap {
+		    border-bottom: 1px solid rgba(150, 150, 150, 0.2);
+		}
+				
+        #pageBg {
+            background-color: #F5F6F7;
+        }
+        
+        #pageWrap {
+            margin: 100px auto 0px auto;
+            width: 1194px;
+        }
+
+        #pageTit {
+            margin-bottom: 100px;
+            font-size: 24px;
+        }
+
+        #pageInner {
+            display: flex;
+            justify-content: space-between;
+            width: 1194px;
+        }
+
+        #pageListWrap {
+            width: 444px;
+        }
+
+        #petList {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 20px;
+            width: 404px;
+            height: 40px;
+            background-color: white;
+            border: 1px solid #F3F3F3;
+        }
+
+        #careViewWrap {
+            width: 684px;
+            border-right: 2px solid white;
+            border-left: 2px solid white;
+            border-bottom: 2px solid white;
+            border-radius: 5px;
+            background-color: #FAFAFA;
+        }
+
+        #careViewHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 20px;
+            width: 644px;
+            height: 40px;
+            border-radius: 5px 5px 0px 0px;
+            background-color: white;
+        }
+
+        #careViewTit {
+            font-size: 14px;
+        }
+
+        #writeBtn {
+            cursor: pointer;
+        }
+
+        #careViewBody {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0 auto;
+            padding: 0px 40px 0px 40px;
+            width: 604px;
+        }
+
+        #writeDateWrap {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        #writeDate {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0px;
+            width: 240px;
+            height: 24px;
+            background-color: #F3F3F3;
+            border-radius: 50px;
+            color: #C0C0C0;
+            font-size: 12px;
+        }
+
+        #careViewBox {
+            width: 604px;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        #careViewBoxInner {
+            padding: 20px;
+            width: 564px;
+        }
+
+        #careViewBoxTit {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 40px;
+            font-size: 14px;
+        }
+
+        #careViewBoxContent {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 40px;
+            font-size: 14px;
+            color: #535353;
+        }
+
+        #sitterNameWrap {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        #sitterName {
+            font-size: 12px;
+            color: #535353;
+        }
+
+        #writeTimeWrap {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        #writeTime {
+            font-size: 12px;
+        }
+
+        #careViewBoxWrap {
+            margin-bottom: 80px;
+        }
+
+        #careViewBoxWrap:last-child {
+            margin-bottom: 20px;
+        }
+
+        div.radio-wrap {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        input[type='radio'],
+        input[type='radio']:checked {
+            appearance: none;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 100%;
+            margin-right: 0.1rem;
+            cursor: pointer;
+        }
+
+        input[type='radio'] {
+            background-color: white;
+            border: 2px solid #C4C4C4;
+        }
+
+        input[type='radio']:checked {
+            background-color: #89A0F2;
+        }
+
+        #period {
+            color: #535353;
+            font-size: 12px;
+        }
+
+        #diaryServiceInfo {
+            margin: 8px 0px;
+            font-size: 12px;
+            color: #89A0F2;
+        }
+    </style>
 </head>
+<body id="pageBg">
+    <%@include file="../components/header.jsp" %>
 
-<body>
-	<%@include file="../components/header.jsp" %>
-
-    <div id="careDiaryPageWrap">
-        <div id="pageTit">돌봄 일지</div>
-        <div id="careDiaryInner">
-            <div id="careDiaryPetName">
-            	<c:forEach var="pet" items="${care.carePetList}" varStatus="status">
-            		${pet.name}
-            		<c:if test="${!status.last}">
-            		, 
-            		</c:if>
-            	</c:forEach>
-            	 돌봄일지 [${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}]
-            	 (보호자: ${care.companion.name})
-            	<div id="recordBtnDiv"></div>
+    <div id="pageWrap">
+        <div id="pageTit">돌봄일지</div>
+        <div id="pageInner">
+            <div id="pageListWrap">
+                <div id="petList">
+                    <div id="petName">&&& 반려동물</div>
+                    <div class="radio-wrap">
+                        <input type="radio" name="a" id="a" checked />
+                    </div>
+                </div>
+                <div id="petList">
+                    <div id="petName">### 반려동물</div>
+                    <div class="radio-wrap">
+                        <input type="radio" name="a" id="a"/>
+                    </div>
+                </div>
             </div>
-            <div id="careDiaryContent">
-            <c:if test="${care.careRecordList[0].writeDate == null}">
-            	작성한 돌봄일지가 없습니다.
-            </c:if>
-            <c:if test="${care.careRecordList[0].writeDate != null}">
-	            <c:forEach var="careRecord" items="${care.careRecordList}" varStatus="status">
-	            	<div id="fullDateWrap">
-	            		<c:set var="writeDate" value="${fn:split(careRecord.writeDate, ' ')[0]}"/>
-	            		<c:set var="writeTime" value="${fn:split(careRecord.writeDate, ' ')[1]}"/>
-	                	<div id="fullDate">
-	                		${fn:split(writeDate, "-")[0]}년 ${fn:split(writeDate, "-")[1]}월 ${fn:split(writeDate, "-")[2]}일
-	                	</div>
-	            	</div>
-	                <div id="careDiaryCardWrap">
-	                    <div id="careDiaryCard">
-	                        <div id="careDiaryPetSitterName">
-	                        	작성자: ${care.sitter.sitter.name} 돌보미
-	                        </div>
-	                        <img src="/images/diaryImg.svg" id="diaryImg" />
-	                        <div id="diaryContentWrap">
-	                            <div id="diaryTit">${careRecord.title}</div>
-	                            <div id="diaryContent">${careRecord.content}</div>
-	                            <div id="diaryServiceInfo">
-	                            	★ 돌봄 체크 리스트 </br>
-	                            	<c:forEach var="careDetail" items="${careRecord.checkList}" varStatus="status">
-	                            		${careDetail.carePet.name} - ${careDetail.serviceInfo.title} 
-	                            		<c:if test="${careDetail.check == 'Y'}">
-	                            			▣
-	                            		</c:if>
-	                            		<c:if test="${careDetail.check == 'N'}">
-	                            			□
-	                            		</c:if>
-	                            		<br/> 
-	                            	</c:forEach>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div id="diaryDateWarp">
-	                        <div id="diaryDate">${fn:split(writeTime, ':')[0]}시 ${fn:split(writeTime, ':')[0]}분</div>
-	                    </div>
-	                </div>
-	            </c:forEach>
-            </c:if>
+
+            <div id="careViewWrap">
+                <div id="careViewHeader">
+                    <div id="careViewTit">
+                        <c:forEach var="pet" items="${care.carePetList}" varStatus="status">
+                            ${pet.name}
+                            <c:if test="${!status.last}">
+                            , 
+                            </c:if>
+                        </c:forEach>
+                        <span id="period">(보호자: ${care.companion.name}) [${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}]</span></div>
+                    <img src="/images/writeBtn.svg" id="writeBtn"/>
+                </div>
+                <div id="careViewBody">
+                    <c:if test="${care.careRecordList[0].writeDate == null}">
+                        작성한 돌봄일지가 없습니다.
+                    </c:if>
+                    <c:if test="${care.careRecordList[0].writeDate != null}">
+                        <c:forEach var="careRecord" items="${care.careRecordList}" varStatus="status">
+                            <div id="writeDateWrap">
+                                <c:set var="writeDate" value="${fn:split(careRecord.writeDate, ' ')[0]}"/>
+                                <c:set var="writeTime" value="${fn:split(careRecord.writeDate, ' ')[1]}"/>
+                                <div id="writeDate">${fn:split(writeDate, "-")[0]}년 ${fn:split(writeDate, "-")[1]}월 ${fn:split(writeDate, "-")[2]}일</div>
+                            </div>
+
+                            <div id="careViewBoxWrap">
+                                <div id="careViewBox">
+                                    <img src="/images/careNullImg.svg" id="careImg"/>
+                                    <div id="careViewBoxInner">
+                                        <div id="careViewBoxTit">${careRecord.title}</div>
+                                        <div id="careViewBoxContent">${careRecord.content}</div>
+                                        <div id="diaryServiceInfo">
+                                            ★ 돌봄 체크 리스트 </br>
+                                            <c:forEach var="careDetail" items="${careRecord.checkList}" varStatus="status">
+                                                ${careDetail.carePet.name} - ${careDetail.serviceInfo.title} 
+                                                <c:if test="${careDetail.check == 'Y'}">
+                                                    ▣
+                                                </c:if>
+                                                <c:if test="${careDetail.check == 'N'}">
+                                                    □
+                                                </c:if>
+                                                <br/> 
+                                            </c:forEach>
+                                        </div>
+                                        <div id="sitterNameWrap">
+                                            <div id="sitterName">by. ${care.sitter.sitter.name} 반려동물 돌보미</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="writeTimeWrap">
+                                    <div id="writeTime">${fn:split(writeTime, ':')[0]}시 ${fn:split(writeTime, ':')[0]}분</div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+                </div>
             </div>
         </div>
+    </div>
+     <div id="footerWrap">
+        <div id="footerText">Copyrights © 2021 by 윤김구이. All Rights Reserved.</div>
     </div>
 </body>
 </html>

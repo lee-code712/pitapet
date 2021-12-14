@@ -34,12 +34,6 @@ public class AddReviewController implements Controller {
 		String rate = null;
 		ArrayList<String> files = new ArrayList<>();
 		
-		// session에 id정보가 없는지 확인
-		if (!UserSessionUtils.hasLogined(session)) {
-			// 로그인 상태가 아니면 방문자인 상태를 전달
-			request.setAttribute("isNotLogined", true);
-		}	
-		
 		boolean check = ServletFileUpload.isMultipartContent(request);
 		if(check) {//파일 전송이 포함된 상태가 맞다면
 			ServletContext context = request.getServletContext();

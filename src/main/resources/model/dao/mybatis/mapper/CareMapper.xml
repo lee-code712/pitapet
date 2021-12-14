@@ -82,10 +82,10 @@
 	<insert id="createCare" parameterType="Care">
 		<selectKey keyProperty="id" resultType="int" order="BEFORE">
 			SELECT care_seq.nextval AS id FROM DUAL
-		</selectKey>
-				
-		INSERT INTO Care (sitter_id, member_id, care_id, start_date, TO_DATE(end_date, 'YYYY/MM/DD HH24:mi:ss'), total_price, notes, status)
-		VALUES (sitter.sitter.id, companion.id, id, startDate, endDate, totalPrice, notes, status)
+		</selectKey>		
+		INSERT INTO care (care_id, sitter_id, member_id, start_date, end_date, total_price, notes, care_status)
+		VALUES (#{id}, #{sitter.sitter.id}, #{companion.id},  #{startDate}, 
+			 TO_DATE(#{endDate}, 'yyyy/MM/dd HH24:mi:ss'), #{totalPrice}, #{notes}, #{status})
 	</insert>
 	
 	<!-- 돌봄 내역 삭제 -->
@@ -98,7 +98,7 @@
 	<select id="getCheckInfo" parameterType="String"> 
 		SELECT care_check	        
         FROM care_checklist         			
-		WHERE rcv_id = #{rcvId} 		
+		WHERE rcv_id = #{rcvId}	
     </select>
     
     <!-- 돌봄일지 리스트 조회 -->

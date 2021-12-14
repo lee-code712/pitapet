@@ -30,7 +30,7 @@ public class ServiceDAO {
 	public List<Service> findProvideServiceList(String sitterId) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			List<Service> services = sqlSession.getMapper(ServiceMapper.class).selectProvideServicesBySitter(sitterId);
+			List<Service> services = sqlSession.getMapper(ServiceMapper.class).findProvideServicesBySitter(sitterId);
 			System.out.println(services);
 			return services;
 		} finally {

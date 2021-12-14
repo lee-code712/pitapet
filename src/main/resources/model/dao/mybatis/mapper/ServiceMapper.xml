@@ -4,17 +4,24 @@
 <mapper namespace="model.dao.mybatis.mapper.ServiceMapper">
 	<cache />
 	
-	<delete id="deleteReceiveService" parameterType="String">
-		DELETE FROM receive_service
-		WHERE care_id = #{id}
-	</delete>
-	
-	<select id="selectProvideServicesBySitter" parameterType="String"
+	<select id="findProvideServicesBySitter" parameterType="String"
 		resultType="Service">
 		SELECT service_id AS id, title, content
 		FROM provide_service JOIN service USING (service_id)
 		WHERE sitter_id = #{id}
     </select>
+    
+    <insert id="createReceiveServices" parameterType="java.util.List">
+	    <foreach collection="list" item="item" index="index"  open="INSERT ALL " separator=" " close="SELECT * FROM DUAL" >
+	    	INTO RECEIVE_SERVICE (rcv_id, care_id, pet_id, service_id)
+	    	VALUES (#{item.id}, #{item.careInfo.id}, #{item.carePet.id}, #{item.serviceInfo.id})	
+		</foreach>
+    </insert>
+    
+    <delete id="deleteReceiveService" parameterType="String">
+		DELETE FROM receive_service
+		WHERE care_id = #{id}
+	</delete>
     
     <!-- <resultMap id="recvServiceResultMap" type="CareDetails">
 		<id column="recvId" jdbcType="VARCHAR" property="id" />

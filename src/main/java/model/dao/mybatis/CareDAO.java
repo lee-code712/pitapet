@@ -2,14 +2,15 @@ package model.dao.mybatis;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.*;
 
 import model.dao.mybatis.mapper.CareMapper;
+import model.dao.mybatis.mapper.ServiceMapper;
 import model.dto.Care;
+import model.dto.CareDetails;
 import model.dto.CareRecord;
 
 public class CareDAO {
@@ -63,7 +64,25 @@ public class CareDAO {
 	public int createCare(Care care) {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
-			return sqlSession.getMapper(CareMapper.class).createCare(care);
+			int result1 = sqlSession.getMapper(CareMapper.class).createCare(care);
+			int careId = care.getId();
+			System.out.println(careId);
+			for (CareDetails careDetail : care.getCareList()) {
+				// careId 추가
+				careDetail.getCareInfo().setId(careId);
+				// recvId 추가
+				String recvId = Integer.toString(careId) + careDetail.getCarePet().getId().replaceAll("[^0-9]", "") 
+						+ careDetail.getServiceInfo().getId().replaceAll("[^0-9]", "");
+				careDetail.setId(recvId);
+			}
+			int result2 = sqlSession.getMapper(ServiceMapper.class).createReceiveServices(care.getCareList());
+			System.out.println(result1 + " " + result2);
+			if (result1 > 0 && result2 > 0)
+				sqlSession.commit();
+			else
+				sqlSession.rollback();
+			return result2;
+			
 		} finally {
 			sqlSession.close();
 		}

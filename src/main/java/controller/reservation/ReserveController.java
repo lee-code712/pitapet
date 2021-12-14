@@ -35,6 +35,12 @@ public class ReserveController implements Controller {
 
 		// 예약 form 이동
 		if (request.getMethod().equals("GET")) {
+			// session에 id정보가 없는지 확인
+			if (!UserSessionUtils.hasLogined(session)) {
+				// 로그인 상태가 아니면 방문자인 상태를 전달
+				request.setAttribute("isNotLogined", true);
+			}
+			
 			PetSitterManager sitterMan = PetSitterManager.getInstance();
 			PetManager petMan = PetManager.getInstance();
 			
@@ -42,7 +48,6 @@ public class ReserveController implements Controller {
 			PetSitter petsitterInfo = sitterMan.findPetSitter(sitterId);
 			request.setAttribute("petsitterInfo", petsitterInfo);
 			List<Service> ableService = petsitterInfo.getServices();
-
 			if (ableService != null) {
 				Map<String, Service> serviceMap = serviceMan.getServiceMap(ableService);
 				ObjectMapper mapper = new ObjectMapper();
@@ -69,42 +74,29 @@ public class ReserveController implements Controller {
 		Care care = new Care(request.getParameter("fromDate"), request.getParameter("toDate"), 
 				Integer.parseInt(request.getParameter("totalPrice")), request.getParameter("cautionText"), 
 				"X", null, new Member(memberId), new PetSitter(new Member(sitterId)));
-		int careId = careMan.createCare(care);
-
-		if (careId == 0) { // care 레코드 생성 실패
+		List<CareDetails> careDetails = new ArrayList<CareDetails>();
+		String[] pets = request.getParameterValues("pet"); // 돌봄 받을 펫들의 id
+		for (String petId : pets) {
+			String[] services = request.getParameterValues(petId); // 돌봄 받을 펫의 요청 서비스들의 id
+			for (String serviceId : services) {
+				CareDetails careDetail = new CareDetails(null, new Care(), 
+						new Service(serviceId), new Pet(petId));
+				careDetails.add(careDetail);
+			}
+		}
+		care.setCareList(careDetails);
+		
+		int isCreated = careMan.createCare(care);
+			
+		if (isCreated == 0) { // care 레코드 생성 실패
 			request.setAttribute("reservationFailed", true);
 			request.setAttribute("care", care);
 			return "redirect:/reservation/reserve";
-		} else {
-			care.setId(careId);
-			String[] pets = request.getParameterValues("pet"); // 돌봄 받을 펫들의 id
-			List<CareDetails> careDetails = new ArrayList<CareDetails>();
-
-			for (String pet : pets) {
-				String[] services = request.getParameterValues(pet); // 돌봄 받을 펫의 요청 서비스들
-
-				for (String service : services) {
-					String receiveServiceId = serviceMan.createReceiveService(careId, pet, service);
-
-					if (receiveServiceId == null) { // receiveService 레코드 생성 실패
-						serviceMan.deleteReceiveService(careId); // 삽입된 receive_service 레코드 삭제
-						careMan.deleteCare(careId); // 삽입된 care 레코드 삭제
-
-						care.setCareList(careDetails);
-						session.setAttribute("reserveInfo", care);
-						return "redirect:/reservation/reserve?reservationFailed=true";
-					} else {
-						String recvId = Integer.toString(careId) + pet.replaceAll("[^0-9]", "") + service.replaceAll("[^0-9]", "");
-						CareDetails cd = new CareDetails(recvId, care, new Service(service), new Pet(pet), "N");
-						careDetails.add(cd);
-					}
-				}
-			}
+		} 
 			
-			if (session.getAttribute("reserveInfo") != null)
-				session.removeAttribute("reserveInfo");
+		if (session.getAttribute("reserveInfo") != null)
+			session.removeAttribute("reserveInfo");
 
-			return "redirect:/member/memberMyPage";
-		}
+		return "redirect:/member/memberMyPage";
 	}
 }

@@ -182,16 +182,11 @@
 		                <div id="subPageWrap">
 			                <div id="subPageTit">리뷰 작성</div>
 			                <select name='reviewStar'>
-							  <option value='' selected>리뷰 별점</option>
-							  <option value='1'>5.0</option>
-							  <option value='2'>4.5</option>
-							  <option value='3'>4.0</option>
-							  <option value='4'>3.5</option>
-							  <option value='5'>3.0</option>
-							  <option value='6'>2.5</option>
-							  <option value='7'>2.0</option>
-							  <option value='8'>1.5</option>
-							  <option value='9'>1.0</option>
+							  <option selected>5.0</option>
+							  <option>4.0</option>
+							  <option>3.0</option>
+							  <option>2.0</option>
+							  <option>1.0</option>
 							</select>
 						</div>
 		                <input type="hidden" name="careId" value="${careListOfReview.get(0).id}" />
@@ -234,10 +229,10 @@
                         </div>
                         <div id="reviewText">${review.content}</div>
                         <div id="reviewImgScopeWrap">
-                            <c:if test="${review.images eq null}">
+                            <c:if test="${empty review.images}">
                                 <img src="/images/reviewNewImg.svg" id="reviewImg"/>
                             </c:if>
-                            <c:if test="${review.images ne null}">
+                            <c:if test="${not empty review.images}">
                                 <img src="${pageContext.request.contextPath}${review.images[0]}" id="reviewImg"/>
                             </c:if>
                             <div id="reviewScopeWrap">

@@ -14,22 +14,28 @@
     <link rel="stylesheet" href="/css/footer.css"/>
     <link rel="stylesheet" href="/css/careDiary.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-    	var start = new Date("${care.startDate}");
-    	var end = new Date("${care.endDate}");
-    	var needCount =  end.getDate() - start.getDate() + 1;
-    	var writeCount = "${writeCount}";
-    	if (writeCount == null || writeCount == '')
-    		writeCount = 0;
-    	else
-    		writeCount = parseInt(writeCount);
-    	var identity = "${sessionScope.identity}";
-    	console.log(needCount, writeCount)
-
-		if ((needCount - writeCount) > 0) {
-			$('#recordBtnDiv').text("dd");
-			console.log("실행됨");
-		}
+	    window.onload = function(){
+	    	var identity = "${sessionScope.identity}";
+	    	if (identity == "S") {
+		    	var start = new Date("${care.startDate}");
+		    	var end = new Date("${care.endDate}");
+		    	var needCount =  end.getDate() - start.getDate() + 1;
+		    	var writeCount = "${writeCount}";
+		    	if (writeCount == null || writeCount == '')
+		    		writeCount = 0;
+		    	else
+		    		writeCount = parseInt(writeCount);   	
+		
+				if ((needCount - writeCount) > 0) {
+					var newInputElement = document.createElement("input");
+					$(newInputElement).attr("type", "button");
+					$(newInputElement).attr("value", "일지추가");
+					$("#recordBtnDiv").append(newInputElement);
+				}
+	    	}
+	    }
     </script>
 </head>
 
@@ -48,7 +54,7 @@
             	</c:forEach>
             	 돌봄일지 [${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}]
             	 (보호자: ${care.companion.name})
-            	 <div id="recordBtnDiv"></div>
+            	<div id="recordBtnDiv"></div>
             </div>
             <div id="careDiaryContent">
             <c:if test="${care.careRecordList[0].writeDate == null}">

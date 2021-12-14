@@ -31,6 +31,7 @@ public class AddReviewController implements Controller {
 		String content = null;
 		String careId = null;
 		String sitterId = null;
+		String rate = null;
 		ArrayList<String> files = new ArrayList<>();
 		
 		// session에 id정보가 없는지 확인
@@ -82,6 +83,8 @@ public class AddReviewController implements Controller {
                 			careId = value;
                 		else if(item.getFieldName().equals("sitterId"))
                 			sitterId = value;
+                		else if(item.getFieldName().equals("reviewStar"))
+                			rate = value;
                 	}
                 	else {//파일이라면...
                 		if(item.getFieldName().equals("picture")) {
@@ -104,7 +107,8 @@ public class AddReviewController implements Controller {
                 		}
                 	}
                 }
-                Review review = new Review(content, (float)5.0, 
+                System.out.println(Float.parseFloat(rate));
+                Review review = new Review(content, Float.parseFloat(rate), 
     					new Care(Integer.parseInt(careId)), files);
             	boolean isAdded = reviewMan.add(review, memberId);
             	if (!isAdded)

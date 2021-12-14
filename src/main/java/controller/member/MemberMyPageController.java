@@ -14,11 +14,15 @@ import controller.member.UserSessionUtils;
 import model.dto.Care;
 import model.dto.Member;
 import model.dto.Pet;
+import model.dto.PetKind;
 import model.dto.PetSitter;
+import model.dto.Service;
 import model.service.CareManager;
 import model.service.MemberManager;
+import model.service.PetManager;
 import model.service.PetSitterApplicationManager;
 import model.service.PetSitterManager;
+import model.service.ServiceManager;
 
 public class MemberMyPageController implements Controller{
 
@@ -29,6 +33,8 @@ public class MemberMyPageController implements Controller{
 		PetSitterApplicationManager applicationMan = PetSitterApplicationManager.getInstance();
 		CareManager careMan = CareManager.getInstance();
 		PetSitterManager sitterMan = PetSitterManager.getInstance();
+		PetManager petMan = PetManager.getInstance();
+		ServiceManager serviceMan = ServiceManager.getInstance();
 		
 		// session에 id정보가 없으면 mainpage 호출 리다이렉션
 		if(!UserSessionUtils.hasLogined(session)) {
@@ -65,6 +71,22 @@ public class MemberMyPageController implements Controller{
 				String sitterInfoJson = mapper.writeValueAsString(sitterInfo);
 				request.setAttribute("sitterInfo", sitterInfo);
 				request.setAttribute("sitterInfoJson", sitterInfoJson);
+			}
+			
+			List<PetKind> petKind = petMan.findAblePetKindList(userId);
+			if (petKind != null) {
+				ObjectMapper mapper = new ObjectMapper();
+				String petKindJson = mapper.writeValueAsString(petKind);
+				request.setAttribute("petKind", petKind);
+				request.setAttribute("petKindJson", petKindJson);
+			}
+			
+			List<Service> serviceList = serviceMan.findProvideServiceList(userId);
+			if (serviceList != null) {
+				ObjectMapper mapper = new ObjectMapper();
+				String serviceListJson = mapper.writeValueAsString(serviceList);
+				request.setAttribute("serviceList", serviceList);
+				request.setAttribute("serviceListJson", serviceListJson);
 			}
 		}
 		

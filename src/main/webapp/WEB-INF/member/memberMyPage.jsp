@@ -17,6 +17,14 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="/js/memberMyPage.js"></script>
+    <script>
+	    var memberInfoJson = JSON.parse('${memberInfoJson}');
+	    var applicationStatus = '${applicationStatus}';
+	    var careListJson = JSON.parse('${careListJson}');
+	    var sitterInfoJson = JSON.parse('${sitterInfoJson}');
+	    var petKindJson = JSON.parse('${petKindJson}');
+	    var serviceListJson = JSON.parse('${serviceListJson}');
+    </script>
 </head>
 
 <body>
@@ -25,15 +33,15 @@
     <div id="pageWrap">
         <div id="pageTitWrap">
             <div id="pageTit">마이페이지</div>
-            <c:if test="${param.cancelFailed}">
-				<script> alert("예약 취소에 실패했습니다. 예약 취소는 24시간 전까지 가능합니다."); </script>
-			</c:if>
             <c:if test="${sessionScope.identity == 'S'}">
             	<div id="changeBtnWrap">
 	                <button id="memberBtn">보호자</button>
 	                <button id="sitterBtn">돌보미</button>
             	</div>
             </c:if>
+            <c:if test="${param.cancelFailed}">
+				<script> alert("예약 취소에 실패했습니다. 예약 취소는 24시간 전까지 가능합니다."); </script>
+			</c:if>
         </div>
 
         <div id="container">
@@ -75,7 +83,7 @@
             </div>
 
             <div id="reservationInfoWrap">
-                <table>
+                <table id="infoTable">
                     <tr>
                         <th>이름</th>
                         <th>예약일</th>

@@ -1,6 +1,7 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -58,5 +59,9 @@ public class ServiceManager {
 	
 	public int countReceiveServiceByPetId(String petId) throws SQLException {
 		return serviceDAO.countReceiveServiceByPetId(petId);
+	}
+	
+	public ArrayList<Service> findProvideServiceList(String sitterId) throws SQLException {
+		return serviceDAO.findProvideServiceList(sitterId);
 	}
 }

@@ -64,4 +64,8 @@ public class ServiceManager {
 	public ArrayList<Service> findProvideServiceList(String sitterId) throws SQLException {
 		return serviceDAO.findProvideServiceList(sitterId);
 	}
+	
+	public List<Service> findAllServiceList() throws SQLException {
+		return serviceDAO.findAllServiceList();
+	}
 }

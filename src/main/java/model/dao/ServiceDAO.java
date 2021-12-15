@@ -10,6 +10,7 @@ import java.util.List;
 import model.dto.Care;
 import model.dto.CareDetails;
 import model.dto.Pet;
+import model.dto.PetKind;
 import model.dto.Service;
 
 public class ServiceDAO {
@@ -151,6 +152,34 @@ public class ServiceDAO {
 				Service service = new Service(serviceId, rs.getString("title"), rs.getString("content"));
 
 				return service;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
+
+	//DB에 등록되어 있는 전체 서비스 목록
+	public List<Service> findAllServiceList() throws SQLException {
+		String sql = "SELECT service_id, title, content " + "FROM service";
+		
+		jdbcUtil.setSqlAndParameters(sql, null);
+		
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();
+			if (rs.next()) {
+				List<Service> serviceList = new ArrayList<>();
+				Service service = new Service(rs.getString("service_id"), rs.getString("title"),
+						rs.getString("content"));
+				serviceList.add(service);
+				while (rs.next()) {
+					service = new Service(rs.getString("service_id"), rs.getString("title"),
+							rs.getString("content"));
+					serviceList.add(service);
+				}
+				return serviceList;
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

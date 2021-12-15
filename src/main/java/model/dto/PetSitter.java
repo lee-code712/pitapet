@@ -2,6 +2,8 @@ package model.dto;
 
 import java.util.List;
 
+import javax.management.remote.SubjectDelegationPermission;
+
 public class PetSitter {
 	private Member sitter;
 	private String publicStatus;
@@ -49,6 +51,15 @@ public class PetSitter {
 		this.myApplyInfo = myApplyInfo;
 	}
 
+	public PetSitter(String publicStatus, String ableDate, String calculatedPrice, String tag, String notes) {
+		super();
+		this.publicStatus = publicStatus;
+		this.ableDate = ableDate;
+		this.calculatedPrice = calculatedPrice;
+		this.tag = tag;
+		this.notes = notes;
+	}
+	
 	public Member getSitter() {
 		return sitter;
 	}

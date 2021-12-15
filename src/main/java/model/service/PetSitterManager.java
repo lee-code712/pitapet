@@ -164,4 +164,11 @@ public class PetSitterManager {
 		
 		return sitter;
 	}
+	
+	public boolean createSitter(String memberId, PetSitter sitter, String applyId) throws SQLException {
+		int count = sitterDAO.createSitter(memberId, sitter, applyId);
+		if (count == 0)
+			return false;
+		return true;
+	}
 }

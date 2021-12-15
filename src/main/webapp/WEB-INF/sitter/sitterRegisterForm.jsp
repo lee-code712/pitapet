@@ -18,6 +18,7 @@
 	<%@include file="../components/header.jsp" %>
 
     <div id="pageWrap">
+      <form name="form" method="POST" action="<c:url value='/petSitter/registerSitter' />"> 
         <div id="pageTit">돌보미 정보 등록</div>
         <table>
             <tr>
@@ -52,7 +53,11 @@
 
             <tr>
                 <td id="tdTit">제공 서비스</td>
-                <td><input type="text" placeholder="제공 서비스를 입력하세요." id="textDesign" /></td>
+                <td>
+                    <c:forEach var="service" items="${serviceList}">
+		                  <input type="checkbox" id="textDesign" name="serviceCheck" value="${service.id}" />${service.title}
+	                </c:forEach>
+                </td>
             </tr>
 
             <tr>
@@ -79,8 +84,7 @@
                 <input type="file" id="fileBtn"/>
             </div>
         </div>
-
-		<form name="form" method="POST" action="<c:url value='/petSitter/registerSitter' />">    
+   
         <table id="infoRegisterWrap">
             <tr>
                 <td id="tableTit">정보 등록</td>
@@ -90,20 +94,28 @@
             <tr>
                 <td id="tdTit">정보 공개</td>
                 <td>
-                    <input type="radio" value="0" checked /> 공개
-                    <input type="radio" value="1" id="radioBox" /> 비공개
+                    <input type="radio" name="publicStatus" value="Y" checked /> 공개
+                    <input type="radio" name="publicStatus" value="N" id="radioBox" /> 비공개
                 </td>
             </tr>
 
             <tr>
                 <td id="tdTit">돌봄 가능한 날짜</td>
-                <td><input type="text" placeholder="돌봄 가능한 날짜를 입력하세요." id="textDesign" /></td>
+                <td>
+                    <input type="checkbox" id="textDesign" name="ableDate" value="0" />일
+                    <input type="checkbox" id="textDesign" name="ableDate" value="1" />월
+                    <input type="checkbox" id="textDesign" name="ableDate" value="2" />화
+                    <input type="checkbox" id="textDesign" name="ableDate" value="3" />수
+                    <input type="checkbox" id="textDesign" name="ableDate" value="4" />목
+                    <input type="checkbox" id="textDesign" name="ableDate" value="5" />금
+                    <input type="checkbox" id="textDesign" name="ableDate" value="6" />토
+                </td>
             </tr>
 
             <tr>
                 <td id="tdTit">이용 금액</td>
                 <td>
-                    <input type="text" placeholder="이용금액(1박케어,데이케어)을 입력하세요. 예) 32000,22000" id="textDesign" />
+                    <input type="text" placeholder="이용금액(1박케어,데이케어)을 입력하세요. 예) 32000,22000" id="textDesign" name="calculatedPrice"/>
                 </td>
             </tr>
 
@@ -118,18 +130,18 @@
 
             <tr>
                 <td id="tdTit">원하는 검색 태그</td>
-                <td><input type="text" placeholder="원하는 검색 태그를 입력하세요." id="textDesign" /></td>
+                <td><input type="text" placeholder="원하는 검색 태그를 입력하세요." id="textDesign" name="tag"/></td>
             </tr>
 
             <tr>
                 <td id="tdTit">기타 사항</td>
-                <td><input type="text" placeholder="기타 사항을 입력하세요." id="textDesign" /></td>
+                <td><input type="text" placeholder="기타 사항을 입력하세요." id="textDesign" name="notes"/></td>
             </tr>
         </table>
 
-        <div id="btnWrap">
-            <button type="submit" id="sitterRegisterBtn">저장</button>
-        </div>
+        	<div id="btnWrap">
+            	<button type="submit" id="sitterRegisterBtn">저장</button>
+        	</div>
         </form>
     </div>
     

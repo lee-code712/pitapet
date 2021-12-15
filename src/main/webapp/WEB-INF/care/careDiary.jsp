@@ -39,19 +39,10 @@
     </script>
 
     <style>
-    	#logo {
-		    z-index: 1;
-		   	margin-left: 14px;
-		}	
-		
-		#headerWrap {
-		    border-bottom: 1px solid rgba(150, 150, 150, 0.2);
-		}
-				
+
         #pageBg {
             background-color: #F5F6F7;
         }
-        
         #pageWrap {
             margin: 100px auto 0px auto;
             width: 1194px;
@@ -84,7 +75,7 @@
         }
 
         #careViewWrap {
-            width: 684px;
+            width: 1194px;
             border-right: 2px solid white;
             border-left: 2px solid white;
             border-bottom: 2px solid white;
@@ -97,7 +88,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0px 20px;
-            width: 644px;
+            width: 1154px;
             height: 40px;
             border-radius: 5px 5px 0px 0px;
             background-color: white;
@@ -105,6 +96,12 @@
 
         #careViewTit {
             font-size: 14px;
+        }
+        
+        #careImg {
+        	width: 604.15px;
+        	height: 353.3px;
+        	object-fit: cover;
         }
 
         #writeBtn {
@@ -197,30 +194,6 @@
             margin-bottom: 20px;
         }
 
-        div.radio-wrap {
-            display: inline-flex;
-            align-items: center;
-        }
-
-        input[type='radio'],
-        input[type='radio']:checked {
-            appearance: none;
-            width: 1rem;
-            height: 1rem;
-            border-radius: 100%;
-            margin-right: 0.1rem;
-            cursor: pointer;
-        }
-
-        input[type='radio'] {
-            background-color: white;
-            border: 2px solid #C4C4C4;
-        }
-
-        input[type='radio']:checked {
-            background-color: #89A0F2;
-        }
-
         #period {
             color: #535353;
             font-size: 12px;
@@ -231,6 +204,39 @@
             font-size: 12px;
             color: #89A0F2;
         }
+
+        #careViewBoxTitWrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 40px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #ddd;}
+
+        .dropdown:hover .dropdown-content {display: block;}
     </style>
 </head>
 <body id="pageBg">
@@ -238,22 +244,6 @@
 
     <div id="pageWrap">
         <div id="pageTit">돌봄일지</div>
-        <div id="pageInner">
-            <div id="pageListWrap">
-                <div id="petList">
-                    <div id="petName">&&& 반려동물</div>
-                    <div class="radio-wrap">
-                        <input type="radio" name="a" id="a" checked />
-                    </div>
-                </div>
-                <div id="petList">
-                    <div id="petName">### 반려동물</div>
-                    <div class="radio-wrap">
-                        <input type="radio" name="a" id="a"/>
-                    </div>
-                </div>
-            </div>
-
             <div id="careViewWrap">
                 <div id="careViewHeader">
                     <div id="careViewTit">
@@ -282,7 +272,15 @@
                                 <div id="careViewBox">
                                     <img src="/images/careNullImg.svg" id="careImg"/>
                                     <div id="careViewBoxInner">
+                                        <div id="careViewBoxTitWrap">
                                         <div id="careViewBoxTit">${careRecord.title}</div>
+                                            <div class="dropdown">
+                                                <img src="/images/update.svg" />
+                                                <div class="dropdown-content">
+                                                <a href="#">수정하기</a>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div id="careViewBoxContent">${careRecord.content}</div>
                                         <div id="diaryServiceInfo">
                                             ★ 돌봄 체크 리스트 </br>
@@ -312,7 +310,7 @@
             </div>
         </div>
     </div>
-     <div id="footerWrap">
+    <div id="footerWrap">
         <div id="footerText">Copyrights © 2021 by 윤김구이. All Rights Reserved.</div>
     </div>
 </body>

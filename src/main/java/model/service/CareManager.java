@@ -47,6 +47,11 @@ public class CareManager {
 		return careDAO.findCareSchedules(memberId, sitterId);
 	}
 	
+	/* 돌봄 스케쥴을 리스트로 반환 */
+	public List<Care> getSitterCareSchedules(String memberId, String sitterId) throws SQLException {
+		return careDAO.findSitterCareSchedules(memberId, sitterId);
+	}
+	
 	/* 돌봄 스케줄을 맵으로 저장하여 반환 */
 	public Map<Integer, Care> getCareScheduleMap(Member member) throws SQLException {
 		List<Care> careSchedules = new ArrayList<>();

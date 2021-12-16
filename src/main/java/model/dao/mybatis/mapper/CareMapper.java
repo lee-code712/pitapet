@@ -12,6 +12,9 @@ public interface CareMapper {
 	/* 보호자 및 특정 돌보미의 돌봄 스케쥴 조회 */
 	public List<Care> findCareSchedules(@Param("memberId") String memberId, @Param("sitterId") String sitterId);
 	
+	/* 특정 돌보미의 돌봄 스케쥴 조회 */
+	public List<Care> findSitterCareSchedules(@Param("memberId") String memberId, @Param("sitterId") String sitterId);
+	
 	/* 돌봄 예약내역 조회 */
 	public Care findReservation(int careId);
 	

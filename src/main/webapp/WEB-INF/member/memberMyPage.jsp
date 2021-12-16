@@ -24,6 +24,8 @@
 	    var sitterInfoJson = JSON.parse('${sitterInfoJson}');
 	    var petKindJson = JSON.parse('${petKindJson}');
 	    var serviceListJson = JSON.parse('${serviceListJson}');
+	    var sitterCareListJson = JSON.parse('${sitterCareListJson}');
+	    console.log(sitterCareListJson);
     </script>
 </head>
 
@@ -79,7 +81,7 @@
 	                        </c:when>
 	                        <c:when test="${applicationStatus eq 'Y' && sitterInfo ne null}">
 	                        	<c:url value='/member/updateSitter' var="updateSitterUrl"/>
-	                        	<button id="applySitterBtn" onclick="location.href='${updateSitterUrl}'">정보 수정</button>
+	                        	<button id="applySitterBtn" onclick="location.href='${updateSitterUrl}'">돌보미 정보 수정</button>
 	                        </c:when>
 	                        <c:when test="${applicationStatus eq 'Z'}">
 	                        	<button id="applySitterBtn">돌보미 지원 정보 조회</button>

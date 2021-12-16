@@ -23,11 +23,41 @@
 		SELECT DISTINCT care_id, start_date, end_date, c.member_id, m.name, c.sitter_id, care_status
         FROM care c JOIN member m ON c.sitter_id = m.member_id      
         <where>
-			<if test="sitterId == null">
+			<if test="sitterId == null and memberId != null">
 				c.member_id = #{memberId}
 			</if>
-			<if test="sitterId != null">
+			<if test="sitterId != null and memberId != null">
 				c.member_id = #{memberId} OR c.sitter_id = #{memberId}
+			</if>
+			<if test="memberId == null and sitterId != null">
+				c.sitter_id = #{sitterId}
+			</if>
+		</where>			     
+	</select>
+	
+	<!-- 특정 돌보미의 돌봄 스케줄 조회 -->
+	<resultMap id="sitterScheResultMap" type="Care">
+		<id column="care_id" jdbcType="INTEGER" property="id" javaType="int" />
+		<result column="start_date" jdbcType="DATE" property="startDate" javaType="string" />
+		<result column="end_date" jdbcType="DATE" property="endDate" javaType="string" />
+		<result column="care_status" jdbcType="VARCHAR" property="status"  javaType="string" />
+		<association property="companion" column="member_id" javaType="Member">
+			<id column="member_id" jdbcType="VARCHAR" property="id" javaType="string" />
+			<result column="name" jdbcType="VARCHAR" property="name" javaType="string" />
+		</association>
+		<association property="sitter" column="sitter_id" javaType="PetSitter">
+			<association property="sitter" column="member_id" javaType="Member">
+				<id column="sitter_id" jdbcType="VARCHAR" property="id" javaType="string" />
+			</association>
+		</association>
+	</resultMap>
+	
+	<select id="findSitterCareSchedules" parameterType="String" resultMap="sitterScheResultMap"> 
+		SELECT DISTINCT care_id, start_date, end_date, c.member_id, m.name, c.sitter_id, care_status
+        FROM care c JOIN member m ON c.member_id = m.member_id      
+        <where>
+			<if test="memberId == null and sitterId != null">
+				c.sitter_id = #{sitterId}
 			</if>
 		</where>			     
 	</select>

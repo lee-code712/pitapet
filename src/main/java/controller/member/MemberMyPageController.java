@@ -92,6 +92,16 @@ public class MemberMyPageController implements Controller{
 				request.setAttribute("serviceList", serviceList);
 				request.setAttribute("serviceListJson", serviceListJson);
 			}
+			
+			List<Care> sitterCareList = careMan.getSitterCareSchedules(null, userId);
+			if (sitterCareList != null) {
+				// JSON 객체 저장
+				ObjectMapper mapper = new ObjectMapper();
+				String sitterCareListJson = mapper.writeValueAsString(sitterCareList);
+
+				request.setAttribute("sitterCareList", sitterCareList);
+				request.setAttribute("sitterCareListJson", sitterCareListJson);
+			}
 		}
 		
         return "/member/memberMyPage.jsp";

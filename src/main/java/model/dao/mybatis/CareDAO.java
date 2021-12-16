@@ -38,6 +38,17 @@ public class CareDAO {
 		}
 	}
 	
+	/* 특정 돌보미의 돌봄 스케쥴 조회 */
+	public List<Care> findSitterCareSchedules(String memberId, String sitterId) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		try {
+			List<Care> careList = sqlSession.getMapper(CareMapper.class).findSitterCareSchedules(memberId, sitterId);
+			return careList;
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
 	/* 돌봄 예약내역 조회 */
 	public Care findReservation(int careId) {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);

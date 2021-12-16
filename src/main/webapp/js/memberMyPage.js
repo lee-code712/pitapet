@@ -8,14 +8,85 @@ function searchMemberPageInfo() {
 }
 
 function searchSitterPageInfo() {
+	$("#reservationInfoWrap").empty();
+	
+	$("#reservationInfoWrap").append("예약 정보");
+	$("#reservationInfoWrap").append("<br/>");
+	var careTableElement = document.createElement("table");
+	$(careTableElement).attr("id", "infoTable");
+	var careTrElement = document.createElement("tr");
+	var careThElement = document.createElement("th");
+	$(careThElement).html("이름");
+	$(careTrElement).append(careThElement);
+	var careThElement2 = document.createElement("th");
+	$(careThElement2).html("예약일");
+	$(careTrElement).append(careThElement2);
+	var careThElement3 = document.createElement("th");
+	$(careThElement3).html("완료상태");
+	$(careTrElement).append(careThElement3);
+	var careThElement4 = document.createElement("th");
+	$(careTrElement).append(careThElement4);
+	$(careTableElement).append(careTrElement);
+	
+	for (key in sitterCareListJson) {
+		if (sitterCareListJson[key].status == "X") {
+			var careTrElement2 = document.createElement("tr");
+			var careTdElement = document.createElement("td");
+			$(careTdElement).html(sitterCareListJson[key].companion.name);
+			$(careTrElement2).append(careTdElement);
+			var careTdElement2 = document.createElement("td");
+			$(careTdElement2).html(sitterCareListJson[key].startDate.split(" ")[0] + " ~ " + sitterCareListJson[key].endDate.split(" ")[0]);
+			$(careTrElement2).append(careTdElement2);
+			var careTdElement3 = document.createElement("td");
+			$(careTdElement3).html("<a href=\"/reservation/viewReservation?careId=" + sitterCareListJson[key].id +"\">" + "예약완료");
+			$(careTrElement2).append(careTdElement3);
+			var careTdElement4 = document.createElement("td");
+			// $(careTdElement4).html("<button id=\"cancelBtn\" onClick=\"/reservation/cancelReservation?careId=" + sitterCareListJson[key].id +"\">" + "취소하기" + "</button>");
+			$(careTrElement2).append(careTdElement4);
+			$(careTableElement).append(careTrElement2);
+		}
+		if (sitterCareListJson[key].status == "Y") {
+			var careTrElement2 = document.createElement("tr");
+			var careTdElement = document.createElement("td");
+			$(careTdElement).html(sitterCareListJson[key].companion.name);
+			$(careTrElement2).append(careTdElement);
+			var careTdElement2 = document.createElement("td");
+			$(careTdElement2).html(sitterCareListJson[key].startDate.split(" ")[0] + " ~ " + sitterCareListJson[key].endDate.split(" ")[0]);
+			$(careTrElement2).append(careTdElement2);
+			var careTdElement3 = document.createElement("td");
+			$(careTdElement3).html("<a href=\"/reservation/viewReservation?careId=" + sitterCareListJson[key].id +"\">" + "진행중");
+			$(careTrElement2).append(careTdElement3);
+			var careTdElement4 = document.createElement("td");
+			$(careTdElement4).html("<button id=\"careBtn\" onClick=\"/care/listCareDiary?careId=" + sitterCareListJson[key].id +"\">" + "돌봄일지" + "</button>");
+			$(careTrElement2).append(careTdElement4);
+			$(careTableElement).append(careTrElement2);
+		}
+		if (sitterCareListJson[key].status == "Z") {
+			var careTrElement2 = document.createElement("tr");
+			var careTdElement = document.createElement("td");
+			$(careTdElement).html(sitterCareListJson[key].companion.name);
+			$(careTrElement2).append(careTdElement);
+			var careTdElement2 = document.createElement("td");
+			$(careTdElement2).html(sitterCareListJson[key].startDate.split(" ")[0] + " ~ " + sitterCareListJson[key].endDate.split(" ")[0]);
+			$(careTrElement2).append(careTdElement2);
+			var careTdElement3 = document.createElement("td");
+			$(careTdElement3).html("<a href=\"/reservation/viewReservation?careId=" + sitterCareListJson[key].id +"\">" + "돌봄완료");
+			$(careTrElement2).append(careTdElement3);
+			var careTdElement4 = document.createElement("td");
+			$(careTdElement4).html("<button id=\"careBtn\" onClick=\"/care/listCareDiary?careId=" + sitterCareListJson[key].id +"\">" + "돌봄일지" + "</button>");
+			$(careTrElement2).append(careTdElement4);
+			$(careTableElement).append(careTrElement2);
+		}
+	}
+	$("#reservationInfoWrap").append(careTableElement);
+	
 	var publicStatus = sitterInfoJson.publicStatus;
 	var ableDate = sitterInfoJson.ableDate;
 	var calculatedPrice = sitterInfoJson.calculatedPrice;
 	var tag = sitterInfoJson.tag;
 	var notes = sitterInfoJson.notes;
 	
-	$("#reservationInfoWrap").empty();
-	
+	$("#reservationInfoWrap").append("<br/>");
 	$("#reservationInfoWrap").append("돌보미 정보");
 	$("#reservationInfoWrap").append("<br/>");
 	var newTableElement = document.createElement("table");

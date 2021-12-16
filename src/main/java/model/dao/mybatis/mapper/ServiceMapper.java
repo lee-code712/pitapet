@@ -3,8 +3,6 @@ package model.dao.mybatis.mapper;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 import model.dto.CareDetails;
 import model.dto.Service;
 

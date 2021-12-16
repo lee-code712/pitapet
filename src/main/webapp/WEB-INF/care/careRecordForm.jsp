@@ -163,13 +163,13 @@
 			                <div id="activeContentInner">
 			                    <div id="activeContentTit">${check.serviceInfo.title}</div>
 			                    <div id="activeContent">
-			                        <input type="checkbox" name="${check.carePet.id}" value="${check.serviceInfo.id}" id="service">
+			                        <input type="checkbox" name="recvService" value="${check.id}" id="service">
 			                    </div>
 			                </div>
 		                </c:if>
 	                </c:forEach>
 	            </div>
-	        </div>
+	        </div>	        
 		</c:forEach>
 
         <div id="diaryWrap">

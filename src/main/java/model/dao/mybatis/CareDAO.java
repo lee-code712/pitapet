@@ -114,6 +114,7 @@ public class CareDAO {
 		try {
 			int result1 = sqlSession.getMapper(CareMapper.class).createCareRecord(careRecord);
 			int recordId = careRecord.getId();
+			System.out.println(recordId);
 			for (CareDetails careDetail : careRecord.getCheckList()) {
 				// recordId 추가
 				careDetail.setRecordId(recordId);

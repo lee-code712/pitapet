@@ -65,4 +65,11 @@
 	    	VALUES (#{map.service}, #{map.sitterId})	
 		</foreach>
 	</insert>
+	
+	<insert id="createCareCheckList" parameterType="java.util.List">
+	    <foreach collection="list" item="item" index="index"  open="INSERT ALL " separator=" " close="SELECT * FROM DUAL" >
+	    	INTO care_checklist (record_id, rcv_id, care_check)
+	    	VALUES (#{item.recordId}, #{item.id}, #{item.check})	
+		</foreach>
+    </insert>
 </mapper>

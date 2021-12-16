@@ -223,4 +223,13 @@
 		WHERE c.care_id = #{careId}
 		ORDER BY cr.write_date
     </select>
+    
+    <!-- 돌봄일지 추가 -->
+    <insert id="createCareRecord" parameterType="CareRecord">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT record_seq.nextval AS id FROM DUAL
+		</selectKey>		
+		INSERT INTO care_record (record_id, write_date, title, content, care_id)
+		VALUES (#{id}, SYSDATE, #{title},  #{content}, #{careInfo.id})
+	</insert>
 </mapper>

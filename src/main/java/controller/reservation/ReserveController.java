@@ -90,7 +90,7 @@ public class ReserveController implements Controller {
 			
 		if (isCreated == 0) { // care 레코드 생성 실패
 			request.setAttribute("reservationFailed", true);
-			request.setAttribute("care", care);
+			session.setAttribute("reserveInfo", care);
 			return "redirect:/reservation/reserve";
 		} 
 			

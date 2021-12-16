@@ -24,7 +24,7 @@ public class CareDiaryListController implements Controller {
 		int careId = Integer.valueOf(request.getParameter("careId")); 
 		Care care = careMan.findCareRecordsByCare(careId);
 		request.setAttribute("care", care);
-		if (care.getCareRecordList().get(0).getWriteDate() != null)
+		if (care.getCareRecordList() != null)
 			request.setAttribute("writeCount", care.getCareRecordList().size());
 		
 		return "/care/careDiary.jsp";

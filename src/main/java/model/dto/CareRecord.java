@@ -13,6 +13,10 @@ public class CareRecord implements Serializable {
 	private Care careInfo;
 	private List<String> images;
 	
+	public CareRecord() {
+		super();
+	}
+	
 	public CareRecord(int id) {
 		super();
 		this.id = id;

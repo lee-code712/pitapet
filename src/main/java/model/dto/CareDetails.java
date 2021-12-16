@@ -1,7 +1,10 @@
 package model.dto;
 
+import java.io.Serializable;
+
 /* receive service랑 checklist 테이블이 합쳐진 것 */
-public class CareDetails {
+@SuppressWarnings("serial")
+public class CareDetails implements Serializable {
 	private String id; // recv_id
 	private Care careInfo;
 	private Service serviceInfo;

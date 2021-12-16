@@ -7,17 +7,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import model.dto.Care;
 import model.dto.CareDetails;
-import model.dto.CareRecord;
 import model.dto.Member;
 import model.dto.Pet;
 import model.dto.PetSitter;
-import model.dto.Service;
 import model.dao.mybatis.CareDAO;
 import model.dao.PetDAO;
 import model.dao.ReviewDAO;
@@ -167,6 +167,16 @@ public class CareManager {
 	
 	/* 돌봄일지 리스트 반환 */
 	public Care findCareRecordsByCare(int careId) throws SQLException {
+		Care care = careDAO.findCareRecordsByCare(careId);
+		if (care.getCareList() != null) {
+			List<String> carePetList = new ArrayList<String>();
+			for (CareDetails careDetail : care.getCareList())
+				carePetList.add(careDetail.getCarePet().getName());
+			Set<String> setPets = new HashSet<String>(carePetList);
+			carePetList = new ArrayList<String>(setPets);
+			care.setCarePetList(carePetList);
+		}
+
 		return careDAO.findCareRecordsByCare(careId);
 	}
 	

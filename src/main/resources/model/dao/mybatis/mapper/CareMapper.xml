@@ -183,10 +183,6 @@
 				<result column="sitter_name" jdbcType="VARCHAR" property="name" javaType="String" />
 			</association>
 		</association>
-		<collection property="carePetList" ofType="Pet">
-			<id column="pet_id" jdbcType="VARCHAR" property="id" javaType="String" />
-			<result column="pet_name" jdbcType="VARCHAR" property="name" javaType="String" />
-		</collection>
 		<collection property="careRecordList" ofType="CareRecord">
 			<id column="record_id" jdbcType="NUMERIC" property="id" javaType="int" />
 			<result column="write_date" jdbcType="DATE" property="writeDate" javaType="String" />

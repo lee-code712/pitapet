@@ -1,6 +1,9 @@
 package controller.care;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +30,14 @@ public class RecordCareController implements Controller {
 			int careId = Integer.parseInt(request.getParameter("careId"));
 			List<CareDetails> checkList = serviceMan.findReceiveServiceList(careId);
 			request.setAttribute("checkList", checkList);
+			
+			List<String> carePetNameList = new ArrayList<String>();
+			for (CareDetails careDetail : checkList)
+				carePetNameList.add(careDetail.getCarePet().getName());
+			Set<String> setPets = new HashSet<String>(carePetNameList);
+			carePetNameList = new ArrayList<String>(setPets);
+			request.setAttribute("carePets", carePetNameList);
+			
 			return "/care/careRecordForm.jsp";
 		}
 		

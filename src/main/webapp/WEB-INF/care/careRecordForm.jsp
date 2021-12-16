@@ -137,59 +137,23 @@
 
     <div id="careDiaryPageWrap">
         <div id="pageTit">돌봄 일지</div>
-
-        <div id="petChoiceWrap">
-            <div id="petChoiceTit">반려동물 선택</div>
-            <div id="petChoiceContentWrap">
-                <div id="petChoiceContentInner">
-                    <div id="petChoiceContentTit">반려동물</div>
-                    <div id="petChoiceContent">
-                        <input type="radio" value="1" id="radioText" checked>멍멍이
-                        <input type="radio" value="2" id="radioText">멍이
-                        <input type="radio" value="3" id="radioText">고양이
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="activeWrap">
-            <div id="activeTit">활동</div>
-            <div id="activeContentWrap">
-                <div id="activeContentInner">
-                    <div id="activeContentTit">산책</div>
-                    <div id="activeContent">
-                        <input type="radio" value="1" id="radioText" checked>1번
-                        <input type="radio" value="2" id="radioText">2번
-                        <input type="radio" value="3" id="radioText">3번 이상
-                    </div>
-                </div>
-
-                <div id="activeContentInner">
-                    <div id="activeContentTit">밥</div>
-                    <div id="activeContent">
-                        <input type="radio" value="1" id="radioText" checked>적게
-                        <input type="radio" value="2" id="radioText">보통
-                        <input type="radio" value="3" id="radioText">많이
-                    </div>
-                </div>
-
-                <div id="activeContentInner">
-                    <div id="activeContentTit">배식여부</div>
-                    <div id="activeContent">
-                        <input type="radio" value="1" id="radioText" checked>유
-                        <input type="radio" value="2" id="radioText">무
-                    </div>
-                </div>
-
-                <div id="activeContentInner">
-                    <div id="activeContentTit">목욕여부</div>
-                    <div id="activeContent">
-                        <input type="radio" value="1" id="radioText" checked>유
-                        <input type="radio" value="2" id="radioText">무
-                    </div>
-                </div>
-            </div>
-        </div>
+		<c:forEach var="pet" items="${checkList[0].careInfo.carePetList}">
+			<div id="activeWrap">
+	            <div id="activeTit"><b>${pet}</b>&nbsp;돌봄 체크 리스트</div>
+	            <div id="activeContentWrap">
+	   				<c:forEach var="check" items="${checkList}">
+	   					<c:if test="${check.carePet.name == pet}">
+			                <div id="activeContentInner">
+			                    <div id="activeContentTit">${check.serviceInfo.title}</div>
+			                    <div id="activeContent">
+			                        <input type="checkbox" name="${check.carePet.id}" value="${check.serviceInfo.id}" id="service">
+			                    </div>
+			                </div>
+		                </c:if>
+	                </c:forEach>
+	            </div>
+	        </div>
+		</c:forEach>
 
         <div id="diaryWrap">
             <div id="diaryTit">

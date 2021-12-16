@@ -132,7 +132,9 @@
         #applyImg {
             width: 684px;
             height: 476.06px;
-            object-fit: cover;
+            object-fit: scale-down;
+            border: 1px solid #EAEAEA;
+            border-radius: 5px;
         }
 
         #certImg {
@@ -140,6 +142,15 @@
             height: 309.02px;
             object-fit: cover;
         }
+        
+        #headerWrap {
+		    border-bottom: 1px solid rgba(150, 150, 150, 0.2);
+		}
+		
+		#logo {
+		    z-index: 1;
+		   	margin-left: 14px;
+		}
     </style>
 </head>
 
@@ -178,7 +189,7 @@
             <div id="infoPage">
                 <div id="sitterName">${applicantDetail.applicant.id}</div>
                 <div id="locationWrap">
-                    <img src="./images/location.svg" id="locationImg"/>
+                    <img src="/images/location.svg" id="locationImg"/>
                     ${applicantDetail.applicant.address}
                 </div>
 
@@ -187,7 +198,7 @@
 
                 <div id="subTit">▪ 자격증</div>
                 	<c:if test="${applicantDetail.images eq null}">
-                    	<img src="./images/certImg.svg" id="certImg"/>
+                    	<img src="/images/certImg.svg" id="certImg"/>
                     </c:if>
                     <c:if test="${applicantDetail.images ne null}">
                     	<img src="${applicantDetail.images[0]}" id="certImg"/>
@@ -210,6 +221,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="footerWrap">
+        <div id="footerText">Copyrights © 2021 by 윤김구이. All Rights Reserved.</div>
     </div>
 </body>
 </html>

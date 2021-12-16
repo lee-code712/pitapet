@@ -31,7 +31,7 @@
 					var newInputElement = document.createElement("img");
 					$(newInputElement).attr("id", "writeBtn");
 					$(newInputElement).attr("src", "/images/writeBtn.svg");
-					$(newInputElement).attr("onClick", "location.href='/care/recordCare'");
+					$(newInputElement).attr("onClick", "location.href='/care/recordCare?careId=' + ${care.id}");
 					$("#recordBtnDiv").append(newInputElement);
 				}
 	    	}

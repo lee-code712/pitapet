@@ -72,18 +72,48 @@
 		<result column="care_status" jdbcType="VARCHAR" property="status" javaType="string" />
 		<association property="companion" column="member_id" javaType="Member">
 			<id column="member_id" jdbcType="VARCHAR" property="id" javaType="string" />
+			<result column="mem_name" jdbcType="VARCHAR" property="name" javaType="string" />
+			<result column="mem_email" jdbcType="VARCHAR" property="email" javaType="string" />
+			<result column="mem_phone" jdbcType="VARCHAR" property="phone" javaType="string" />
+			<result column="mem_address" jdbcType="VARCHAR" property="address" javaType="string" />
 		</association>
 		<association property="sitter" column="sitter_id" javaType="PetSitter">
 			<association property="sitter" column="member_id" javaType="Member">
 				<id column="sitter_id" jdbcType="VARCHAR" property="id" javaType="string" />
+				<result column="sit_name" jdbcType="VARCHAR" property="name" javaType="string" />
+				<result column="sit_email" jdbcType="VARCHAR" property="email" javaType="string" />
+				<result column="sit_phone" jdbcType="VARCHAR" property="phone" javaType="string" />
+				<result column="sit_address" jdbcType="VARCHAR" property="address" javaType="string" />
 			</association>
 		</association>
+		<collection property="careList" ofType="CareDetails">
+			<id column="rcv_id" jdbcType="VARCHAR" property="id" javaType="String" />
+			<association property="serviceInfo" column="service_id" javaType="Service">
+				<id column="service_id" jdbcType="VARCHAR" property="id" javaType="String" />
+				<result column="service_name" jdbcType="VARCHAR" property="title" javaType="String" />
+			</association>
+			<association property="carePet" column="pet_id" javaType="Pet">
+				<id column="pet_id" jdbcType="VARCHAR" property="id" javaType="String" />
+				<result column="pet_name" jdbcType="VARCHAR" property="name" javaType="String" />
+			</association>
+		</collection>
 	</resultMap>
 	
 	<select id="findReservation" parameterType="int" resultMap="careResultMap"> 
-		SELECT sitter_id, member_id, care_id, start_date, end_date, total_price, notes, care_status
-	    FROM care
-	    WHERE care_id = #{careId}      			     
+		SELECT c.care_id, c.start_date, c.end_date, c.member_id, c.sitter_id,
+            c.total_price, c.notes, c.care_status,
+            m.name AS mem_name, m.email AS mem_email, m.phone AS mem_phone, m.address AS mem_address,
+            sm.name AS sit_name, sm.email AS sit_email, sm.phone AS sit_phone, sm.address AS sit_address, 
+    		rs.rcv_id,
+    		s.service_id, s.title AS service_name, 
+    		p.pet_id, p.name AS pet_name
+		FROM care c
+    		FULL OUTER JOIN member m ON c.member_id = m.member_id
+    		FULL OUTER JOIN member sm ON c.sitter_id = sm.member_id
+    		FULL OUTER JOIN receive_service rs ON c.care_id = rs.care_id
+    		FULL OUTER JOIN service s ON rs.service_id = s.service_id
+    		FULL OUTER JOIN pet p ON rs.pet_id = p.pet_id
+		WHERE c.care_id = #{careId}     			     
 	</select>
 	
 	<!-- 보호자-돌보미 간 돌봄 완료 내역 반환 -->
@@ -107,7 +137,7 @@
 	    FROM care
 	    WHERE member_id = #{memberId} AND sitter_id = #{sitterId} AND care_status = 'Z'      		     
 	</select>
-	
+
 	<!-- 돌봄 내역 추가 -->
 	<insert id="createCare" parameterType="Care">
 		<selectKey keyProperty="id" resultType="int" order="BEFORE">

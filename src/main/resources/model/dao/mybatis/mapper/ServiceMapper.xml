@@ -4,11 +4,35 @@
 <mapper namespace="model.dao.mybatis.mapper.ServiceMapper">
 	<cache />
 	
-	<select id="findProvideServicesBySitter" parameterType="String"
-		resultType="Service">
+	<select id="findAllServiceKinds" resultType="Service">
+		SELECT service_id AS id, title, content
+		FROM service
+	</select>
+	
+	<select id="findProvideServicesBySitter" parameterType="String" resultType="Service">
 		SELECT service_id AS id, title, content
 		FROM provide_service JOIN service USING (service_id)
 		WHERE sitter_id = #{id}
+    </select>
+    
+    <select id ="findReceiveServicesByCare" parameterType="int" resultType="CareDetails">
+    	SELECT rs.rcv_id AS id,
+    		rs.care_Id AS careInfo.id,
+    		rs.service_id AS serviceInfo.id, 
+    		rs.pet_id AS carePet.id, 
+    		s.title AS serviceInfo.title,
+    		p.name AS carePet.name
+		FROM receive_service rs
+			LEFT OUTER JOIN care c ON rs.care_id = c.care_id
+    		LEFT OUTER JOIN service s ON rs.service_id = s.service_id
+    		LEFT OUTER JOIN pet p ON rs.pet_id = p.pet_id
+		WHERE c.care_id = #{careId}
+    </select>
+    
+    <select id="countReceiveServiceByPetId" parameterType="String" resultType="int">
+    	SELECT COUNT(*) 
+    	FROM receive_service 
+    	WHERE pet_id = #{pet_id}
     </select>
     
     <insert id="createReceiveServices" parameterType="java.util.List">
@@ -18,46 +42,9 @@
 		</foreach>
     </insert>
     
-    <delete id="deleteReceiveService" parameterType="String">
+    <delete id="deleteReceiveService" parameterType="int">
 		DELETE FROM receive_service
 		WHERE care_id = #{id}
 	</delete>
-    
-    <!-- <resultMap id="recvServiceResultMap" type="CareDetails">
-		<id column="recvId" jdbcType="VARCHAR" property="id" />
-		<collection property="careInfo" ofType="Care">
-			<id column="careId" jdbcType="INTEGER" property="id" />
-		</collection>
-		<collection property="serviceInfo" ofType="Service">
-			<id column="serviceId" jdbcType="VARCHAR" property="id" />
-			<result column="title" jdbcType="VARCHAR" property="title" />
-			<result column="content" jdbcType="VARCHAR" property="content" />
-		</collection>
-		<collection property="carePet" ofType="Pet">
-			<id column="petId" jdbcType="VARCHAR" property="id" />
-			<result column="birth" jdbcType="VARCHAR" property="birth" />
-			<result column="gender" jdbcType="VARCHAR" property="gender" />
-			<collection property="kind" ofType="PetKind">
-				<id column="kindId" jdbcType="VARCHAR" property="id" />
-			</collection>
-			<collection property="myCompanion" ofType="Member">
-				<id column="memberId" jdbcType="VARCHAR" property="id" />
-			</collection>
-		</collection>
-	</resultMap>
-    
-    <select id="selectReceiveServicesByCare" parameterType="String"
-		resultType="recvServiceResultMap">
-		SELECT care_id AS careId, 
-			rcv_id AS recvId, 
-			service_id AS serviceId, title, content,
-			pet_id AS petId, birth, gender, kind_id AS kind,
-		FROM receive_service rs JOIN pet p USING (pet_id) JOIN service USING (service_id)
-		WHERE care_id = #{id}
-		SELECT service_id AS id, title, content
-		FROM provide_service JOIN service USING (service_id)
-		WHERE sitter_id = #{id}
-    </select>  -->
-    
     
 </mapper>

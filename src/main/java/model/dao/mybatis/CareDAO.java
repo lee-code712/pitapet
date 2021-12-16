@@ -77,7 +77,6 @@ public class CareDAO {
 		try {
 			int result1 = sqlSession.getMapper(CareMapper.class).createCare(care);
 			int careId = care.getId();
-			System.out.println(careId);
 			for (CareDetails careDetail : care.getCareList()) {
 				// careId 추가
 				careDetail.getCareInfo().setId(careId);
@@ -87,7 +86,7 @@ public class CareDAO {
 				careDetail.setId(recvId);
 			}
 			int result2 = sqlSession.getMapper(ServiceMapper.class).createReceiveServices(care.getCareList());
-			System.out.println(result1 + " " + result2);
+
 			if (result1 > 0 && result2 > 0)
 				sqlSession.commit();
 			else
@@ -104,6 +103,30 @@ public class CareDAO {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
 			return sqlSession.getMapper(CareMapper.class).getCareRecordByCareId(careId);
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	/* 돌봄일지 추가 */
+	public int createCareRecord(CareRecord careRecord) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		try {
+			int result1 = sqlSession.getMapper(CareMapper.class).createCareRecord(careRecord);
+			int recordId = careRecord.getId();
+			for (CareDetails careDetail : careRecord.getCheckList()) {
+				// recordId 추가
+				careDetail.setRecordId(recordId);
+				careDetail.setCheck("Y");
+			}
+			int result2 = sqlSession.getMapper(ServiceMapper.class).createCareCheckList(careRecord.getCheckList());
+			
+			if (result1 > 0 && result2 > 0)
+				sqlSession.commit();
+			else
+				sqlSession.rollback();
+			return result2;
+			
 		} finally {
 			sqlSession.close();
 		}

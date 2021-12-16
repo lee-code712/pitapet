@@ -21,7 +21,11 @@ import controller.Controller;
 import controller.member.UserSessionUtils;
 import model.dto.Care;
 import model.dto.CareDetails;
+import model.dto.CareRecord;
+import model.dto.Pet;
 import model.dto.Review;
+import model.dto.Service;
+import model.service.CareManager;
 import model.service.ServiceManager;
 
 public class RecordCareController implements Controller {
@@ -29,6 +33,7 @@ public class RecordCareController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		ServiceManager serviceMan = ServiceManager.getInstance();
+		CareManager careMan = CareManager.getInstance();
 		
 		// 돌봄일지 작성 form 이동
 		if (request.getMethod().equals("GET")) {
@@ -52,6 +57,23 @@ public class RecordCareController implements Controller {
 		}
 		
 		// 일지 추가 처리
+		CareRecord careRecord = new CareRecord(
+				-1, null, null, request.getParameter("title"), 
+				request.getParameter("content"), 
+				new Care(Integer.parseInt(request.getParameter("careId"))), null);
+		List<CareDetails> careDetails = new ArrayList<CareDetails>();
+		String[] pets = request.getParameterValues("pet"); // 돌봄 받은 펫들의 id
+		for (String petId : pets) {
+			String[] services = request.getParameterValues(petId); // 돌봄 제공한 서비스들의 id
+			for (String serviceId : services) {
+				CareDetails careDetail = new CareDetails(null, new Care(), 
+						new Service(serviceId), new Pet(petId));
+				careDetails.add(careDetail);
+			}
+		}
+		careRecord.setCheckList(careDetails);
+		
+		int isCreated = careMan.createCareRecord(careRecord);
 		
 		return "redirect:/care/listCareDiary";
 	}

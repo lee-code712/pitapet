@@ -30,4 +30,7 @@ public interface ServiceMapper {
 	
 	/* 돌보미 서비스 추가 */
 	public int addProvideService(List<Map<String, String>> provideServices);
+	
+	/* 서버스 제공 체크 리스트 추가  */
+	public int createCareCheckList(List<CareDetails> careCheckList);
 }

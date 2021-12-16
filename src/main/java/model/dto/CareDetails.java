@@ -6,6 +6,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class CareDetails implements Serializable {
 	private String id; // recv_id
+	private int recordId;
 	private Care careInfo;
 	private Service serviceInfo;
 	private Pet carePet;
@@ -48,6 +49,15 @@ public class CareDetails implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public int getRecordId() {
+		return recordId;
+	}
+
+	public void setRecordId(int recordId) {
+		this.recordId = recordId;
+	}
+
 	public Care getCareInfo() {
 		return careInfo;
 	}

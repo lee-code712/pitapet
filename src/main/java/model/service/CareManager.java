@@ -15,6 +15,7 @@ import java.util.Set;
 
 import model.dto.Care;
 import model.dto.CareDetails;
+import model.dto.CareRecord;
 import model.dto.Member;
 import model.dto.Pet;
 import model.dto.PetSitter;
@@ -207,5 +208,10 @@ public class CareManager {
 		
 		List<Care> updated = careDAO.findCareSchedules(memberId, null);
 		return updated;
+	}
+	
+	/* 돌봄일지 추가 */
+	public int createCareRecord(CareRecord careRecord) throws SQLException {
+		return careDAO.createCareRecord(careRecord);
 	}
 }

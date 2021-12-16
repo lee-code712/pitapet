@@ -2,12 +2,17 @@ package model.dao.mybatis;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.*;
 
+import model.dao.mybatis.mapper.CareMapper;
 import model.dao.mybatis.mapper.ServiceMapper;
+import model.dto.Care;
 import model.dto.CareDetails;
 import model.dto.Service;
 
@@ -81,6 +86,31 @@ public class ServiceDAO {
 			else
 				sqlSession.rollback();
 			return result;
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	/* 돌보미 서비스 추가 */
+	public int addProvideService(List<Service> provideServices, String sitterId) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			List<Map<String, String>> prvdServices = new ArrayList<Map<String, String>>();
+			for (Service s : provideServices) {
+				Map<String, String> param = new HashMap<String, String>();
+				param.put("sitterId", sitterId);
+				param.put("service", s.getId());
+				prvdServices.add(param);
+			}
+			int result = sqlSession.getMapper(ServiceMapper.class).addProvideService(prvdServices);
+			
+			if (result > 0)
+				sqlSession.commit();
+			else
+				sqlSession.rollback();
+			
+			return result;
+			
 		} finally {
 			sqlSession.close();
 		}

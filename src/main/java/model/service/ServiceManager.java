@@ -64,4 +64,8 @@ public class ServiceManager {
 		return serviceDAO.countReceiveServiceByPetId(petId);
 	}
 	
+	/* 돌보미 서비스 추가 */
+	public int addProvideService(List<Service> provideServices, String sitterId) throws SQLException {
+		return serviceDAO.addProvideService(provideServices, sitterId);
+	}
 }

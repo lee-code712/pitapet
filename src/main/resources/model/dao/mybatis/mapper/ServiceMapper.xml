@@ -47,4 +47,10 @@
 		WHERE care_id = #{id}
 	</delete>
     
+    <insert id="addProvideService" parameterType="hashMap">
+    	<foreach collection="list" item="map" index="index"  open="INSERT ALL " separator=" " close="SELECT * FROM DUAL" >
+	    	INTO PROVIDE_SERVICE (service_id, sitter_id)
+	    	VALUES (#{map.service}, #{map.sitterId})	
+		</foreach>
+	</insert>
 </mapper>

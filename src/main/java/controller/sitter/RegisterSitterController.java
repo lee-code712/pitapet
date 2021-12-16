@@ -40,14 +40,6 @@ public class RegisterSitterController implements Controller{
 		}
 		 
 		try {
-//			String[] service = request.getParameterValues("serviceCheck");
-//			List<Service> serviceList = new ArrayList<>();
-//			for(int i = 0; i < service.length; i++) {
-//				Service s = new Service();
-//				s.setId(service[i]);
-//				serviceList.add(s);
-//			}
-//			
 			String[] ableDate = request.getParameterValues("ableDate");
 			for (String d : ableDate) {
 				System.out.println(d);
@@ -73,14 +65,28 @@ public class RegisterSitterController implements Controller{
 			System.out.println(ascii);
 			
 			sitter = new PetSitter(request.getParameter("publicStatus"), ascii, request.getParameter("calculatedPrice")
-					,request.getParameter("tag"), request.getParameter("notes"));
+					, request.getParameter("tag"), request.getParameter("notes"));
 			
 			
 			 PetSitterApplication applicationInfo = appMan.findApplicationByMemberId(memberId);
 			 
 	         boolean isRegister = sitterMan.createSitter(memberId, sitter, applicationInfo.getId());
-	         if(isRegister)
-	            return "redirect:/member/memberMyPage";
+	         if (isRegister) {
+	        	// 서비스 추가
+	        	String[] service = request.getParameterValues("serviceCheck");
+	 			List<Service> serviceList = new ArrayList<>();
+	 			for(int i = 0; i < service.length; i++) {
+	 				Service s = new Service();
+	 				s.setId(service[i]);
+	 				serviceList.add(s);
+	 			}
+	 			int isServiceAdded = servMan.addProvideService(serviceList, memberId);
+	 			if (isServiceAdded > 0)
+	 				return "redirect:/member/memberMyPage";
+	 			else
+	 				return "redirect:/petSitter/registerSitter";
+	         }
+	            
 	         else
 	            return "redirect:/petSitter/registerSitter";
 	      } catch (Exception e) {

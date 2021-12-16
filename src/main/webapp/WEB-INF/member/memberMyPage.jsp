@@ -22,8 +22,8 @@
 	    var applicationStatus = '${applicationStatus}';
 	    var careListJson = JSON.parse('${careListJson}');
 	    var sitterInfoJson = JSON.parse('${sitterInfoJson}');
-	    var petKindJson = JSON.parse('${petKindJson}');
 	    var serviceListJson = JSON.parse('${serviceListJson}');
+	    var petKindJson = JSON.parse('${petKindJson}');
 	    var sitterCareListJson = JSON.parse('${sitterCareListJson}');
     </script>
 </head>

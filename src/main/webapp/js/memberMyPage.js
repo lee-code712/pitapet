@@ -57,7 +57,7 @@ function searchSitterPageInfo() {
 			$(careTdElement3).html("<a href=\"/reservation/viewReservation?careId=" + sitterCareListJson[key].id +"\">" + "진행중");
 			$(careTrElement2).append(careTdElement3);
 			var careTdElement4 = document.createElement("td");
-			$(careTdElement4).html("<button id=\"careBtn\" onClick=\"/care/listCareDiary?careId=" + sitterCareListJson[key].id +"\">" + "돌봄일지" + "</button>");
+			$(careTdElement4).html("<button id=\"careBtn\" onClick=\"location.href='/care/listCareDiary?careId=" + sitterCareListJson[key].id +"'\">" + "돌봄일지" + "</button>");
 			$(careTrElement2).append(careTdElement4);
 			$(careTableElement).append(careTrElement2);
 		}
@@ -73,7 +73,7 @@ function searchSitterPageInfo() {
 			$(careTdElement3).html("<a href=\"/reservation/viewReservation?careId=" + sitterCareListJson[key].id +"\">" + "돌봄완료");
 			$(careTrElement2).append(careTdElement3);
 			var careTdElement4 = document.createElement("td");
-			$(careTdElement4).html("<button id=\"careBtn\" onClick=\"/care/listCareDiary?careId=" + sitterCareListJson[key].id +"\">" + "돌봄일지" + "</button>");
+			$(careTdElement4).html("<button id=\"careBtn\" onClick=\"location.href='/care/listCareDiary?careId=" + sitterCareListJson[key].id +"'\">" + "돌봄일지" + "</button>");
 			$(careTrElement2).append(careTdElement4);
 			$(careTableElement).append(careTrElement2);
 		}

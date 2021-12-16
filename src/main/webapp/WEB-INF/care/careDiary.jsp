@@ -16,8 +16,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
 	    window.onload = function(){
-	    	var identity = "${sessionScope.identity}";
-	    	if (identity == "S") {
+	    	var sitter = "${care.sitter.sitter.id}";
+	    	if (sitter == "${sessionScope.id}") {
 		    	var start = new Date("${care.startDate}");
 		    	var end = new Date("${care.endDate}");
 		    	var needCount =  end.getDate() - start.getDate() + 1;
@@ -28,9 +28,9 @@
 		    		writeCount = parseInt(writeCount);   	
 		
 				if ((needCount - writeCount) > 0) {
-					var newInputElement = document.createElement("input");
-					$(newInputElement).attr("type", "button");
-					$(newInputElement).attr("value", "일지추가");
+					var newInputElement = document.createElement("img");
+					$(newInputElement).attr("id", "writeBtn");
+					$(newInputElement).attr("src", "/images/writeBtn.svg");
 					$(newInputElement).attr("onClick", "location.href='/care/recordCare'");
 					$("#recordBtnDiv").append(newInputElement);
 				}
@@ -254,7 +254,7 @@
                             </c:if>
                         </c:forEach>
                         <span id="period">(보호자: ${care.companion.name}) [${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}]</span></div>
-                    <img src="/images/writeBtn.svg" id="writeBtn"/>
+                    <div id="recordBtnDiv"></div>
                 </div>
                 <div id="careViewBody">
                     <c:if test="${care.careRecordList[0].writeDate == null}">

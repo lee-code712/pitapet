@@ -3,9 +3,11 @@ package model.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import model.dao.mybatis.ServiceDAO;
 import model.dto.CareDetails;
@@ -52,7 +54,14 @@ public class ServiceManager {
 	
 	/* 특정 돌봄 내역에 해당하는 제공 서비스 리스트 반환 */
 	public List<CareDetails> findReceiveServiceList(int careId) throws SQLException {
-		return serviceDAO.findReceiveServiceList(careId);
+		List<CareDetails> receiveServiceList = serviceDAO.findReceiveServiceList(careId);
+		List<String> carePetList = new ArrayList<String>();
+		for (CareDetails careDetail : receiveServiceList)
+			carePetList.add(careDetail.getCarePet().getName());
+		Set<String> setPets = new HashSet<String>(carePetList);
+		carePetList = new ArrayList<String>(setPets);
+		receiveServiceList.get(0).getCareInfo().setCarePetList(carePetList);
+		return receiveServiceList;
 	}
 	
 	/* 특정 돌봄 내역에 해당하는 제공 서비스 리스트 삭제 */

@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="model.dao.mybatis.mapper.ServiceMapper">
-	<cache />
-	
+
 	<select id="findAllServiceKinds" resultType="Service">
 		SELECT service_id AS id, title, content
 		FROM service
@@ -15,18 +14,31 @@
 		WHERE sitter_id = #{id}
     </select>
     
-    <select id ="findReceiveServicesByCare" parameterType="int" resultType="CareDetails">
-    	SELECT rs.rcv_id AS id,
-    		rs.care_Id AS careInfo.id,
-    		rs.service_id AS serviceInfo.id, 
-    		rs.pet_id AS carePet.id, 
-    		s.title AS serviceInfo.title,
-    		p.name AS carePet.name
+    <resultMap id="serviceByCareMap" type="CareDetails">
+		<id column="rcv_id" jdbcType="VARCHAR" property="id" javaType="String" />
+		<association property="careInfo" column="care_id" javaType="Care">
+			<id column="care_id" jdbcType="VARCHAR" property="id" javaType="int" />
+		</association>
+		<association property="serviceInfo" column="service_id" javaType="Service">
+			<id column="service_id" jdbcType="VARCHAR" property="id" javaType="String" />
+			<result column="service_name" jdbcType="VARCHAR" property="title" javaType="String" />
+		</association>
+		<association property="carePet" column="pet_id" javaType="Pet">
+			<id column="pet_id" jdbcType="VARCHAR" property="id" javaType="String" />
+			<result column="pet_name" jdbcType="VARCHAR" property="name" javaType="String" />
+		</association>
+	</resultMap>
+    
+    <select id ="findReceiveServicesByCare" parameterType="int" resultMap="serviceByCareMap">
+    	SELECT rs.rcv_id, rs.care_id, rs.service_id, rs.pet_id,
+    		s.title AS service_name,
+    		p.name AS pet_name
 		FROM receive_service rs
 			LEFT OUTER JOIN care c ON rs.care_id = c.care_id
     		LEFT OUTER JOIN service s ON rs.service_id = s.service_id
     		LEFT OUTER JOIN pet p ON rs.pet_id = p.pet_id
 		WHERE c.care_id = #{careId}
+		ORDER BY rs.pet_id, rs.service_id
     </select>
     
     <select id="countReceiveServiceByPetId" parameterType="String" resultType="int">

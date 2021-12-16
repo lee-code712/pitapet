@@ -18,6 +18,7 @@ public class RecordCareController implements Controller {
 			if(!UserSessionUtils.hasLogined(session)) {
 				return "redirect:/mainpage";
 			}
+			
 			return "/care/careRecordForm.jsp";
 		}
 		

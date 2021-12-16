@@ -7,13 +7,22 @@ import model.dto.Service;
 
 public interface ServiceMapper {
 	
+	/* 모든 서비스타입 리스트 조회 */
+	public List<Service> findAllServiceKinds();
+	
 	/* 제공가능한 서비스 리스트 조회 */
 	public List<Service> findProvideServicesBySitter(String sitterId);
+	
+	/* 돌봄내역에 대한 제공서비스 리스트 조회 */
+	public List<CareDetails> findReceiveServicesByCare(String careId);
+	
+	/* 특정 반려동물에 대해 제공 서비스가 있는지 확인 */
+	public int countReceiveServiceByPetId(String petId);
 	
 	/* 제공받을 서비스 삽입 */
 	public int createReceiveServices(List<CareDetails> rcevServices);
 	
 	/* 제공받을 서비스 삭제 */
-	public int deleteReceiveService(String careId);
+	public int deleteReceiveService(int careId);
 	
 }

@@ -1,14 +1,12 @@
 package model.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import model.dao.ServiceDAO;
-import model.dto.Care;
+import model.dao.mybatis.ServiceDAO;
 import model.dto.CareDetails;
 import model.dto.Service;
 
@@ -27,6 +25,16 @@ public class ServiceManager {
 	public static ServiceManager getInstance() {
 		return serviceMan;
 	}
+	
+	/* 모든 서비스 타입 리스트 반환 */
+	public List<Service> findAllServiceList() throws SQLException {
+		return serviceDAO.findAllServiceList();
+	}
+	
+	/* 특정 돌보미의 제공 가능 서비스 리스트 반환 */
+	public List<Service> findProvideServiceList(String sitterId) throws SQLException {
+		return serviceDAO.findProvideServiceList(sitterId);
+	}
 
 	/* 제공받을 서비스 맵으로 반환 */
 	public Map<String, Service> getServiceMap(List<Service> ableService) throws SQLException {
@@ -41,31 +49,18 @@ public class ServiceManager {
 		return serviceMap;
 	}
 	
-	public String createReceiveService(int careId, String petId, String serviceId) throws SQLException {
-		   return serviceDAO.createReceiveService(careId, petId, serviceId);
+	/* 특정 돌봄 내역에 해당하는 제공 서비스 리스트 반환 */
+	public List<CareDetails> findReceiveServiceList(String careId) throws SQLException {
+		return serviceDAO.findReceiveServiceList(careId);
 	}
 	
+	/* 특정 돌봄 내역에 해당하는 제공 서비스 리스트 삭제 */
 	public int deleteReceiveService(int careId) throws SQLException {
 		return serviceDAO.deleteReceiveService(careId);
 	}
 
-	public List<CareDetails> findReceiveServiceByCareId(Care care) throws SQLException {
-		return serviceDAO.findReceiveServiceByCareId(care);
-	}
-	
-	public Service findServiceInfo(String serviceId) throws SQLException {
-		return serviceDAO.findServiceInfo(serviceId);
-	}
-	
 	public int countReceiveServiceByPetId(String petId) throws SQLException {
 		return serviceDAO.countReceiveServiceByPetId(petId);
 	}
 	
-	public ArrayList<Service> findProvideServiceList(String sitterId) throws SQLException {
-		return serviceDAO.findProvideServiceList(sitterId);
-	}
-	
-	public List<Service> findAllServiceList() throws SQLException {
-		return serviceDAO.findAllServiceList();
-	}
 }

@@ -1,8 +1,10 @@
 package model.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CareRecord {
+@SuppressWarnings("serial")
+public class CareRecord implements Serializable {
 	private int id;
 	private List<CareDetails> checkList;
 	private String writeDate;
@@ -16,6 +18,18 @@ public class CareRecord {
 		this.id = id;
 	}
 	
+	public CareRecord(int id, List<CareDetails> checkList, String writeDate, String title, String content,
+			Care careInfo, List<String> images) {
+		super();
+		this.id = id;
+		this.checkList = checkList;
+		this.writeDate = writeDate;
+		this.title = title;
+		this.content = content;
+		this.careInfo = careInfo;
+		this.images = images;
+	}
+
 	public int getId() {
 		return id;
 	}

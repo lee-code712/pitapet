@@ -130,6 +130,21 @@
             margin-left: 14px;
         }
     </style>
+    <script>
+	    function recordCare() {
+	    	if (form.title.value == "") {
+	    		alert("일지 제목을 입력해주세요.");
+	    		form.toDate.focus();
+	    		return false;
+	    	}
+	    	if (form.content.value == "") {
+	    		alert("일지 내용을 입력해주세요.");
+	    		form.fromDate.focus();
+	    		return false;
+	    	}
+	    	form.submit();
+	    }
+    </script>
 </head>
 
 <body>
@@ -137,6 +152,8 @@
 
     <div id="careDiaryPageWrap">
         <div id="pageTit">돌봄 일지</div>
+        <form name="form" method="POST" action="<c:url value='/care/recordCare'>
+        	<c:param name='careId' value='${checkList[0].careInfo.id}'/></c:url>">
 		<c:forEach var="pet" items="${checkList[0].careInfo.carePetList}">
 			<div id="activeWrap">
 	            <div id="activeTit"><b>${pet}</b>&nbsp;돌봄 체크 리스트</div>
@@ -157,20 +174,21 @@
 
         <div id="diaryWrap">
             <div id="diaryTit">
-                <input type="text" placeholder="제목을 입력하세요." id="diaryTitText"/>
+                <input type="text" placeholder="제목을 입력하세요." id="diaryTitText" name="title"/>
             </div>
             <div id="diaryContent">
-                <textarea placeholder="내용을 입력하세요." id="diaryContentText" style="resize: none;"></textarea>
+                <textarea placeholder="내용을 입력하세요." id="diaryContentText" style="resize: none;" name="content"></textarea>
             </div>
         </div>
 
         <div id="fileReviewBtnWrap">
             <div id="fileWrap">
                 <img src="/images/fileImg.svg" id="fileImg"/>
-                <input type="file" id="fileBtn"/>
+                <input type="file" id="fileBtn" name="picture"/>
             </div>
-            <button id="detailReviewBtn">리뷰 등록</button>
+            <button type="button" id="detailReviewBtn" onClick="recordCare()">일지 추가</button>
         </div>
+        </form>
     </div>
     <div id="footerWrap">
         <div id="footerText">Copyrights © 2021 by 윤김구이. All Rights Reserved.</div>

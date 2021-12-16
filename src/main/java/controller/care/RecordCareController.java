@@ -1,17 +1,27 @@
 package controller.care;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.naming.SizeLimitExceededException;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import controller.Controller;
 import controller.member.UserSessionUtils;
+import model.dto.Care;
 import model.dto.CareDetails;
+import model.dto.Review;
 import model.service.ServiceManager;
 
 public class RecordCareController implements Controller {
@@ -42,6 +52,7 @@ public class RecordCareController implements Controller {
 		}
 		
 		// 일지 추가 처리
+		
 		return "redirect:/care/listCareDiary";
 	}
 }

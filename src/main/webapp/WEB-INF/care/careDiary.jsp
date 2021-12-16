@@ -258,7 +258,7 @@
                 </div>
                 <div id="careViewBody">
                     <c:if test="${care.careRecordList[0].writeDate == null}">
-                        작성한 돌봄일지가 없습니다.
+                        돌봄일지 목록이 비어있습니다.
                     </c:if>
                     <c:if test="${care.careRecordList[0].writeDate != null}">
                         <c:forEach var="careRecord" items="${care.careRecordList}" varStatus="status">

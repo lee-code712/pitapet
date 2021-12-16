@@ -119,7 +119,24 @@ function searchSitterPageInfo() {
 	}
 	$(newTrElement2).append(newTdElement);
 	var newTdElement2 = document.createElement("td");
-	$(newTdElement2).html(ableDate.charCodeAt(0).toString(2));
+	var ableDateBin = ableDate.charCodeAt(0).toString(2);
+	console.log(ableDateBin);
+	var ableDate = ""
+	if (ableDateBin[0] == 1)
+		ableDate += "월 ";
+	if (ableDateBin[1] == 1)
+		ableDate += "화 ";
+	if (ableDateBin[2] == 1)
+		ableDate += "수 ";
+	if (ableDateBin[3] == 1)
+		ableDate += "목 ";
+	if (ableDateBin[4] == 1)
+		ableDate += "금 ";
+	if (ableDateBin[5] == 1)
+		ableDate += "토 ";
+	if (ableDateBin[6] == 1)
+		ableDate += "일 ";
+	$(newTdElement2).html(ableDate);
 	$(newTrElement2).append(newTdElement2);
 	var newTdElement3 = document.createElement("td");
 	$(newTdElement3).html(calculatedPrice);

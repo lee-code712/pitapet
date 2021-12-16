@@ -25,7 +25,6 @@
 	    var petKindJson = JSON.parse('${petKindJson}');
 	    var serviceListJson = JSON.parse('${serviceListJson}');
 	    var sitterCareListJson = JSON.parse('${sitterCareListJson}');
-	    console.log(sitterCareListJson);
     </script>
 </head>
 

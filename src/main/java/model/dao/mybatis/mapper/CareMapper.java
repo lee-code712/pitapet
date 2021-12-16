@@ -27,4 +27,6 @@ public interface CareMapper {
 	public int deleteCare(int careId);
 	
 	public String getCheckInfo(String rcvId);
+
+	public int updateCareSchedule(int careId);
 }

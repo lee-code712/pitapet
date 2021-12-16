@@ -116,4 +116,13 @@ public class CareDAO {
 			sqlSession.close();
 		}
 	}
+	
+	public int updateCareSchedule(Care care) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		try {
+			return sqlSession.getMapper(CareMapper.class).updateCareSchedule(care.getId());
+		} finally {
+			sqlSession.close();
+		}
+	}
 }

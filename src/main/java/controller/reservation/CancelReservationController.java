@@ -31,7 +31,7 @@ public class CancelReservationController implements Controller  {
 		
 		long diffSec = (cmpDate.getTimeInMillis() - today.getTimeInMillis()) / 1000;
 		long diffDays = diffSec / (24*60*60); //일자수 차이
-		if (diffDays >= 1) {
+		if (diffDays >= 1 && care.getStatus().equals("X")) {
 			serviceMan.deleteReceiveService(careId); // 삽입된 receive_service 레코드 삭제
 			careMan.deleteCare(careId); // 삽입된 care 레코드 삭제
 			return "redirect:/member/memberMyPage";

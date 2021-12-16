@@ -192,4 +192,24 @@ public class CareDAO {
 		}
 		return null;
 	}
+	
+	/* 돌봄 진행 상태로 업데이트 */
+	public int updateCareSchedule(Care care) throws SQLException {
+		String sql = "UPDATE care SET care_status = ? "
+				+ "WHERE care_id = ?";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { "Y", care.getId() });
+		
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+			
+			return recordCount;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}
+		return 0;
+	}
 }

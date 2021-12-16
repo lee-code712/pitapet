@@ -57,6 +57,10 @@ public class MemberMyPageController implements Controller{
 		
 		List<Care> careList = careMan.getCareSchedules(userId, null);
 		if (careList != null) {
+			// 돌봄 진행 상태 변경
+			careList = careMan.updateCareSchedules(userId, careList);
+			
+			// JSON 객체 저장
 			ObjectMapper mapper = new ObjectMapper();
 			String careListJson = mapper.writeValueAsString(careList);
 			request.setAttribute("careList", careList);

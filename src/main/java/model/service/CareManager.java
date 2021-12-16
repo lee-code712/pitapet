@@ -211,4 +211,25 @@ public class CareManager {
 	public String getCheckInfo(String rcvId) throws SQLException {
 		return careDAO.getCheckInfo(rcvId);
 	}
+	
+	/* 돌봄 시작일 지났을 시 돌봄 진행 상태 업데이트 */
+	public List<Care> updateCareSchedules(String memberId, List<Care> careSchedules) throws ParseException {
+		for (Care care : careSchedules) {
+			Calendar today = Calendar.getInstance();
+			today.setTime(new Date()); //금일 날짜
+			Date date = new SimpleDateFormat("yyyy-MM-dd").parse(care.getStartDate());
+			Calendar cmpDate = Calendar.getInstance();
+			cmpDate.setTime(date); //특정 일자
+			
+			long diffSec = (cmpDate.getTimeInMillis() - today.getTimeInMillis()) / 1000;
+			long diffDays = diffSec / (24*60*60); //일자수 차이
+			
+			if (diffDays <= 0 && care.getStatus().equals("X")) {
+				careDAO.updateCareSchedule(care);
+			}
+		}
+		
+		List<Care> updated = careDAO.findCareSchedules(memberId, null);
+		return updated;
+	}
 }

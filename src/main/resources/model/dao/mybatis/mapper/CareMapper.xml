@@ -94,6 +94,13 @@
 		WHERE care_id = #{careId}
 	</delete>
 	
+	<!-- 돌봄 내역 삭제 -->
+	<update id="updateCareSchedule" parameterType="int">
+		UPDATE Care
+		SET care_status = 'Y'
+		WHERE care_id = #{careId}
+	</update>
+	
 	<!-- check 정보 반환 -->
 	<select id="getCheckInfo" parameterType="String"> 
 		SELECT care_check	        

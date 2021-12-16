@@ -189,7 +189,7 @@
             <div id="infoPage">
                 <div id="sitterName">${applicantDetail.applicant.id}</div>
                 <div id="locationWrap">
-                    <img src="./images/location.svg" id="locationImg"/>
+                    <img src="/images/location.svg" id="locationImg"/>
                     ${applicantDetail.applicant.address}
                 </div>
 
@@ -198,7 +198,7 @@
 
                 <div id="subTit">▪ 자격증</div>
                 	<c:if test="${applicantDetail.images eq null}">
-                    	<img src="./images/certImg.svg" id="certImg"/>
+                    	<img src="/images/certImg.svg" id="certImg"/>
                     </c:if>
                     <c:if test="${applicantDetail.images ne null}">
                     	<img src="${applicantDetail.images[0]}" id="certImg"/>

@@ -9,9 +9,11 @@ import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import controller.member.UserSessionUtils;
+import model.dto.PetKind;
 import model.dto.PetSitter;
 import model.dto.PetSitterApplication;
 import model.dto.Service;
+import model.service.PetManager;
 import model.service.PetSitterApplicationManager;
 import model.service.PetSitterManager;
 import model.service.ServiceManager;
@@ -24,6 +26,7 @@ public class RegisterSitterController implements Controller{
 		PetSitterApplicationManager appMan = PetSitterApplicationManager.getInstance();
 		PetSitterManager sitterMan = PetSitterManager.getInstance();
 		ServiceManager servMan = ServiceManager.getInstance();
+		PetManager petMan = PetManager.getInstance();
 		
 		String memberId = UserSessionUtils.getLoginUserId(session);
 		
@@ -32,7 +35,9 @@ public class RegisterSitterController implements Controller{
 		if (request.getMethod().equals("GET")) {
 			 PetSitterApplication applicationInfo = appMan.findApplicationByMemberId(memberId);
 			 List<Service> serviceList = servMan.findAllServiceList();
+			 List<PetKind> petKindList = petMan.findAllPetKindList();
 			 
+			 request.setAttribute("petKindList", petKindList);
 			 request.setAttribute("serviceList", serviceList);
 			 request.setAttribute("applicationInfo", applicationInfo);
 			 
@@ -40,47 +45,21 @@ public class RegisterSitterController implements Controller{
 		}
 		 
 		try {
-			String[] ableDate = request.getParameterValues("ableDate");
-			for (String d : ableDate) {
-				System.out.println(d);
-			}
-			int count = 0;
-			String ableDateBin = "";
-			for (int i = 0; i < 7; i++) { // 0 1 3 4 : 월 화 목 금 : 1101100
-				if (count < ableDate.length) {
-					if (Integer.parseInt(ableDate[count]) == i) {
-						ableDateBin += "1";
-						count++;
-					}
-					else {
-						ableDateBin += "0";
-					}
-				}
-				else {
-					ableDateBin += "0";
-				}
-			}
-			String ascii = Character.toString((char)Integer.parseInt(ableDateBin, 2));
-			System.out.println(ableDateBin);
-			System.out.println(ascii);
+			// 지원정보 자기소개 업데이트
+			appMan.updateApplcationIntroduction(memberId, request.getParameter("introduction"));
 			
-			sitter = new PetSitter(request.getParameter("publicStatus"), ascii, request.getParameter("calculatedPrice")
+			// petSitter 레코드 생성
+			PetSitterApplication applicationInfo = appMan.findApplicationByMemberId(memberId);
+			
+			sitter = new PetSitter(request.getParameter("publicStatus"), null, request.getParameter("calculatedPrice")
 					, request.getParameter("tag"), request.getParameter("notes"));
 			
 			
-			 PetSitterApplication applicationInfo = appMan.findApplicationByMemberId(memberId);
-			 
-	         boolean isRegister = sitterMan.createSitter(memberId, sitter, applicationInfo.getId());
+	         boolean isRegister = sitterMan.createSitter(memberId, sitter, applicationInfo.getId(), request.getParameterValues("ableDate"));
 	         if (isRegister) {
 	        	// 서비스 추가
 	        	String[] service = request.getParameterValues("serviceCheck");
-	 			List<Service> serviceList = new ArrayList<>();
-	 			for(int i = 0; i < service.length; i++) {
-	 				Service s = new Service();
-	 				s.setId(service[i]);
-	 				serviceList.add(s);
-	 			}
-	 			int isServiceAdded = servMan.addProvideService(serviceList, memberId);
+	 			int isServiceAdded = servMan.addProvideService(service, memberId);
 	 			if (isServiceAdded > 0)
 	 				return "redirect:/member/memberMyPage";
 	 			else

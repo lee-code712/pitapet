@@ -73,7 +73,7 @@
 
             <tr>
                 <td>
-                    <textarea value="${applicationInfo.introduction}" id="introduceText"></textarea>
+                    <textarea id="introduceText" name="introduction">${applicationInfo.introduction}</textarea>
                 </td>
             </tr>
         </table>
@@ -122,9 +122,9 @@
             <tr>
                 <td id="tdTit">돌봄 가능 반려동물</td>
                 <td>
-                    <input type="radio" value="0" checked /> 대형견
-                    <input type="radio" value="1" id="radioBox" /> 소형견
-                    <input type="radio" value="2" id="radioBox" /> 고양이
+                	<c:forEach var="petKind" items="${petKindList}" varStatus="status">
+                		<input type="checkbox" id="textDesign" name="ablePetKind" value="${petKind.id}" /> ${petKind.largeCategory} - ${petKind.smallCategory}
+	                </c:forEach>
                 </td>
             </tr>
 

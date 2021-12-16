@@ -106,5 +106,12 @@ public class PetSitterApplicationManager {
 			return false;
 		return true;
 	}
-
+	
+	// 돌보미 지원 정보 자기소개 수정
+	public boolean updateApplcationIntroduction(String memberId, String introduction) throws SQLException {
+		int count = petSitterApplicationDAO.updateApplcationIntroduction(memberId, introduction);
+		if(count == 0)
+			return false;
+		return true;
+	}
 }

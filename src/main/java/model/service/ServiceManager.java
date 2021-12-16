@@ -1,6 +1,7 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -65,7 +66,13 @@ public class ServiceManager {
 	}
 	
 	/* 돌보미 서비스 추가 */
-	public int addProvideService(List<Service> provideServices, String sitterId) throws SQLException {
+	public int addProvideService(String[] service, String sitterId) throws SQLException {
+		List<Service> provideServices = new ArrayList<>();
+		for(int i = 0; i < service.length; i++) {
+			Service s = new Service();
+			s.setId(service[i]);
+			provideServices.add(s);
+		}
 		return serviceDAO.addProvideService(provideServices, sitterId);
 	}
 }

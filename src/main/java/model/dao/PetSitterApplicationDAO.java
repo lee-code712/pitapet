@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.dto.Care;
 import model.dto.Member;
 import model.dto.PetSitterApplication;
 
@@ -280,5 +281,23 @@ public class PetSitterApplicationDAO {
 			}
 			return 0;
 		}
+	// 돌보미 지원 정보 자기소개 업데이트
+		public int updateApplcationIntroduction(String memberId, String introduction) throws SQLException {
+			String sql = "UPDATE petsitter_application SET introduction = ? "
+					+ "WHERE member_id = ?";
 
+			jdbcUtil.setSqlAndParameters(sql, new Object[] { introduction, memberId });
+			
+			try {
+				int recordCount = jdbcUtil.executeUpdate();
+				
+				return recordCount;
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			} finally {
+				jdbcUtil.commit();
+				jdbcUtil.close();
+			}
+			return 0;
+		}
 }

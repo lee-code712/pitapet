@@ -165,9 +165,32 @@ public class PetSitterManager {
 		return sitter;
 	}
 	
-	public boolean createSitter(String memberId, PetSitter sitter, String applyId) throws SQLException {
-		int count = sitterDAO.createSitter(memberId, sitter, applyId);
-		if (count == 0)
+	public boolean createSitter(String memberId, PetSitter sitter, String applyId, String[] ableDate) throws SQLException {
+		for (String d : ableDate) {
+			System.out.println(d);
+		}
+		int count = 0;
+		String ableDateBin = "";
+		for (int i = 0; i < 7; i++) { // 0 1 3 4 : 월 화 목 금 : 1101100
+			if (count < ableDate.length) {
+				if (Integer.parseInt(ableDate[count]) == i) {
+					ableDateBin += "1";
+					count++;
+				}
+				else {
+					ableDateBin += "0";
+				}
+			}
+			else {
+				ableDateBin += "0";
+			}
+		}
+		String ascii = Character.toString((char)Integer.parseInt(ableDateBin, 2));
+		
+		sitter.setAbleDate(ascii);
+		
+		int rslt = sitterDAO.createSitter(memberId, sitter, applyId);
+		if (rslt == 0)
 			return false;
 		return true;
 	}

@@ -132,7 +132,9 @@
         #applyImg {
             width: 684px;
             height: 476.06px;
-            object-fit: cover;
+            object-fit: scale-down;
+            border: 1px solid #EAEAEA;
+            border-radius: 5px;
         }
 
         #certImg {
@@ -140,6 +142,15 @@
             height: 309.02px;
             object-fit: cover;
         }
+        
+        #headerWrap {
+		    border-bottom: 1px solid rgba(150, 150, 150, 0.2);
+		}
+		
+		#logo {
+		    z-index: 1;
+		   	margin-left: 14px;
+		}
     </style>
 </head>
 
@@ -210,6 +221,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="footerWrap">
+        <div id="footerText">Copyrights © 2021 by 윤김구이. All Rights Reserved.</div>
     </div>
 </body>
 </html>

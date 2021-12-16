@@ -14,7 +14,7 @@ public interface ServiceMapper {
 	public List<Service> findProvideServicesBySitter(String sitterId);
 	
 	/* 돌봄내역에 대한 제공서비스 리스트 조회 */
-	public List<CareDetails> findReceiveServicesByCare(String careId);
+	public List<CareDetails> findReceiveServicesByCare(int careId);
 	
 	/* 특정 반려동물에 대해 제공 서비스가 있는지 확인 */
 	public int countReceiveServiceByPetId(String petId);

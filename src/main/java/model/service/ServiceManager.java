@@ -50,7 +50,7 @@ public class ServiceManager {
 	}
 	
 	/* 특정 돌봄 내역에 해당하는 제공 서비스 리스트 반환 */
-	public List<CareDetails> findReceiveServiceList(String careId) throws SQLException {
+	public List<CareDetails> findReceiveServiceList(int careId) throws SQLException {
 		return serviceDAO.findReceiveServiceList(careId);
 	}
 	
@@ -59,6 +59,7 @@ public class ServiceManager {
 		return serviceDAO.deleteReceiveService(careId);
 	}
 
+	/* 특정 반려동물에 대해 제공 서비스가 있는지 확인 */
 	public int countReceiveServiceByPetId(String petId) throws SQLException {
 		return serviceDAO.countReceiveServiceByPetId(petId);
 	}

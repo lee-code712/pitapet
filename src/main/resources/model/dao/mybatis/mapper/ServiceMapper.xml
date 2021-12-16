@@ -15,7 +15,7 @@
 		WHERE sitter_id = #{id}
     </select>
     
-    <select id ="findReceiveServicesByCare" parameterType="String" resultType="CareDetails">
+    <select id ="findReceiveServicesByCare" parameterType="int" resultType="CareDetails">
     	SELECT rs.rcv_id AS id,
     		rs.care_Id AS careInfo.id,
     		rs.service_id AS serviceInfo.id, 

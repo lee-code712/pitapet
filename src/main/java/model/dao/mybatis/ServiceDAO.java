@@ -50,7 +50,7 @@ public class ServiceDAO {
 	}
 	
 	/* 특정 돌봄내역에 대한 제공 서비스 정보를 검색해 List에 저장 및 반환 */
-	public List<CareDetails> findReceiveServiceList(String careId) {
+	public List<CareDetails> findReceiveServiceList(int careId) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
 			List<CareDetails> services = sqlSession.getMapper(ServiceMapper.class).findReceiveServicesByCare(careId);

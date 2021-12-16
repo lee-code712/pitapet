@@ -8,6 +8,11 @@ function searchMemberPageInfo() {
 }
 
 function searchSitterPageInfo() {
+	if (sitterInfoJson == null) {
+		alert("돌보미 정보 등록이 필요합니다");
+		return;
+	}
+	
 	$("#reservationInfoWrap").empty();
 	
 	$("#reservationInfoWrap").append("예약 정보");

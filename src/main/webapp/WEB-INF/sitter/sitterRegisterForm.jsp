@@ -50,7 +50,7 @@
                 <td id="tdTit">돌보미 경력</td>
                 <td><input type="text" value="${applicationInfo.career}"  id="textDesign" /></td>
             </tr>
-
+            
             <tr>
                 <td id="tdTit">제공 서비스</td>
                 <td>
@@ -102,13 +102,13 @@
             <tr>
                 <td id="tdTit">돌봄 가능한 날짜</td>
                 <td>
-                    <input type="checkbox" id="textDesign" name="ableDate" value="0" />일
-                    <input type="checkbox" id="textDesign" name="ableDate" value="1" />월
-                    <input type="checkbox" id="textDesign" name="ableDate" value="2" />화
-                    <input type="checkbox" id="textDesign" name="ableDate" value="3" />수
-                    <input type="checkbox" id="textDesign" name="ableDate" value="4" />목
-                    <input type="checkbox" id="textDesign" name="ableDate" value="5" />금
-                    <input type="checkbox" id="textDesign" name="ableDate" value="6" />토
+                    <input type="checkbox" id="textDesign" name="ableDate" value="0" />월
+                    <input type="checkbox" id="textDesign" name="ableDate" value="1" />화
+                    <input type="checkbox" id="textDesign" name="ableDate" value="2" />수
+                    <input type="checkbox" id="textDesign" name="ableDate" value="3" />목
+                    <input type="checkbox" id="textDesign" name="ableDate" value="4" />금
+                    <input type="checkbox" id="textDesign" name="ableDate" value="5" />토
+                    <input type="checkbox" id="textDesign" name="ableDate" value="6" />일
                 </td>
             </tr>
 

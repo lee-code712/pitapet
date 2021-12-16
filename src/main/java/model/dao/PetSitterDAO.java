@@ -259,7 +259,7 @@ public class PetSitterDAO {
 				     + "INTO PETSITTER VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) "
 				     + "SELECT * FROM DUAL";
 		
-		 Object[] param = new Object[] {sitter.getPublicStatus(), "@", sitter.getCalculatedPrice(), sitter.getTag(),
+		 Object[] param = new Object[] {sitter.getPublicStatus(), sitter.getAbleDate(), sitter.getCalculatedPrice(), sitter.getTag(),
 				 sitter.getNotes(), null, 0, 0, applyId, memberId};
 
 		  jdbcUtil.setSqlAndParameters(sql, param);

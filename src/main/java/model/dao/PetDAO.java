@@ -360,4 +360,23 @@ public class PetDAO {
 		}		
 		return 0;
 	}
+
+	public int addAblePetKind(String memberId, String kindId) {
+		String sql = "INSERT INTO available_pet_kind (kind_id, sitter_id) " 
+				+ "VALUES (?, ?)";
+
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { kindId, memberId });
+		
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+
+			return recordCount;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}
+		return 0;
+	}
 }

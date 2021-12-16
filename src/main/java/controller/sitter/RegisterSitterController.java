@@ -55,22 +55,29 @@ public class RegisterSitterController implements Controller{
 					, request.getParameter("tag"), request.getParameter("notes"));
 			
 			
-	         boolean isRegister = sitterMan.createSitter(memberId, sitter, applicationInfo.getId(), request.getParameterValues("ableDate"));
-	         if (isRegister) {
+	        boolean isRegister = sitterMan.createSitter(memberId, sitter, applicationInfo.getId(), request.getParameterValues("ableDate"));
+	        if (isRegister) {
 	        	// 서비스 추가
 	        	String[] service = request.getParameterValues("serviceCheck");
 	 			int isServiceAdded = servMan.addProvideService(service, memberId);
-	 			if (isServiceAdded > 0)
-	 				return "redirect:/member/memberMyPage";
+	 			if (isServiceAdded > 0) {
+	 				// 돌봄 가능 반려동물 추가
+	 				String[] ablePetKind = request.getParameterValues("ablePetKind");
+	 				int isAblePetKindAdded = petMan.addAblePetKind(memberId, ablePetKind);
+	 				if (isAblePetKindAdded > 0)
+	 					return "redirect:/member/memberMyPage";
+	 				else 
+	 					return "redirect:/petSitter/registerSitter";
+	 			}
 	 			else
 	 				return "redirect:/petSitter/registerSitter";
-	         }
+	        }
 	            
-	         else
-	            return "redirect:/petSitter/registerSitter";
+	        else
+	        	return "redirect:/petSitter/registerSitter";
 	      } catch (Exception e) {
-	         request.setAttribute("registerFailed", true);         
-	         return "redirect:/petSitter/registerSitter";         
+		        request.setAttribute("registerFailed", true);         
+		        return "redirect:/petSitter/registerSitter";         
 	      }
 		
 	}

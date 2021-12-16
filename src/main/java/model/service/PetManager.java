@@ -12,6 +12,7 @@ import java.util.List;
 import model.dao.PetDAO;
 import model.dto.Pet;
 import model.dto.PetKind;
+import model.dto.Service;
 
 public class PetManager {
 	private static PetManager petMan = new PetManager();
@@ -124,6 +125,17 @@ public class PetManager {
 			return petDAO.removePetAttachments(petId) + petDAO.remove(petId);
 		}
 	}
+	
+	// 돌봄 가능 반려동물 추가
+	public int addAblePetKind(String memberId, String[] petKinds) throws SQLException {
+		int count = 0;
+		
+		for(int i = 0; i < petKinds.length; i++) {
+			count += petDAO.addAblePetKind(memberId, petKinds[i]);
+		}
+		
+		return count;
+	}	
 	
 //	public ArrayList<PetKind> findAblePetKindList(String sitterId) throws SQLException {
 //	return petDAO.findAblePetKindList(sitterId);

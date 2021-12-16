@@ -12,13 +12,15 @@
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
     <link rel="stylesheet" href="/css/sitterRegisterForm.css"/>
+    <script src="/js/sitterRegisterForm.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 </head>
 
 <body>
 	<%@include file="../components/header.jsp" %>
 
     <div id="pageWrap">
-      <form name="form" method="POST" action="<c:url value='/petSitter/registerSitter' />"> 
+      <form name="form" method="POST" action="<c:url value='/petSitter/registerSitter' />" onsubmit="return sitterRegister()"> 
         <div id="pageTit">돌보미 정보 등록</div>
         <table>
             <tr>
@@ -100,7 +102,7 @@
             </tr>
 
             <tr>
-                <td id="tdTit">돌봄 가능한 날짜</td>
+                <td id="tdTit">돌봄 가능 요일</td>
                 <td>
                     <input type="checkbox" id="textDesign" name="ableDate" value="0" />월
                     <input type="checkbox" id="textDesign" name="ableDate" value="1" />화
@@ -120,7 +122,7 @@
             </tr>
 
             <tr>
-                <td id="tdTit">돌봄 가능 반려동물</td>
+                <td id="tdTit">돌봄 가능 반려동물 종</td>
                 <td>
                 	<c:forEach var="petKind" items="${petKindList}" varStatus="status">
                 		<input type="checkbox" id="textDesign" name="ablePetKind" value="${petKind.id}" /> ${petKind.largeCategory} - ${petKind.smallCategory}

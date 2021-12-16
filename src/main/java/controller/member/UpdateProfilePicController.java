@@ -89,15 +89,18 @@ public class UpdateProfilePicController implements Controller {
                 			String ext = filename.substring(filename.lastIndexOf( "." ));
                 			String newFilename = "profile-" + userId + "-1" + ext;
                 			File newFile = new File(dir, newFilename);
+                			if (newFile.exists()) {
+                				newFile.delete();
+                			}
                 			item.write(file);
                 			file.renameTo(newFile);
-                			// memberMan.deleteProfilePic(userId); // 프로필 사진이 존재한다면 삭제한다
+                			memberMan.deleteProfilePic(userId); // 프로필 사진이 존재한다면 삭제한다
                 			//파일을 upload 경로에 실제로 저장한다.
                 			files.add(newFilename);
                 		}
                 	}
                 }
-                // isUpdated = memberMan.updateProfilePic(userId, files.get(0));
+                isUpdated = memberMan.updateProfilePic(userId, files.get(0));
 			}catch(SizeLimitExceededException e) {
 			//업로드 되는 파일의 크기가 지정된 최대 크기를 초과할 때 발생하는 예외처리
 				e.printStackTrace();           

@@ -68,5 +68,37 @@ private SqlSessionFactory sqlSessionFactory;
 			sqlSession.close();
 		}
 	}
+
+	public int deleteProfilePic(String memberId, String like) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		try {
+			int result = sqlSession.getMapper(MemberMapper.class).deleteProfilePic(memberId, like);
+			
+			if(result > 0) {
+				sqlSession.commit();
+			} else {
+				sqlSession.rollback();
+			}
+			return result;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public int addAttachment(String image, String memberId) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		try {
+			int result = sqlSession.getMapper(MemberMapper.class).addAttachment(memberId, image);
+			
+			if(result > 0) {
+				sqlSession.commit();
+			} else {
+				sqlSession.rollback();
+			}
+			return result;
+		} finally {
+			sqlSession.close();
+		}
+	}
 	
 }

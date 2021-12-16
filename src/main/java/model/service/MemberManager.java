@@ -70,16 +70,18 @@ public class MemberManager {
 	}
 	
 	/* 프로필 사진 삭제 */
-	// public int deleteProfilePic(String memberId) throws SQLException, PasswordMismatchException {
-		// return memberDAO.deleteProfilePic(memberId);
-	// }
+	public int deleteProfilePic (String memberId) throws SQLException, PasswordMismatchException {
+		String like = "%profile-" + memberId + "-%";
+		return memberDAO.deleteProfilePic(memberId, like);
+	}
 	
 	/* 프로필 사진 업데이트 */
-	/*
-	 * public boolean updateProfilePic (String memberId, String image) throws
-	 * SQLException { image = "/upload/" + image; int count =
-	 * memberDAO.addAttachment(image, memberId); if (count == 0) return false;
-	 * 
-	 * return true; }
-	 */
+	public boolean updateProfilePic (String memberId, String image) throws SQLException {
+		image = "/upload/" + image;
+		int count = memberDAO.addAttachment(image, memberId);
+		if (count == 0) return false;
+		 
+		return true;
+	}
+	 
 }

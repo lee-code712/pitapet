@@ -31,4 +31,16 @@
 		</set>
 		WHERE member_id = #{id}
 	</update>
+	
+	<!-- 프로필 사진 삭제 -->
+	<delete id="deleteProfilePic" parameterType="String">
+		DELETE FROM attachment
+		WHERE member_id = #{memberId} AND category_id = 'AtchId04'
+	</delete>
+	
+	<!-- 프로필 사진 추가 -->
+	<insert id="addAttachment" parameterType="String">
+		INSERT INTO attachment (img_src, member_id, category_id)
+		VALUES (#{image}, #{memberId}, 'AtchId04')
+	</insert>
 </mapper>

@@ -12,6 +12,18 @@
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
 	<link rel="stylesheet" href="/css/sitterApplyForm.css"/>
+	<style>
+		#applyCancelBtn {
+			margin-right: 40px;
+			width: 100px;
+		    height: 40px;
+		    background-color: #C4C4C4;
+		    color: white;
+		    border-radius: 5px;
+		    border: none;
+		    cursor: pointer;
+		}
+	</style>
 </head>
 
 <body>
@@ -39,7 +51,7 @@
         	<c:url value='/member/sitterApplyCancel' var="cancelUrl">
         		<c:param name="applyId" value="${applicationInfo.id}" />
         	</c:url>
-            <button id="applyBtn" onclick="location.href='${cancelUrl}'">지원 취소</button>
+            <button id="applyCancelBtn" onclick="location.href='${cancelUrl}'">지원 취소</button>
             <c:url value='/member/memberMyPage' var="returnUrl"/>
             <button id="applyBtn" onclick="location.href='${returnUrl}'">돌아가기</button>
         </div>

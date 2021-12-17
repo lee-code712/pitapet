@@ -110,6 +110,28 @@ public class CareDAO {
 		}
 	}
 	
+	/* 돌봄일지 개수 확인 후 돌봄상태 '돌봄완료'로 변겅 */
+	public int updageCareStatusToZ(int careId) {
+		SqlSession sqlSession = sqlSessionFactory.openSession(true);
+		try {
+			Map<String, Integer> recordCountMap = sqlSession.getMapper(CareMapper.class).findCareRecordCount(careId);
+			int totalDays = Integer.parseInt(String.valueOf(recordCountMap.get("dayCount"))) + 1;
+			int writeCareRecords = Integer.parseInt(String.valueOf(recordCountMap.get("countCareRecord")));
+			if (totalDays > writeCareRecords)
+				return -1;
+			else {
+				int result = sqlSession.getMapper(CareMapper.class).updateCareStatus(careId, "Z");
+				if (result > 0)
+					sqlSession.commit();
+				else
+					sqlSession.rollback();
+				return result;
+			}
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
 	/* 돌봄일지 추가 */
 	public int createCareRecord(CareRecord careRecord) {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
@@ -170,7 +192,7 @@ public class CareDAO {
 	public int updateCareSchedule(Care care) {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
-			return sqlSession.getMapper(CareMapper.class).updateCareSchedule(care.getId());
+			return sqlSession.getMapper(CareMapper.class).updateCareStatus(care.getId(), "Y");
 		} finally {
 			sqlSession.close();
 		}

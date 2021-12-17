@@ -63,9 +63,12 @@ public class RecordCareController implements Controller {
 			request.setAttribute("recordFailed", true);
 			session.setAttribute("recordInfo", careRecord);
 			return "redirect:/care/recordCare";
-		} 
+		}
 		
-		// 날짜만큼 개수를 채운경우 -> 돌봄완료로 전환
+		int isUpdated = careMan.updateCareStatusToZ(careId);
+		
+		if (isUpdated == 0) // 돌봄상태 업데이트 실패
+			request.setAttribute("updateFailed", true);
 			
 		if (session.getAttribute("recordInfo") != null)
 			session.removeAttribute("recordInfo");

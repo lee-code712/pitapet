@@ -147,6 +147,12 @@ public class CareManager {
 		return needReviewCareList;
 	}
 	
+	/* 작성해야 할 돌봄내역없으면 돌봄상태 '돌봄완료'로 변경 */
+	public int updateCareStatusToZ(int careId) throws SQLException {
+		return careDAO.updageCareStatusToZ(careId);
+	}
+	
+	
 	/* 돌봄 예약(돌봄 내역 생성) */
 	public int createCare(Care care) throws SQLException, ParseException {
 		care.setEndDate(care.getEndDate() + " 00:00:01");

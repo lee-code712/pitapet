@@ -154,13 +154,6 @@
 		WHERE care_id = #{careId}
 	</delete>
 	
-	<!-- 돌봄 내역 삭제 -->
-	<update id="updateCareSchedule" parameterType="int">
-		UPDATE Care
-		SET care_status = 'Y'
-		WHERE care_id = #{careId}
-	</update>
-	
 	<!-- check 정보 반환 -->
 	<select id="getCheckInfo" parameterType="String"> 
 		SELECT care_check	        
@@ -221,8 +214,22 @@
     		FULL OUTER JOIN service s ON rs.service_id = s.service_id
     		FULL OUTER JOIN pet p ON rs.pet_id = p.pet_id
 		WHERE c.care_id = #{careId}
-		ORDER BY cr.write_date, p.pet_id, s.service_id
+		ORDER BY cr.write_date, p.pet_id
     </select>
+    
+    <!-- 돌봄 내역에 대한 돌봄 기간 및 돌봄일지 개수 반환 -->
+    <resultMap id="careRecordCountMap" type="java.util.Map">
+    	<id column="dayCount" property="dayCount" />
+    	<id column="countCareRecord" property="countCareRecord" />
+    </resultMap>
+    
+    <select id="findCareRecordCount" parameterType="int" resultMap="careRecordCountMap">
+    	SELECT TO_DATE(c.end_date) - TO_DATE(c.start_date) AS dayCount, 
+    		COUNT(cr.care_id) AS countCareRecord
+		FROM care c JOIN care_record cr ON c.care_id = cr.care_id
+		WHERE c.care_id ='1000'
+		GROUP BY cr.care_id, c.start_date, c.end_date
+    </select> 
     
     <!-- 돌봄일지 추가 -->
     <insert id="createCareRecord" parameterType="CareRecord">
@@ -232,4 +239,11 @@
 		INSERT INTO care_record (record_id, write_date, title, content, care_id)
 		VALUES (#{id}, SYSDATE, #{title},  #{content}, #{careInfo.id})
 	</insert>
+	
+	<!-- 돌봄상태 변경 -->
+	<update id="updateCareStatus">
+		UPDATE care
+		SET care_status = #{status}
+		WHERE care_id = #{careId}
+	</update>
 </mapper>

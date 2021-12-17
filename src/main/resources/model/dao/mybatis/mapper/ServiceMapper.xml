@@ -54,7 +54,7 @@
 		</association>
 	</resultMap>
     
-    <select id="findNReceiveServices" parameterType="java.util.List" resultMap="serviceByNMap">
+    <select id="findNReceiveServices" parameterType="java.util.Map" resultMap="serviceByNMap">
     	SELECT rcv_id, care_id
     	FROM receive_service
     	WHERE care_id = #{careId}

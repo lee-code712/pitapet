@@ -1,6 +1,7 @@
 package model.dao.mybatis.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -27,12 +28,16 @@ public interface CareMapper {
 	/* 돌봄일지 리스트 조회 */
 	public Care getCareRecordByCareId(int careId);
 	
+	/* 돌봄일지 작성 개수 반환 */
+	public Map<String, Integer> findCareRecordCount(int careId);
+	
+	/* 돌봄상태 변경 */
+	public int updateCareStatus(@Param("careId") int careId, @Param("status") String status);
+	
 	/* 돌봄일지 추가 */
 	public int createCareRecord(CareRecord careRecord);
 	
 	public int deleteCare(int careId);
 	
 	public String getCheckInfo(String rcvId);
-
-	public int updateCareSchedule(int careId);
 }

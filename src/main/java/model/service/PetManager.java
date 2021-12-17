@@ -118,12 +118,10 @@ public class PetManager {
 	/* 반려동물 삭제 */
 	public int remove(String petId) throws SQLException {
 		ServiceManager serviceMan = ServiceManager.getInstance();
-		if (serviceMan.countReceiveServiceByPetId(petId) != 0) // 해당 반려동물 관련 예약 정보가 있다면
-			return 0;
-		else {
+		if (serviceMan.countReceiveServiceByPetId(petId) > 0) // 해당 반려동물 관련 예약 정보가 없으면
 			// 반려동물 사진 삭제과 반려동물 삭제
 			return petDAO.removePetAttachments(petId) + petDAO.remove(petId);
-		}
+		return 0;
 	}
 	
 	/* 돌봄 가능 반려동물 추가 */

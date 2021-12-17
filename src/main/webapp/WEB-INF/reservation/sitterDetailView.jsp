@@ -50,7 +50,6 @@
 	    var disabledDays = [];
 	    for (key in schedules) {
 	    	disabledDays.push(schedules[key].split(' ')[0]);
-	    	console.log(schedules[key].split(' ')[0])
 	    }
 	
 	    // 특정일 선택막기

@@ -344,10 +344,9 @@ public class PetDAO {
 
 	// 반려동물 정보 삭제
 	public int remove(String petId) throws SQLException {
-		String like = "%" + petId + "%";
 		String sql = "DELETE FROM pet "
-				+ "WHERE pet_id LIKE ?";     
-		jdbcUtil.setSqlAndParameters(sql, new Object[] { like });	
+				+ "WHERE pet_id =?";     
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { petId });	
 						
 		try {
 			int rs = jdbcUtil.executeUpdate();

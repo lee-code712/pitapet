@@ -78,7 +78,7 @@
 	        </table>
 	        
 	        <div id="btnWrap">
-	            <button type="button" id="cancelBtn" onclick="addPet(this.id)">취소</button>
+	            <button type="button" id="cancelBtn" onclick="history.back()">취소</button>
 	            <button type="button" id="addBtn" onclick="addPet(this.id)">추가</button> 
 	        </div>
         </form>

@@ -34,42 +34,43 @@
 
     <div id="careDiaryPageWrap">
         <div id="pageTit">돌봄 일지</div>
+        
         <form name="form" method="POST" action="<c:url value='/care/recordCare'>
         	<c:param name='careId' value='${checkList[0].careInfo.id}'/></c:url>">
-		<c:forEach var="pet" items="${checkList[0].careInfo.carePetList}">
-			<div id="activeWrap">
-	            <div id="activeTit"><b>${pet}</b>&nbsp;돌봄 체크 리스트</div>
-	            <div id="activeContentWrap">
-	   				<c:forEach var="check" items="${checkList}">
-	   					<c:if test="${check.carePet.name == pet}">
-			                <div id="activeContentInner">
-			                    <div id="activeContentTit">${check.serviceInfo.title}</div>
-			                    <div id="activeContent">
-			                        <input type="checkbox" name="recvService" value="${check.id}" id="service">
-			                    </div>
-			                </div>
-		                </c:if>
-	                </c:forEach>
+			<c:forEach var="pet" items="${checkList[0].careInfo.carePetList}">
+				<div id="activeWrap">
+		            <div id="activeTit"><b>${pet}</b>&nbsp;돌봄 체크 리스트</div>
+		            <div id="activeContentWrap">
+		   				<c:forEach var="check" items="${checkList}">
+		   					<c:if test="${check.carePet.name == pet}">
+				                <div id="activeContentInner">
+				                    <div id="activeContentTit">${check.serviceInfo.title}</div>
+				                    <div id="activeContent">
+				                        <input type="checkbox" name="recvService" value="${check.id}" id="service">
+				                    </div>
+				                </div>
+			                </c:if>
+		                </c:forEach>
+		            </div>
+		        </div>	        
+			</c:forEach>
+
+	        <div id="diaryWrap">
+	            <div id="diaryTit">
+	                <input type="text" placeholder="제목을 입력하세요." id="diaryTitText" name="title"/>
 	            </div>
-	        </div>	        
-		</c:forEach>
-
-        <div id="diaryWrap">
-            <div id="diaryTit">
-                <input type="text" placeholder="제목을 입력하세요." id="diaryTitText" name="title"/>
-            </div>
-            <div id="diaryContent">
-                <textarea placeholder="내용을 입력하세요." id="diaryContentText" style="resize: none;" name="content"></textarea>
-            </div>
-        </div>
-
-        <div id="fileReviewBtnWrap">
-            <div id="fileWrap">
-                <img src="/images/fileImg.svg" id="fileImg"/>
-                <input type="file" id="fileBtn" name="picture"/>
-            </div>
-            <button type="button" id="detailReviewBtn" onClick="recordCare()">일지 추가</button>
-        </div>
+	            <div id="diaryContent">
+	                <textarea placeholder="내용을 입력하세요." id="diaryContentText" style="resize: none;" name="content"></textarea>
+	            </div>
+	        </div>
+	
+	        <div id="fileReviewBtnWrap">
+	            <div id="fileWrap">
+	                <img src="/images/fileImg.svg" id="fileImg"/>
+	                <input type="file" id="fileBtn" name="picture"/>
+	            </div>
+	            <button type="button" id="detailReviewBtn" onClick="recordCare()">일지 추가</button>
+	        </div>
         </form>
     </div>
     

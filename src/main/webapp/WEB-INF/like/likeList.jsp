@@ -25,22 +25,27 @@
 			<c:url value="/reservation/viewSitterDetail" var="viewUrl">
 				<c:param name="sitterId" value="${likeSitter.sitter.id}" />
 			</c:url>
+			
 			<div id="petSitterInfoBox">
 				<img src="${likeSitter.sitter.profileImage}" id="petSitterImg" />
 				<div id="petSitterLocation">${likeSitter.sitter.address}</div>
+				
 				<div id="likeCountWrap">
 					<img src="/images/smallHeart.svg" is="likeCountImg" />
 					<div id="likeCount">${likeSitter.like}</div>
 				</div>
+				
 				<div id="petSitterInfoInner">
 					<c:url value='/like/changeLike' var='addLikeUrl'>
 						<c:param name='status' value='add' />
 						<c:param name='sitterId' value='${likeSitter.sitter.id}' />
 					</c:url>
+					
 					<c:url value='/like/changeLike' var='cancelLikeUrl'>
 						<c:param name='status' value='remove' />
 						<c:param name='sitterId' value='${likeSitter.sitter.id}' />
 					</c:url>
+					
 					<div id="petSitterNameLikeWrap">
 						<div id="petSitterName" onClick="location.href='${viewUrl}'">${likeSitter.sitter.id}</div>
 						<c:set var="likeCk" value="true" />
@@ -55,7 +60,9 @@
 						  </c:otherwise>
 						</c:choose>
 					</div>
+					
 					<div id="petSitterIntro">${likeSitter.notes}</div>
+					
 					<div id="serviceCaringWrap">
 						<div id="caringDateWrap">
 							<div id="caringPetsWrap">

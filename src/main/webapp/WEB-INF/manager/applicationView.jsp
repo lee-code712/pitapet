@@ -35,6 +35,7 @@
 
     <div id="pageWrap">
         <div id="pageTit">지원 정보</div>
+        
         <div id="pageInner">
             <div id="introPage">
                 <c:if test="${empty applicantDetail.applicant.profileImage}">

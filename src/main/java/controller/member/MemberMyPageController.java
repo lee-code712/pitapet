@@ -1,7 +1,6 @@
 package controller.member;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,10 +9,8 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import controller.Controller;
-import controller.member.UserSessionUtils;
 import model.dto.Care;
 import model.dto.Member;
-import model.dto.Pet;
 import model.dto.PetKind;
 import model.dto.PetSitter;
 import model.dto.Service;

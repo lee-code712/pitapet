@@ -26,10 +26,10 @@
 				<c:param name="sitterId" value="${review.careInfo.sitter.sitter.id}" />
 			</c:url>
             <div id="reviewBox">
-                <c:if test="${review.images eq null}">
+                <c:if test="${empty review.images}">
                     	<img src="/images/reviewNullImg.svg" id="reviewImg"/>
                 </c:if>
-                 <c:if test="${review.images ne null}">
+                 <c:if test="${not empty review.images}">
                     	<img src="${review.images[0]}" id="reviewImg"/>
                 </c:if>
                 <div id="reviewBoxInner">

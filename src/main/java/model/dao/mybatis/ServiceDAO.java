@@ -10,9 +10,7 @@ import java.util.Map;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.*;
 
-import model.dao.mybatis.mapper.CareMapper;
 import model.dao.mybatis.mapper.ServiceMapper;
-import model.dto.Care;
 import model.dto.CareDetails;
 import model.dto.Service;
 

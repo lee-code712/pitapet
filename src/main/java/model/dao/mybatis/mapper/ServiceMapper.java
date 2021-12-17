@@ -20,6 +20,9 @@ public interface ServiceMapper {
 	/* 특정 반려동물에 대해 제공 서비스가 있는지 확인 */
 	public int countReceiveServiceByPetId(String petId);
 	
+	/* 돌봄일지 작성 시 돌보미가 체크하지 않은 서비스 리스트 */
+	public List<CareDetails> findNReceiveServices(Map<String, Object> param);
+	
 	/* 제공받을 서비스 삽입 */
 	public int createReceiveServices(List<CareDetails> rcevServices);
 	

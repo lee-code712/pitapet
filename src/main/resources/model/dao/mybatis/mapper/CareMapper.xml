@@ -221,7 +221,7 @@
     		FULL OUTER JOIN service s ON rs.service_id = s.service_id
     		FULL OUTER JOIN pet p ON rs.pet_id = p.pet_id
 		WHERE c.care_id = #{careId}
-		ORDER BY cr.write_date
+		ORDER BY cr.write_date, p.pet_id, s.service_id
     </select>
     
     <!-- 돌봄일지 추가 -->

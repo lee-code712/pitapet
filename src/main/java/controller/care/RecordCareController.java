@@ -46,13 +46,13 @@ public class RecordCareController implements Controller {
 		}
 		
 		// 일지 추가 처리
-		String careId = request.getParameter("careId");
+		int careId = Integer.parseInt(request.getParameter("careId"));
 		CareRecord careRecord = new CareRecord(-1, null, null, request.getParameter("title"), 
-				request.getParameter("content"), new Care(Integer.parseInt(careId)), null);
+				request.getParameter("content"), new Care(careId), null);
 		List<CareDetails> careDetails = new ArrayList<CareDetails>();
 		String[] recvService = request.getParameterValues("recvService"); // 돌봄 받은 펫들의 id
 		for (String recvId : recvService) {
-			CareDetails careDetail = new CareDetails(recvId);
+			CareDetails careDetail = new CareDetails(recvId, new Care(careId), null, null);
 			careDetails.add(careDetail);
 		}
 		careRecord.setCheckList(careDetails);

@@ -47,6 +47,25 @@
     	WHERE pet_id = #{pet_id}
     </select>
     
+    <resultMap id="serviceByNMap" type="CareDetails">
+		<id column="rcv_id" jdbcType="VARCHAR" property="id" javaType="String" />
+		<association property="careInfo" column="care_id" javaType="Care">
+			<id column="care_id" jdbcType="VARCHAR" property="id" javaType="int" />
+		</association>
+	</resultMap>
+    
+    <select id="findNReceiveServices" parameterType="java.util.List" resultMap="serviceByNMap">
+    	SELECT rcv_id, care_id
+    	FROM receive_service
+    	WHERE care_id = #{careId}
+            <if test="careDetailsList.size != 0">
+                AND rcv_id NOT IN
+                <foreach collection="careDetailsList" item="item" index="index"  open="(" separator="," close=")">
+                    #{item.id}
+                </foreach>
+            </if>
+    </select>
+    
     <insert id="createReceiveServices" parameterType="java.util.List">
 	    <foreach collection="list" item="item" index="index"  open="INSERT ALL " separator=" " close="SELECT * FROM DUAL" >
 	    	INTO RECEIVE_SERVICE (rcv_id, care_id, pet_id, service_id)

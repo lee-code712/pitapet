@@ -2,7 +2,9 @@ package model.dao.mybatis;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.*;
@@ -114,12 +116,25 @@ public class CareDAO {
 		try {
 			int result1 = sqlSession.getMapper(CareMapper.class).createCareRecord(careRecord);
 			int recordId = careRecord.getId();
-			System.out.println(recordId);
+			// 돌보미가 체크한 제공 서비스 리스트
 			for (CareDetails careDetail : careRecord.getCheckList()) {
 				// recordId 추가
 				careDetail.setRecordId(recordId);
 				careDetail.setCheck("Y");
 			}
+			// 돌보미가 미체크한 제공 서비스 리스트
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("careId", careRecord.getCareInfo().getId());
+			param.put("careDetailsList", careRecord.getCheckList());
+			List<CareDetails> nReceiveServices = sqlSession.getMapper(ServiceMapper.class)
+					.findNReceiveServices(param);
+			for (CareDetails careDetail : nReceiveServices) {
+				// recordId 추가
+				careDetail.setRecordId(recordId);
+				careDetail.setCheck("N");
+				careRecord.getCheckList().add(careDetail);
+			}
+			
 			int result2 = sqlSession.getMapper(ServiceMapper.class).createCareCheckList(careRecord.getCheckList());
 			
 			if (result1 > 0 && result2 > 0)

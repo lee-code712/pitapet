@@ -13,6 +13,7 @@ public class UpdateMemberController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		HttpSession session = request.getSession();
 		MemberManager memMan = MemberManager.getInstance();
 		
@@ -33,6 +34,7 @@ public class UpdateMemberController implements Controller {
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
 		
+		// 패스워드를 변경하는 경우와 안하는 경우를 나눠 수정 처리
 		if (newPassword == null || "null".equals(newPassword) || newPassword.equals("")) {
 			Member updateInfo = new Member(userId, email, phone, address);
 			try {

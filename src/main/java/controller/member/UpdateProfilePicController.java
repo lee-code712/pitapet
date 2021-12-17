@@ -16,7 +16,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import controller.Controller;
-import model.dto.PetKind;
 import model.service.MemberManager;
 
 public class UpdateProfilePicController implements Controller {
@@ -33,7 +32,7 @@ public class UpdateProfilePicController implements Controller {
 			return "/member/ProfilePicUpdateForm.jsp";
 		}
 		
-		// 프로필 사진 추가 처리 
+		// 프로필 사진 변경 처리 
 		String userId = UserSessionUtils.getLoginUserId(session);
 		ArrayList<String> files = new ArrayList<>();
 		boolean isUpdated = false;
@@ -70,11 +69,11 @@ public class UpdateProfilePicController implements Controller {
                 	//commons-fileupload를 사용하여 전송받으면 
                 	//모든 parameter는 FileItem 클래스에 하나씩 저장된다.
                 	
-                	String value = item.getString("utf-8");
+                	// String value = item.getString("utf-8");
                 	//넘어온 값에 대한 한글 처리를 한다.
                 	
                 	if(item.isFormField()) {//일반 폼 데이터라면...
- 
+                		
                 	}
                 	else {//파일이라면...
                 		if(item.getFieldName().equals("picture")) {
@@ -100,6 +99,8 @@ public class UpdateProfilePicController implements Controller {
                 		}
                 	}
                 }
+                
+                // 프로필 사진 변경 처리
                 isUpdated = memberMan.updateProfilePic(userId, files.get(0));
 			}catch(SizeLimitExceededException e) {
 			//업로드 되는 파일의 크기가 지정된 최대 크기를 초과할 때 발생하는 예외처리

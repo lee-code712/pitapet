@@ -18,6 +18,8 @@ import model.service.PetSitterManager;
 import model.service.ReviewManager;
 
 public class ViewSitterDetailController implements Controller {
+	
+	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		HttpSession session = request.getSession();

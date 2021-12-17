@@ -71,6 +71,7 @@ public class ReserveController implements Controller {
 		// 예약 처리
 		CareManager careMan = CareManager.getInstance();
 
+		// 예약 정보 저장
 		Care care = new Care(request.getParameter("fromDate"), request.getParameter("toDate"), 
 				Integer.parseInt(request.getParameter("totalPrice")), request.getParameter("cautionText"), 
 				"X", null, new Member(memberId), new PetSitter(new Member(sitterId)));
@@ -86,6 +87,7 @@ public class ReserveController implements Controller {
 		}
 		care.setCareList(careDetails);
 		
+		// 예약 정보 추가 처리
 		int isCreated = careMan.createCare(care);
 			
 		if (isCreated == 0) { // care 레코드 생성 실패

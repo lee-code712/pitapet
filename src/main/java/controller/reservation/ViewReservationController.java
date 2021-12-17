@@ -15,6 +15,7 @@ public class ViewReservationController implements Controller {
 		CareManager careMan = CareManager.getInstance();
 		String careId = (String) request.getParameter("careId");
 		
+		// 예약 상세 정보 전달
 		Care care = careMan.findReservation(Integer.parseInt(careId));
 		request.setAttribute("reservationInfo", care);
 		

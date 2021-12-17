@@ -12,6 +12,8 @@ import model.dto.Review;
 import model.service.ReviewManager;
 
 public class ListReviewController implements Controller{
+	
+	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession();
@@ -23,9 +25,11 @@ public class ListReviewController implements Controller{
 			request.setAttribute("isNotLogined", true);
 		}	
 		
+		// 모든 리뷰 정보 전달
 		List<Review> reviews = reviewMan.findReviewList();
 		request.setAttribute("reviews", reviews);
 		
 		return "/review/reviewList.jsp";
 	}
+	
 }

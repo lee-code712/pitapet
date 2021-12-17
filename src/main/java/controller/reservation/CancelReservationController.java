@@ -29,6 +29,7 @@ public class CancelReservationController implements Controller  {
 		Calendar cmpDate = Calendar.getInstance();
 		cmpDate.setTime(date); //특정 일자
 		
+		// 돌봄 시작일이 하루 이상 남고, 예약상태가 '예약완료'이면 예약 내역 삭제 처리
 		long diffSec = (cmpDate.getTimeInMillis() - today.getTimeInMillis()) / 1000;
 		long diffDays = diffSec / (24*60*60); //일자수 차이
 		if (diffDays >= 1 && care.getStatus().equals("X")) {

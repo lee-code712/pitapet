@@ -20,7 +20,7 @@ public class ListPetController implements Controller {
 		PetManager petMan = PetManager.getInstance();
 		String userId = UserSessionUtils.getLoginUserId(session);
 
-		// 로그인한 유저의 반려동물 리스트
+		// 로그인한 사용자의 반려동물 리스트 전달
 		List<Pet> listPet = petMan.findPetListOfMember(userId);
 		request.setAttribute("petList", listPet);
 

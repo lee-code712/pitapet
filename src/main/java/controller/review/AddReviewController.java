@@ -22,6 +22,8 @@ import model.dto.Review;
 import model.service.ReviewManager;
 
 public class AddReviewController implements Controller {
+	
+	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession();
@@ -34,6 +36,7 @@ public class AddReviewController implements Controller {
 		String rate = null;
 		ArrayList<String> files = new ArrayList<>();
 		
+		// 리뷰 추가 처리
 		boolean check = ServletFileUpload.isMultipartContent(request);
 		if(check) {//파일 전송이 포함된 상태가 맞다면
 			ServletContext context = request.getServletContext();
@@ -101,7 +104,8 @@ public class AddReviewController implements Controller {
                 		}
                 	}
                 }
-                System.out.println(Float.parseFloat(rate));
+                
+                // 리뷰 정보 저장 후 추가 처리
                 Review review = new Review(content, Float.parseFloat(rate), 
     					new Care(Integer.parseInt(careId)), files);
             	boolean isAdded = reviewMan.add(review, memberId);

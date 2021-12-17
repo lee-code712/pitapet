@@ -1,6 +1,5 @@
 package controller.sitter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,8 @@ import model.service.PetSitterManager;
 import model.service.ServiceManager;
 
 public class RegisterSitterController implements Controller{
-	 
+	
+	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		
@@ -29,9 +29,9 @@ public class RegisterSitterController implements Controller{
 		PetManager petMan = PetManager.getInstance();
 		
 		String memberId = UserSessionUtils.getLoginUserId(session);
-		
 		PetSitter sitter = null;
 		
+		// 돌보미 등록 form 이동
 		if (request.getMethod().equals("GET")) {
 			 PetSitterApplication applicationInfo = appMan.findApplicationByMemberId(memberId);
 			 List<Service> serviceList = servMan.findAllServiceList();
@@ -43,7 +43,8 @@ public class RegisterSitterController implements Controller{
 			 
 			 return "/sitter/sitterRegisterForm.jsp";
 		}
-		 
+		
+		// 돌보미 등록 처리
 		try {
 			// 지원정보 자기소개 업데이트
 			appMan.updateApplcationIntroduction(memberId, request.getParameter("introduction"));
@@ -53,7 +54,6 @@ public class RegisterSitterController implements Controller{
 			
 			sitter = new PetSitter(request.getParameter("publicStatus"), null, request.getParameter("calculatedPrice")
 					, request.getParameter("tag"), request.getParameter("notes"));
-			
 			
 	        boolean isRegister = sitterMan.createSitter(memberId, sitter, applicationInfo.getId(), request.getParameterValues("ableDate"));
 	        if (isRegister) {

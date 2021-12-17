@@ -14,6 +14,7 @@ public class DeletePetController implements Controller {
 		String petId = request.getParameter("petId");
 		PetManager petMan = PetManager.getInstance();
 		
+		// 반려동물 삭제 처리
 		int delete = petMan.remove(petId);
 		if (delete > 0) {
 			return "redirect:/pet/listPet";

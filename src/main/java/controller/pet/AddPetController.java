@@ -17,10 +17,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import controller.Controller;
 import controller.member.UserSessionUtils;
-import model.dto.Care;
 import model.dto.Pet;
 import model.dto.PetKind;
-import model.dto.Review;
 import model.service.PetManager;
 
 public class AddPetController implements Controller {
@@ -115,6 +113,7 @@ public class AddPetController implements Controller {
                 		}
                 	}
                 }
+                // 반려동물 정보 저장 후 반려동물 추가 처리
                 pet = new Pet(name, birth, gender, new PetKind(kindId), files.get(0));
         		isAdded = petMan.addPet(userId, pet);
 			}catch(SizeLimitExceededException e) {
@@ -128,10 +127,6 @@ public class AddPetController implements Controller {
             }
 		}
 		
-		/*
-		 * Pet pet = new Pet(name, birth, gender, new PetKind(kindId), null); boolean
-		 * isAdded = petMan.addPet(userId, pet);
-		 */
 		if (!isAdded) {
 			session.setAttribute("petInfo", pet);
 			return "redirect:/pet/addPet?updateFailed=true";

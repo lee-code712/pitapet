@@ -35,10 +35,8 @@ public class RequestMapping {
         mappings.put("/member/register/form", new ForwardController("/member/registerForm.jsp"));
         mappings.put("/member/memberMyPage", new MemberMyPageController());
         mappings.put("/member/updateMember", new UpdateMemberController());
-        mappings.put("/member/updateSitter", new UpdateSitterController());
         mappings.put("/member/updateProfilePic", new UpdateProfilePicController());
         mappings.put("/member/applySitter", new ApplySitterController());
-        mappings.put("/member/updateSitterApply", new ForwardController("/member/sitterApplyUpdateForm.jsp"));
         mappings.put("/member/register", new RegisterController());
         mappings.put("/member/viewSitterApply", new ViewSitterApplyController());
         mappings.put("/member/sitterApplyCancel", new CancelSitterApplyController());
@@ -47,10 +45,7 @@ public class RequestMapping {
         mappings.put("/pet/deletePet", new DeletePetController());
         mappings.put("/pet/listPet", new ListPetController());
         // sitter
-        mappings.put("/petSitter/sitterMyPage", new ForwardController("/sitter/sitterMyPage"));
         mappings.put("/petSitter/registerSitter", new RegisterSitterController());
-        mappings.put("/petSitter/updateSitter", new ForwardController("/sitter/sitterUpdateForm.jsp"));
-        mappings.put("/petSitter/viewSitter", new ForwardController("/sitter/sitterView.jsp"));
         // reservation
         mappings.put("/reservation/listSitter", new ListSitterController());
         mappings.put("/reservation/viewSitterDetail", new ViewSitterDetailController());
@@ -60,7 +55,6 @@ public class RequestMapping {
         // care
         mappings.put("/care/listCareDiary", new CareDiaryListController());
         mappings.put("/care/recordCare", new RecordCareController());
-        mappings.put("/care/updateCareDiary", new ForwardController("/care/careDiaryUpdateForm.jsp"));
         // review
         mappings.put("/review/listReview", new ListReviewController());
         mappings.put("/review/addReview", new AddReviewController());

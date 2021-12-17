@@ -27,7 +27,6 @@ public class UpdateProfilePicController implements Controller {
 		
 		MemberManager memberMan = MemberManager.getInstance();
 		
-		// 반려동물 추가 form 이동
 		if (request.getMethod().equals("GET")) {
 			return "/member/ProfilePicUpdateForm.jsp";
 		}

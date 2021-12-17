@@ -177,10 +177,10 @@
         <div id="pageTit">지원 정보</div>
         <div id="pageInner">
             <div id="introPage">
-                <c:if test="${applicantDetail.applicant.profileImage eq null}">
+                <c:if test="${empty applicantDetail.applicant.profileImage}">
 					<img src="/images/applyImage.svg" id="applyImg" />
 				</c:if>
-				<c:if test="${applicantDetail.applicant.profileImage ne null}">
+				<c:if test="${not empty applicantDetail.applicant.profileImage}">
 					<img src="${applicantDetail.applicant.profileImage}" id="applyImg" />
 				</c:if>
                 <div id="introTit">${applicantDetail.introduction}</div>
@@ -197,10 +197,10 @@
                 <div id="service">${applicantDetail.career}</div>
 
                 <div id="subTit">▪ 자격증</div>
-                	<c:if test="${applicantDetail.images eq null}">
+                	<c:if test="${empty applicantDetail.images}">
                     	<img src="/images/certImg.svg" id="certImg"/>
                     </c:if>
-                    <c:if test="${applicantDetail.images ne null}">
+                    <c:if test="${not empty applicantDetail.images}">
                     	<img src="${applicantDetail.images[0]}" id="certImg"/>
                     </c:if>
                 <div id="certName">${applicantDetail.certification}</div>

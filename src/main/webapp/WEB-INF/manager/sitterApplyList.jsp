@@ -51,5 +51,7 @@
 	            </c:forEach>
         </table>
     </div>
+    
+    <%@include file="../components/footer.jsp" %>
 </body>
 </html>

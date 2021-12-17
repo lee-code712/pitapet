@@ -167,8 +167,7 @@
             </div>
         </div>
     </div>
-    <div id="footerWrap">
-        <div id="footerText">Copyrights © 2021 by 윤김구이. All Rights Reserved.</div>
-    </div>
+    
+    <%@include file="../components/footer.jsp" %>
 </body>
 </html>

@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="/css/sitterRegisterForm.css"/>
     <script src="/js/sitterRegisterForm.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <style>
+		#checkBoxWrap {
+		    display: flex;
+		    align-items: center;
+		    height: 40px;
+		}
+    </style>
 </head>
 
 <body>
@@ -57,7 +64,9 @@
                 <td id="tdTit">제공 서비스</td>
                 <td>
                     <c:forEach var="service" items="${serviceList}">
-		                  <input type="checkbox" id="textDesign" name="serviceCheck" value="${service.id}" />${service.title}
+                        <div id="checkBoxWrap">
+                            <input type="checkbox" name="serviceCheck" value="${service.id}" /> ${service.title}
+                        </div>
 	                </c:forEach>
                 </td>
             </tr>
@@ -125,7 +134,7 @@
                 <td id="tdTit">돌봄 가능 반려동물 종</td>
                 <td>
                 	<c:forEach var="petKind" items="${petKindList}" varStatus="status">
-                		<input type="checkbox" id="textDesign" name="ablePetKind" value="${petKind.id}" /> ${petKind.largeCategory} - ${petKind.smallCategory}
+                		<input type="checkbox" name="ablePetKind" value="${petKind.id}" /> ${petKind.largeCategory} - ${petKind.smallCategory}
 	                </c:forEach>
                 </td>
             </tr>

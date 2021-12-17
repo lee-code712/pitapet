@@ -171,4 +171,27 @@ public class ReviewDAO {
 		}
 		return 0;
 	}	
+
+	/* 별점 평균 업데이트 */
+	public int updateAvgRate(String sitterId, Float rate) throws SQLException {
+		String sql = "UPDATE petsitter "
+				+ "SET avg_rate = ("
+				+ "SELECT (SUM(rate) + " + rate + ") / (COUNT(review_id) + 1)"
+				+ "FROM review JOIN care USING (care_id)"
+				+ "WHERE sitter_id = ?)";
+		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { sitterId });
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+
+			return recordCount;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}
+		return 0;
+	}
+	
 }

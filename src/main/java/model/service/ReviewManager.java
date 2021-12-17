@@ -50,7 +50,7 @@ public class ReviewManager {
 	}
 	
 	/* 리뷰 추가 */
-	public boolean add(Review review, String memberId) throws SQLException {
+	public boolean add(Review review, String memberId, String sitterId) throws SQLException {
 		int count = reviewDAO.add(review);
 		if (count == 0) return false;
 		
@@ -60,6 +60,9 @@ public class ReviewManager {
 			count = reviewDAO.addAttachment(imgSrc, memberId);
 			if (count == 0) return false;
 		}
+		// 별점 평균을 구해 갱신
+		count = reviewDAO.updateAvgRate(sitterId, review.getRate());
+		if (count == 0) return false;
 		return true;
 	}
 	

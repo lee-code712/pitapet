@@ -108,7 +108,7 @@ public class AddReviewController implements Controller {
                 // 리뷰 정보 저장 후 추가 처리
                 Review review = new Review(content, Float.parseFloat(rate), 
     					new Care(Integer.parseInt(careId)), files);
-            	boolean isAdded = reviewMan.add(review, memberId);
+            	boolean isAdded = reviewMan.add(review, memberId, sitterId);
             	if (!isAdded)
             		request.setAttribute("addFailed", true);
 			}catch(SizeLimitExceededException e) {

@@ -165,11 +165,14 @@ public class PetSitterManager {
 		return sitter;
 	}
 	
+	/* 돌보미 생성 */
 	public boolean createSitter(String memberId, PetSitter sitter, String applyId, String[] ableDate) throws SQLException {
 		for (String d : ableDate) {
 			System.out.println(d);
 		}
 		int count = 0;
+		
+		//돌봄 가능 요일 처리
 		String ableDateBin = "";
 		for (int i = 0; i < 7; i++) { // 0 1 3 4 : 월 화 목 금 : 1101100
 			if (count < ableDate.length) {

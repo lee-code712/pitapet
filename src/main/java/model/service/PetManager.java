@@ -7,12 +7,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 import model.dao.PetDAO;
 import model.dto.Pet;
 import model.dto.PetKind;
-import model.dto.Service;
 
 public class PetManager {
 	private static PetManager petMan = new PetManager();
@@ -47,6 +45,7 @@ public class PetManager {
 		return userPets;
 	}
 	
+	/* 특정 돌보미의 돌봄 가능 종 리스트 검색 */
 	public ArrayList<PetKind> findAblePetKindList(String sitterId) throws SQLException {
 		return petDAO.findAblePetKindList(sitterId);
 	}
@@ -85,7 +84,7 @@ public class PetManager {
 		return null;
 	}
 	
-	// 반려동물 아이디 생성
+	/* 반려동물 아이디 생성 */
 	public String makePetId() {
 		int count = petDAO.countAllPet();
 		String petId = null;
@@ -111,22 +110,23 @@ public class PetManager {
 		return true;
 	}	
 	
+	/* 반려동물 정보 검색 */
 	public Pet findPetInfo(String petId) throws SQLException {
 		return petDAO.findPetInfo(petId);
 	}
 	
-	// 반려동물 삭제
+	/* 반려동물 삭제 */
 	public int remove(String petId) throws SQLException {
 		ServiceManager serviceMan = ServiceManager.getInstance();
 		if (serviceMan.countReceiveServiceByPetId(petId) != 0) // 해당 반려동물 관련 예약 정보가 있다면
 			return 0;
 		else {
-			// 반려동물 사진 삭제 // 반려동물 삭제
+			// 반려동물 사진 삭제과 반려동물 삭제
 			return petDAO.removePetAttachments(petId) + petDAO.remove(petId);
 		}
 	}
 	
-	// 돌봄 가능 반려동물 추가
+	/* 돌봄 가능 반려동물 추가 */
 	public int addAblePetKind(String memberId, String[] petKinds) throws SQLException {
 		int count = 0;
 		
@@ -136,23 +136,4 @@ public class PetManager {
 		
 		return count;
 	}	
-	
-//	public ArrayList<PetKind> findAblePetKindList(String sitterId) throws SQLException {
-//	return petDAO.findAblePetKindList(sitterId);
-//}
-
-//public ArrayList<String> findPetAttachments(String memberId, String petId) throws SQLException {
-//	return (ArrayList<String>) petDAO.findPetAttachments(memberId, petId);
-//}
-
-//public ArrayList<CareDetails> findCarePetList(Integer careId) throws SQLException {
-//	ArrayList<Pet> petList = petDAO.findCarePetList(careId);
-//	ArrayList<CareDetails> careDetailList = new ArrayList<CareDetails>();
-//	if (petList != null) {
-//		for (Pet pet : petList) {
-//			careDetailList.add(new CareDetails(pet));
-//		}
-//	}
-//	return careDetailList;
-//}
 }	

@@ -32,7 +32,7 @@ public class PetSitterApplicationManager {
 		return petSitterApplicationDAO.findApplicationList();
 	}
 	
-	/* 특정  돌보미 지원자 정보 반환 */
+	/* 특정 돌보미 지원자 정보 반환 */
 	public PetSitterApplication findApplication(String applyId) throws SQLException {
 		PetSitterApplication application = petSitterApplicationDAO.findApplication(applyId);
 		String[] address = application.getApplicant().getAddress().split(" ");
@@ -50,6 +50,7 @@ public class PetSitterApplicationManager {
 		return application;
 	}
 	
+	/* 돌보미 승인/거절 */
 	public boolean updateStatus(String applyId, String memberId, String status) throws SQLException {
 		int count = 0;
 		
@@ -64,11 +65,7 @@ public class PetSitterApplicationManager {
 		return true;
 	}
 	
-//	public int createBasicSitter(String memberId, String applyId) throws SQLException {
-//	      return petSitterApplicationDAO.createBasicSitter(memberId, applyId);
-//	}
-	
-	//돌보미 지원 아이디 생성
+	/* 돌보미 지원 아이디 생성 */
 	public String makeApplicationId() {
 		int count = petSitterApplicationDAO.countAllApplication();
 		String applicationId = null;
@@ -80,7 +77,7 @@ public class PetSitterApplicationManager {
 		return applicationId;
 	}
 		
-	// 돌보미 지원 추가
+	/* 돌보미 지원 추가 */
 	public boolean addApplication(String memberId, PetSitterApplication app) throws SQLException {
 		app.setId(makeApplicationId());
 		int count = petSitterApplicationDAO.addApplication(memberId, app);
@@ -89,7 +86,7 @@ public class PetSitterApplicationManager {
 		return true;
 	}
 	
-	//아이디로 돌보미 지원 내역 찾기
+	/* 아이디로 돌보미 지원 내역 찾기 */
 	public PetSitterApplication findApplicationByMemberId(String memberId) throws SQLException {
 		PetSitterApplication application = petSitterApplicationDAO.findApplicationByMemberId(memberId);
 		
@@ -99,7 +96,7 @@ public class PetSitterApplicationManager {
 		return application;
 	}
 	
-	//돌보미 지원 취소
+	/* 돌보미 지원 취소 */
 	public boolean cancelApplication(String applyId) throws SQLException {
 		int count = petSitterApplicationDAO.cancelApplication(applyId);
 		if(count == 0)
@@ -107,7 +104,7 @@ public class PetSitterApplicationManager {
 		return true;
 	}
 	
-	// 돌보미 지원 정보 자기소개 수정
+	/* 돌보미 지원 정보 자기소개 수정 */
 	public boolean updateApplcationIntroduction(String memberId, String introduction) throws SQLException {
 		int count = petSitterApplicationDAO.updateApplcationIntroduction(memberId, introduction);
 		if(count == 0)

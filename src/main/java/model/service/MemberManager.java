@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import model.dao.mybatis.MemberDAO;
 import model.dto.Member;
-import model.dto.Pet;
 import model.service.exception.ExistingIdException;
 import model.service.exception.MemberNotFoundException;
 import model.service.exception.PasswordMismatchException;

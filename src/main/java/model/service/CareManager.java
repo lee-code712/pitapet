@@ -187,10 +187,12 @@ public class CareManager {
 		return careDAO.findCareRecordsByCare(careId);
 	}
 	
+	/* 돌봄 내역 삭제 */
 	public int deleteCare(int careId) throws SQLException {
 		return careDAO.deleteCare(careId);
 	}
 	
+	/* 제공받는 서비스 했는지 확인(체크) */
 	public String getCheckInfo(String rcvId) throws SQLException {
 		return careDAO.getCheckInfo(rcvId);
 	}

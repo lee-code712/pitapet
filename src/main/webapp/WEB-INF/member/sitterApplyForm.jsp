@@ -12,18 +12,6 @@
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
 	<link rel="stylesheet" href="/css/sitterApplyForm.css"/>
-	<style>
-		#applyCancelBtn {
-			margin-right: 40px;
-			width: 100px;
-		    height: 40px;
-		    background-color: #C4C4C4;
-		    color: white;
-		    border-radius: 5px;
-		    border: none;
-		    cursor: pointer;
-		}
-	</style>
 </head>
 
 <body>

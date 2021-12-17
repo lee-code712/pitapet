@@ -26,38 +26,6 @@
 	    var petKindJson = JSON.parse('${petKindJson}');
 	    var sitterCareListJson = JSON.parse('${sitterCareListJson}');
     </script>
-    
-    <style>
-    	#rezCompleteBtn {
-    		width: 80px;
-		    height: 24px;
-		    border: none;
-		    color: #D8B571;
-		    border-radius: 50px;
-		    background-color: white;
-		    cursor: pointer;
-    	}
-    	
-    	#rezProceedingBtn {
-    		width: 80px;
-		    height: 24px;
-		    border: none;
-		    color: #9FBB50;
-		    border-radius: 50px;
-		    background-color: white;
-		    cursor: pointer;
-    	}
-    	
-    	#careCompleteBtn {
-    		width: 80px;
-		    height: 24px;
-		    border: none;
-		    color: #9889F2;
-		    border-radius: 50px;
-		    background-color: white;
-		    cursor: pointer;
-    	}
-    </style>
 </head>
 
 <body>

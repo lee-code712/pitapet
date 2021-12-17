@@ -115,3 +115,14 @@
 #blank {
     margin-left: 20px;
 }
+
+#applyCancelBtn {
+	margin-right: 40px;
+	width: 100px;
+    height: 40px;
+    background-color: #C4C4C4;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}

@@ -14,14 +14,6 @@
 	<link rel="stylesheet" href="/css/footer.css" />
 	<link rel="stylesheet" href="/css/sitterList.css" />
 	<script src="/js/sitterList.js"></script>
-	
-	<style>
-		#reviewSubTit {
-			margin-left: 10px;
-			font-size: 12px;
-			color: #535353;
-		}
-	</style>
 </head>
 
 <body id="pageBg">

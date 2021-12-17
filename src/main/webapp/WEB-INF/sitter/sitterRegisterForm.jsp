@@ -14,13 +14,6 @@
     <link rel="stylesheet" href="/css/sitterRegisterForm.css"/>
     <script src="/js/sitterRegisterForm.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <style>
-		#checkBoxWrap {
-		    display: flex;
-		    align-items: center;
-		    height: 40px;
-		}
-    </style>
 </head>
 
 <body>

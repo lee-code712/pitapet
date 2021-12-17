@@ -1,8 +1,6 @@
-@charset "UTF-8";
-
-#headerWrap {
+ #headerWrap {
     border-bottom: 1px solid rgba(150, 150, 150, 0.2);
-}
+}   
 
 #pageWrap {
     margin: 100px auto 0px auto;
@@ -14,155 +12,127 @@
     font-size: 24px;
 }
 
-#applyBox {
+#pageInner {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    width: 1154px;
-    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
-    border-radius: 5px;
-    background: white;
+    width: 1194px;
 }
 
-#applyImgWrap {
-    position: relative;
+#introPage {
+    width: 684px;
 }
 
-#targetLocation {
+#infooPage {
+    width: 444px;
+}
+
+#locationWrap {
     display: flex;
-    justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    transform: (50%, 50%);
-    width: 80px;
-    height: 30px;
-    border-radius: 5px 0px 5px 0px;
-    background-color: #757575;
-    color: white;
-}
-
-#applyInfo {
-    display: flex;
-    flex-direction: column;
-    width: 576px;
-    height: 348px;
-}
-
-#sitterName {
-    margin-bottom: 34px;
-    font-size: 24px;
-}
-
-#detailTit {
-    margin-bottom: 20px;
-    font-size: 18px;
-}
-
-#detailIntro {
-    margin-bottom: 50px;
-    font-size: 14px;
-    color: #535353;
-}
-
-#lookUpDate {
+    height: 40px;
     font-size: 12px;
     color: #C4C4C4;
 }
 
-#serviceCaringWrap {
-    display: flex;
-    flex-direction: column;
-    margin-top: auto;
+#locationImg {
+    margin-right: 4px;
 }
 
-#petSitterServiceWrap {
-    display: flex;
-    margin-bottom: 20px;
+#sitterName {
+    font-size: 18px;
 }
 
-#petSitterService {
-    margin-left: 20px;
-    font-size: 14px;
-    color: #E3C1A2;
+#subTit {
+    margin: 40px 0px 20px 0px;
+    font-size: 16px;
 }
 
-#serviceTit {
-    font-size: 14px;
-}
-
-#caringTit {
+#service {
     font-size: 14px;
     color: #535353;
 }
 
-
-#caringDateWrap {
-    display: flex;
-    justify-content: space-between;
-}
-
-#caringPetsWrap {
+#ablePetWrap {
     display: flex;
     align-items: center;
+    height: 40px;
+}
+
+#ablePet {
+    margin-right: 14px;
+    padding: 2px 8px;
     font-size: 14px;
-}
-
-#caringPet {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 20px;
-    width: 70px;
-    height: 24px;
     color: #E3C1A2;
     border: 1px solid #E3C1A2;
     border-radius: 50px;
 }
 
+#certName {
+    font-size: 14px;
+    color: #535353;
+}
+
+#btnWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 444px;
+    height: 40px;
+}
+
+#acceptBtn {
+    width: 200px;
+    height: 40px;
+    color: white;
+    background: #89A0F2;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#refuseBtn {
+    width: 200px;
+    height: 40px;
+    color: white;
+    background: #F28989;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#introTit {
+    margin: 40px 0px 10px 0px;
+    font-size: 18px;
+}
+
+#introText {
+    color: #535353;
+    font-size: 14px;
+}
+
+#certName {
+    margin: 20px 0px 80px 0px;
+}
+
+#applyImg {
+    width: 684px;
+    height: 476.06px;
+    object-fit: scale-down;
+    border: 1px solid #EAEAEA;
+    border-radius: 5px;
+}
+
+#certImg {
+    width: 444px;
+    height: 309.02px;
+    object-fit: cover;
+}
+      
+#headerWrap {
+    border-bottom: 1px solid rgba(150, 150, 150, 0.2);
+}
+
 #logo {
     z-index: 1;
    	margin-left: 14px;
-}
-		
-#refuseBtn {
-	margin-right: 40px;
-    width: 100px;
-    height: 40px;
-    background-color: #F28989;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    border: none;
-}
-		
-#acceptBtn {
-    width: 100px;
-    height: 40px;
-    background-color: #89A0F2;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    border: none;
-}
-		
-#acceptBtnWrap {
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	    margin-top: 60px;
-	height: 40px;
-}
-
-#profileImg {
-	width: 500px;
-	height: 348px;
-	border: 1px solid #eaeaea;
-	border-radius: 5px;
-	object-fit: cover;
-}
-
-#pageBg {
-	background: #F8F9FA;
 }

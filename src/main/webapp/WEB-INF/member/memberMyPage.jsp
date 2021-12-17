@@ -52,10 +52,10 @@
                     <c:url value='/member/updateMember' var="updateMemberUrl"/>
                     <img src="/images/infoEdit.svg" id="editBtn" onclick="location.href='${updateMemberUrl}'" />
                 </div>
-	                <c:if test="${memberInfo.profileImage eq null}">
+	                <c:if test="${empty memberInfo.profileImage}">
 						<img src="/images/myPageNullImg.svg" id="profileImg" />
 					</c:if>
-					<c:if test="${memberInfo.profileImage ne null}">
+					<c:if test="${not empty memberInfo.profileImage}">
 						<img src="${memberInfo.profileImage}" id="profileImg" />
 					</c:if>
                 <div id="myInfo">
@@ -134,13 +134,14 @@
                    		
                    		<c:if test="${care.status eq 'Z'}">
 							<c:url value='/reservation/viewReservation?careId=${care.id}' var="viewReservationUrl"/>
+							<c:url value='/reservation/viewSitterDetail?sitterId=${care.sitter.sitter.id}' var="viewSitterUrl"/>
                    			<tr>
 	                    		<td>${care.sitter.sitter.name}</td>
 	                    		<td>${fn:split(care.startDate, ' ')[0]} ~ ${fn:split(care.endDate, ' ')[0]}</td>
 	                   			<td><button id="careCompleteBtn" onClick="location.href='${viewReservationUrl}'">돌봄완료</button></td>
 	                   			<td>
 		                            <button id="careBtn" onClick="location.href='${careDiaryUrl}'">돌봄일지</button>
-		                            <button id="reviewBtn">리뷰작성</button>
+		                            <button id="reviewBtn" onClick="location.href='${viewSitterUrl}'">리뷰작성</button>
 		                        </td>
 	                        </tr>
                    		</c:if>

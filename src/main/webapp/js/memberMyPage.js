@@ -14,7 +14,7 @@ function searchSitterPageInfo() {
 	}
 	
 	$("#reservationInfoWrap").empty();
-	
+	$("#reservationInfoWrap").append("<img src='/images/sole.svg'/>  ");
 	$("#reservationInfoWrap").append("예약 정보");
 	$("#reservationInfoWrap").append("<br/><br/><br/>");
 	var careTableElement = document.createElement("table");
@@ -92,6 +92,7 @@ function searchSitterPageInfo() {
 	var notes = sitterInfoJson.notes;
 	
 	$("#reservationInfoWrap").append("<br/><br/><br/><br/><br/>");
+	$("#reservationInfoWrap").append("<img src='/images/sole.svg'/>  ");
 	$("#reservationInfoWrap").append("돌보미 정보");
 	$("#reservationInfoWrap").append("<br/><br/><br/>");
 	var newTableElement = document.createElement("table");
@@ -157,6 +158,7 @@ function searchSitterPageInfo() {
 	
 	// 돌봄 가능한 펫 정보
 	$("#reservationInfoWrap").append("<br/><br/><br/><br/><br/>");
+	$("#reservationInfoWrap").append("<img src='/images/sole.svg'/>  ");
 	$("#reservationInfoWrap").append("돌봄 가능한 반려동물 정보");
 	$("#reservationInfoWrap").append("<br/><br/><br/>");
 	
@@ -186,6 +188,7 @@ function searchSitterPageInfo() {
 	
 	// 가능한 서비스 정보
 	$("#reservationInfoWrap").append("<br/><br/><br/><br/><br/>");
+	$("#reservationInfoWrap").append("<img src='/images/sole.svg'/>  ");
 	$("#reservationInfoWrap").append("가능한 서비스 정보");
 	$("#reservationInfoWrap").append("<br/><br/><br/>");
 	

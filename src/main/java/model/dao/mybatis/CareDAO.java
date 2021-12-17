@@ -170,6 +170,7 @@ public class CareDAO {
 		}
 	}
 	
+	/* 돌봄 내역 삭제 */
 	public int deleteCare(int careId) {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
@@ -179,6 +180,7 @@ public class CareDAO {
 		}
 	}
 	
+	/* 제공받는 서비스 했는지 확인(체크) */
 	public String getCheckInfo(String rcvId) {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
@@ -189,6 +191,7 @@ public class CareDAO {
 		}
 	}
 	
+	/* 돌봄 진행 상태로 업데이트 */
 	public int updateCareSchedule(Care care) {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {

@@ -27,6 +27,7 @@ private SqlSessionFactory sqlSessionFactory;
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 	}
 	
+	/* 특정 회원정보 반환 */
 	public Member findMember(String memberId) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -37,6 +38,7 @@ private SqlSessionFactory sqlSessionFactory;
 		}
 	}
 	
+	/* 회원정보 생성 */
 	public int createMember(Member newMember) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -53,6 +55,7 @@ private SqlSessionFactory sqlSessionFactory;
 		}
 	}
 	
+	/* 회원정보 업데이트 */
 	public int update(Member updateInfo) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -69,6 +72,7 @@ private SqlSessionFactory sqlSessionFactory;
 		}
 	}
 
+	/* 프로필 사진 삭제 */
 	public int deleteProfilePic(String memberId, String like) {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
@@ -85,6 +89,7 @@ private SqlSessionFactory sqlSessionFactory;
 		}
 	}
 
+	/* 프로필 사진 추가 */
 	public int addAttachment(String image, String memberId) {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {

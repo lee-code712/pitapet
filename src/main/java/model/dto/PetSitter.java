@@ -2,8 +2,6 @@ package model.dto;
 
 import java.util.List;
 
-import javax.management.remote.SubjectDelegationPermission;
-
 public class PetSitter {
 	private Member sitter;
 	private String publicStatus;

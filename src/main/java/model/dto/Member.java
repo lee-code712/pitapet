@@ -3,6 +3,7 @@ package model.dto;
 import java.io.Serializable;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class Member implements Serializable{
 	private String id;
 	private String password;

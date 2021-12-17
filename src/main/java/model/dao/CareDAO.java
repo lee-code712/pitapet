@@ -28,7 +28,6 @@ public class CareDAO {
 			sql += "WHERE c.member_id = ? OR c.sitter_id = ? ";
 			jdbcUtil.setSqlAndParameters(sql, new Object[] { memberId, memberId });
 		}
-		//sql += "ORDER BY start_date DESC";
 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();
@@ -156,6 +155,7 @@ public class CareDAO {
 		return 0;
 	}
 	
+	/* 돌봄 내역 삭제 */
 	public int deleteCare(int careId) throws SQLException {
 		String sql = "DELETE FROM care "
 				+ "WHERE care_id = ?";     
@@ -173,6 +173,7 @@ public class CareDAO {
 		return 0;
 	}
 	
+	/* 제공받는 서비스 했는지 확인(체크) */
 	public String getCheckInfo(String rcvId) throws SQLException {
 		String sql = "SELECT care_check "
 				+ "FROM care_checklist "

@@ -261,7 +261,6 @@ public class PetDAO {
 
 	/* 반려동물 추가 */
 	public int addPet(String memberId, Pet pet) {
-		// 반려동물 추가
 		String sql = "INSERT INTO PET VALUES (?, ?, ?, ?, ?, ?)";
 		Object[] param = new Object[] { pet.getId(), pet.getName(), pet.getBirth(), pet.getGender(), memberId, pet.getKind().getId() };
 		jdbcUtil.setSqlAndParameters(sql, param);
@@ -280,6 +279,7 @@ public class PetDAO {
 		return 0;
 	}
 
+	/* petId에 해당하는 반려동물 정보 조회 */
 	public Pet findPetInfo(String petId) throws SQLException {
 		String sql = "SELECT pet_id, name, birth, gender, member_id, kind_id " + "FROM pet " + "WHERE pet_id = ?";
 
@@ -361,6 +361,7 @@ public class PetDAO {
 		return 0;
 	}
 
+	/* 돌보미의 돌봄 가능 동물 종 추가 */
 	public int addAblePetKind(String memberId, String kindId) {
 		String sql = "INSERT INTO available_pet_kind (kind_id, sitter_id) " 
 				+ "VALUES (?, ?)";

@@ -4,19 +4,9 @@ public class LikeList {
 	private String memberId;
 	private PetSitter likeSitter;
 	
-	public LikeList(String memberId) {
-		super();
-		this.memberId = memberId;
-	}
-	
 	public LikeList(String memberId, PetSitter likeSitter) {
 		super();
 		this.memberId = memberId;
-		this.likeSitter = likeSitter;
-	}
-	
-	public LikeList(PetSitter likeSitter) {
-		super();
 		this.likeSitter = likeSitter;
 	}
 	

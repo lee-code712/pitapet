@@ -70,31 +70,24 @@ public class PetSitter {
 	public void setPublicStatus(String publicStatus) {
 		this.publicStatus = publicStatus;
 	}
-	
 	public String getAbleDate() {
 		return ableDate;
 	}
-
 	public void setAbleDate(String ableDate) {
 		this.ableDate = ableDate;
 	}
-
 	public String getCalculatedPrice() {
 		return calculatedPrice;
 	}
-
 	public void setCalculatedPrice(String calculatedPrice) {
 		this.calculatedPrice = calculatedPrice;
 	}
-
 	public String getTag() {
 		return tag;
 	}
-
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
-
 	public String getNotes() {
 		return notes;
 	}
@@ -118,28 +111,22 @@ public class PetSitter {
 	}
 	public void setView(int view) {
 		this.view = view;
-	}
-	
+	}	
 	public List<PetKind> getKinds() {
 		return kinds;
 	}
-
 	public void setKinds(List<PetKind> kinds) {
 		this.kinds = kinds;
 	}
-
 	public List<Service> getServices() {
 		return services;
 	}
-
 	public void setServices(List<Service> services) {
 		this.services = services;
 	}
-
 	public PetSitterApplication getMyApplyInfo() {
 		return myApplyInfo;
 	}
-
 	public void setMyApplyInfo(PetSitterApplication myApplyInfo) {
 		this.myApplyInfo = myApplyInfo;
 	}

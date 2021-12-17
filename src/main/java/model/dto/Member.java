@@ -139,15 +139,13 @@ public class Member implements Serializable{
 	}
 	public void setMyPets(List<Pet> myPets) {
 		this.myPets = myPets;
-	}
-	
+	}	
 	public String getProfileImage() {
 		return profileImage;
 	}
 	public void setProfileImage(String profileImage) {
 		this.profileImage = profileImage;
-	}
-	
+	}	
 	public boolean matchPassword(String password) {
 		if(password == null) {
 			return false;

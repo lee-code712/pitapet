@@ -33,14 +33,6 @@ public class Care implements Serializable {
 		this.sitter = sitter;
 	}
 
-	public Care(int id, String startDate, String endDate, PetSitter sitter) {
-		super();
-		this.id = id;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.sitter = sitter;
-	}
-	
 	public Care(int id, String startDate, String endDate, Member companion, PetSitter sitter, String status) {
 		super();
 		this.id = id;

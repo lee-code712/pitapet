@@ -17,11 +17,6 @@ public class CareRecord implements Serializable {
 		super();
 	}
 	
-	public CareRecord(int id) {
-		super();
-		this.id = id;
-	}
-	
 	public CareRecord(int id, List<CareDetails> checkList, String writeDate, String title, String content,
 			Care careInfo, List<String> images) {
 		super();
@@ -70,11 +65,9 @@ public class CareRecord implements Serializable {
 	public void setCareInfo(Care careInfo) {
 		this.careInfo = careInfo;
 	}
-
 	public List<String> getImages() {
 		return images;
 	}
-
 	public void setImages(List<String> images) {
 		this.images = images;
 	}

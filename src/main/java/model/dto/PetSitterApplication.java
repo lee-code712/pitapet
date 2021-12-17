@@ -85,11 +85,9 @@ public class PetSitterApplication {
 	public void setApplicant(Member applicant) {
 		this.applicant = applicant;
 	}
-
 	public List<String> getImages() {
 		return images;
 	}
-
 	public void setImages(List<String> images) {
 		this.images = images;
 	}

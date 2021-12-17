@@ -70,5 +70,6 @@
 			</div>
 		</c:forEach>
 	</div>
+	<%@include file="../components/footer.jsp" %>
 </body>
 </html>

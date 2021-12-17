@@ -253,30 +253,30 @@ public class PetSitterDAO {
 		return 0;
 	}
 	
-	//돌보미 등록
+	/* 돌보미 등록 */
 	public int createSitter(String memberId, PetSitter sitter, String applyId) throws SQLException {
-		String sql = "INSERT ALL "
-				     + "INTO PETSITTER VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) "
-				     + "SELECT * FROM DUAL";
-		
-		 Object[] param = new Object[] {sitter.getPublicStatus(), sitter.getAbleDate(), sitter.getCalculatedPrice(), sitter.getTag(),
-				 sitter.getNotes(), null, 0, 0, applyId, memberId};
+		String sql = "INSERT ALL " 
+				+ "INTO PETSITTER VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) " 
+				+ "SELECT * FROM DUAL";
 
-		  jdbcUtil.setSqlAndParameters(sql, param);
-		  
-	      try {
-	         int recordCount = jdbcUtil.executeUpdate();
-	         
-	         return recordCount;
-	      } catch (Exception ex) {
-	          jdbcUtil.rollback();
-	    	  ex.printStackTrace();
-	      } finally {
-	    	 jdbcUtil.commit();
-	         jdbcUtil.close();      
-	      }
-	      return 0;
-	   }
+		Object[] param = new Object[] { sitter.getPublicStatus(), sitter.getAbleDate(), sitter.getCalculatedPrice(),
+				sitter.getTag(), sitter.getNotes(), null, 0, 0, applyId, memberId };
+
+		jdbcUtil.setSqlAndParameters(sql, param);
+
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+
+			return recordCount;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
+		}
+		return 0;
+	}
 		
 }
 	

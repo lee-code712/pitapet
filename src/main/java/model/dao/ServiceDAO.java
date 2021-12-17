@@ -1,8 +1,6 @@
 package model.dao;
 
-import java.security.interfaces.RSAKey;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +8,6 @@ import java.util.List;
 import model.dto.Care;
 import model.dto.CareDetails;
 import model.dto.Pet;
-import model.dto.PetKind;
 import model.dto.Service;
 
 public class ServiceDAO {
@@ -46,7 +43,7 @@ public class ServiceDAO {
 		return null;
 	}
 
-// 아직 완료x	
+	/* 돌봄 예약 정보(돌봄 내역) 추가 */
 	public String createReceiveService(int careId, String petId, String serviceId) throws SQLException {
 		String sql = "INSERT INTO RECEIVE_SERVICE VALUES (?, ?, ?, ?)";
 		petId = petId.replaceAll(" ", "");
@@ -56,7 +53,7 @@ public class ServiceDAO {
 		jdbcUtil.setSqlAndParameters(sql, param);
 
 		try {
-			int result = jdbcUtil.executeUpdate();
+			jdbcUtil.executeUpdate();
 
 			sql = "SELECT rcv_id " + "FROM receive_service " + "WHERE rcv_id = ?";
 			param = new Object[] { recvId };
@@ -77,6 +74,7 @@ public class ServiceDAO {
 		return null;
 	}
 
+	/* 예약내역을 참조하는 제공 서비스 삭제 */
 	public int deleteReceiveService(int careId) throws SQLException {
 		String sql = "DELETE FROM receive_service " + "WHERE care_id = ?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { careId });
@@ -93,6 +91,7 @@ public class ServiceDAO {
 		return 0;
 	}
 
+	/* 예약 내여겍에 대한 제공 서비스 리스트 조회  */
 	public List<CareDetails> findReceiveServiceByCareId(Care care) throws SQLException {
 		String sql = "SELECT care_id, rcv_id, pet_id, service_id " + "FROM receive_service " + "WHERE care_id = ?";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { care.getId() });
@@ -119,6 +118,7 @@ public class ServiceDAO {
 		return null;
 	}
 
+	/* 특정 반려동물이 받을 서비스 개수 반환 */
 	public int countReceiveServiceByPetId(String petId) {
 		String like = "%" + petId + "%";
 		String sql = "SELECT COUNT(*) FROM receive_service WHERE pet_id LIKE ?";
@@ -141,6 +141,7 @@ public class ServiceDAO {
 		return count;
 	}
 
+	/* 특정 서비스 정보 조회 */
 	public Service findServiceInfo(String serviceId) throws SQLException {
 		String sql = "SELECT service_id, title, content " + "FROM service " + "WHERE service_id = ?";
 
@@ -161,7 +162,7 @@ public class ServiceDAO {
 		return null;
 	}
 
-	//DB에 등록되어 있는 전체 서비스 목록
+	/* 전체 서비스 목록 조회 */
 	public List<Service> findAllServiceList() throws SQLException {
 		String sql = "SELECT service_id, title, content " + "FROM service";
 		

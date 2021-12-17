@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.dto.Care;
 import model.dto.Member;
 import model.dto.PetSitterApplication;
 
@@ -100,7 +99,7 @@ public class PetSitterApplicationDAO {
 		
 	}
 	
-	//아이디로 돌보미 지원내역 찾기
+	/* 아이디로 돌보미 지원내역 찾기 */
 	public PetSitterApplication findApplicationByMemberId(String memberId) throws SQLException {
 		String sql = "SELECT apply_id, apply_date, career, certification, introduction, member_id, name, gender, phone, address, img_src "
 				+ "FROM petsitter_application ps JOIN member m USING(member_id) "
@@ -202,27 +201,7 @@ public class PetSitterApplicationDAO {
 		return 0;
 	}
 	
-//	//돌보미 승인시 기본적인 펫시터 객체 생성
-//	public int createBasicSitter(String memberId, String applyId) throws SQLException {
-//		String sql = "INSERT INTO PETSITTER(sitter_id, public_status, able_date, sitter_like, sitter_view, apply_id) VALUES (?, ?, ?, ?, ?, ?)";
-//				
-//		jdbcUtil.setSqlAndParameters(sql, new Object[] {memberId, 'N', 'N', 0, 0, applyId}); 
-//
-//		try {				
-//			int result = jdbcUtil.executeUpdate();
-//			return result;
-//		} catch (Exception ex) {
-//			jdbcUtil.rollback();
-//			ex.printStackTrace();
-//		}
-//		finally {
-//			jdbcUtil.commit();
-//			jdbcUtil.close();
-//		}		
-//		return 0;
-//	}
-	
-	// 시스템에 등록된 돌보미 지원 수 반환
+	/* 시스템에 등록된 돌보미 지원 수 반환 */
 		public int countAllApplication() {
 			String sql = "SELECT COUNT(?) FROM PETSITTER_APPLICATION";
 			Object[] param = new Object[] { "apply_id" };
@@ -243,61 +222,63 @@ public class PetSitterApplicationDAO {
 			return count;
 		}
 			
-	//돌보미 지원 추가
-		public int addApplication(String memberId, PetSitterApplication applicationInfo) {
-			String sql = "INSERT INTO PETSITTER_APPLICATION VALUES (?, SYSDATE, ?, ?, ?, ?, ?)";
-			Object[] param = new Object[] {applicationInfo.getId(), applicationInfo.getCareer(), applicationInfo.getCertification(),
-					applicationInfo.getIntroduction(), applicationInfo.getApprovalStatus(), memberId};
-			jdbcUtil.setSqlAndParameters(sql, param);
+	/* 돌보미 지원정보 추가 */
+	public int addApplication(String memberId, PetSitterApplication applicationInfo) {
+		String sql = "INSERT INTO PETSITTER_APPLICATION VALUES (?, SYSDATE, ?, ?, ?, ?, ?)";
+		Object[] param = new Object[] { applicationInfo.getId(), applicationInfo.getCareer(),
+				applicationInfo.getCertification(), applicationInfo.getIntroduction(),
+				applicationInfo.getApprovalStatus(), memberId };
+		jdbcUtil.setSqlAndParameters(sql, param);
 
-			try {
-				int recordCount = jdbcUtil.executeUpdate();
-				return recordCount;
-			} catch (Exception ex) {
-				jdbcUtil.rollback();
-				ex.printStackTrace();
-			} finally {
-				jdbcUtil.commit();
-				jdbcUtil.close();				
-			}
-			return 0;
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+			return recordCount;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
 		}
+		return 0;
+	}
 	
-	// 돌보미 지원 취소
-		public int cancelApplication(String applyId) {
-			String sql = "DELETE FROM PETSITTER_APPLICATION WHERE apply_id=?";
-			Object[] param = new Object[] {applyId};
-			jdbcUtil.setSqlAndParameters(sql, param);
+	/* 돌보미 지원 취소 */
+	public int cancelApplication(String applyId) {
+		String sql = "DELETE FROM PETSITTER_APPLICATION WHERE apply_id=?";
+		Object[] param = new Object[] { applyId };
+		jdbcUtil.setSqlAndParameters(sql, param);
 
-			try {
-				int recordCount = jdbcUtil.executeUpdate();
-				return recordCount;
-			} catch (Exception ex) {
-				jdbcUtil.rollback();
-				ex.printStackTrace();
-			} finally {
-				jdbcUtil.commit();
-				jdbcUtil.close();				
-			}
-			return 0;
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+			return recordCount;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
 		}
-	// 돌보미 지원 정보 자기소개 업데이트
-		public int updateApplcationIntroduction(String memberId, String introduction) throws SQLException {
-			String sql = "UPDATE petsitter_application SET introduction = ? "
-					+ "WHERE member_id = ?";
+		return 0;
+	}
+	
+	/* 돌보미 지원 정보 자기소개 업데이트 */
+	public int updateApplcationIntroduction(String memberId, String introduction) throws SQLException {
+		String sql = "UPDATE petsitter_application SET introduction = ? " 
+				+ "WHERE member_id = ?";
 
-			jdbcUtil.setSqlAndParameters(sql, new Object[] { introduction, memberId });
-			
-			try {
-				int recordCount = jdbcUtil.executeUpdate();
-				
-				return recordCount;
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			} finally {
-				jdbcUtil.commit();
-				jdbcUtil.close();
-			}
-			return 0;
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { introduction, memberId });
+
+		try {
+			int recordCount = jdbcUtil.executeUpdate();
+
+			return recordCount;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();
 		}
+		return 0;
+	}
 }

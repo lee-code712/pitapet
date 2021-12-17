@@ -225,10 +225,9 @@
 			</div>
 		</div>
 	</div>
-	<div id="footerWrap">
-		<div id="footerText">Copyrights © 2021 by 윤김구이. All Rights
-			Reserved.</div>
-	</div>
+	
+	<%@include file="../components/footer.jsp" %>
+	
 	<nav class="menu-box-1">
 		<div class="button">
 			<div id="btn">

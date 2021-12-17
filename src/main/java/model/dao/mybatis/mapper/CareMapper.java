@@ -37,7 +37,9 @@ public interface CareMapper {
 	/* 돌봄일지 추가 */
 	public int createCareRecord(CareRecord careRecord);
 	
+	/* 돌봄 내역 삭제 */
 	public int deleteCare(int careId);
 	
+	/* 제공받는 서비스 했는지 확인(체크) */
 	public String getCheckInfo(String rcvId);
 }

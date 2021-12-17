@@ -77,6 +77,7 @@ public class MemberMyPageController implements Controller{
 				request.setAttribute("sitterInfoJson", sitterInfoJson);
 			}
 			
+			//돌봄 가능 종 리스트 검색
 			List<PetKind> petKind = petMan.findAblePetKindList(userId);
 			if (petKind != null) {
 				ObjectMapper mapper = new ObjectMapper();
@@ -85,6 +86,7 @@ public class MemberMyPageController implements Controller{
 				request.setAttribute("petKindJson", petKindJson);
 			}
 			
+			//제공 가능 서비스 리스트 검색
 			List<Service> serviceList = serviceMan.findProvideServiceList(userId);
 			if (serviceList != null) {
 				ObjectMapper mapper = new ObjectMapper();

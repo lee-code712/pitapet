@@ -12,6 +12,7 @@ public class CancelSitterApplyController implements Controller{
 		PetSitterApplicationManager appMan = PetSitterApplicationManager.getInstance();
 		String applyId = request.getParameter("applyId");
 		
+		//돌보미 지원 취소의 성공 여부
 		boolean isCancel = appMan.cancelApplication(applyId);
 		
 		try {

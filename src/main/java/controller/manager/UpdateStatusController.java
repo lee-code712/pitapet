@@ -18,27 +18,21 @@ public class UpdateStatusController implements Controller{
     	String memberId = (String) request.getParameter("memberId");
     	String status = (String) request.getParameter("status");
     	
+    	//돌보미 승인 또는 거절 성공여부
     	boolean updateSuccess = psApplicationMan.updateStatus(applyId, memberId, status);
     	
     	if(updateSuccess) {
+    		//돌보미 승인
     		if(status.equals("approval")) {
-    			// int createResult = psApplicationMan.createBasicSitter(memberId, applyId); // 돌보미 등록시 PetSitter객체가 생성됨
-        		//if(createResult > 0) {
-        			int upgradeResult = sitterMan.upgradeSitter(memberId);
-        			if(upgradeResult > 0) {
-        				return "redirect:/manager/listSitterApply";
-        			} else {
-        				return "redirect:/manager/viewApply";
-        			}
-        		//}
-//        		else {
-//        			request.setAttribute("updateFailed", true);
-//        			return "redirect:/manager/viewApply";
-//        		}
-    		} else {
+        		int upgradeResult = sitterMan.upgradeSitter(memberId);
+        		if(upgradeResult > 0) {
+        			return "redirect:/manager/listSitterApply";
+        		} else {
+        			return "redirect:/manager/viewApply";
+        		}
+    		} else { //돌보미 거절
     			return "redirect:/manager/listSitterApply";
     		}
-    		
     	} else {
     		request.setAttribute("updateFailed", true);
     		return "redirect:/manager/viewApply";

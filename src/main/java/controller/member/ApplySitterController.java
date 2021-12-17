@@ -23,10 +23,12 @@ public class ApplySitterController implements Controller{
 		 try {
 	         PetSitterApplicationManager appMan = PetSitterApplicationManager.getInstance();
 
+	         //돌보미 지원을 위한 객체
 	         applicationInfo = new PetSitterApplication(
 	               request.getParameter("career"), request.getParameter("certification"), 
 	               request.getParameter("introduction"), "X");
 	         
+	         //돌보미 지원 성공 여부
 	         boolean isApply = appMan.addApplication(memberId, applicationInfo);
 	         if(isApply)
 	            return "redirect:/member/memberMyPage";

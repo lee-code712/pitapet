@@ -14,6 +14,7 @@ public class ViewApplyController implements Controller {
     	PetSitterApplicationManager psApplicationMan = PetSitterApplicationManager.getInstance();
     	String applyId = (String) request.getParameter("applyId");
     	
+    	//돌보미 상세 지원내역 가져오기
     	PetSitterApplication applicantDetail = psApplicationMan.findApplication(applyId);
     	request.setAttribute("applicantDetail", applicantDetail);
     	

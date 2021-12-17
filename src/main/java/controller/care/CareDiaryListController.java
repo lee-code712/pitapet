@@ -16,7 +16,7 @@ public class CareDiaryListController implements Controller {
 		HttpSession session = request.getSession();
 		CareManager careMan = CareManager.getInstance();
 		
-		// session에 id정보가 없으면 mainpage 호출 리다이렉션
+		//session에 id정보가 없으면 mainpage 호출 리다이렉션
 		if(!UserSessionUtils.hasLogined(session)) {
 			return "redirect:/mainpage";
 		}		
@@ -24,6 +24,8 @@ public class CareDiaryListController implements Controller {
 		int careId = Integer.valueOf(request.getParameter("careId")); 
 		Care care = careMan.findCareRecordsByCare(careId);
 		request.setAttribute("care", care);
+		
+		//해당 돌봄내역에 작성한 돌봄일지 개수
 		if (care.getCareRecordList() != null)
 			request.setAttribute("writeCount", care.getCareRecordList().size());
 		

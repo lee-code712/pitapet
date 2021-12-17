@@ -15,6 +15,7 @@ public class ListSitterApplyController implements Controller {
 
     	PetSitterApplicationManager psApplicationMan = PetSitterApplicationManager.getInstance();
     	
+    	//돌보미 지원자 리스트 가져오기
     	List<PetSitterApplication> applicantList = psApplicationMan.findApplicationList();
     	request.setAttribute("applicantList", applicantList);
     	

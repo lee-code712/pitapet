@@ -27,16 +27,17 @@ public class LoginController implements Controller {
             session.setAttribute(UserSessionUtils.USER_SESSION_KEY, memberId);
             session.setAttribute("identity", member.getIdentity());
             
+            // 로그인한 회원이 매니저 등급일 경우
             if(member.getIdentity().equals("M"))
             	return "redirect:/manager/listSitterApply";
             else
             	return "redirect:/mainpage";			
-		} catch (MemberNotFoundException e) {
+		} catch (MemberNotFoundException e) { //입력한 id에 해당하는 회원이 없는 경우
             request.setAttribute("loginIdFailed", true);
 			request.setAttribute("exception", e);
             
 			return "/member/loginForm.jsp";			
-		} catch (PasswordMismatchException e) {
+		} catch (PasswordMismatchException e) { //입력한 id와 password가 맞지 않을 경우
             request.setAttribute("loginPwFailed", true);
 			request.setAttribute("exception", e);
            

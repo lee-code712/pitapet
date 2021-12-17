@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
-#headerWrap {
-    border-bottom: 1px solid rgba(150, 150, 150, 0.2);
+#pageBg {
+    background-color: #F5F6F7;
 }
 
-#careDiaryPageWrap {
+#pageWrap {
     margin: 100px auto 0px auto;
     width: 1194px;
 }
@@ -14,100 +14,187 @@
     font-size: 24px;
 }
 
-#careDiaryInner {
-    margin-bottom: 80px;
+#pageInner {
+    display: flex;
+    justify-content: space-between;
     width: 1194px;
-    border: 1px solid #EAEAEA;
-    background: #FDFDFD;
+}
+
+#pageListWrap {
+    width: 444px;
+}
+
+#petList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    width: 404px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid #F3F3F3;
+}
+
+#careViewWrap {
+    width: 1194px;
+    border-right: 2px solid white;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
     border-radius: 5px;
+    background-color: #FAFAFA;
 }
 
-#careDiaryPetName {
+#careViewHeader {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding-left: 20px;
-    width: 1174px;
+    padding: 0px 20px;
+    width: 1154px;
     height: 40px;
-    font-size: 18px;
-    border-bottom: 1px solid #EAEAEA;
+    border-radius: 5px 5px 0px 0px;
+    background-color: white;
 }
 
-#careDiaryContent {
+#careViewTit {
+    font-size: 14px;
+}
+
+#careImg {
+	width: 604.15px;
+	height: 353.3px;
+	object-fit: cover;
+}
+
+#writeBtn {
+    cursor: pointer;
+}
+
+#careViewBody {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     margin: 0 auto;
-    width: 736px;
+    padding: 0px 40px 0px 40px;
+    width: 604px;
 }
 
-#fullDateWrap {
+#writeDateWrap {
     display: flex;
     justify-content: center;
-    width: 730px;
+    width: 100%;
 }
 
-#fullDate {
+#writeDate {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
-    width: 500px;
-    height: 40px;
-    border: 1px solid #7AAFFF;
-    color: #7AAFFF;
+    margin: 40px 0px;
+    width: 240px;
+    height: 24px;
+    background-color: #F3F3F3;
     border-radius: 50px;
+    color: #C0C0C0;
+    font-size: 12px;
 }
 
-#careDiaryCardWrap {
-    width: 736px;
+#careViewBox {
+    width: 604px;
+    border-radius: 5px;
+    background-color: white;
 }
 
-#careDiaryCard {
-    margin-top: 100px;
-    width: 736px;
-    border: 1px solid #EAEAEA;
-    border-radius: 10px;
-}
-
-#careDiaryPetSitterName {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 20px;
-    width: 716px;
-    height: 40px;
-    border-bottom: 1px solid #EAEAEA;
-}
-
-#diaryContentWrap {
+#careViewBoxInner {
     padding: 20px;
-    width: 1134px;
+    width: 564px;
 }
 
-#diaryTit {
-    font-size: 18px;
+#careViewBoxTit {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
 }
 
-#diaryContent {
-    margin-top: 14px;
+#careViewBoxContent {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
     font-size: 14px;
     color: #535353;
 }
 
-#diaryServiceInfo {
-    margin-top: 60px;
-    font-size: 12px;
-    color: #7AAFFF;
-}
-
-#diaryDateWarp {
-    margin: 20px 0px 40px 0px;
-    width: 736px;
-}
-
-#diaryDate {
+#sitterNameWrap {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
 }
 
-#logo {
-    z-index: 1;
-   	margin-left: 14px;
+#sitterName {
+    font-size: 12px;
+    color: #535353;
 }
+
+#writeTimeWrap {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    width: 100%;
+}
+
+#writeTime {
+    font-size: 12px;
+}
+
+#careViewBoxWrap {
+    margin-bottom: 80px;
+}
+
+#careViewBoxWrap:last-child {
+    margin-bottom: 20px;
+}
+
+#period {
+    color: #535353;
+    font-size: 12px;
+}
+
+#diaryServiceInfo {
+    margin: 8px 0px;
+    font-size: 12px;
+    color: #89A0F2;
+}
+
+#careViewBoxTitWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}

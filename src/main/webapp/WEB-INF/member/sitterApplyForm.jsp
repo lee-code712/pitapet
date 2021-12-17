@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>돌보미 지원</title>
+    <title>돌보미 지원 정보 확인</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
@@ -18,33 +18,31 @@
 	<%@include file="../components/header.jsp" %>
     
     <div id="pageWrap">
-        <div id="pageTit">돌보미 지원</div>
-        <c:if test="${applyFailed}">
-			<script> alert('돌보미 지원에 실패했습니다. 다시 지원해주세요.'); </script>
-		</c:if>
-     
-     <form name="form" method="POST" action="<c:url value='/member/applySitter' />">    
+        <div id="pageTit">돌보미 지원 정보 확인</div>
+        
         <div id="introTit">자기소개</div>
         <div id="introTextWrap">
-            <textarea placeholder="내용을 입력하세요." id="introText" name="introduction"></textarea>
+            <textarea name="introduction" id="introText">${applicationInfo.introduction}</textarea>
         </div>
 
         <div id="infoTit">돌보미 경력</div>
         <div id="infoContent">
-        	<input type="text" placeholder="경력(O년 O개월)" name="career"/>
+        	<input type="text" name="career" value="${applicationInfo.career}" id="infoText"/>
         </div>
 
         <div id="infoTit">자격증</div>
         <div id="infoContent">
-        	<input type="text" placeholder="OO 자격증" name="certification"/>
+        	<input type="text" name="certification" value="${applicationInfo.certification}" id="infoText" />
         </div>
-        <div id="fileWrap"><img src="../images/fileImg.svg" id="fileImg" /><input type="file"/></div> 
-        <div id="fileWarning">* 자격증 사진을 첨부하세요.</div>
 
         <div id="btnWrap">
-            <button type="submit" id="applyBtn">지원</button>
+        	<c:url value='/member/sitterApplyCancel' var="cancelUrl">
+        		<c:param name="applyId" value="${applicationInfo.id}" />
+        	</c:url>
+            <button id="applyBtn" onclick="location.href='${cancelUrl}'">지원 취소</button>
+            <c:url value='/member/memberMyPage' var="returnUrl"/>
+            <button id="applyBtn" onclick="location.href='${returnUrl}'">돌아가기</button>
         </div>
-       </form> 
     </div>
     
     <%@include file="../components/footer.jsp" %>

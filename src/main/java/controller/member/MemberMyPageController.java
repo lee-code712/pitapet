@@ -66,6 +66,7 @@ public class MemberMyPageController implements Controller{
 		
 		// 돌보미 정보 전달
 		PetSitter sitterInfo = sitterMan.findPetSitter(userId);
+		System.out.println(sitterInfo);
 		if (memberInfo.getIdentity().equals("S") && sitterInfo != null) {
 			if (sitterInfo != null) {
 				ObjectMapper mapper = new ObjectMapper();

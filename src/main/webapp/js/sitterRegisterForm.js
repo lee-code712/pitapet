@@ -29,10 +29,5 @@ function sitterRegister() {
 		return false;
 	}
 	
-	if (!$("input[name=notes]").val()) {
-		alert("기타 사항을 입력해 주세요.");
-		return false;
-	}
-	
 	form.submit();
 }

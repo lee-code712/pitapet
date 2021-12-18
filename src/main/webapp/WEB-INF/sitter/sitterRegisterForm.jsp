@@ -77,7 +77,7 @@
 
             <tr>
                 <td>
-                    <textarea id="introduceText" name="introduction">${applicationInfo.introduction}</textarea>
+                    <textarea id="introduceText" name="notes"></textarea>
                 </td>
             </tr>
         </table>
@@ -135,11 +135,6 @@
             <tr>
                 <td id="tdTit">원하는 검색 태그</td>
                 <td><input type="text" placeholder="원하는 검색 태그를 입력하세요." id="textDesign" name="tag"/></td>
-            </tr>
-
-            <tr>
-                <td id="tdTit">기타 사항</td>
-                <td><input type="text" placeholder="기타 사항을 입력하세요." id="textDesign" name="notes"/></td>
             </tr>
         </table>
 

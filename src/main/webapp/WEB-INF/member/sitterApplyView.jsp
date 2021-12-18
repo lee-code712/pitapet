@@ -18,28 +18,28 @@
 	<%@include file="../components/header.jsp" %>
     
     <div id="pageWrap">
-        <div id="pageTit">돌보미 지원 정보 확인</div>
+        <div id="pageTit">돌보미 지원</div>
         
         <div id="introTit">자기소개</div>
         <div id="introTextWrap">
-            <input type="text" name="introduction" value="${applicationInfo.introduction}"/>
+            <textarea name="introduction" id="introText">${applicationInfo.introduction}</textarea>
         </div>
 
         <div id="infoTit">돌보미 경력</div>
         <div id="infoContent">
-        	<input type="text" name="career" value="${applicationInfo.career}"/>
+        	<input type="text" name="career" value="${applicationInfo.career}" id="infoText"/>
         </div>
 
         <div id="infoTit">자격증</div>
         <div id="infoContent">
-        	<input type="text" name="certification" value="${applicationInfo.certification}" />
+        	<input type="text" name="certification" value="${applicationInfo.certification}" id="infoText" />
         </div>
 
         <div id="btnWrap">
         	<c:url value='/member/sitterApplyCancel' var="cancelUrl">
         		<c:param name="applyId" value="${applicationInfo.id}" />
         	</c:url>
-            <button id="applyBtn" onclick="location.href='${cancelUrl}'">지원 취소</button>
+            <button id="applyCancelBtn" onclick="location.href='${cancelUrl}'">지원 취소</button>
             <c:url value='/member/memberMyPage' var="returnUrl"/>
             <button id="applyBtn" onclick="location.href='${returnUrl}'">돌아가기</button>
         </div>

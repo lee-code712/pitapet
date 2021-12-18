@@ -24,8 +24,8 @@
         <div id="joinTit">PIT A PET</div>
         <div id="idPwdWrap">
             <input type="text" placeholder="아이디" id="joinId" name="id" value="${registerInfo.id}"/>
-            <input type="text" placeholder="비밀번호" id="joinPwd" name ="password"/>
-            <input type="text" placeholder="비밀번호 재확인" id="joinCheckPwd" name="checkPassword" />
+            <input type="password" placeholder="비밀번호" id="joinPwd" name ="password"/>
+            <input type="password" placeholder="비밀번호 재확인" id="joinCheckPwd" name="checkPassword" />
         </div>
 
         <div id="privacyWrap">
@@ -52,8 +52,8 @@
         <div id="joinTit">PIT A PET</div>
         <div id="idPwdWrap">
             <input type="text" placeholder="아이디" id="joinId" name="id" />
-            <input type="text" placeholder="비밀번호" id="joinPwd" name ="password"/>
-            <input type="text" placeholder="비밀번호 재확인" id="joinCheckPwd" name="checkPassword" />
+            <input type="password" placeholder="비밀번호" id="joinPwd" name ="password"/>
+            <input type="password" placeholder="비밀번호 재확인" id="joinCheckPwd" name="checkPassword" />
         </div>
 
         <div id="privacyWrap">

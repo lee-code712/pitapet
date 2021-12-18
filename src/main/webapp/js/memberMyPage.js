@@ -43,7 +43,7 @@ function searchSitterPageInfo() {
 			$(careTdElement2).html(sitterCareListJson[key].startDate.split(" ")[0] + " ~ " + sitterCareListJson[key].endDate.split(" ")[0]);
 			$(careTrElement2).append(careTdElement2);
 			var careTdElement3 = document.createElement("td");
-			$(careTdElement3).html("<button id=\"rezCompleteBtn\" onClick=\"location.href=\"/reservation/viewReservation?careId=" + sitterCareListJson[key].id +"'\">" + "예약완료" + "</button>");
+			$(careTdElement3).html("<button id=\"rezCompleteBtn\" onClick=\"location.href=\'/reservation/viewReservation?careId=" + sitterCareListJson[key].id +"'\">" + "예약완료" + "</button>");
 			$(careTrElement2).append(careTdElement3);
 			var careTdElement4 = document.createElement("td");
 			// $(careTdElement4).html("<button id=\"cancelBtn\" onClick=\"/reservation/cancelReservation?careId=" + sitterCareListJson[key].id +"\">" + "취소하기" + "</button>");
@@ -59,7 +59,7 @@ function searchSitterPageInfo() {
 			$(careTdElement2).html(sitterCareListJson[key].startDate.split(" ")[0] + " ~ " + sitterCareListJson[key].endDate.split(" ")[0]);
 			$(careTrElement2).append(careTdElement2);
 			var careTdElement3 = document.createElement("td");
-			$(careTdElement3).html("<button id=\"rezProceedingBtn\" onClick=\"location.href=\"/reservation/viewReservation?careId=" + sitterCareListJson[key].id +"'\">" + "진행중" + "</button>");
+			$(careTdElement3).html("<button id=\"rezProceedingBtn\" onClick=\"location.href=\'/reservation/viewReservation?careId=" + sitterCareListJson[key].id +"'\">" + "진행중" + "</button>");
 			$(careTrElement2).append(careTdElement3);
 			var careTdElement4 = document.createElement("td");
 			$(careTdElement4).html("<button id=\"careBtn\" onClick=\"location.href='/care/listCareDiary?careId=" + sitterCareListJson[key].id +"'\">" + "돌봄일지" + "</button>");
@@ -75,7 +75,7 @@ function searchSitterPageInfo() {
 			$(careTdElement2).html(sitterCareListJson[key].startDate.split(" ")[0] + " ~ " + sitterCareListJson[key].endDate.split(" ")[0]);
 			$(careTrElement2).append(careTdElement2);
 			var careTdElement3 = document.createElement("td");
-			$(careTdElement3).html("<button id=\"careCompleteBtn\" onClick=\"location.href=\"/reservation/viewReservation?careId=" + sitterCareListJson[key].id +"'\">" + "돌봄완료" + "</button>");
+			$(careTdElement3).html("<button id=\"careCompleteBtn\" onClick=\"location.href=\'/reservation/viewReservation?careId=" + sitterCareListJson[key].id +"'\">" + "돌봄완료" + "</button>");
 			$(careTrElement2).append(careTdElement3);
 			var careTdElement4 = document.createElement("td");
 			$(careTdElement4).html("<button id=\"careBtn\" onClick=\"location.href='/care/listCareDiary?careId=" + sitterCareListJson[key].id +"'\">" + "돌봄일지" + "</button>");

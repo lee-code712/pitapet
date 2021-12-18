@@ -9,7 +9,7 @@
 	<title>예약하기</title>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="/css/header.css" />
 	<link rel="stylesheet" href="/css/footer.css" />

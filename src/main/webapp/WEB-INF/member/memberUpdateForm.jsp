@@ -7,7 +7,7 @@
 	<meta charset="UTF-8" />
 	<title>내 정보</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="/css/header.css" />
 	<link rel="stylesheet" href="/css/footer.css" />
@@ -34,12 +34,12 @@
 				
 				<tr>
 					<td id="tdTit">이름</td>
-					<td><input type="text" id="textDesign" value="${memberInfo.name}" disabled="true"/></td>
+					<td><input type="text" id="textDesign" value="${memberInfo.name}" disabled /></td>
 				</tr>
 				
 				<tr>
 					<td id="tdTit">생년월일</td>
-					<td><input type="text" id="textDesign" value="${memberInfo.birth}" disabled="true"/></td>
+					<td><input type="text" id="textDesign" value="${memberInfo.birth}" disabled /></td>
 				</tr>
 
 				<tr>

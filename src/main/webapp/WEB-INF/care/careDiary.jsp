@@ -8,7 +8,7 @@
     <meta charset="UTF-8"/>
     <title>돌봄 일지</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/header.css"/>
     <link rel="stylesheet" href="/css/footer.css"/>
@@ -86,7 +86,7 @@
 	                                </div>
 	                                <div id="careViewBoxContent">${careRecord.content}</div>
 	                                <div id="diaryServiceInfo">
-	                                    ★ 돌봄 체크 리스트 </br>
+	                                    ★ 돌봄 체크 리스트 <br/>
 	                                    <c:forEach var="careDetail" items="${careRecord.checkList}" varStatus="status">
 	                                        ${careDetail.carePet.name} - ${careDetail.serviceInfo.title} 
 	                                        <c:if test="${careDetail.check == 'Y'}">

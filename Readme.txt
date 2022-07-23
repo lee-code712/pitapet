@@ -1,3 +1,6 @@
+DB : Oracle / API: JDBC / Framework: MyBatis / 개발언어 : JSP, Java, JavaScript / 프론트엔드 : HTML5
+서버 : Apache Tomcat
+
 필요한 사전 설정:
 프로젝트 언어 인코딩을 UTF-8로 설정해 두었습니다.
 (https://java119.tistory.com/5 참고)

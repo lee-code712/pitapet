@@ -104,7 +104,7 @@
 	                            </div>
 	                        </div>
 	                        <div id="writeTimeWrap">
-	                            <div id="writeTime">${fn:split(writeTime, ':')[0]}시 ${fn:split(writeTime, ':')[0]}분</div>
+	                            <div id="writeTime">${fn:split(writeTime, ':')[0]}시 ${fn:split(writeTime, ':')[1]}분</div>
 	                        </div>
 	                    </div>
 	                </c:forEach>

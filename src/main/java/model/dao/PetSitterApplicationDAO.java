@@ -224,10 +224,10 @@ public class PetSitterApplicationDAO {
 			
 	/* 돌보미 지원정보 추가 */
 	public int addApplication(String memberId, PetSitterApplication applicationInfo) {
-		String sql = "INSERT INTO PETSITTER_APPLICATION VALUES (?, SYSDATE, ?, ?, ?, ?, ?)";
+		// 테이블과 컬럼 순서가 달라 sql문 수정함 (2023-10-22)
+		String sql = "INSERT INTO PETSITTER_APPLICATION (apply_id, apply_date, career, certification, introduction, member_id) VALUES (?, SYSDATE, ?, ?, ?, ?)";
 		Object[] param = new Object[] { applicationInfo.getId(), applicationInfo.getCareer(),
-				applicationInfo.getCertification(), applicationInfo.getIntroduction(),
-				applicationInfo.getApprovalStatus(), memberId };
+				applicationInfo.getCertification(), applicationInfo.getIntroduction(), memberId };
 		jdbcUtil.setSqlAndParameters(sql, param);
 
 		try {

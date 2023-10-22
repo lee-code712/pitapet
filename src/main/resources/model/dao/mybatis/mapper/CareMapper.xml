@@ -227,7 +227,7 @@
     	SELECT TO_DATE(c.end_date) - TO_DATE(c.start_date) AS dayCount, 
     		COUNT(cr.care_id) AS countCareRecord
 		FROM care c JOIN care_record cr ON c.care_id = cr.care_id
-		WHERE c.care_id ='1000'
+		WHERE c.care_id =#{careId}
 		GROUP BY cr.care_id, c.start_date, c.end_date
     </select> 
     

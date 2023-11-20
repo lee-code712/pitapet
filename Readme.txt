@@ -1,23 +1,34 @@
-DB : Oracle / API: JDBC / Framework: MyBatis / 개발언어 : JSP, Java, JavaScript / 프론트엔드 : HTML5
-서버 : Apache Tomcat
+# PitAPet
+반려동물 돌보미 예약 서비스
+</br></br>
 
-필요한 사전 설정:
-프로젝트 언어 인코딩을 UTF-8로 설정해 두었습니다.
-(https://java119.tistory.com/5 참고)
+## ✔ 프로젝트 소개
+반려동물을 키우는 사람들을 위한 플랫폼으로, 돌보미를 예약할 수 있을 뿐만 아니라 돌보미로 활동하고자 하는 사용자들에게 기회를 제공합니다.
 
-테스트용 ID/PW:
-보호자 계정
-ID: M0000002
-PW: 13577
+### 개발 기간
+- 2021.09 - 2021.12 (4개월)
 
-돌보미 계정
-ID: dd
-PW: 1234
+### 맴버 구성
+- 팀장 : 윤라경 - 마이 페이지, 돌보미지원 페이지, 돌봄일지 페이지, DB 관리
+- 팀원1 : 구세현 - 로그인, 회원가입, 리뷰 페이지, 좋아요 페이지, DB 구축
+- 팀원2 : 김혜란 - UI 디자인, 웹 퍼블리싱
+- 팀원3 : 이유리 - 돌보미 검색 페이지, 예약 페이지, DB 설계
 
-관리자 계정
-ID: manager
-PW: 0000
+### 개발 환경
+- IDE : Eclipse(Java EE IDE)
+- Programming Language : Java 8, JavaScript
+- Template Engine : `JSP`
+- Database Access Technology : `MyBatis`
+- Database : Oracle Database 11g
+- WAS : Apache Tomcat 8.5
+- Version Control: Git
+</br></br>
 
-주의사항:
-파일 업로드 시 이클립스 프로젝트 폴더 내에 업로드되지 않기 때문에, 기존에 등록된 사진이 깨져 보일 것입니다. (프로필 사진, 반려동물 사진, 리뷰 사진)
-파일 업로드 시 파일명이 한글이면 오류가 발생합니다.
+## ✔ 주요 기능
+### 로그인
+### 회원가입
+### 돌보미 검색
+### 돌보미 예약
+### 돌봄일지
+### 돌봄 서비스 리뷰
+### 마이페이지
